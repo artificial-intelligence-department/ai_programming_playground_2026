@@ -8,7 +8,6 @@ int main(){
 
     //Оголошення змінних
     const double degradation = 0.02;
-    
     string model;
     double C, eff, P, C_eff, E_stored, E_useful, E_loss, T;
     int    h, m, years, charge;
@@ -93,6 +92,7 @@ int main(){
     cout << left << setw(40) << "Запас енергії:"    << setprecision(1) << E_stored << " %"      << endl;
     cout << left << setw(40) << "корисна енергія:"  << setprecision(1) << E_useful << " %"      << endl;
     cout << left << setw(34) << "втрати:"           << setprecision(1) << E_loss   << " %"      << endl;
+    cout << "commit" << endl;
 
     return 0;
 }
