@@ -92,7 +92,6 @@ int main(){
     cout << left << setw(40) << "Запас енергії:"    << setprecision(1) << E_stored << " %"      << endl;
     cout << left << setw(40) << "корисна енергія:"  << setprecision(1) << E_useful << " %"      << endl;
     cout << left << setw(34) << "втрати:"           << setprecision(1) << E_loss   << " %"      << endl;
-    cout << "commit" << endl;
 
     return 0;
 }
