@@ -4,14 +4,21 @@
 #include <iomanip>
 
 using namespace std;
+/*  
+Автономність портативної зарядної станції
+Ярошенко Володимир 
+11 група 
+*/
  int main() {
-string name;
+
+string name; // назва станції 
 int C, years, charge, eff, P;
+
 cout << "Введіть модель станції:";
-cin >> name;
-if(name.length() >31 ) {
+getline(cin, name);
+if(name.length() >31 ) { // перевіряємо довжину назви станції
     cout << "Назва станції не повинна перевищувати 31 символ" << endl;
-    return 1;
+    return 1; // зупиняємо програму якщо не правильна довжина назви
 }
 
 cout << "Введіть паспортну ємність (Вт·год): ";
@@ -49,14 +56,14 @@ if(P < 0 ) {
     cout << "Потужність споживання не може бути від'ємною" << endl;
     return 1;
 }
-float C_eff = C * pow(1 - 2.0/100 , years);
 
-float E_stored = C_eff *charge / 100;
-float E_useful = E_stored * eff / 100;
-float E_loss = E_stored - E_useful;
-float T = E_useful / P;
-float h = int(T);
-float m = ((T - h) * 60); 
+float C_eff = C * pow(1 - 2.0/100 , years); // 2 -відсоток втрата ємності щороку, обчисоюємо фактичну ємність станції у відстоках
+float E_stored = C_eff *charge / 100; //  запас енергії у Вт*год 
+float E_useful = E_stored * eff / 100; // корисна енергія у Вт*год
+float E_loss = E_stored - E_useful; // втрати енергії у Вт*год
+float T = E_useful / P;  // весь час роботи станції у годинах в дробовому вигляді
+float h = int(T); // визначаємо цілі години роботи 
+float m = ((T - h) * 60); // визначаємо хвилини роботи з урахуванням годин 
 
 cout << "Модель станції: " << name << endl;
 cout << "Паспортна ємність: " << fixed << setprecision(1) << C << " Вт·год" << endl;
