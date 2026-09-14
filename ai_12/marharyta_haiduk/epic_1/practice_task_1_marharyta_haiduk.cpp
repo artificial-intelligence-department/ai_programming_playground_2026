@@ -13,42 +13,42 @@ int main() {
     cin>>model;
     if (model.length() > 31) {
         cout<<"Помилка. Модель станції повинна бути не довшою за 31 символ.";
-        return 0;
+        return 1;
     }
     double C;
     cout<<"Паспортна ємність (Вт·год): ";
     cin>>C;
     if (C<=0) {
         cout<<"Помилка. Паспортна ємність повинна бути більше 0."<<endl;
-        return 0;
+        return 1;
     }
     int years;
     cout<<"Вік станції(років): ";
     cin>>years;
     if (years<0 || years>20) {
         cout<<"Помилка. Вік станції повинен бути від 0 до 20."<< endl;
-        return 0;
+        return 1;
     }
     int charge;
     cout<<"Рівень заряду(%): ";
     cin>>charge;
     if (charge<0 || charge>100) {
         cout<<"Помилка. Рівень заряду повинен бути від 0 до 100."<<endl;
-        return 0;
+        return 1;
     }
     double eff;
     cout<<"ККД інвертора(%): ";
     cin>>eff;
     if (eff<=0 || eff>100) {
         cout<<"Помилка. ККД інвертора повинен бути більше 0, не більше 100"<<endl;
-        return 0;
+        return 1;
     }
     double P;
     cout<<"Потужність приладу(Вт): ";
     cin>>P;
     if (P<=0) {
         cout<<"Помилка. Потужність приладу повинна бути більше 0."<<endl;
-        return 0;
+        return 1;
     }
 
     const double degradation = 2.0; // відсоток втрати ємності за рік
