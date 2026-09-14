@@ -1,3 +1,10 @@
+
+/*
+ Автономність портативної зарядної станції 
+ Автор: Рубаха Олексій 
+ Група: ШІ-13
+*/
+
 #include <iostream>
 #include <cmath>
 #include <iomanip>
@@ -6,8 +13,10 @@ using namespace std;
 
 int main(){
 
-    //Оголошення змінних
+    // Втрата ємності акумулятора за один рік - 2 %
     const double degradation = 0.02;
+
+    //Оголошення змінних
     string model;
     double C, eff, P, C_eff, E_stored, E_useful, E_loss, T;
     int    h, m, years, charge;
@@ -22,7 +31,7 @@ int main(){
     }
 
     //Введення паспортної ємності станції
-    cout<<"Паспортна ємність: ";
+    cout<<"Паспортна ємність (Вт·год): ";
     cin>>C;
     //Перевірка на правельність ємності
     if (C <= 0){
@@ -31,7 +40,7 @@ int main(){
     }
 
     //Введення віку станції
-    cout<<"вік станції: ";
+    cout<<"Вік станції (років): ";
     cin>>years;
     //Перевірка правельності введення віку
     if (years < 0 || years>20){
@@ -40,7 +49,7 @@ int main(){
     }
 
     //Введення рівню зарядку
-    cout<<"Рівень заряду: ";
+    cout<<"Рівень заряду (%): ";
     cin>>charge;
     //Перевірка правельності введення заряду станції
     if (charge < 0 || charge > 100){
@@ -49,7 +58,7 @@ int main(){
     }
 
     //Введення ККД інвентора
-    cout<<"ККД інвентора: ";
+    cout<<"ККД інвертора (%): ";
     cin>>eff;
     //Перевірка правельності введення ККД інвентора
     if (eff <= 0 || eff > 100){
@@ -58,7 +67,7 @@ int main(){
     }
 
     //Введення потужності приладу
-    cout<<"Потужність приладу: ";
+    cout<<"Потужність приладу (Вт): ";
     cin>>P;
     //Перевірка потужності
     if (P <= 0){
@@ -83,15 +92,17 @@ int main(){
 
     //Виведння розрахунків
     cout << "\n";
-    cout << left << setw(34) << "Модель:"                              << model                 << endl;
-    cout << left << setw(40) << "Паспортна ємність:"<< setprecision(1) << C        << " Вт/год" << endl;
-    cout << left << setw(39) << "Вік станції:"                         << years    << " p."     << endl;
-    cout << left << setw(40) << "Фактична ємність:" << setprecision(1) << C_eff    << " Вт/год" << endl;
-    cout << left << setw(40) << "Рівень заряду:"                       << charge   << " %"      << endl;
-    cout << left << setw(40) << "ККД інвертора:"    << setprecision(2) << eff      << " %"      << endl;
-    cout << left << setw(40) << "Запас енергії:"    << setprecision(1) << E_stored << " %"      << endl;
-    cout << left << setw(40) << "корисна енергія:"  << setprecision(1) << E_useful << " %"      << endl;
-    cout << left << setw(34) << "втрати:"           << setprecision(1) << E_loss   << " %"      << endl;
+    cout << left << setw(40) << "Модель:"                                             << model                 << endl;
+    cout << left << setw(40) << "Паспортна ємність:"      << fixed << setprecision(1) << C        << " Вт·год" << endl;
+    cout << left << setw(40) << "Вік станції:"                                        << years    << " р."     << endl;
+    cout << left << setw(40) << "Фактична ємність:"       << fixed << setprecision(1) << C_eff    << " Вт·год" << endl;
+    cout << left << setw(40) << "Рівень заряду:"                                      << charge   << " %"      << endl;
+    cout << left << setw(40) << "ККД інвертора:"          << fixed << setprecision(2) << eff      << " %"      << endl;
+    cout << left << setw(40) << "Запас енергії:"          << fixed << setprecision(1) << E_stored << " Вт·год" << endl;
+    cout << left << setw(40) << "Корисна енергія:"        << fixed << setprecision(1) << E_useful << " Вт·год" << endl;
+    cout << left << setw(40) << "Втрати на перетворенні:" << fixed << setprecision(1) << E_loss   << " Вт·год" << endl;
+    cout << left << setw(40) << "Час роботи:"             << fixed << setprecision(2) << T        << " год = " << h << " год "
+        << setfill('0') << setw(2) << m << setfill(' ') << " хв" << endl;
 
-    return 0;
+        return 0;
 }
