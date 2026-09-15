@@ -92,16 +92,16 @@ int main(){
 
     //Виведння розрахунків
     cout << "\n";
-    cout << left << setw(40) << "Модель:"                                             << model                 << endl;
-    cout << left << setw(40) << "Паспортна ємність:"      << fixed << setprecision(1) << C        << " Вт·год" << endl;
-    cout << left << setw(40) << "Вік станції:"                                        << years    << " р."     << endl;
-    cout << left << setw(40) << "Фактична ємність:"       << fixed << setprecision(1) << C_eff    << " Вт·год" << endl;
-    cout << left << setw(40) << "Рівень заряду:"                                      << charge   << " %"      << endl;
-    cout << left << setw(40) << "ККД інвертора:"          << fixed << setprecision(2) << eff      << " %"      << endl;
-    cout << left << setw(40) << "Запас енергії:"          << fixed << setprecision(1) << E_stored << " Вт·год" << endl;
-    cout << left << setw(40) << "Корисна енергія:"        << fixed << setprecision(1) << E_useful << " Вт·год" << endl;
-    cout << left << setw(40) << "Втрати на перетворенні:" << fixed << setprecision(1) << E_loss   << " Вт·год" << endl;
-    cout << left << setw(40) << "Час роботи:"             << fixed << setprecision(2) << T        << " год = " << h << " год "
+    cout << fixed << left << setw(40) << "Модель:"                                             << model                 << endl;
+    cout << fixed << left << setw(40) << "Паспортна ємність:"      << fixed << setprecision(1) << C        << " Вт·год" << endl;
+    cout << fixed << left << setw(40) << "Вік станції:"                                        << years    << " р."     << endl;
+    cout << fixed << left << setw(40) << "Фактична ємність:"       << fixed << setprecision(1) << C_eff    << " Вт·год" << endl;
+    cout << fixed << left << setw(40) << "Рівень заряду:"                                      << charge   << " %"      << endl;
+    cout << fixed << left << setw(40) << "ККД інвертора:"          << fixed << setprecision(2) << eff      << " %"      << endl;
+    cout << fixed << left << setw(40) << "Запас енергії:"          << fixed << setprecision(1) << E_stored << " Вт·год" << endl;
+    cout << fixed << left << setw(40) << "Корисна енергія:"        << fixed << setprecision(1) << E_useful << " Вт·год" << endl;
+    cout << fixed << left << setw(40) << "Втрати на перетворенні:" << fixed << setprecision(1) << E_loss   << " Вт·год" << endl;
+    cout << fixed << left << setw(40) << "Час роботи:"             << fixed << setprecision(2) << T        << " год = " << h << " год "
         << setfill('0') << setw(2) << m << setfill(' ') << " хв" << endl;
 
         return 0;
