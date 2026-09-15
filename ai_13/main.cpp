@@ -11,6 +11,7 @@ int main()
     int  year, charge;
     cout << "Модель станції: ";
     cin >> model;
+
     if (model.length()> 31) {
         cout<<"Помилка: Модель зарядної станції не повинна перевищувати 31 символів."<<endl;
         return 1;
