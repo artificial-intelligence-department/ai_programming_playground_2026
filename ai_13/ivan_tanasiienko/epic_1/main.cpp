@@ -81,6 +81,21 @@ int main() {
         minutesToPrint = std::to_string(minutes);
     }
 
+    //Виведення результатів
+    std::cout << std::endl << "Модель: " << std::setw(56) << model << std::endl;
+    std::cout << std::fixed << std::setprecision(1) << "Паспортна ємність: " << std::setw(45) << C << " Вт·год" << std::endl;
+    std::cout << "Вік станції: " << std::setw(47) << years << " р." << std::endl;
+    std::cout << std::fixed << std::setprecision(1) << "Фактична ємність: "  << std::setw(46) << fC << " Вт·год" << std::endl;
+    std::cout << "Рівень заряду: "  << std::setw(46)  << charge << " %" << std::endl;
+    std::cout << std::fixed << std::setprecision(2) << "ККД інвертора: "  << std::setw(49) << eff << " %" << std::endl;
+    std::cout << std::fixed << std::setprecision(1) << "Запас енергії: "  << std::setw(49) << currentFC << " Вт·год" << std::endl;
+    std::cout << std::fixed << std::setprecision(1) << "Корисна енергія: "  << std::setw(47) << effFc << " Вт·год" << std::endl;
+    std::cout << std::fixed << std::setprecision(1) << "Втрати на перетворенні: "  << std::setw(40) << effLoss << " Вт·год" << std::endl;
+    std::cout << std::fixed << std::setprecision(2) << "Час роботи: "  << std::setw(52) << hours << " год = " << fullHours << " год " << minutesToPrint << " хв" << std::endl;
+
+    return 0;
+}
+
     /*
 Ввід користувача
 Модель станції: EcoRiver-2Pro
@@ -105,17 +120,3 @@ int main() {
 
 
      */
-    //Виведення результатів
-    std::cout << std::endl << "Модель: " << model << std::endl;
-    std::cout << std::fixed << std::setprecision(1) << "Паспортна ємність: " << C << " Вт·год" << std::endl;
-    std::cout << "Вік станції: " << years << " р." << std::endl;
-    std::cout << std::fixed << std::setprecision(1) << "Фактична ємність: " << fC << " Вт·год" << std::endl;
-    std::cout << "Рівень заряду: " << charge << " %" << std::endl;
-    std::cout << std::fixed << std::setprecision(2) << "ККД інвертора: " << eff << " %" << std::endl;
-    std::cout << std::fixed << std::setprecision(1) << "Запас енергії: " << currentFC << " Вт·год" << std::endl;
-    std::cout << std::fixed << std::setprecision(1) << "Корисна енергія: " << effFc << " Вт·год" << std::endl;
-    std::cout << std::fixed << std::setprecision(1) << "Втрати на перетворенні: " << effLoss << " Вт·год" << std::endl;
-    std::cout << std::fixed << std::setprecision(2) << "Час роботи: " << hours << " год = " << fullHours << " год " << minutesToPrint << " хв" << std::endl;
-
-    return 0;
-}
