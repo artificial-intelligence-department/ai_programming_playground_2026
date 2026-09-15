@@ -49,32 +49,32 @@ int main() {
     if(name.length() > 31)
     {
        cout<<"Помилка: назва моделі станції має бути не довша за 31 символ."<<endl;
-    return 0;
+    return 1;
      }
     cout<<fixed<<setprecision(1);
     cout<<"Паспортна ємність: "<<c<<" Вт·год"<<endl;
     if(c<=0) 
     {
         cout<<"Помилка: паспортна ємність повинна бути більше 0."<<endl;
-        return 0;
+        return 1;
     }
     cout<<"Вік станції (років): "<<years<<" р."<<endl;
     if(!(0<=years && years<20))
     {
         cout<<"Помилка: вік станції мусить бути від 0 до 20."<<endl;
-        return 0;
+        return 1;
     }
     cout<<"Фактична ємність: "<<c_eff<<" Вт·год"<<endl;
     cout<<"Рівень заряду (%): " <<charge<<" %"<<endl;
     if(!(0<=charge && charge<=100)){
         cout<<"Помилка: рівень заряду мусить бути від 0 до 100."<<endl;
-        return 0;
+        return 1;
     }
     cout<<fixed<<setprecision(2);
     cout<<"ККД інвертора (%): "<<eff<<" %"<<endl;
      if(!(eff>0 && eff<=100)){
         cout<<"Помилка: ККД інвертора має бути більше за 0 і не більше 100."<<endl;
-        return 0;
+        return 1;
     }
     cout<<fixed<<setprecision(1);
     cout<<"Запас енергії: "<<E_stored<<" Вт·год"<<endl;
@@ -84,7 +84,7 @@ int main() {
     cout<<"Час роботи: "<<T<<" год = "<<h<<" год "<<m<<" хв"<<endl;
     if(P<=0){
         cout<<"Помилка: потужність має бути більше за 0."<<endl;
-        return 0;
+        return 1;
     }
 return 0;
 }
