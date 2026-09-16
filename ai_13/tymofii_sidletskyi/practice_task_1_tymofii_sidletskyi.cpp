@@ -3,102 +3,116 @@
 #include <cmath>
 #include <iomanip>
 /* Задача автономність портативної зарядної станції 
-    Сідлецький Тимофій ШІ-13*/
+    Сідлецький Тимофій ШІ-13 */
 int main() {
-    // Запит у користувача назви моделі станції та присвоєння цієї назви до змінної name
-    std::cout << "Модель станції: \n";
-    std::string name;
-    getline(std::cin, name);
+
+    using namespace std;
+
+    string stationModel;
+    double capacity;
+    int age;
+    int charge;
+    int eff;
+    int power;
+    const double capacityLossPerYear = 2.0; // Втрата ємності на рік у %
+
+    // Запит у користувача назви моделі станції та присвоєння цієї назви до змінної stationModel
+    cout << "Модель станції: ";
+    getline(cin, stationModel);
 
     // Перевірка довжини назви моделі станції та наявності пробілів у ній
-    if (name.length() >= 32 || name.find(' ') != std::string::npos) {
-        std::cout << "Помилка: назва моделі станції не повинна перевищувати 31 символ та не має містити пробілів.\n";
-        return 0; 
+    if (stationModel.length() > 31 || stationModel.find(' ') != string::npos) {
+        cout << "Помилка: назва моделі станції не повинна перевищувати 31 символ та не має містити пробілів.";
+        return 1; 
     }
 
-    // Запит у користувача ємності станції та присвоєння цієї ємності до змінної C
-    std::cout << "Паспортна ємність (Вт.год): \n";
-    double C;
-    std::cin >> C;
+    // Запит у користувача ємності станції та присвоєння цієї ємності до змінної capacity
+    cout << "Паспортна ємність (Вт.год): ";
+    cin >> capacity;
 
     // Перевірка значення ємності станції
-    if (C < 0 || std::cin.fail()) {
-        std::cout << "Помилка: ємність станції повинна бути числом більше 0.\n";
-        return 0; 
+    if (capacity < 0 || cin.fail()) {
+        cout << "Помилка: ємність станції повинна бути числом більше 0.";
+        return 1; 
     }
 
-    // Запит у користувача віку станції та присвоєння цього віку до змінної years
-    std::cout << "Вік станції (років): \n";
-    int years;
-    std::cin >> years;
+    // Запит у користувача віку станції та присвоєння цього віку до змінної age
+    cout << "Вік станції (років): ";
+    cin >> age;
 
     // Перевірка значення віку станції  
-    if (years < 0 || years > 20 || std::cin.fail()) {
-        std::cout << "Помилка: вік станції повинен бути числом в діапазоні від 0 до 20.\n";
-        return 0; 
+    if (age < 0 || age > 20 || cin.fail()) {
+        cout << "Помилка: вік станції повинен бути числом в діапазоні від 0 до 20.";
+        return 1; 
     }
 
     // Запит у користувача рівня заряду станції та присвоєння цього рівня до змінної charge
-    std::cout << "Рівень заряду станції (%): \n";
-    int charge;
-    std::cin >> charge;
+    cout << "Рівень заряду станції (%): ";
+    cin >> charge;
     
     // Перевірка значення рівня заряду станції
-    if (charge < 0 || charge > 100 || std::cin.fail()) {
-        std::cout << "Помилка: рівень заряду станції повинен бути числом в діапазоні від 0 до 100.\n";
-        return 0;
+    if (charge < 0 || charge > 100 || cin.fail()) {
+        cout << "Помилка: рівень заряду станції повинен бути числом в діапазоні від 0 до 100.";
+        return 1;
     }
 
     // Запит у користувача ККД інвертора та присвоєння цього ККД до змінної eff
-    std::cout << "ККД інвертора (%): \n";
-    int eff;
-    std::cin >> eff;
+    cout << "ККД інвертора (%): ";
+    cin >> eff;
 
     // Перевірка значення ККД інвертора
-    if (eff < 1 || eff > 100 || std::cin.fail()) {
-        std::cout << "Помилка: ККД інвертора повинен бути числом в діапазоні від 1 до 100.\n";
-        return 0;
+    if (eff < 1 || eff > 100 || cin.fail()) {
+        cout << "Помилка: ККД інвертора повинен бути числом в діапазоні від 1 до 100.";
+        return 1;
     }
     
-    // Запит у користувача потужності приладу та присвоєння цієї потужності до змінної P
-    std::cout << "Потужність приладу (Вт): \n";
-    int P;
-    std::cin >> P;
+    // Запит у користувача потужності приладу та присвоєння цієї потужності до змінної power
+    cout << "Потужність приладу (Вт): ";
+    cin >> power;
     
     // Перевірка значення потужності приладу
-    if (P < 1 || std::cin.fail()) {
-        std::cout << "Помилка: потужність приладу повинна бути числом більше 0.\n";
-        return 0;
+    if (power < 1 || cin.fail()) {
+        cout << "Помилка: потужність приладу повинна бути числом більше 0.";
+        return 1;
     }
 
-    // Розрахунок фактичної ємності станції з урахуванням віку. 2 - втрата ємності на рік у %. (Вт. год)
-    double C_eff = C * pow((1.0 - 2.0/100.0), years);
+    // Оголошення змінних для розрахунків
+    double C_eff;
+    double E_stored;
+    double E_useful;
+    double E_loss;
+    double T;
+    int h;
+    int m;
+
+    // Розрахунок фактичної ємності станції з урахуванням віку. (Вт. год)
+    C_eff = capacity * pow((1.0 - capacityLossPerYear/100.0), age);
 
     // Розрахунок запасу енергії при поточному заряді. Ділення на 100 для переведення відсотків у частку. (Вт. год)
-    double E_stored = C_eff * charge / 100;
+    E_stored = C_eff * charge / 100;
 
     // Розрахунок корисної енергії що, дійде до приладу (Вт. год)
-    double E_useful = E_stored * eff / 100;
+    E_useful = E_stored * eff / 100;
 
     // Розрахунок втрат на перетворені напруги (Вт. год)
-    double E_loss = E_stored - E_useful;
+    E_loss = E_stored - E_useful;
 
     // Розрахунок часу роботи станції (год, хв)
-    double T = E_useful / P;
-    int h = T; // Ціла частина годин роботи станції
-    int m = (T - h) * 60; // Ціла частина хвилин роботи станції. Переводимо години в хвилини
+    T = E_useful / power;
+    h = T; // Ціла частина годин роботи станції
+    m = (T - h) * 60; // Ціла частина хвилин роботи станції. Переводимо години в хвилини
 
     // Вивід результатів розрахунків користувачу
-    std::cout << std::left << std::setw(40) << "Модель станції:                 " << name << "\n";
-    std::cout << std::left << std::setw(40) << "Паспортна ємність станції:      " << std::fixed << std::setprecision(1) << C << " Вт.год\n";
-    std::cout << std::left << std::setw(40) << "Вік станції:                    " << years << " р.\n";
-    std::cout << std::left << std::setw(40) << "Фактична ємність:               " << std::fixed << std::setprecision(1) << C_eff << " Вт.год\n";
-    std::cout << std::left << std::setw(40) << "Рівень заряду:                  " << charge << "%\n";
-    std::cout << std::left << std::setw(40) << "ККД інвертора:                  " << std::fixed << std::setprecision(2) << eff << "%\n";
-    std::cout << std::left << std::setw(40) << "Запас енергії:                  " << std::fixed << std::setprecision(1) << E_stored << " Вт.год\n";
-    std::cout << std::left << std::setw(40) << "Корисна енергія:                " << std::fixed << std::setprecision(1) << E_useful << " Вт.год\n";
-    std::cout << std::left << std::setw(40) << "Втрати на перетворення:         " << std::fixed << std::setprecision(1) << E_loss << " Вт.год\n";
-    std::cout << std::left << std::setw(40) << "Час роботи:                     " << std::fixed << std::setprecision(2) << T << " год = " << h << " год " << std::setfill('0') << std::setw(2) << std::right << m << " хв\n";
+    cout << left << setw(40) << "Модель станції:                 " << stationModel << "\n";
+    cout << left << setw(40) << "Паспортна ємність станції:      " << fixed << setprecision(1) << capacity << " Вт.год\n";
+    cout << left << setw(40) << "Вік станції:                    " << age << " р.\n";
+    cout << left << setw(40) << "Фактична ємність:               " << fixed << setprecision(1) << C_eff << " Вт.год\n";
+    cout << left << setw(40) << "Рівень заряду:                  " << charge << "%\n";
+    cout << left << setw(40) << "ККД інвертора:                  " << fixed << setprecision(2) << eff << "%\n";
+    cout << left << setw(40) << "Запас енергії:                  " << fixed << setprecision(1) << E_stored << " Вт.год\n";
+    cout << left << setw(40) << "Корисна енергія:                " << fixed << setprecision(1) << E_useful << " Вт.год\n";
+    cout << left << setw(40) << "Втрати на перетворення:         " << fixed << setprecision(1) << E_loss << " Вт.год\n";
+    cout << left << setw(40) << "Час роботи:                     " << fixed << setprecision(2) << T << " год = " << h << " год " << setfill('0') << setw(2) << right << m << " хв\n";
 
     return 0;
 
