@@ -12,7 +12,8 @@ using namespace std;
  int main() {
 
 string name; // назва станції 
-int C, years, charge, eff, P;
+int  years, charge, eff, P;
+float C;
 
 cout << "Введіть модель станції:";
 getline(cin, name);
@@ -24,7 +25,6 @@ if(name.length() >31 ) { // перевіряємо довжину назви с�
 cout << "Введіть паспортну ємність (Вт·год): ";
 cin >> C;
 if(C < 0 ) {
-    
     cout << "Паспортна ємність не може бути від'ємною" << endl;
     return 1;
 }
@@ -57,7 +57,7 @@ if(P < 0 ) {
     return 1;
 }
 
-float C_eff = C * pow(1 - 2.0/100 , years); // 2 -відсоток втрата ємності щороку, обчисоюємо фактичну ємність станції у відстоках
+float C_eff = C * pow(1 - 2.0/100 , years); // 2 -відсоток втрата ємності щороку, обчислюємо фактичну ємність станції у відстоках
 float E_stored = C_eff *charge / 100; //  запас енергії у Вт*год 
 float E_useful = E_stored * eff / 100; // корисна енергія у Вт*год
 float E_loss = E_stored - E_useful; // втрати енергії у Вт*год
@@ -75,16 +75,6 @@ cout << "Запас енергії: "  << fixed << setprecision(1) << E_stored <
 cout << "Корисна енергія: "  << fixed << setprecision(1) << E_useful << " Вт·год" << endl;
 cout << "Втрати енергії: " << fixed << setprecision(1) << E_loss << " Вт·год" << endl;
 cout << "Час роботи: "  << fixed << setprecision(1) << h << "год  = " << h << " год " << m << " хв" << endl;
-
-
-
-
-
-
-
-
-
-
      return 0;
  }
 
