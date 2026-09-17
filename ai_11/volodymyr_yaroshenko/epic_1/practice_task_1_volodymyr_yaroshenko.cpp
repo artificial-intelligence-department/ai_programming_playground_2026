@@ -12,8 +12,8 @@ using namespace std;
  int main() {
 
 string name; // назва станції 
-int  years, charge, eff, P;
-float C;
+int  years, charge;
+float C, eff, P;
 
 cout << "Введіть модель станції:";
 getline(cin, name);
