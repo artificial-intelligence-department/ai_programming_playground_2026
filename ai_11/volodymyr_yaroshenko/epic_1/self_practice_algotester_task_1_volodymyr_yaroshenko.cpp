@@ -5,7 +5,6 @@
 int main() {
 int n;   
 cin >> n;
-return 1;
 
  int r1 = n / 500;
  int res1 = n - r1 * 500;
@@ -36,5 +35,6 @@ return 1;
 
 
   int res = r1 + r2 + r3 + r4 + r5 + r6 + r7 + r8 + r9;
+  cout << res << endl;
     return 0;
 }
