@@ -24,7 +24,7 @@ if(name.length() >31 ) { // перевіряємо довжину назви с�
 
 cout << "Введіть паспортну ємність (Вт·год): ";
 cin >> C;
-if(C < 0 ) {
+if(C <= 0 ) {
     cout << "Паспортна ємність не може бути від'ємною" << endl;
     return 1;
 }
@@ -52,7 +52,7 @@ if(eff < 0 || eff > 100) {
 
 cout << "Введіть потужність споживання (Вт): ";
 cin >> P;
-if(P < 0 ) {
+if(P <= 0 ) {
     cout << "Потужність споживання не може бути від'ємною" << endl;
     return 1;
 }
@@ -65,16 +65,16 @@ float T = E_useful / P;  // весь час роботи станції у го�
 float h = int(T); // визначаємо цілі години роботи 
 float m = ((T - h) * 60); // визначаємо хвилини роботи з урахуванням годин 
 
-cout << "Модель станції: " << name << endl;
-cout << "Паспортна ємність: " << fixed << setprecision(1) << C << " Вт·год" << endl;
-cout << "Вік станції: " << years << endl;
-cout << "Фактична ємність: "<< fixed << setprecision(1) << C_eff << " Вт·год" << endl;
-cout << "Рівень заряду: " << charge << "%" << endl;
-cout << "ККД інвертора: "  << fixed << setprecision(2) << eff << "%" << endl;
-cout << "Запас енергії: "  << fixed << setprecision(1) << E_stored << " Вт·год" << endl;
-cout << "Корисна енергія: "  << fixed << setprecision(1) << E_useful << " Вт·год" << endl;
-cout << "Втрати енергії: " << fixed << setprecision(1) << E_loss << " Вт·год" << endl;
-cout << "Час роботи: "  << fixed << setprecision(1) << h << "год  = " << h << " год " << m << " хв" << endl;
+cout << "Модель станції:          " << name << endl;
+cout << "Паспортна ємність:       " << fixed << setprecision(1) << C << " Вт·год" << endl;
+cout << "Вік станції:             " << years << endl;
+cout << "Фактична ємність:        "<< fixed << setprecision(1) << C_eff << " Вт·год" << endl;
+cout << "Рівень заряду:           " << charge << "%" << endl;
+cout << "ККД інвертора:           "  << fixed << setprecision(2) << eff << "%" << endl;
+cout << "Запас енергії:           "  << fixed << setprecision(1) << E_stored << " Вт·год" << endl;
+cout << "Корисна енергія:         "  << fixed << setprecision(1) << E_useful << " Вт·год" << endl;
+cout << "Втрати енергії:          " << fixed << setprecision(1) << E_loss << " Вт·год" << endl;
+cout << "Час роботи:              "  << fixed << setprecision(1) << h << "год  = " << h << " год " << m << " хв" << endl;
      return 0;
  }
 
