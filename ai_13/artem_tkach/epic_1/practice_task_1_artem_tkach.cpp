@@ -72,54 +72,48 @@ int main() {
     }
 
     // Виведення результатів
-std::cout << "\n";
-    // Для текстового поля
-    std::cout << std::left << std::setw(30) << "Модель:" 
-              << std::right << std::setw(15) << model << "\n";
+const int w_label = 25; 
+    const int w_num   = 10; 
 
-    // Фіксуємо 1 знак після коми для більшості чисел
-    std::cout << std::fixed << std::setprecision(1);
+    std::cout << "\n";
 
-    /* ПРОСТИЙ І НАДІЙНИЙ СПОСІБ ВИРІВНЯННЯ: */
-    // 1. Назва параметра: left, width = 25
-    // 2. Число: right, width = 7
-    // 3. Одиниця виміру: left, width = 10
+    std::cout << std::left  << std::setw(w_label) << "Модель:" 
+              << std::right << std::setw(w_num + 7) << model << "\n";
 
-    std::cout << std::left << std::setw(30) << "Паспортна ємність:" 
-              << std::right << std::setw(10) << capacity 
-              << std::left << " Вт·год\n";
+    std::cout << std::left  << std::setw(w_label) << "Паспортна ємність:" 
+              << std::right << std::setw(w_num) << std::fixed << std::setprecision(2) << capacity 
+              << std::left  << " Вт·год\n";
 
-    std::cout << std::left << std::setw(30) << "Вік станції:" 
-              << std::right << std::setw(10) << years 
-              << std::left << " р.\n";
+    std::cout << std::left  << std::setw(w_label) << "Вік станції:" 
+              << std::right << std::setw(w_num) << years 
+              << std::left  << " р.    \n"; // 4 пробіли після р.
 
-    std::cout << std::left << std::setw(30) << "Фактична ємність:" 
-              << std::right << std::setw(10) << c_eff 
-              << std::left << " Вт·год\n";
+    std::cout << std::left  << std::setw(w_label) << "Фактична ємність:" 
+              << std::right << std::setw(w_num) << std::fixed << std::setprecision(2) << c_eff 
+              << std::left  << " Вт·год\n";
 
-    std::cout << std::left << std::setw(30) << "Рівень заряду:" 
-              << std::right << std::setw(10) << charge 
-              << std::left << " %\n";
+    std::cout << std::left  << std::setw(w_label) << "Рівень заряду:" 
+              << std::right << std::setw(w_num) << std::fixed << std::setprecision(2) << charge 
+              << std::left  << " %     \n"; // 5 пробілів після %
 
-    std::cout << std::left << std::setw(30) << "ККД інвертора:" 
-              << std::setprecision(2) << std::right << std::setw(10) << efficiency 
-              << std::left << " %\n";
+    std::cout << std::left  << std::setw(w_label) << "ККД інвертора:" 
+              << std::right << std::setw(w_num) << std::fixed << std::setprecision(2) << efficiency 
+              << std::left  << " %     \n"; // 5 пробілів після %
 
-    std::cout << std::fixed << std::setprecision(1);
-    std::cout << std::left << std::setw(30) << "Запас енергії:" 
-              << std::right << std::setw(10) << e_stored 
-              << std::left << " Вт·год\n";
+    std::cout << std::left  << std::setw(w_label) << "Запас енергії:" 
+              << std::right << std::setw(w_num) << std::fixed << std::setprecision(3) << e_stored 
+              << std::left  << " Вт·год\n";
 
-    std::cout << std::left << std::setw(30) << "Корисна енергія:" 
-              << std::right << std::setw(10) << e_useful 
-              << std::left << " Вт·год\n";
+    std::cout << std::left  << std::setw(w_label) << "Корисна енергія:" 
+              << std::right << std::setw(w_num) << std::fixed << std::setprecision(3) << e_useful 
+              << std::left  << " Вт·год\n";
 
-    std::cout << std::left << std::setw(30) << "Втрати на перетворенні:" 
-              << std::right << std::setw(10) << e_loss 
-              << std::left << " Вт·год\n";
+    std::cout << std::left  << std::setw(w_label) << "Втрати на перетворенні:" 
+              << std::right << std::setw(w_num) << std::fixed << std::setprecision(3) << e_loss 
+              << std::left  << " Вт·год\n";
 
-    std::cout << std::left << std::setw(30) << "Час роботи:" 
-              << std::setprecision(2) << std::right << std::setw(7) << t_hours 
+    std::cout << std::left  << std::setw(w_label) << "Час роботи:" 
+              << std::right << std::setw(6) << std::fixed << std::setprecision(2) << t_hours 
               << " год  = " << hours << " год " 
               << std::setfill('0') << std::setw(2) << minutes << " хв\n";
 
