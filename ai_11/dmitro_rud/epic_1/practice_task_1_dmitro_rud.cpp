@@ -101,17 +101,29 @@ int main() {
     int hours = T; // ціла частина T - повні години
     int minutes = (T - hours) * 60; // залишок переводимо в хвилини
 
-    std::cout << std::left << std::setw(30) << "Модель: " << model << std::endl;
-    std::cout << std::left << std::setw(30) << "Паспортна ємність: " << std::fixed << std::setprecision(1) << C << " Вт·год" << std::endl;
-    std::cout << std::left << std::setw(30) << "Вік станції: " << years << " років" << std::endl;
-    std::cout << std::left << std::setw(30) <<  "Фактична ємність: " << std::fixed << std::setprecision(1) << C_eff << " Вт·год" << std::endl;
-    std::cout << std::left << std::setw(30) << "Рівень заряду: " << charge << " %" << std::endl;
-    std::cout << std::left << std::setw(30) <<  "ККД інвертора: " << std::fixed << std::setprecision(2) << eff << " %" << std::endl;
-    std::cout << std::left << std::setw(30) << "Запас енергії: " << std::fixed << std::setprecision(1) <<  E_stored << " Вт·год" << std::endl;
-    std::cout << std::left << std::setw(30) <<  "Корисна енергія: " << std::fixed << std::setprecision(1) << E_useful << " Вт·год" << std::endl;
-    std::cout << std::left << std::setw(30) <<  "Втрати на перетворенні: " << std::fixed << std::setprecision(1) << E_loss << " Вт·год" << std::endl;
-    // std::right тут важливо - до цього стоїть std::left, а нулі для хвилин мають бути зліва (05, а не 50)
-    std::cout << std::left << std::setw(30) << "Час роботи:" << std::fixed << std::setprecision(2) << T << " год = "<< hours << " год " << std::right << std::setfill('0') << std::setw(2) << minutes << " хв" << std::endl;
+// Вирівнюємо назви вручну до 24 символів, а для чисел використовуємо правостороннє вирівнювання шириною 5
+    std::cout << "Модель:                 " << model << std::endl;
+
+    std::cout << "Паспортна ємність:      " << std::right << std::setw(5) << std::fixed << std::setprecision(1) << C << " Вт·год" << std::endl;
+
+    std::cout << "Вік станції:            " << std::right << std::setw(5) << years << " р." << std::endl;
+
+    std::cout << "Фактична ємність:       " << std::right << std::setw(5) << std::fixed << std::setprecision(1) << C_eff << " Вт·год" << std::endl;
+
+    std::cout << "Рівень заряду:          " << std::right << std::setw(5) << charge << " %" << std::endl;
+
+    std::cout << "ККД інвертора:          " << std::right << std::setw(5) << std::fixed << std::setprecision(2) << eff << " %" << std::endl;
+
+    std::cout << "Запас енергії:          " << std::right << std::setw(5) << std::fixed << std::setprecision(1) << E_stored << " Вт·год" << std::endl;
+
+    std::cout << "Корисна енергія:        " << std::right << std::setw(5) << std::fixed << std::setprecision(1) << E_useful << " Вт·год" << std::endl;      
+
+    std::cout << "Втрати на перетворення: " << std::right << std::setw(5) << std::fixed << std::setprecision(1) << E_loss << " Вт·год" << std::endl;
+
+// Для часу роботи (години з хвилинами виводимо окремо з заповненням нулями)
+    std::cout << "Час роботи:             " << std::right << std::setw(5) << std::fixed << std::setprecision(2) << T 
+          << " год = " << hours << " год " 
+          << std::setfill('0') << std::setw(2) << minutes << " хв" << std::endl;
 
     return 0;
 }
