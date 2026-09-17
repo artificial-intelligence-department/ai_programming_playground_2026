@@ -7,38 +7,38 @@ int n;
 cout << "Введіть суму: ";
 cin >> n;
 if(n<0 || n > 1000000000)  {
-    cout << "Сума повинна бути в межах від 0 до 1000000000" << endl;
+    cout << "Сума повинна бути в межах від 0 до 10^9" << endl;
 return 1;
 }
- int k = n / 500;
- int res1 = n - k * 500;
+ int r1 = n / 500;
+ int res1 = n - r1 * 500;
 
- int l = res1 / 200;
- int res2 = res1 - l * 200;
+ int r2 = res1 / 200;
+ int res2 = res1 - r2 * 200;
 
- int z = res2 / 100;
- int res3 = res2 - z * 100;
+ int r3 = res2 / 100;
+ int res3 = res2 - r3 * 100;
 
- int x = res3 / 50;
- int res4 = res3 - x * 50;
+ int r4 = res3 / 50;
+ int res4 = res3 - r4 * 50;
 
- int c = res4 / 20;
- int res5 = res4 - c * 20;
+ int r5 = res4 / 20;
+ int res5 = res4 - r5 * 20;
 
- int v = res5 / 10;
- int res6 = res5 - v * 10;
+ int r6 = res5 / 10;
+ int res6 = res5 - r6 * 10;
 
- int b = res6 / 5;
- int res7 = res6 - b * 5;
+ int r7 = res6 / 5;
+ int res7 = res6 - r7 * 5;
 
- int y = res7 / 2;
- int res8 = res7 - y * 2;
+ int r8 = res7 / 2;
+ int res8 = res7 - r8 * 2;
 
- int m = res8 / 1;
- int res9 = res8 - m * 1;
+ int r9 = res8 / 1;
+ int res9 = res8 - r9 * 1;
 
 
-  int res = k + l + z + x + c + v + b + y + m;
-cout  << res<< endl;
+  int res = r1 + r2 + r3 + r4 + r5 + r6 + r7 + r8 + r9;
+cout << res << endl;
     return 0;
 }
