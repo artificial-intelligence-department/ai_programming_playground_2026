@@ -126,4 +126,4 @@ int main() {
           << std::setfill('0') << std::setw(2) << minutes << " хв" << std::endl;
 
     return 0;
-}
+}  
