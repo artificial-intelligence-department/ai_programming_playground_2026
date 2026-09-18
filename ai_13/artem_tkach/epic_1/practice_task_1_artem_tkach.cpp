@@ -1,7 +1,7 @@
 /*
  * Автономність портативної зарядної станції
  * Ткач Артем
- * ші-13
+ * ШІ-13
  */
 
 #include <iostream>
@@ -10,15 +10,15 @@
 #include <iomanip>
 
 int main() {
-// Відсоток деградації ємності акумулятора за один рік
+    // Відсоток деградації ємності акумулятора за один рік
     const double DEGRADATION_RATE_PER_YEAR = 2.0;
 
     std::string model; // Назва моделі акумулятора
-    double capacity; // Заявлена ємність акумулятора (Вт*год)
-    int years; // Вік акумулятора у роках
-    double charge; // Заряд (%)
+    double capacity;   // Заявлена ємність акумулятора (Вт*год)
+    int years;         // Вік акумулятора у роках
+    double charge;     // Заряд (%)
     double efficiency; // ККД інвертора (%)
-    double power; // Потужність (Вт)
+    double power;      // Потужність (Вт)
 
     // Введення та валідація даних
     std::cout << "Модель станції: ";
@@ -71,51 +71,20 @@ int main() {
         minutes = 0;
     }
 
-    // Виведення результатів
-const int w_label = 25; 
-    const int w_num   = 10; 
-
+    // Вивід результатів
     std::cout << "\n";
+    std::cout << "Модель:                  " << model << "\n";
+    std::cout << "Паспортна ємність:       " << std::fixed << std::setprecision(1) << capacity << " Вт·год\n";
+    std::cout << "Вік станції:             " << years << " р.\n";
+    std::cout << "Фактична ємність:        " << std::fixed << std::setprecision(1) << c_eff << " Вт·год\n";
+    std::cout << "Рівень заряду:           " << std::fixed << std::setprecision(0) << charge << " %\n";
+    std::cout << "ККД інвертора:           " << std::fixed << std::setprecision(2) << efficiency << " %\n";
+    std::cout << "Запас енергії:           " << std::fixed << std::setprecision(1) << e_stored << " Вт·год\n";
+    std::cout << "Корисна енергія:         " << std::fixed << std::setprecision(1) << e_useful << " Вт·год\n";
+    std::cout << "Втрати на перетворенні:  " << std::fixed << std::setprecision(1) << e_loss << " Вт·год\n";
 
-    std::cout << std::left  << std::setw(w_label) << "Модель:" 
-              << std::right << std::setw(w_num + 7) << model << "\n";
-
-    std::cout << std::left  << std::setw(w_label) << "Паспортна ємність:" 
-              << std::right << std::setw(w_num) << std::fixed << std::setprecision(2) << capacity 
-              << std::left  << " Вт·год\n";
-
-    std::cout << std::left  << std::setw(w_label) << "Вік станції:" 
-              << std::right << std::setw(w_num) << years 
-              << std::left  << " р.    \n"; // 4 пробіли після р.
-
-    std::cout << std::left  << std::setw(w_label) << "Фактична ємність:" 
-              << std::right << std::setw(w_num) << std::fixed << std::setprecision(2) << c_eff 
-              << std::left  << " Вт·год\n";
-
-    std::cout << std::left  << std::setw(w_label) << "Рівень заряду:" 
-              << std::right << std::setw(w_num) << std::fixed << std::setprecision(2) << charge 
-              << std::left  << " %     \n"; // 5 пробілів після %
-
-    std::cout << std::left  << std::setw(w_label) << "ККД інвертора:" 
-              << std::right << std::setw(w_num) << std::fixed << std::setprecision(2) << efficiency 
-              << std::left  << " %     \n"; // 5 пробілів після %
-
-    std::cout << std::left  << std::setw(w_label) << "Запас енергії:" 
-              << std::right << std::setw(w_num) << std::fixed << std::setprecision(3) << e_stored 
-              << std::left  << " Вт·год\n";
-
-    std::cout << std::left  << std::setw(w_label) << "Корисна енергія:" 
-              << std::right << std::setw(w_num) << std::fixed << std::setprecision(3) << e_useful 
-              << std::left  << " Вт·год\n";
-
-    std::cout << std::left  << std::setw(w_label) << "Втрати на перетворенні:" 
-              << std::right << std::setw(w_num) << std::fixed << std::setprecision(3) << e_loss 
-              << std::left  << " Вт·год\n";
-
-    std::cout << std::left  << std::setw(w_label) << "Час роботи:" 
-              << std::right << std::setw(6) << std::fixed << std::setprecision(2) << t_hours 
-              << " год  = " << hours << " год " 
-              << std::setfill('0') << std::setw(2) << minutes << " хв\n";
+    std::cout << "Час роботи:              " << std::fixed << std::setprecision(2) << t_hours << " год  = " 
+              << hours << " год " << (minutes < 10 ? "0" : "") << minutes << " хв\n";
 
     return 0;
 }
