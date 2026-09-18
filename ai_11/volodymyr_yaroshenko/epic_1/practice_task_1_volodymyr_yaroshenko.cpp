@@ -65,16 +65,16 @@ float T = E_useful / P;  // весь час роботи станції у го�
 float h = int(T); // визначаємо цілі години роботи 
 int  m = ((T - h) * 60); // визначаємо хвилини роботи з урахуванням годин 
 
-cout << "Модель станції:          " << name << endl;
-cout << "Паспортна ємність:       " << fixed << setprecision(1) << C << " Вт·год" << endl;
-cout << "Вік станції:             " << years << endl;
-cout << "Фактична ємність:        "<< fixed << setprecision(1) << C_eff << " Вт·год" << endl;
-cout << "Рівень заряду:           " << charge << "%" << endl;
-cout << "ККД інвертора:           "  << fixed << setprecision(2) << eff << "%" << endl;
-cout << "Запас енергії:           "  << fixed << setprecision(1) << E_stored << " Вт·год" << endl;
-cout << "Корисна енергія:         "  << fixed << setprecision(1) << E_useful << " Вт·год" << endl;
-cout << "Втрати енергії:          " << fixed << setprecision(1) << E_loss << " Вт·год" << endl;
-cout << "Час роботи:              "  << fixed << setprecision(1) << h << "год  = " << h << " год " << m << " хв" << endl;
+cout << left << setw(40) << "Модель станції:" << name << endl;
+cout << left << setw(44) << "Паспортна ємність:" << fixed << setprecision(1) << C << " Вт·год" << endl;
+cout << left << setw(38) << "Вік станції:" << years << endl;
+cout << left << setw(43) << "Фактична ємність:"<< fixed << setprecision(1) << C_eff << " Вт·год" << endl;
+cout << left << setw(40) << "Рівень заряду:" << charge << "%" << endl;
+cout << left << setw(40) << "ККД інвертора:"  << fixed << setprecision(2) << eff << "%" << endl;
+cout << left << setw(40) << "Запас енергії:"  << fixed << setprecision(1) << E_stored << " Вт·год" << endl;
+cout << left << setw(42) << "Корисна енергія:"  << fixed << setprecision(1) << E_useful << " Вт·год" << endl;
+cout << left << setw(41) << "Втрати енергії:"  << fixed << setprecision(1) << E_loss << " Вт·год" << endl;
+cout << left << setw(37) << "Час роботи:"  << fixed << setprecision(1) << h << "год  = " << h << " год " << m << " хв" << endl;
      return 0;
  }
 
