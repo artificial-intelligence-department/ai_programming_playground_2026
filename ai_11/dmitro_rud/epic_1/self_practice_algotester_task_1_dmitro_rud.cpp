@@ -20,25 +20,27 @@ int main() {
     std::vector<int> garages = {a , b};
     std::sort(garages.begin(), garages.end());
 
-    int x = 0; // кількість гаражів типу a
-    int y = 0; // кількість гаражів типу b
-    int big_garage = cars / garages[1];
-    int targetNumber = garages[1] * big_garage;
-    if (targetNumber == cars) {
+    long long x = 0; // кількість гаражів типу a
+    long long y = 0; // кількість гаражів типу b
+    long long big_garage = cars / garages[1];
+    long long big_garages_size = garages[1] * big_garage;// кількість машин, які можна розмістити в гаражах типу b
+    if (big_garages_size == cars) {
         std::cout << big_garage << std::endl;
+        return 0;
     }
-while (targetNumber/garages[1]  >= 0) {  
-    int low_number = cars - targetNumber;// кількість машин, які залишилися після заповнення гаражів типу b
-    if (low_number % garages[0] == 0) {
-        x = low_number / garages[0];
-        y = targetNumber / garages[1];
+while (big_garages_size/garages[1]  >= 0) {  
+    long long small_garages_size = cars - big_garages_size;// кількість машин, які залишилися після заповнення гаражів типу b
+    if (small_garages_size % garages[0] == 0) {
+        x = small_garages_size / garages[0];
+        y = big_garages_size / garages[1];
         std::cout << x + y << std::endl;
         return 0;
     } else {
-        targetNumber -= garages[1];
+        big_garages_size -= garages[1];
     }
 
 }
     std::cout << -1 << std::endl;
     return 0;
 }
+
