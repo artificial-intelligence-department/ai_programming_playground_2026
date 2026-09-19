@@ -15,11 +15,11 @@ int years;
 int charge;
 double eff;
 double P;
+string name;
 
 const double LOSS_PER_YEAR = 2.0; // Відсоток втрати ємності за один рік
 
 int main() {
-    string name;
     cout << "Введіть ім'я станції: ";
     if (!(cin >> name) || name.length() > 31) { 
         cout << "Помилка: неправильно вказана модель станції." << endl;
