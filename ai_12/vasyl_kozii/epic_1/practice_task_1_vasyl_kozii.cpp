@@ -1,3 +1,4 @@
+/*ШІ-12 Козій Василь Іванович*/
 #include <iostream>
 #include <string>
 #include <cmath>
@@ -6,9 +7,11 @@
 using namespace std;
 int main()
 {
+    //Це для виведення текту українською мовою
     SetConsoleCP(65001);
     SetConsoleOutputCP(65001);
     string Station_Model;
+    //Вводимо всі змінні і робимо перевірки
     cout <<"Модель станції: ";
     cin >>Station_Model;
     if(Station_Model.length()>31){
@@ -70,7 +73,7 @@ int main()
         cout <<"Веведіть число більше 0";
         return 1;
     }
-    
+    //Розрахунки
     double C_eff=C*pow(0.98, years);
     double E_stored=C_eff*(charge/100);
     double E_eseful=E_stored*(eff/100);
@@ -78,6 +81,7 @@ int main()
     double T=E_eseful/p;
     double h=(int)T;
     double m=(int)((T-h)*60);
+    //Виводимо дані з заданою кількістю цифр після коми
     cout <<"Модель: ";
     cout <<Station_Model <<endl;
     cout <<"Паспортна ємність: ";
