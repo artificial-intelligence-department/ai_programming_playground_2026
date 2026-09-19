@@ -11,10 +11,12 @@
 using namespace std;
 
 int main() {
-   string Model;
-   double Capacity, KKD, Power;
-   int years, charge;
+   // Введення змінних
+   string Model; // Модель
+   double Capacity, KKD, Power; // Паспортна ємність, ККД інвертора, потужність приладу
+   int years, charge; // Вік станції, рівень заряду
    const double Loss=2; // Відсоток втрати ємності за рік
+   // Введення данних та валідація 
    cout << "Модель станції: ";
    cin>>Model;
    if(Model.size()>31)
@@ -26,7 +28,7 @@ int main() {
    cin>>Capacity;
    if(Capacity<=0)
    {
-      cout<< "Error: wrong data input";
+      cout<<"Error: wrong data input";
       return 1;
    }
    cout<<"Вік станції (років): ";
@@ -57,14 +59,29 @@ int main() {
       cout<< "Error: wrong data input";
       return 1;
    }
+
+   // Розрахунок фактичної ємності з урахуванням віку
    double Capacityfact = Capacity*pow((1-Loss/100),years);
+
+   // Розрахунок запасу енергії при поточному заряді
    double E_stored = Capacityfact*charge/100;
+
+   // Розрахунок корисної енергії ,що дійде до приладу
    double E_useful = E_stored*KKD/100;
+
+   // Розрахунок втрат енергії на перетворенні напруги
    double E_loss = E_stored-E_useful;
+
+   // Розрахунок часу роботи
    double Time = E_useful/Power;
+
+   // Години роботи
    int hours = int(Time);
+   
+   // Хвилини роботи 
    int mins = int((Time-hours)*60);
 
+   // Вивід данних
    cout<<fixed;
    cout<<"Модель:"<<setw(25)<<Model<<endl;
    cout<<"Паспортна ємність:"<<setw(15)<<setprecision(1)<<Capacity<<" Вт*год"<<endl; 
