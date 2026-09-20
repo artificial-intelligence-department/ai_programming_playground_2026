@@ -13,7 +13,7 @@ int main()
     string Station_Model;
     //Вводимо всі змінні і робимо перевірки
     cout <<"Модель станції: ";
-    cin >>Station_Model;
+    getline(cin, Station_Model);
     if(Station_Model.length()>31){
         cout <<"Введіть назву не довшу за 31 символ";
         return 1;
@@ -22,7 +22,7 @@ int main()
     cout <<"Паспортна ємність (Вт·год): ";
     cin >>C;
     if(C<=0){
-        cout <<"Веведіть додатне число";
+        cout <<"Введіть додатне число";
         return 1;
     }
     int years;
@@ -30,11 +30,11 @@ int main()
     if(cin >>years){
     }
     else{
-        cout <<"Веведіть ціле число від 0 до 20";
+        cout <<"Введіть ціле число від 0 до 20";
         return 1;
     }
     if(years<0 || years>20){
-        cout <<"Веведіть ціле число від 0 до 20";
+        cout <<"Введіть ціле число від 0 до 20";
         return 1;
     }
     double charge;
@@ -42,11 +42,11 @@ int main()
     if(cin >>charge){
     }
     else{
-        cout <<"Веведіть ціле число від 0 до 100";
+        cout <<"Введіть ціле число від 0 до 100";
         return 1;
     }
     if(charge<0 || charge>100){
-        cout <<"Веведіть ціле число від 0 до 100";
+        cout <<"Введіть ціле число від 0 до 100";
         return 1;
     }
     double eff;
@@ -54,7 +54,7 @@ int main()
     if(cin >>eff){
     }
     else{
-        cout <<"Веведіть число від 0 до 100";
+        cout <<"Введіть число від 0 до 100";
         return 1;
     }
     if(eff<0 || eff>100){
@@ -66,11 +66,11 @@ int main()
     if(cin >>p){
     }
     else{
-        cout <<"Веведіть число більше 0";
+        cout <<"Введіть число більше 0";
         return 1;
     }
     if(p<=0){
-        cout <<"Веведіть число більше 0";
+        cout <<"Введіть число більше 0";
         return 1;
     }
     //Розрахунки
@@ -98,7 +98,7 @@ int main()
     cout <<fixed <<setprecision(1) <<E_stored <<" Вт·год" <<endl;
     cout <<"Корисна енергія: ";
     cout <<fixed <<setprecision(1) <<E_eseful <<" Вт·год" <<endl;
-    cout <<"Корисна енергія: ";
+    cout <<"Втрати на перетворенні: ";
     cout <<fixed <<setprecision(1) <<E_loss <<" Вт·год" <<endl;
     cout <<"Час роботи: ";
     cout <<fixed <<setprecision(2) <<T <<" год = ";
