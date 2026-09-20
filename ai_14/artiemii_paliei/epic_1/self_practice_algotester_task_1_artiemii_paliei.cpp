@@ -1,8 +1,3 @@
-/*
-    self_practice_algotester_task_1
-    Прізвище: Палєй
-    Група: ШІ-14
-*/
 #include <iostream>
 int main()
 {
