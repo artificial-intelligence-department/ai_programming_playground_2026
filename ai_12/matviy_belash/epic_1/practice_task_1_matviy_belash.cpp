@@ -3,14 +3,9 @@
 #include <string> //бібліотека для роботи з рядками
 #include <cmath> //бібліотека для математичних функцій
 #include <iomanip> //бібліотека для форматованого виводу
-#include <windows.h> //бібліотека для роботи з консоллю Windows
-
 using namespace std;
 
 int main() {
-
-    SetConsoleOutputCP(CP_UTF8); // Встановлення кодування виводу консолі на українську
-    SetConsoleCP(CP_UTF8);
     
     string model; //додаємо комірки для змінних
     double C;
