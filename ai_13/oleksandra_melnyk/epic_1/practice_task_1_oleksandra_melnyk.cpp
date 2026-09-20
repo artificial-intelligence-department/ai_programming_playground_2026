@@ -13,9 +13,9 @@ int main()
     string model;
     double capacity, capacityf,kkd,energyuseful, energy, power, lose, time;
     int  year, charge; 
+    float k=0.02; //відсоток втрати ємності за рік 
     cout << "Модель станції: ";
     cin >> model;
-    // оголошення змінних 
     if (model.length()> 31) {
         cout<<"Помилка: Модель зарядної станції не повинна перевищувати 31 символів."<<endl;
         return 1;
@@ -50,19 +50,19 @@ int main()
         cout<<"Помилка: Потужність приладу не може бути від'ємною."<<endl;
         return 1;
     }
-    //ввід всіх даних корситувачем і перевірка введення на істинність 
+    // перевірка введення на істинність 
 
     cout <<"Модель зарядної станції:           "<<model<<endl;;
     cout<<"Паспортна ємність (Вт*год):          "<<capacity<<fixed<<setprecision(1)<<" Вт*год"<<endl;
     cout<<"Вік станції (років):         "<<year<<endl;
-    capacityf=capacity*pow(1.0-2/100.0,year);
-    energy=capacityf*(charge/100.0);
-    energyuseful=energy*(kkd/100.0);
-    lose=energy-energyuseful;
-    time=energyuseful/power;
+    capacityf=capacity*pow(1.0-k,year); // Обчислюємо фактичну ємність з урахуванням зношення акумулятора (у Вт·год) 
+    energy=capacityf*(charge/100.0); // Знаходимо запас енергії при поточному рівні заряду (у Вт·год)
+    energyuseful=energy*(kkd/100.0); // Визначаємо корисну енергію, яка дійде до приладу через інвертор (у Вт·год)
+    lose=energy-energyuseful; // Розраховуємо втрати енергії на перетворення напруги (у Вт·год)
+    time=energyuseful/power; //обчислюємо час роботи приладу у годинах
     int h=int(time);
-    int m=int((time-h)*60);
-    //обчислення даних, розрахувнок формул 
+    int m=int((time-h)*60); // Виокремлюємо повні години та залишок у хвилинах для зручного виводу
+    
     cout<<"Фактична ємність:            "<<capacityf<<fixed<<setprecision(1)<<" Вт*год"<<endl;
     cout<<"Рівень заряду:                 "<<charge<<"%"<<endl;
     cout<<"ККД інвертора:               "<<kkd<<fixed<<setprecision(2)<<"%"<<endl;
@@ -70,6 +70,4 @@ int main()
     cout<<"Корисна енергія:             "<<energyuseful<<fixed<<setprecision(1)<<" Вт*год"<<endl;
     cout<<"Втрати на перетворенні:      "<<lose<<fixed<<setprecision(1)<<" Вт*год"<<endl;
     cout<<"Час роботи приладу:          "<<h<<" год "<<m<<" хв"<<endl;
-    //вивід кожної змінної окремо з кожного рядка 
-
 }
