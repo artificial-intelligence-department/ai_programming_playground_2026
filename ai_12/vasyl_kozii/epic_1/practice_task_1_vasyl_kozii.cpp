@@ -4,8 +4,8 @@
 #include <iostream>
 #include <string>
 #include <cmath>
-#include <windows.h>
-#include <iomanip>
+#include <windows.h> //Для виведення тексту українською мовою
+#include <iomanip> //Для виведення з заданою кількістю цифр після коми
 using namespace std;
 int main()
 {
@@ -15,7 +15,7 @@ int main()
     string Station_Model;
     //Вводимо всі змінні і робимо перевірки
     cout <<"Модель станції: ";
-    getline(cin, Station_Model);
+    getline(cin, Station_Model); //Якщо в назві будуть пропуски програма всеодно її запише
     if(Station_Model.length()>31){
         cout <<"Введіть назву не довшу за 31 символ";
         return 1;
@@ -76,11 +76,11 @@ int main()
         return 1;
     }
     //Розрахунки
-    double C_eff=C*pow(0.98, years);
-    double E_stored=C_eff*(charge/100);
-    double E_eseful=E_stored*(eff/100);
-    double E_loss=E_stored-E_eseful;
-    double T=E_eseful/p;
+    double C_eff=C*pow(0.98, years); //Фактична ємність
+    double E_stored=C_eff*(charge/100); //Запас енергії
+    double E_eseful=E_stored*(eff/100); //Корисна енергія
+    double E_loss=E_stored-E_eseful; //Втрати енергії на перетворенні
+    double T=E_eseful/p; //Час роботи
     double h=(int)T;
     double m=(int)((T-h)*60);
     //Виводимо дані з заданою кількістю цифр після коми
