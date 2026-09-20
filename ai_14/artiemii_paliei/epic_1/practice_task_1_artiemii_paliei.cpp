@@ -26,49 +26,49 @@ int main()
     std::cin >> ModelName;
     if (ModelName.length() > 31)
     {
-        std::cout << "Ви не ввели назву або значення перевищує допустимий ліміт символів (31)" << std::endl;
+        std::cout << "Значення перевищує допустимий ліміт символів (31)" << std::endl;
         return 1;
     }
 
     std::cout << "Паспортна ємність (Вт·год): ";
     if (!(std::cin >> C) || C <= 0)
     {
-        std::cout << "Ємність повинна бути числом або більша за 0" << std::endl;
+        std::cout << "Ємність повинна бути числом більшим за 0" << std::endl;
         return 1;
     }
 
     std::cout << "Вік станції (років): ";
-    if (!(std::cin >> years) || years <= 0 || years > 20)
+    if (!(std::cin >> years) || years < 0 || years > 20)
     {
-        std::cout << "Вік станції повинен бути числом або в діапазоні від 1 до 20 років" << std::endl;
+        std::cout << "Вік станції повинен бути числом в діапазоні від 0 до 20 років" << std::endl;
         return 1;
     }
 
     std::cout << "Рівень заряду (%): ";
-    if (!(std::cin >> charge) || charge <= 0 || charge > 100)
+    if (!(std::cin >> charge) || charge < 0 || charge > 100)
     {
-        std::cout << "Заряд станції повинен бути числом або в діпазоні від 1 до 100%" << std::endl;
+        std::cout << "Заряд станції повинен бути числом в діпазоні від 0 до 100%" << std::endl;
         return 1;
     }
 
     std::cout << "ККД інфертора (%): ";
     if (!(std::cin >> eff) || eff > 100 || eff <= 0)
     {
-        std::cout << "ККД зарядної станції повинен бути числом або в діапазоні від 1 до 100" << std::endl;
+        std::cout << "ККД зарядної станції повинен бути числом в діапазоні від 1 до 100" << std::endl;
         return 1;
     }
 
     std::cout << "Потужність приладу (Вт): ";
     if (!(std::cin >> P) || P <= 0)
     {
-        std::cout << "Потужність приладу повинна бути числом або більшою за 0" << std::endl;
+        std::cout << "Потужність приладу повинна бути числом більшим за 0" << std::endl;
         return 1;
     }
 
     // Створення констант для уникнення magic numbers
-    const double hudred_percent = 100.0;             // Константа 100%
-    const double year_loss = 1 - 2 / hudred_percent; // Константа річної втрати ємності
-    const int mins_in_hour = 60; // Константа хвилин у годині (60)
+    const double hudred_percent = 100.0;             // 100%
+    const double year_loss = 1 - 2 / hudred_percent; // Річна втрата ємності
+    const int mins_in_hour = 60; // Хвилини у годині (60)
 
     // Обчислення зміних...
 
