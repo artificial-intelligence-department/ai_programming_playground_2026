@@ -19,7 +19,6 @@ int main() {
         return 1;
     }
     
-
     cout << a + b << endl;
 
  return 0;
