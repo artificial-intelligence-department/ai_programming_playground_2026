@@ -6,7 +6,6 @@
 
 #include <iostream>
 #include <iomanip>
-#include <cmath>
 #include <string>
 
 using namespace std;
@@ -25,43 +24,59 @@ int main() {
 
     // Введення даних з підказками
     cout << "Модель станції: ";
-    if (!(cin >> model) || model.length() > 31) {
+    if ((cin >> model) && model.length() <= 31) {
+        // Успішне зчитування
+    } else {
         cout << "Помилка: назва моделі занадто довга або некоректна!" << endl;
         return 1;
     }
 
     cout << "Паспортна ємність (Вт·год): ";
-    if (!(cin >> C) || C <= 0) {
+    if ((cin >> C) && C > 0) {
+        // Успішне зчитування
+    } else {
         cout << "Помилка: ємність мусить бути більше 0!" << endl;
         return 1;
     }
 
     cout << "Вік станції (років): ";
-    if (!(cin >> years) || years < 0 || years > 20) {
+    if ((cin >> years) && years >= 0 && years <= 20) {
+        // Успішне зчитування
+    } else {
         cout << "Помилка: вік станції мусить бути від 0 до 20 років!" << endl;
         return 1;
     }
 
     cout << "Рівень заряду (%): ";
-    if (!(cin >> charge) || charge < 0 || charge > 100) {
+    if ((cin >> charge) && charge >= 0 && charge <= 100) {
+        // Успішне зчитування
+    } else {
         cout << "Помилка: рівень заряду мусить бути від 0 до 100%!" << endl;
         return 1;
     }
 
     cout << "ККД інвертора (%): ";
-    if (!(cin >> eff) || eff <= 0 || eff > 100) {
+    if ((cin >> eff) && eff > 0 && eff <= 100) {
+        // Успішне зчитування
+    } else {
         cout << "Помилка: ККД інвертора мусить бути в межах від 0 до 100%!" << endl;
         return 1;
     }
 
     cout << "Потужність приладу (Вт): ";
-    if (!(cin >> P) || P <= 0) {
+    if ((cin >> P) && P > 0) {
+        // Успішне зчитування
+    } else {
         cout << "Помилка: потужність мусить бути більше 0!" << endl;
         return 1;
     }
 
-    // 1. Фактична ємність з урахуванням деградації 2% на рік
-    double C_eff = C * pow(1.0 - DEGRADATION_PER_YEAR / 100.0, years);
+    // 1. Фактична ємність з урахуванням деградації 2% на рік (без cmath / pow)
+    double C_eff = C;
+    double factor = 1.0 - (DEGRADATION_PER_YEAR / 100.0);
+    for (int i = 0; i < years; ++i) {
+        C_eff *= factor;
+    }
 
     // 2. Запас енергії при поточному рівні заряду
     double E_stored = C_eff * (charge / 100.0);
@@ -100,7 +115,7 @@ int main() {
     
     cout << fixed << setprecision(2);
     cout << left << setw(28) << "Час роботи:" << T << " год = "
-         << hours << " год " << setfill('0') << setw(2) << minutes << " хв" << endl;
+         << hours << " год " << setfill('0') << setw(2) << minutes << setfill(' ') << " хв" << endl;
 
     return 0;
 }
