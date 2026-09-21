@@ -52,7 +52,7 @@ int main()
     }
 
     std::cout << "ККД інфертора (%): ";
-    if (!(std::cin >> eff) || eff > 100 || eff <= 0)
+    if (!(std::cin >> eff) || eff >= 100 || eff <= 0)
     {
         std::cout << "ККД зарядної станції повинен бути числом в діапазоні від 1 до 100" << std::endl;
         return 1;
@@ -107,6 +107,6 @@ int main()
     std::printf("Запас енергії:\t\t%.1f Вт*год\n", E_stored);
     std::printf("Корисна енергія:\t%.1f Вт*год\n", E_useful);
     std::printf("Втрати на перетворенні:\t%.1f Вт*год\n", E_loss);
-    std::printf("Час роботи:\t\t%.2f год = %.i год %.i хв\n", T, h, m);
+    std::printf("Час роботи:\t\t%.2f год = %i год %i хв\n", T, h, m);
     return 0;
 }
