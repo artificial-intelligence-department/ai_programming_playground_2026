@@ -84,19 +84,19 @@ int main() {
 
     // Виведення результат
     cout << fixed;
-    cout << "Модель:" << model << endl;
+    cout << "Модель:                 " << model << endl;
     
-    cout << setprecision(1) << "Паспортна ємність: " << capacity << " Вт·год" << endl;
-    cout << "Вік станції: " << years << " р." << endl;
-    cout << setprecision(2) << "Фактична ємність: " << c_eff << " Вт·год" << endl;
-    cout << setprecision(0) << "Рівень заряду: " << charge << " %" << endl;
-    cout << setprecision(1) << "ККД інвертора: " << eff << " %" << endl;
-    cout << setprecision(2) << "Запас енергії: " << e_stored << " Вт·год" << endl;
-    cout << setprecision(2) << "Корисна енергія: " << e_useful << " Вт·год" << endl;
+    cout << setprecision(1) << "Паспортна ємність:      " << capacity << " Вт·год" << endl;
+    cout << "Вік станції:            " << years << " р." << endl;
+    cout << setprecision(2) << "Фактична ємність:       " << c_eff << " Вт·год" << endl;
+    cout << setprecision(0) << "Рівень заряду:          " << charge << " %" << endl;
+    cout << setprecision(1) << "ККД інвертора:          " << eff << " %" << endl;
+    cout << setprecision(2) << "Запас енергії:          " << e_stored << " Вт·год" << endl;
+    cout << setprecision(2) << "Корисна енергія:        " << e_useful << " Вт·год" << endl;
     cout << setprecision(2) << "Втрати на перетворенні: " << e_loss << " Вт·год" << endl;
     
-    cout << setprecision(2) << "Час роботи: " << total_hours << " год  = " 
+    cout << setprecision(2) << "Час роботи:             " << total_hours << " год  = " 
          << h << " год " << (m < 10 ? "0" : "") << m << " хв" << endl;
-
+    
     return 0;
 }
