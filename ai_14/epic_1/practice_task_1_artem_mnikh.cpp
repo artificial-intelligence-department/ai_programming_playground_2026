@@ -1,3 +1,5 @@
+/*Автономність портативної зарядної станції, Мніх, ШІ-14*/
+
 #include <iostream>
 #include <string>
 #include <cmath>
