@@ -80,7 +80,7 @@ int main() {
     cout << left << setw(30) << "Паспортна ємність:"
             << right << setw(15) << fixed << setprecision(1) << C << " Вт·год" << endl;
     cout << left << setw(30) << "Вік станції:"
-         << right << setw(10) << years << " р." << endl;
+         << right << setw(10) << years << " P." << endl;
     cout << left << setw(30) << "Фактична ємність:"
          << right << setw(10) << fixed << setprecision(1) << C_eff << " Вт·год" << endl;
     cout << left << setw(30) << "Рівень заряду:"
