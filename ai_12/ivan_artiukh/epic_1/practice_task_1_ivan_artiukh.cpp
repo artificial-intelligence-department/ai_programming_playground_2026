@@ -12,7 +12,7 @@
 int main() {
     
     //Втрата ємності акумулятора за рік у десятковому дробі
-    const double capacity_loss = 0.02; 
+    const float capacity_loss = 0.02; 
 
     //Ініціалізація змінних для запису вводу користувача
     int years = 0; //Вік станції
@@ -23,12 +23,13 @@ int main() {
     std::string station_name; //Назва станції
 
     //Виведення запинту на дані у консоль, зчитування, валідація(для кожної змінної)
-    std::cout<<"Модель станції: ";
-    std::cin>>station_name;
-    if(std::cin.fail() || station_name.length() > 31) {
-        std::cout<<"Некоректна назва моделі.\n";
-        return 1;
+    std::cout<<"Модель станції(без пробілів): ";
+    getline(std::cin, station_name);
+    if(station_name.length()>32){
+         std::cout<<"Некоректна назва моделі.\n";
+         return 1;
     }
+  
     
     std::cout<<"Паспортна ємність (Вт·год): ";
     std::cin>>C;
@@ -91,26 +92,26 @@ int main() {
     std::cout << std::fixed;
 
     //Вивід 
-    std::cout <<"Модель: " << station_name << "\n";
+    std::cout <<"Модель:   " << station_name << "\n";
 
-    std::cout << "Паспортна ємність: "<< std::setprecision(1) << C << " Вт*год\n";
+    std::cout << "Паспортна ємність:   "<< std::setprecision(1) << C << " Вт*год\n";
 
-    std::cout << "Вік станції: "<< years << " pоків\n";
+    std::cout << "Вік станції:   "<< years << " pоків\n";
 
     std::cout << "Фактична ємність: "<< std::setprecision(1)
     << C_eff << " Вт*год\n";
 
-    std::cout << "Рівень заряду: " << charge << " %\n";
+    std::cout << "Рівень заряду:   " << charge << " %\n";
 
-    std::cout <<"ККД інвертора: " << std::setprecision(2) << eff << " %\n";
+    std::cout <<"ККД інвертора:   " << std::setprecision(2) << eff << " %\n";
 
-    std::cout << "Запас енергії: " << std::setprecision(1) << E_stored << " Вт*год\n";
+    std::cout << "Запас енергії:   " << std::setprecision(1) << E_stored << " Вт*год\n";
 
-    std::cout << "Корисна енергія: " << std::setprecision(1) << E_useful << " Вт*год\n";
+    std::cout << "Корисна енергія:   " << std::setprecision(1) << E_useful << " Вт*год\n";
 
-    std::cout << "Втрати на перетворенні: " << std::setprecision(1) << E_loss << " Вт*год\n";
+    std::cout << "Втрати на перетворенні:   " << std::setprecision(1) << E_loss << " Вт*год\n";
 
-    std::cout << std::setprecision(2) << "Час роботи: " << T << " год = "
+    std::cout << std::setprecision(2) << "Час роботи:   " << T << " год = "
     << h << " год " << ((m>9) ? "" : "0" ) << m << " xв\n"; // Додавання '0' перед кількістю хвилин, якщо їх менше 10
 
     return 0;
