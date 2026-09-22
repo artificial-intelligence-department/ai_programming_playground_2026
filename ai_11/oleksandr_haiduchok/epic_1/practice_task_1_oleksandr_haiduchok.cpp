@@ -1,4 +1,6 @@
-/*Epic1_Haiduchok_ShI11*/
+/*Автономність портативної зарядної станції
+Гайдучок Олександр
+ШІ-11*/
 #include <iostream>
 #include <cmath>
 #include <string>
