@@ -104,10 +104,10 @@ int main()
     double T = E_useful / p;
 
     // виділяємо повні години з часу роботи
-    int h = static_cast<int>(T);
+    int h = (int) T;
 
     // виділяємо хвилини, що залишилися після повних годин
-    int m = static_cast<int>((T - h) * 60);
+    int m = int((T - h) * 60);
 
     // Виводимо результати з потрібною точністю
     std::cout << std::fixed << std::setprecision(1);
