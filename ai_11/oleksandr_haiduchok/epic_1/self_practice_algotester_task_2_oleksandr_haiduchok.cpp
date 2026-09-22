@@ -1,3 +1,6 @@
+/* Спекотнi днi пiнгвiнiв
+Гайдучок Олександр
+ШІ-11*/
 #include <iostream>
 #include <string>
 using namespace std;
