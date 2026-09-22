@@ -1,3 +1,6 @@
+/* A плюс B
+Гайдучок Олександр
+ШІ-11*/
 #include <iostream>
 using namespace std;
 
