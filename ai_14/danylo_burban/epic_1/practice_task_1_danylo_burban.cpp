@@ -17,39 +17,39 @@ int main (){
     //inputs
     cout<<"Модель станції"<<endl;
     cin>>model_name;
-    if (model_name.length()>31 || model_name.empty()){
+    if (model_name.length()>32 || model_name.empty()){
         cout<<"Неправильно введена модель станції";
-        return 0;
+        return 1;
     }
 
     cout << "Паспортна ємність (Вт·год): ";
     if (!(cin >> C) || C <= 0) {
         cout << "Помилка: паспортна ємність має бути більше 0" << endl;
-        return 0;
+        return 1;
     }
 
     cout << "Вік станції (в роках): ";
     if (!(cin >> years) || years < 0 || years > 20) {
         cout << "Помилка: вік станції має бути від 0 до 20" << endl;
-        return 0;
+        return 1;
     }
 
     cout << "Рівень заряду (%): ";
     if (!(cin >> charge) || charge < 0 || charge > 100) {
         cout << "Помилка: рівень заряду має бути від 0 до 100" << endl;
-        return 0;
+        return 1;
     }
 
     cout << "ККД інвертора (%): ";
     if (!(cin >> eff) || eff <= 0 || eff > 100) {
         cout << "Помилка: ККД інвертора має бути від 0 до 100" << endl;
-        return 0;
+        return 1;
     }
 
     cout << "Потужність приладу (Вт): ";
     if (!(cin >> P) || P <= 0) {
         cout << "Помилка: потужність приладу має бути більше 0" << endl;
-        return 0;
+        return 1;
     }
 
 
