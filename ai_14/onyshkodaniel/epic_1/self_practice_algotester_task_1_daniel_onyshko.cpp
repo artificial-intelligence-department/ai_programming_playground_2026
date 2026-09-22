@@ -1,10 +1,11 @@
 
 #include <iostream>
+using namespace std;
 
 int main() {
     long long a, b;
-    if (std::cin >> a >> b) {
-        std::cout << a + b << std::endl;
+    if (cin >> a >> b) {
+        cout << a + b << endl;
     }
     return 0;
 }
