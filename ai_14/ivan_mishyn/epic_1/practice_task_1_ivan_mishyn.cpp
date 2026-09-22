@@ -6,6 +6,7 @@
 #include <iostream>
 #include <iomanip>
 #include <string>
+#include <cmath>
 
 using namespace std;
 
@@ -50,8 +51,7 @@ void output(){// блок виводу значень
     cout << "Запас енергії:            " << setprecision(1) << E_stored << " Вт·год" << endl;
     cout << "Корисна енергія:          " << setprecision(1) << E_useful << " Вт·год" << endl;
     cout << "Втрати на перетворенні:   " << setprecision(1) << E_loss << " Вт·год" << endl;
-    cout << "Час роботи:               " << setprecision(2) << T << " год = " << h << " год ";
-    cout << m << " хв" << endl;
+    cout << "Час роботи:               " << setprecision(2) << T << " год = " << h << " год "<< m << " хв" << endl;
 }
 
 void check(){//блок перевірки правильності вводу
@@ -91,10 +91,7 @@ void calculation()//блок обчислень
 {
     C_eff = C;
     float capacity_loss = 0.98;//скільки залишається ємності за 1 рік
-    for (int i = 0; i < years; i++)//Вираховуєм залишкову ємність в залежності від віку станції станції
-    {
-        C_eff = C_eff * capacity_loss;
-    }
+    C_eff *= pow(capacity_loss, years);//Вираховуєм залишкову ємність в залежності від віку станції станції
     E_stored = C_eff * charge / 100;//Запас енергії при поточному заряді, Вт·год
     E_useful = E_stored * eff / 100;//Корисна енергія, що дійде до приладу, Вт·год
     E_loss = E_stored - E_useful;//Втрати на перетворенні напруги, Вт·год
