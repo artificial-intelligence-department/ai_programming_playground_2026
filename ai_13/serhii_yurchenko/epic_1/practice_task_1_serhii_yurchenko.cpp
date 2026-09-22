@@ -71,7 +71,7 @@ int main() {
         return 1;
     }
 
-    // 1. Фактична ємність з урахуванням деградації 2% на рік (без cmath / pow)
+    // 1. Фактична ємність з урахуванням деградації 2% на рік 
     double C_eff = C;
     double factor = 1.0 - (DEGRADATION_PER_YEAR / 100.0);
     for (int i = 0; i < years; ++i) {
