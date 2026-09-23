@@ -12,6 +12,10 @@ using namespace std;
 
 int main () 
 {
+    const float cap_loss = 2.0; //втрата ємності за рік
+    const float base_cap = 100.0; //базова ємність
+    const int minutes_in_hour = 60; //кількість хв в годині
+    
     //змінні для вхідних даних
     string model; 
     float C;
@@ -19,10 +23,6 @@ int main ()
     int charge;
     float eff;
     int P;
-
-    const float cap_loss = 2.0; //втрата ємності за рік
-    const float base_cap = 100.0; //базова ємність
-    const int minutes_in_hour = 60; //кількість хв в годині
 
     cout << "--------------Вхідні дані--------------" << endl;
 
