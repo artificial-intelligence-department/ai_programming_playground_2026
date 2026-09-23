@@ -12,8 +12,6 @@
 using namespace std;
 
 int main() {
-    // Введення початкових даних та перевірка коректності
-
     string model;
     cout << "Модель станції: ";
     cin >> model;
@@ -62,29 +60,15 @@ int main() {
         return 1;
     }
 
-    // Обчислення параметрів роботи станції
-
-    // Втрата ємності 2% за кожен рік експлуатації
     const double degradationPerYear = 2.0;
-
-    // Обчислюємо реальну ємність з урахуванням зносу
     double C_eff = C * pow(1.0 - degradationPerYear / 100.0, years);
-
-    // Запас енергії при поточному рівні заряду
     double E_stored = C_eff * charge / 100.0;
-
-    // Корисна енергія з урахуванням ККД інвертора
     double E_useful = E_stored * eff / 100.0;
-
-    // Втрати енергії при перетворенні
     double E_loss = E_stored - E_useful;
 
-    // Розрахунок часу роботи приладу (в годинах і хвилинах)
     double T = E_useful / P;
     int h = (int)T;
     int m = (int)((T - h) * 60.0);
-
-    // Форматований вивід результатів
 
     cout << "\n--- Результати розрахунку ---" << endl;
     cout << fixed;
