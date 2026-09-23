@@ -19,7 +19,7 @@ int main() {
     int charge=0;
     float eff=0.0;
     int P=0;
-    float deg_rate_yr=2.0;
+    const float deg_rate_yr=2.0;
     
     cout << "Введіть модель станції: ";
     cin >> model;
