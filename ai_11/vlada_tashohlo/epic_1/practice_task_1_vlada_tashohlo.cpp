@@ -63,34 +63,34 @@ int main() {
         cin >> P;
     }
 
-// Обчислення фактичної ємності з урахуванням зносу акумулятора (Вт·год)
-float C_eff = C * pow(1 - (deg_rate_yr / 100 /* переведення відсотків у частку */), years);
-
-// Обчислення поточного запасу енергії в акумуляторі (Вт·год)
-float E_stored = C_eff * charge / 100;
-
-// Обчислення корисної енергії з урахуванням ККД інвертора (Вт·год)
-float E_useful = E_stored * eff / 100;
-
-// Обчислення втрат енергії на перетворенні (Вт·год)
-float E_loss = E_stored - E_useful;
-
-// Обчислення загального часу автономної роботи приладу (год)
-float T = E_useful / P;
-
-// Конвертація часу у години та хвилини
-int h = (int)T;
-int m =(int)((T - h) * 60 /* переведення дробової частини години у хвилини */);
-
-cout << "Модель:                 " << model << endl;
-cout << "Паспортна ємність:      " << fixed << setprecision(1) << C << " Вт·год" << endl;
-cout << "Фактична ємність:       " << fixed << setprecision(1) << C_eff << " Вт·год" << endl;
-cout << "Вік станції:            " << years << " р." << endl;
-cout << "Рівень заряду:          " << charge << " %" << endl;
-cout << "ККД інвертора:          " << fixed << setprecision(2) << eff << " %" << endl;
-cout << "Запас енергії:          " << fixed << setprecision(1) << E_stored << " Вт·год" << endl;
-cout << "Корисна енергія:        " << fixed << setprecision(1) << E_useful << " Вт·год" << endl;
-cout << "Втрати на перетворенні: " << fixed << setprecision(1) << E_loss << " Вт·год" << endl;
-cout << "Час роботи:             " << fixed << setprecision(2) << T << " год = " << h << " год " << setfill('0') << setw(2) << m << " хв" << endl;
-return 0;
+    // Обчислення фактичної ємності з урахуванням зносу акумулятора (Вт·год)
+    float C_eff = C * pow(1 - (deg_rate_yr / 100 /* переведення відсотків у частку */), years);
+    
+    // Обчислення поточного запасу енергії в акумуляторі (Вт·год)
+    float E_stored = C_eff * charge / 100;
+    
+    // Обчислення корисної енергії з урахуванням ККД інвертора (Вт·год)
+    float E_useful = E_stored * eff / 100;
+    
+    // Обчислення втрат енергії на перетворенні (Вт·год)
+    float E_loss = E_stored - E_useful;
+    
+    // Обчислення загального часу автономної роботи приладу (год)
+    float T = E_useful / P;
+    
+    // Конвертація часу у години та хвилини
+    int h = (int)T;
+    int m =(int)((T - h) * 60 /* переведення дробової частини години у хвилини */);
+    
+    cout << "Модель:                 " << model << endl;
+    cout << "Паспортна ємність:      " << fixed << setprecision(1) << C << " Вт·год" << endl;
+    cout << "Фактична ємність:       " << fixed << setprecision(1) << C_eff << " Вт·год" << endl;
+    cout << "Вік станції:            " << years << " р." << endl;
+    cout << "Рівень заряду:          " << charge << " %" << endl;
+    cout << "ККД інвертора:          " << fixed << setprecision(2) << eff << " %" << endl;
+    cout << "Запас енергії:          " << fixed << setprecision(1) << E_stored << " Вт·год" << endl;
+    cout << "Корисна енергія:        " << fixed << setprecision(1) << E_useful << " Вт·год" << endl;
+    cout << "Втрати на перетворенні: " << fixed << setprecision(1) << E_loss << " Вт·год" << endl;
+    cout << "Час роботи:             " << fixed << setprecision(2) << T << " год = " << h << " год " << setfill('0') << setw(2) << m << " хв" << endl;
+    return 0;
 }
