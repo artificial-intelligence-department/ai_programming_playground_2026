@@ -8,8 +8,7 @@
 
 using namespace std;
 
-int main() 
-{
+int main() {
     // Змінні для збереження вхідних даних
     string modelStation;
     double capacity;
@@ -21,48 +20,42 @@ int main()
     // Введення даних та їх валідація
     cout << "Модель станції: ";
     cin >> modelStation;
-    if (modelStation.length() > 31) 
-    {
+    if (cin.fail() || modelStation.length() > 31) {
         cout << "Помилка" << endl;
         return 1;
     }
 
     cout << "Ємність: ";
     cin >> capacity;
-    if (capacity <= 0 || capacity > 5000) 
-    {
+    if (cin.fail() || capacity <= 0 || capacity > 5000) {
         cout << "Помилка" << endl;
         return 1;
     }
 
     cout << "Вік станції: ";
     cin >> years;
-    if (years < 0 || years > 20) 
-    {
+    if (cin.fail() || years < 0 || years > 20) {
         cout << "Помилка" << endl;
         return 1;
     }
 
     cout << "Рівень заряду: ";
     cin >> charge;
-    if (charge < 0 || charge > 100) 
-    {
+    if (cin.fail() || charge < 0 || charge > 100) {
         cout << "Помилка" << endl;
         return 1;
     }
 
     cout << "ККД інвертора: ";
     cin >> efficiency;
-    if (efficiency <= 0 || efficiency > 100) 
-    {
+    if (cin.fail() || efficiency <= 0 || efficiency > 100) {
         cout << "Помилка" << endl;
         return 1;
     }
 
     cout << "Потужність приладу: ";
     cin >> power;
-    if (power <= 0) 
-    {
+    if (cin.fail() || power <= 0) {
         cout << "Помилка" << endl;
         return 1;
     }
@@ -105,8 +98,7 @@ int main()
     cout << "Час роботи: " << T << " год  = " << h << " год ";
 
     // Форматування хвилин з нулем попереду (наприклад, "05 хв")
-    if (m < 10) 
-    {
+    if (m < 10) {
         cout << "0";
     }
     cout << m << " хв" << endl;
