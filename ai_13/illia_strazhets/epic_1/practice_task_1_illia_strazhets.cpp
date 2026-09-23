@@ -13,6 +13,7 @@ using namespace std;
 
 int main()
 {
+    // Оголошення змінних для введення даних користувачем
     string model;
     double C;
     int years;
