@@ -11,14 +11,16 @@
 
 using namespace std;
 
-string model;
-int C;
-int years;
-int charge;
-float eff;
-int P;
-
 int main() {
+    
+    string model;
+    int C=0;
+    int years=0;
+    int charge=0;
+    float eff=0.0;
+    int P=0;
+    float deg_rate_yr=2.0;
+    
     cout << "Введіть модель станції: ";
     cin >> model;
     while (model.length() > 31 || model.find(' ') != string::npos) {
@@ -62,7 +64,7 @@ int main() {
     }
 
 // Обчислення фактичної ємності з урахуванням зносу акумулятора (Вт·год)
-float C_eff = C * pow(1 - (2.0 /* відсоток втрати ємності за рік */ / 100 /* переведення відсотків у частку */), years);
+float C_eff = C * pow(1 - (deg_rate_yr / 100 /* переведення відсотків у частку */), years);
 
 // Обчислення поточного запасу енергії в акумуляторі (Вт·год)
 float E_stored = C_eff * charge / 100;
@@ -91,5 +93,4 @@ cout << "Корисна енергія:        " << fixed << setprecision(1) << 
 cout << "Втрати на перетворенні: " << fixed << setprecision(1) << E_loss << " Вт·год" << endl;
 cout << "Час роботи:             " << fixed << setprecision(2) << T << " год = " << h << " год " << setfill('0') << setw(2) << m << " хв" << endl;
 return 0;
-
 }
