@@ -1,16 +1,19 @@
+/*  
+Автономність портативної зарядної станції
+Ярошенко Володимир 
+11 група 
+*/
 #include <iostream>
 #include <string>
 #include <cmath>
 #include <iomanip>
 
 using namespace std;
-/*  
-Автономність портативної зарядної станції
-Ярошенко Володимир 
-11 група 
-*/
- int main() {
 
+ int main() {
+const float loss_year = 2.0/100; // відсоток втрат ємності щороку
+const int percent = 100; // відсотки 
+const int minutes_in_h = 60; // хвилини в годині 
 string name; // назва станції 
 int  years, charge;
 float C, eff, P;
@@ -54,18 +57,19 @@ cout << "Введіть потужність споживання (Вт): ";
 cin >> P;
 if(P <= 0 ) {
     cout << "Потужність споживання не може бути від'ємною" << endl;
-    return 1;
+    return 1; 
+    
 }
 
-float C_eff = C * pow(1 - 2.0/100 , years); // 2 -відсоток втрата ємності щороку, обчислюємо фактичну ємність станції у відстоках
-float E_stored = C_eff *charge / 100; //  запас енергії у Вт*год 
-float E_useful = E_stored * eff / 100; // корисна енергія у Вт*год
+float C_eff = C * pow(1 - loss_year , years); // обчислюємо фактичну ємність станції у відстоках
+float E_stored = C_eff *charge / percent; //  запас енергії у Вт*год 
+float E_useful = E_stored * eff / percent; // корисна енергія у Вт*год
 float E_loss = E_stored - E_useful; // втрати енергії у Вт*год
 float T = E_useful / P;  // весь час роботи станції у годинах в дробовому вигляді
 float h = int(T); // визначаємо цілі години роботи 
-int  m = ((T - h) * 60); // визначаємо хвилини роботи з урахуванням годин 
+int  m = ((T - h) * minutes_in_h); // визначаємо хвилини роботи з урахуванням годин 
 
-cout << left << setw(40) << "Модель станції:" << name << endl;
+cout << left << setw(41) << "Модель станції:" << name << endl;
 cout << left << setw(44) << "Паспортна ємність:" << fixed << setprecision(1) << C << " Вт·год" << endl;
 cout << left << setw(38) << "Вік станції:" << years << endl;
 cout << left << setw(43) << "Фактична ємність:"<< fixed << setprecision(1) << C_eff << " Вт·год" << endl;
