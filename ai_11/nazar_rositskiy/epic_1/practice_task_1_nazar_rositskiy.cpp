@@ -13,14 +13,14 @@ int main() {
     cout << "Модель станції: ";
     getline(cin, model);
     //Перевірка значення 
-    if (cin.fail()){
-       cout << "Недопустимий формат вводу";
-       return 1;
-    } else if(model.find(" ") != string::npos){
+    if(model.find(" ") != string::npos){
         cout << "Модель не може містити пробіли";
         return 1;
     } else if(model.length() > 31){
         cout << "Модель не може довшою за 31 літеру";
+        return 1;
+    } else if(model.empty()){
+        cout << "Модель не може бути пустою";
         return 1;
     }
     //Отримання ємності
@@ -80,3 +80,4 @@ int main() {
     cout << "Час роботи:             " << setprecision(2) << T << " год = " << h << " год " << m << " хв" << endl;
 
 }
+   
