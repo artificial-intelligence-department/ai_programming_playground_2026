@@ -34,7 +34,7 @@ int main(){
         return 1;
     }
 
-    signed short year;
+    short year;
     cout << "Введіть вік станції (у роках):";
     cin >> year;
     if ( year < 0){
@@ -46,7 +46,7 @@ int main(){
         return 1;
     }
 
-    signed int charge;
+    int charge;
     cout << "Введіть рівень заряду (у відсотках): ";
     cin >> charge;
     if (charge < 0){
