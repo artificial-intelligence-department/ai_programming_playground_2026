@@ -49,7 +49,7 @@ int main()
     }
 
     double eff;
-    cout << "Вкажіть ККД інвентора до 100%: ";
+    cout << "Вкажіть ККД інвертора до 100%: ";
     cin >> eff;
     if (eff <= 0 || eff > 100){ 
         cout << "Неприпустиме значення" << endl;
@@ -60,7 +60,7 @@ int main()
     cout << "Потужність приладу, Вт: ";
     cin >> P;
     if (P <= 0) { 
-        cout << "Неприпустиме значення P < 0" << endl;
+        cout << "Неприпустиме значення P <= 0" << endl;
         return 1;
     }
 
@@ -75,7 +75,7 @@ int main()
 
     cout << "Рівень заряду, %:               " << charge << endl;
 
-    cout << "ККД інвентора, %:               " << fixed << setprecision(2) << eff << endl;
+    cout << "ККД інвертора, %:               " << fixed << setprecision(2) << eff << endl;
     //Обчислення Запасу енергії відносно заряду
     double E_stored = C_eff*charge/100;
     cout << "Запас енергії, Вт*год:          " << fixed << setprecision(1) << E_stored << endl;
