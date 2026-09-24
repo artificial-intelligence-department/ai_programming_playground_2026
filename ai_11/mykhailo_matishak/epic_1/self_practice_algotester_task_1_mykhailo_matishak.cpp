@@ -1,3 +1,6 @@
+/*Епік 1. Self practice: Algotester, task "A + B"
+Автор: Матішак Михайло
+Група: ШІ-11*/
 #include <iostream>
 using namespace std;
 
