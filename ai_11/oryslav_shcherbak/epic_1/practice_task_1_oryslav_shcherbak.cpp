@@ -16,77 +16,77 @@ int main() {
     int years, charge;
 
     // Зчитуємо модель станції
-    cout << "Модель станції: ";
+    cout << "Station model: ";
     cin >> model;
     // Назва станції не повинна перевищувати 31 символ
     if (model.length() > 31) {
-        cout << "Помилка, назва станції не може бути більше 31 символа." << endl;
-        return 0;
+        cout << "Error, station name cannot be longer than 31 characters." << endl;
+        return 1;
     }
 
     // Зчитуємо паспортну ємність
-    cout << "Паспортна ємність (Вт·год): ";
+    cout << "Rated capacity (Wh): ";
     // Якщо введено не число, завершити програму
     if (!(cin >> C)) {
-        cout << "Помилка, паспортна ємність повинна бути числом." << endl;
-        return 0;
+        cout << "Error, rated capacity must be a number." << endl;
+        return 1;
     }
     // Ємність повинна бути більше за 0, інакше зарядка не має сенсу
     if (C <= 0) {
-        cout << "Помилка, паспортна ємність повинна бути більше за 0." << endl;
-        return 0;
+        cout << "Error, rated capacity must be greater than 0." << endl;
+        return 1;
     }
 
     // Зчитуємо вік станції
-    cout << "Вік станції (років): ";
+    cout << "Station age (years): ";
     // Якщо введено не ціле число, завершити програму
     if (!(cin >> years)) {
-        cout << "Помилка, вік станції повинен бути цілим числом." << endl;
-        return 0;
+        cout << "Error, station age must be an integer." << endl;
+        return 1;
     }
     // Вік обмжений від 0 до 20 років
     if (years < 0 || years > 20) {
-        cout << "Помилка, вік станції повинен бути від 0 до 20 років." << endl;
-        return 0;
+        cout << "Error, station age must be between 0 and 20 years." << endl;
+        return 1;
     }
 
     // Зчитуємо рівень заряду
-    cout << "Рівень заряду (%): ";
+    cout << "Charge level (%): ";
     // Якщо введено не ціле число, завершити програму
     if (!(cin >> charge)) {
-        cout << "Помилка, рівень заряду повинен бути цілим числом." << endl;
-        return 0;
+        cout << "Error, charge level must be an integer." << endl;
+        return 1;
     }
     // Заряд повинен бути в межах від 0 до 100 відсотків
     if (charge < 0 || charge > 100) {
-        cout << "Помилка, рівень заряду повинен бути від 0 до 100." << endl;
-        return 0;
+        cout << "Error, charge level must be between 0 and 100." << endl;
+        return 1;
     }
 
     // Зчитуємо ККД інвертора
-    cout << "ККД інвертора (%): ";
+    cout << "Inverter efficiency (%): ";
     // Якщо введено не число, завершити програму
     if (!(cin >> eff)) {
-        cout << "Помилка, ККД інвертора повинен бути числом." << endl;
-        return 0;
+        cout << "Error, inverter efficiency must be a number." << endl;
+        return 1;
     }
     // ККД повинно бути більше 0 і не більше 100
     if (eff <= 0 || eff > 100) {
-        cout << "Помилка, ККД інвертора повинен бути від 0 до 100." << endl;
-        return 0;
+        cout << "Error, inverter efficiency must be between 0 and 100." << endl;
+        return 1;
     }
 
     // Зчитуємо потужність приладу
-    cout << "Потужність приладу (Вт): ";
+    cout << "Device power (W): ";
     // Якщо введено не число, завершити програму
     if (!(cin >> P)) {
-        cout << "Помилка, потужність приладу повинна бути числом." << endl;
-        return 0;
+        cout << "Error, device power must be a number." << endl;
+        return 1;
     }
     // Потужність не може бути нульовою чи від'ємною
     if (P <= 0) {
-        cout << "Помилка, потужність приладу повинна бути більше за 0." << endl;
-        return 0;
+        cout << "Error, device power must be greater than 0." << endl;
+        return 1;
     }
 
     // Відсоток втрати ємності акумулятора за один рік експлуатації
@@ -114,26 +114,30 @@ int main() {
     int m = static_cast<int>((T - h) * 60);
 
     // Виводимо підсумкову інформацію
-    cout << fixed << setprecision(1);
+    const int labelWidth = 24;
+    const int valueWidth = 20;
 
-    cout << "\nМодель: " << model << endl;
-    cout << "Паспортна ємність: " << C << " Вт·год" << endl;
-    cout << "Вік станції: " << years << " р." << endl;
-    cout << "Фактична ємність: " << C_eff << " Вт·год" << endl;
-    cout << "Рівень заряду: " << charge << " %" << endl;
-
-    cout << fixed << setprecision(2);
-    cout << "ККД інвертора: " << eff << " %" << endl;
+    cout << "\n";
+    cout << left << setw(labelWidth) << "Model:" << right << setw(valueWidth) << model << endl;
 
     cout << fixed << setprecision(1);
-    cout << "Запас енергії: " << E_stored << " Вт·год" << endl;
-    cout << "Корисна енергія: " << E_useful << " Вт·год" << endl;
-    cout << "Втрати на перетворенні: " << E_loss << " Вт·год" << endl;
+    cout << left << setw(labelWidth) << "Rated capacity:" << right << setw(valueWidth - 6) << C << " Wh" << endl;
+    cout << left << setw(labelWidth) << "Station age:" << right << setw(valueWidth - 5) << years << " yrs" << endl;
+    cout << left << setw(labelWidth) << "Actual capacity:" << right << setw(valueWidth - 6) << C_eff << " Wh" << endl;
+    cout << left << setw(labelWidth) << "Charge level:" << right << setw(valueWidth - 3) << charge << " %" << endl;
 
     cout << fixed << setprecision(2);
-    cout << "Час роботи: " << T << " год = "
-         << h << " год "
-         << setfill('0') << setw(2) << m << " хв" << endl;
+    cout << left << setw(labelWidth) << "Inverter efficiency:" << right << setw(valueWidth - 3) << eff << " %" << endl;
+
+    cout << fixed << setprecision(1);
+    cout << left << setw(labelWidth) << "Stored energy:" << right << setw(valueWidth - 6) << E_stored << " Wh" << endl;
+    cout << left << setw(labelWidth) << "Useful energy:" << right << setw(valueWidth - 6) << E_useful << " Wh" << endl;
+    cout << left << setw(labelWidth) << "Conversion losses:" << right << setw(valueWidth - 6) << E_loss << " Wh" << endl;
+
+    cout << fixed << setprecision(2);
+    cout << left << setw(labelWidth) << "Runtime:" << right << setw(valueWidth) << T << " h = "
+         << h << " h "
+         << setfill('0') << setw(2) << m << " min" << endl;
 
     return 0;
 }
