@@ -27,15 +27,14 @@ int main()
         return 1;
     }
     
-    char serve[amount]; 
-    
     for(int i = 0; i < amount; i++)
     {
+        char serve; 
         //Введення того, хто виграв ту чи іншу подачу
-        cin >> serve[i];
+        cin >> serve;
         
-        if(serve[i] == 'K') K_letter++;
-        else if(serve[i] == 'V') V_letter++;
+        if(serve == 'K') K_letter++;
+        else if(serve == 'V') V_letter++;
         else //Валідація введення переможця подач
         {
             cout << "Введені букви переможця подач повинні бути або K або V!" << endl;
