@@ -1,3 +1,7 @@
+/* Задача: Дороги та міста
+Виконав: Давидович Святослав
+Група: ШІ-11 */
+
 #include <iostream>
 #include <string>
 #include <iomanip>
