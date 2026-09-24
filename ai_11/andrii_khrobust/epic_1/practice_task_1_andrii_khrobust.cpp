@@ -18,7 +18,7 @@ string model;
 double C, eff, P;
 int years, charge;// змінні
 cout << "Модель станції(одним словом): ";// Модель станції: одне слово без пробілів, не довше 31 символа 
-cin >> model;
+cin >>model;
 if (model.length() > 31) {
     cout << "Помилка: назва моделі не повинна перевищувати 31 символ." << endl;
     return 1;
