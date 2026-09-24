@@ -59,45 +59,36 @@ int main() {
     }
 
     // розрахунки
-    const double kLossPercentage = 2.0 / 100.0;  // Відсоток втрати аккамулятора
-    double C_eff =
-        pass_capacity * std::pow((1.0 - kLossPercentage),
-                                 age_of_station);    // Фактична ємність з урахуванням віку Вт·год
-    double E_stored = C_eff * charge_level / 100.0;  // Запас енергії при поточному заряді, Вт·год
-    double E_useful =
-        E_stored * inventor_efficiency / 100.0;  // Корисна енергія, що дійде до приладу, Вт·год
-    double E_loss = E_stored - E_useful;         // Втрати на перетворенні напруги, Вт·год
-    double T = E_useful / device_power;          // Час роботи, годин
-    int h = static_cast<int>(T);                 // Повні години
-    int m = static_cast<int>((T - h) * 60);      // Хвилини, що залишились
+    const double kLossPercentage = 2.0 / 100.0;
+    // Відсоток втрати аккамулятора
+    double C_eff = pass_capacity * std::pow((1.0 - kLossPercentage), age_of_station);
+    // Фактична ємність з урахуванням віку Вт·год
+    double E_stored = C_eff * charge_level / 100.0;
+    // Запас енергії при поточному заряді, Вт·год
+    double E_useful = E_stored * inventor_efficiency / 100.0;
+    // Корисна енергія, що дійде до приладу, Вт·год
+    double E_loss = E_stored - E_useful;
+    // Втрати на перетворенні напруги, Вт·год
+    double T = E_useful / device_power;
+    // Час роботи, годин
+    int h = static_cast<int>(T);
+    // Повні години
+    int m = static_cast<int>((T - h) * 60);
+    // Хвилини, що залишились
 
     // вивід програми
-    std::cout << "\nМодель: " << model << std::endl;
-
-    std::cout << std::fixed << std::setprecision(1) << "Паспортна ємність: " << pass_capacity
-              << " Вт·год" << std::endl;
-
-    std::cout << "Вік станції: " << age_of_station << " р." << std::endl;
-
-    std::cout << std::fixed << std::setprecision(1) << "Фактична ємність: " << C_eff << " Вт·год"
-              << std::endl;
-
-    std::cout << "Рівень заряду: " << charge_level << " %" << std::endl;
-
-    std::cout << std::fixed << std::setprecision(2) << "ККД інвертора: " << inventor_efficiency
-              << " %" << std::endl;
-
-    std::cout << std::fixed << std::setprecision(1) << "Запас енергії: " << E_stored << " Вт·год"
-              << std::endl;
-
-    std::cout << std::fixed << std::setprecision(1) << "Корисна енергія: " << E_useful << " Вт·год"
-              << std::endl;
-
-    std::cout << "Втрати на перетворенні: " << E_loss << " Вт·год" << std::endl;
-
-    std::cout << std::fixed << std::setprecision(2) << "Час роботи: " << T << " год = ";
-
-    std::cout << h << " год " << (m < 10 ? "0" : "") << m << " хв\n";
+    std::cout                                       << "\nМодель: "               << model                                 << std::endl;
+    std::cout << std::fixed << std::setprecision(1) << "Паспортна ємність: "      << pass_capacity            << " Вт·год" << std::endl;
+    std::cout                                       << "Вік станції: "            << age_of_station           << " р."     << std::endl;
+    std::cout << std::fixed << std::setprecision(1) << "Фактична ємність: "       << C_eff                    << " Вт·год" << std::endl;
+    std::cout                                       << "Рівень заряду: "          << charge_level             << " %"      << std::endl;
+    std::cout << std::fixed << std::setprecision(2) << "ККД інвертора: "          << inventor_efficiency      << " %"      << std::endl;
+    std::cout << std::fixed << std::setprecision(1) << "Запас енергії: "          << E_stored                 << " Вт·год" << std::endl;
+    std::cout << std::fixed << std::setprecision(1) << "Корисна енергія: "        << E_useful                 << " Вт·год" << std::endl;
+    std::cout                                       << "Втрати на перетворенні: " << E_loss                   << " Вт·год" << std::endl;
+    std::cout << std::fixed << std::setprecision(2) << "Час роботи: "             << T                        << " год = ";
+    std::cout                                                                     << h                        << " год ";
+    std::cout                                                                     << (m < 10 ? "0" : "") << m << " хв\n";
 
     return 0;
 }
