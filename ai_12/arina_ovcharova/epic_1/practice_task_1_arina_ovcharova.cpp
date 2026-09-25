@@ -12,8 +12,15 @@
 using namespace std;
 
 int main() {
-    // модель станції
+    // оголошення всіх змінних
     string model;
+    double C, eff, P;
+    int years, charge;
+    const double degradationPerYear = 2.0;   // % втрати ємності за рік
+    double C_eff, E_stored, E_useful, E_loss, T;
+    int h, m;
+
+    // модель станції
     cout << "Модель станції: ";
     cin >> model;
     if (model.length() > 31) {
@@ -22,7 +29,6 @@ int main() {
     }
 
     // паспортна ємність
-    double C;
     cout << "Паспортна ємність (Вт*год): ";
     cin >> C;
     if (cin.fail() || C <= 0) {
@@ -31,7 +37,6 @@ int main() {
     }
 
     // вік станції
-    int years;
     cout << "Вік станції (років): ";
     cin >> years;
     if (cin.fail() || years < 0 || years > 20) {
@@ -40,7 +45,6 @@ int main() {
     }
 
     // рівень заряду
-    int charge;
     cout << "Рівень заряду (%): ";
     cin >> charge;
     if (cin.fail() || charge < 0 || charge > 100) {
@@ -49,7 +53,6 @@ int main() {
     }
 
     // ККД інвертора (0% не приймаємо, бо це не має сенсу для реального пристрою)
-    double eff;
     cout << "ККД інвертора (%): ";
     cin >> eff;
     if (cin.fail() || eff <= 0 || eff > 100) {
@@ -58,7 +61,6 @@ int main() {
     }
 
     // потужність приладу
-    double P;
     cout << "Потужність приладу (Вт): ";
     cin >> P;
     if (cin.fail() || P <= 0) {
@@ -67,16 +69,15 @@ int main() {
     }
 
     // знос 2% на рік від поточної ємності (складний відсоток, не лінійно)
-    const double degradationPerYear = 2.0;
-    double C_eff = C * pow(1.0 - degradationPerYear / 100.0, years);
+    C_eff = C * pow(1.0 - degradationPerYear / 100.0, years);
 
-    double E_stored = C_eff * charge / 100.0;   // енергія при поточному заряді
-    double E_useful = E_stored * eff / 100.0;   // з урахуванням втрат інвертора
-    double E_loss = E_stored - E_useful;        // втрати на перетворенні
+    E_stored = C_eff * charge / 100.0;   // енергія при поточному заряді
+    E_useful = E_stored * eff / 100.0;   // з урахуванням втрат інвертора
+    E_loss = E_stored - E_useful;        // втрати на перетворенні
 
-    double T = E_useful / P;   // час роботи в годинах
-    int h = (int)T;
-    int m = (int)((T - h) * 60.0);
+    T = E_useful / P;   // час роботи в годинах
+    h = (int)T;
+    m = (int)((T - h) * 60.0);
 
     cout << "\n--- Результати розрахунку ---" << endl;
     cout << fixed;
