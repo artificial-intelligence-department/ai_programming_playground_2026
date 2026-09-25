@@ -4,6 +4,7 @@
 Група: ші-11
 */
 
+//Підключення потрібних системних бібліотек
 #include <iostream>
 #include <string>
 #include <iomanip>
@@ -13,6 +14,7 @@ using namespace std;
 
 int main() {
     
+    //Оголошення змінних
     string model;
     int C=0;
     int years=0;
@@ -20,7 +22,8 @@ int main() {
     float eff=0.0;
     int P=0;
     const float deg_rate_yr=2.0;
-    
+
+    //Ввід даних і перевірка вводу
     cout << "Введіть модель станції: ";
     cin >> model;
     while (model.length() > 31 || model.find(' ') != string::npos) {
@@ -81,7 +84,8 @@ int main() {
     // Конвертація часу у години та хвилини
     int h = (int)T;
     int m =(int)((T - h) * 60 /* переведення дробової частини години у хвилини */);
-    
+
+    //Вивід даних
     cout << "Модель:                 " << model << endl;
     cout << "Паспортна ємність:      " << fixed << setprecision(1) << C << " Вт·год" << endl;
     cout << "Фактична ємність:       " << fixed << setprecision(1) << C_eff << " Вт·год" << endl;
