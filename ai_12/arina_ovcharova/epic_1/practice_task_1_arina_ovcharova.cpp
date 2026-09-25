@@ -12,6 +12,7 @@
 using namespace std;
 
 int main() {
+    // модель станції
     string model;
     cout << "Модель станції: ";
     cin >> model;
@@ -20,6 +21,7 @@ int main() {
         return 1;
     }
 
+    // паспортна ємність
     double C;
     cout << "Паспортна ємність (Вт*год): ";
     cin >> C;
@@ -28,6 +30,7 @@ int main() {
         return 1;
     }
 
+    // вік станції
     int years;
     cout << "Вік станції (років): ";
     cin >> years;
@@ -36,6 +39,7 @@ int main() {
         return 1;
     }
 
+    // рівень заряду
     int charge;
     cout << "Рівень заряду (%): ";
     cin >> charge;
@@ -44,6 +48,7 @@ int main() {
         return 1;
     }
 
+    // ККД інвертора (0% не приймаємо, бо це не має сенсу для реального пристрою)
     double eff;
     cout << "ККД інвертора (%): ";
     cin >> eff;
@@ -52,6 +57,7 @@ int main() {
         return 1;
     }
 
+    // потужність приладу
     double P;
     cout << "Потужність приладу (Вт): ";
     cin >> P;
@@ -60,13 +66,15 @@ int main() {
         return 1;
     }
 
+    // знос 2% на рік від поточної ємності (складний відсоток, не лінійно)
     const double degradationPerYear = 2.0;
     double C_eff = C * pow(1.0 - degradationPerYear / 100.0, years);
-    double E_stored = C_eff * charge / 100.0;
-    double E_useful = E_stored * eff / 100.0;
-    double E_loss = E_stored - E_useful;
 
-    double T = E_useful / P;
+    double E_stored = C_eff * charge / 100.0;   // енергія при поточному заряді
+    double E_useful = E_stored * eff / 100.0;   // з урахуванням втрат інвертора
+    double E_loss = E_stored - E_useful;        // втрати на перетворенні
+
+    double T = E_useful / P;   // час роботи в годинах
     int h = (int)T;
     int m = (int)((T - h) * 60.0);
 
