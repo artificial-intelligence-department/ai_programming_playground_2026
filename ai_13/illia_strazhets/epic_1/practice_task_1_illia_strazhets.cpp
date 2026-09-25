@@ -112,6 +112,6 @@ int main()
     cout << fixed << left << setw(40) << "Запас енергії: " << fixed << setprecision(1) << E_stored << " Вт·год" << endl;
     cout << fixed << left << setw(40) << "Корисна енергія: " << fixed << setprecision(1) << E_useful << " Вт·год" << endl;
     cout << fixed << left << setw(40) << "Втрати на перетворенні:  " << fixed << setprecision(1) << E_loss << " Вт·год" << endl;
-    cout << fixed << left << setw(40) << "Час роботи: " << fixed << setprecision(2) << T << " год " << "= " << h << " год " << setfill('0') << setw(2) << m << " хв" << setfill(' ') << endl;
+    cout << fixed << left << setw(40) << "Час роботи: " << fixed << setprecision(2) << T << " год " << "= " << h << " год " << right << setfill('0') << setw(2) << m << " хв" << setfill(' ') << endl;
     return 0;
 }
