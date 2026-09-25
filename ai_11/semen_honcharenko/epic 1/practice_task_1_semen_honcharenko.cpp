@@ -88,7 +88,6 @@ int main() {
     std::cout << "Useful energy: " << trunc((E_useful / 10.0) * 10.0) << " Wh" << std::endl; // useful energy output 
     std::cout << "Energy loss: " << trunc((E_loss / 10.0) * 10.0) << " Wh" << std::endl; // energy loss output
     std::cout << "Time left: " << (( T / 100.0 ) * 100.0 ) << " h = " << h << "h " << ( m < 10 ? "0" : "") << m << "m" << std::endl;
-    
     return 0;
     
 }
