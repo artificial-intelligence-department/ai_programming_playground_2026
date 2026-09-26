@@ -2,9 +2,12 @@
 #include <iostream>
 #include <string>
 #include <iomanip>
+#include <windows.h>
 
 int main() {
     using namespace std;
+    SetConsoleOutputCP(CP_UTF8);
+    SetConsoleCP(CP_UTF8);
 
     string model;
     double C;
@@ -15,6 +18,10 @@ int main() {
 
     cout << "Модель станції: ";
     getline(cin, model);
+    if (model.length() > 31) {
+    cout << "Помилка! Введіть значення до 31 символа без пробілів" << endl;
+    return 1;
+}
 
     cout << "Паспортна ємність (Вт*год): ";
     cin >> C;
@@ -47,7 +54,7 @@ int main() {
     cout << "Потужність приладу (Вт): ";
     cin >> P;
     if (P <= 0) {
-        cout << "Помилка! Значення має бути більше 0" << endl;
+        cout << "Помилка! Введіть значення більше 0" << endl;
         return 1;
     }
 
@@ -57,8 +64,8 @@ int main() {
     double E_loss = E_stored - E_useful;
     double T = E_useful / P;
 
-    int h = static_cast<int>(T);
-    int m = static_cast<int>(round((T - h) * 60));
+    int h = T;
+    int m = round((T - h) * 60);
 
     if (m == 60) {
         h += 1;
