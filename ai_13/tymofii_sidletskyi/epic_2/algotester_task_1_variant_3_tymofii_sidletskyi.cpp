@@ -10,6 +10,7 @@ int main () {
     const int constraint3 = 0;
     long long a1, a2, a3, a4, a5;
 
+    cout << "Введіть сторону першого куба: ";
     cin >> a1;
 
     if (a1 <= constraint1 || a1 >= constraint2 || a1 <= constraint3) {
@@ -17,7 +18,7 @@ int main () {
         return 0;
     }
 
-
+    cout << "Введіть сторону другого куба: ";
     cin >> a2;
 
     if (a2 <= constraint1 || a2 >= constraint2 || a2 <= constraint3) {
@@ -30,7 +31,7 @@ int main () {
         return 0;
     }
 
-
+    cout << "Введіть сторону третього куба: ";
     cin >> a3;
 
     if (a3 <= constraint1 || a3 >= constraint2 || a3 <= constraint3) {
@@ -43,7 +44,7 @@ int main () {
         return 0;
     }
 
-
+    cout << "Введіть сторону четвертого куба: ";
     cin >> a4;
 
     if (a4 <= constraint1 || a4 >= constraint2 || a4 <= constraint3) {
@@ -56,7 +57,7 @@ int main () {
         return 0;
     }
 
-
+    cout << "Введіть сторону п'ятого куба: ";
     cin >> a5;
 
     if (a5 <= constraint1 || a5 >= constraint2 || a5 <= constraint3) {
