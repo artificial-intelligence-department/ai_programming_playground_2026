@@ -42,7 +42,7 @@ int main()
     std::cout << "Вік станції (років): ";
     if (!(std::cin >> years))
     {
-        std::cout << "Ємність має бути числом" << std::endl;
+        std::cout << "Вік має бути числом" << std::endl;
         return 1;
     }
     else if (!(years >= 0 && years <= 20))
