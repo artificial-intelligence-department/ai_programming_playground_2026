@@ -9,6 +9,7 @@ int main() {
     string specialChars;
     int charTypes = 0;
 
+    // Перевірка довжини пароля
     cout << "Довжина пароля (від 1 до 64): ";
     cin >> passLength;
     if (passLength < 1 || passLength > 64 || cin.fail()) {
@@ -16,6 +17,7 @@ int main() {
         return 1;
     }
 
+    // Перевірка наявності цифр у паролі
     cout << "Чи є цифри у паролі (y/n): ";
     cin >> digits;
     if (digits != "y" && digits != "n") {
@@ -23,6 +25,7 @@ int main() {
         return 1;
     }
 
+    // Перевірка наявності великих літер у паролі
     cout << "Чи є великі літери у паролі (y/n): ";
     cin >> capitals;
     if (capitals != "y" && capitals != "n") {
@@ -30,6 +33,7 @@ int main() {
         return 1;
     }
 
+    // Перевірка чи є спеціальні символи у паролі
     cout << "Чи є спеціальні символи у паролі (y/n): ";
     cin >> specialChars;
     if (specialChars != "y" && specialChars != "n") {
@@ -37,6 +41,7 @@ int main() {
         return 1;
     }
     
+    // Кількість різних типів символім у паролі
     if (specialChars == "y") {
         charTypes++;
     }
@@ -47,12 +52,14 @@ int main() {
         charTypes++;
     }
 
+    // Перевірка на мінімальні вимоги
     if (passLength >= 8 && charTypes >= 2) {
         cout << "Мінімальні вимоги: ПРОЙДЕНО" << endl;
     } else {
         cout << "Мінімальні вимоги: НЕ ПРОЙДЕНО" << endl;
     }
 
+    // Перевірка рівня надійності пароля
     if (passLength < 6) {
         level = 1;
         cout << "Рівень надійності: 1 - Дуже слабкий" << endl;
@@ -70,6 +77,7 @@ int main() {
         cout << "Рівень надійності: 4 - Надійний" << endl;
     }
     
+    // Перевірка яку рекомендацію потрібно дати користувачу
     switch (level) {
         case 1:
             cout << "Пароль надто короткий. Мінімум символів 8." << endl;
@@ -87,6 +95,8 @@ int main() {
             cout << "Відмінно. Змінювати нічого не потрібно." << endl;
             break;
     }
+
+    // Попередження що пароль складається тільки з літер
     if (digits == "n" || specialChars == "n") {
         cout << "Попередження: пароль тільки з літер підбирається швидше" << endl;
     }
