@@ -1,6 +1,8 @@
 #include <iostream>
 #include <string>
 using namespace std;
+/* Практична задача 1: аналізатор надійності пароля
+   Сідлецький Тимофій ШІ-13*/
 int main() {
     int passLength;
     int level;
@@ -97,7 +99,7 @@ int main() {
     }
 
     // Попередження що пароль складається тільки з літер
-    if (digits == "n" || specialChars == "n") {
+    if (digits == "n" && specialChars == "n") {
         cout << "Попередження: пароль тільки з літер підбирається швидше" << endl;
     }
     return 0;
