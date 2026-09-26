@@ -2,13 +2,14 @@
 Чернихівський Максим, ШІ-14*/
 #include <iostream> // для cin та cout
 #include <cmath> // для pow та round
+#include <string>
 using namespace std;
 
 int main(){
 
     cout << "Модель станції: ";
     string model = "";
-    cin >> model;
+    if (cin >> model && (model.length() <= 31) && (model.length() > 0)) {} else {cout << "Назва може містити до 31-го символа."; return 1;};
 
     cout << "Паспортна ємність (Вт·год): ";
     int C = 0;
