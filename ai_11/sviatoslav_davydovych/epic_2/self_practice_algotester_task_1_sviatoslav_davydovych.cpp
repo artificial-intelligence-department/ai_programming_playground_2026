@@ -1,5 +1,5 @@
-/* Algotester: "Фарбування"
-https://algotester.com/uk/ArchiveProblem/DisplayWithEditor/40795
+/* Algotester: "Юний художник"
+https://algotester.com/uk/ArchiveProblem/DisplayWithEditor/40857
 Автор: Давидович Святослав
 Група: ШІ-11
 */
