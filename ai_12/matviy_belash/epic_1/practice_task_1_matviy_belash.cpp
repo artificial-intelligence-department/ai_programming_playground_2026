@@ -8,18 +8,14 @@ using namespace std;
 int main() {
     
     string model; //додаємо комірки для змінних
-    double C;
-    int years;
-    int charge;
-    double eff;
-    double P;
+    double C, eff, P;
+    int years, charge;
 
-    cout << "Модель станції: "; //просимо користувача ввести модель станції та перевіряємо довжину введеного рядка
+    cout << "Введіть модель станції: "; //просимо користувача ввести модель станції та перевіряємо довжину введеного рядка
     if (!(cin >> model) || model.length() > 31 ) {
         cout << "Помилка: довжина моделі станції не повинна перевищувати 31 символ." << endl;
         return 1;
     }
-   
 
     cout << "Паспортна ємність (Вт·год): "; //просимо користувача ввести паспортну ємність та перевіряємо чи введене значення більше 0
     if (!(cin >> C) ||C <= 0 ) {
@@ -55,12 +51,13 @@ int main() {
 
     const double DEGRADATION_RATE_PCT = 2.0; // встановлюємо константу для коефіцієнта деградації батареї (2% на рік)
 
-   
-    double C_eff = C * pow(1.0 - DEGRADATION_RATE_PCT / 100.0, years);//розраховуємо різні параметри станції та її роботи
-    double E_stored = C_eff * charge / 100.0;
-    double E_useful = E_stored * eff / 100.0;
-    double E_loss = E_stored - E_useful;
-    double T = E_useful / P;
+    double C_eff, E_stored, E_useful, E_loss, T; // оголошуємо змінні для розрахунків
+
+    C_eff = C * pow(1.0 - DEGRADATION_RATE_PCT / 100.0, years);//розраховуємо різні параметри станції та її роботи
+    E_stored = C_eff * charge / 100.0;
+    E_useful = E_stored * eff / 100.0;
+    E_loss = E_stored - E_useful;
+    T = E_useful / P;
 
     int h = T; // розраховуємо години та хвилини роботи станції
     int m = (T - h) * 60.0;
