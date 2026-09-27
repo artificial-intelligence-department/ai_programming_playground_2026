@@ -19,15 +19,15 @@ int main() {
     // змінна для назви моделі
     string model_name;
     // паспортна ємність
-    double capacity = 0.0;
+    double capacity;
     // вік станції
-    int years = 0;
+    int years;
     // рівень заряду
-    int charge = 0;
+    int charge;
     // ККД інвертор
-    double efficiency = 0.0;
+    double efficiency;
     // потужність приладу
-    double power = 0.0;
+    double power;
 
     cout << "Введіть модель вашої станції: ";
     cin >> model_name;
@@ -38,7 +38,7 @@ int main() {
 
     cout << "Введіть паспортну ємність (Вт*год): ";
     cin >> capacity;
-    if (capacity <= 0.0) {
+    if (capacity <= 0) {
         cout << "Помилка: значення ємності має бути більшим за нуль." << endl;
         return 1;        
     }
@@ -50,61 +50,72 @@ int main() {
         return 1;    
     }
 
-    cout << "Введіть рівень заряду вашої станції: ";
+    cout << "Введіть рівень заряду станції: ";
     cin >> charge;
     if (charge < 0 || charge > 100) {
         cout << "Помилка: рівень заряду має бути від 0 до 100" << endl;
         return 1;    
     }
 
-    cout << "Введіть ККД інвертора вашої станції: ";
+    cout << "Введіть ККД інвертора: ";
     cin >> efficiency;
-    if (efficiency <= 0.0 || efficiency > 100.0) {
+    if (efficiency <= 0 || efficiency > 100) {
         cout << "Помилка: значення ККД інвертора має бути більшим за ноль та не перевищувати 100."  << endl;
         return 1;    
     }
 
     cout << "Введіть потужність приладу: ";
     cin >> power;
-    if (power <= 0.0) {
+    if (power <= 0) {
         cout << "Помилка: значення потужності має бути більшим за 0." << endl;
         return 1;    
     }
 
+    double C_eff;
+    double E_stored;
+    double E_useful;
+    double E_loss;
+    double T; 
+
     // Фактична ємність з урахуванням віку, Вт·год
-    double C_eff = capacity * pow(1 - degrad_per_year / 100.0, years);
+    C_eff = capacity * pow(1 - degrad_per_year / 100.0, years);
     // Запас енергії при поточному заряді, Вт·год
-    double E_stored = C_eff * charge / 100.0;
+    E_stored = C_eff * charge / 100.0;
     // Корисна енергія, що дійде до приладу, Вт·год
-    double E_useful = E_stored * efficiency / 100.0;
+    E_useful = E_stored * efficiency / 100.0;
     // Втрати на перетворенні напруги, Вт·год
-    double E_loss = E_stored - E_useful;
+    E_loss = E_stored - E_useful;
     // Час роботи приладу, год
-    double T = E_useful / power;
+    T = E_useful / power;
     // Повні години
-    int h = int(T); 
+    int h;
+    h = int(T);
     // Хвилини, що залишились
-    int m = int((T - h) * 60);
+    int m; 
+    m = int((T - h) * 60);
+
     cout << endl;
 
     cout << fixed;
 
-    cout << "Модель станції:   " << model_name << endl;
-    cout << "Паспортна ємність:   " << setprecision(1) << capacity << " Вт·год" << endl;
-    cout << "Вік станції:   " << years << " років" << endl;
-    cout << "Фактична ємність:   " << setprecision(1) << C_eff << " Вт·год" << endl;
-    cout << "Рівень заряду:    " << charge << "%" << endl;
-    cout << "ККД інвертора:   " << setprecision(2) << efficiency << "%" << endl;
-    cout << "запас енергії:   " << setprecision(1) << E_stored << " Вт·год" << endl;
-    cout << "Корисна енергія:   " << setprecision(1) << E_useful << " Вт·год" << endl;
-    cout << "Втрати на перетворенні:   " << setprecision(1) << E_loss << " Вт·год" << endl;
-    cout << "Час роботи:   " << setprecision(2) << T << " год = " << h << " год ";
+    cout << "Модель станції: " << model_name << endl;
+    cout << "Паспортна ємність: " << setprecision(1) << capacity << " Вт·год" << endl;
+    cout << "Вік станції: " << years << " років" << endl;
+    cout << "Фактична ємність: " << setprecision(1) << C_eff << " Вт·год" << endl;
+    cout << "Рівень заряду: " << charge << "%" << endl;
+    cout << "ККД інвертора: " << setprecision(2) << efficiency << "%" << endl;
+    cout << "запас енергії: " << setprecision(1) << E_stored << " Вт·год" << endl;
+    cout << "Корисна енергія: " << setprecision(1) << E_useful << " Вт·год" << endl;
+    cout << "Втрати на перетворенні: " << setprecision(1) << E_loss << " Вт·год" << endl;
+    cout << "Час роботи: " << setprecision(2) << T << " год = " << h << " год ";
     if (m < 10) {
         cout << "0" << m << " хв";
     }
     else {
         cout << m << " хв";
     }
+
+    cout << endl;
 
     return 0;
 }
