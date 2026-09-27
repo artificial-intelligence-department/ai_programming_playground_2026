@@ -3,13 +3,15 @@ using namespace std;
 
 int main(){
 
+    //Зчитування та валідація довжини пароля
     cout << "Введіть довжину пароля: ";
     int passwordLength;    
     if(!(cin >> passwordLength) || passwordLength < 1 || passwordLength > 64){
-        cout << "Довжина паролю повинна бути цілим числом від 1 до 64.";
+        cout << "Помилка: Довжина пароль мусить бути від 1 до 64.";
         return 1;
     }
 
+    //Зчитування та валідація наявності цифр
     cout << "Пароль містить цифри (y/n)? ";
     char hasNumbers;
     if(!(cin >> hasNumbers) || (hasNumbers != 'y' && hasNumbers != 'n')){
@@ -17,6 +19,7 @@ int main(){
         return 1;
     }
 
+    //Зчитування та валідація наявності великих літер
     cout << "Пароль містить великі літери (y/n)? ";
     char hasCapitalLetters;
     if(!(cin >> hasCapitalLetters) || (hasCapitalLetters != 'y' && hasCapitalLetters != 'n')){
@@ -24,29 +27,33 @@ int main(){
         return 1;
     }
 
+    //Зчитування та валідація наявності спеціальних символів
     cout << "Пароль містить спеціальні символи (y/n)? ";
     char hasSpecialSymbols;
     if(!(cin >> hasSpecialSymbols) || (hasSpecialSymbols != 'y' && hasSpecialSymbols != 'n')){
         cout << "Значення повинне бути y або n" << endl;
         return 1;
     }
-
+    
+    //Підрахунок кількості типів символів
     int symbolTypesCount = (hasNumbers == 'y') + (hasSpecialSymbols == 'y') + (hasCapitalLetters == 'y');
 
+    //Перевірка мінімальних вимог
     if(passwordLength >= 8 && symbolTypesCount >= 2){
         cout << "Мінімальні вимоги: ПРОЙДЕНО" << endl;
     }
     else{
-        cout << "Мінімальні вимоги: НЕПРОЙДЕНО" << endl;
+        cout << "Мінімальні вимоги: НЕ ПРОЙДЕНО" << endl;
     }
 
+    //Визначення рівня надійності за пріоритетом 
     int securityLevel;
 
     if(passwordLength < 6){
         securityLevel = 1;
         cout << "Рівень надійності: " << securityLevel << " - Дуже слабкий" << endl;
     }
-    else if(passwordLength <= 8 || symbolTypesCount == 0){
+    else if(passwordLength < 8 || symbolTypesCount == 0){
         securityLevel = 2;
         cout << "Рівень надійності: " << securityLevel << " - Слабкий" << endl;
     }
@@ -63,6 +70,7 @@ int main(){
         cout << "Рівень надійності: " << securityLevel << " - Надійний" << endl;
     }
 
+    //Видання рекомендації за рівнем надійності
     switch (securityLevel)
     {
     case 1:
@@ -80,12 +88,14 @@ int main(){
     case 5:
         cout << "Рекомендація: Відмінно. Змінювати нічого не потрібно." << endl;
         break;
+    default: 
+        break;
     }
 
-    if(hasNumbers != 'y'){
+    //Виведення попередження 
+    if(hasNumbers == 'n' && hasSpecialSymbols == 'n'){
         cout << "Попередження: Пароль тільки з літер підбирається швидше." << endl;
     }
-
 
     return 0;
 }
