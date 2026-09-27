@@ -1,30 +1,36 @@
-/*Автономність портативної зарядної станції
+/*Епік 1. Практичне завдання: Автономність портативної зарядної станції
 ШІ-12
 Козій Василь Іванович*/
 #include <iostream>
 #include <string>
 #include <cmath>
-#include <windows.h> //Для виведення тексту українською мовою
-#include <iomanip> //Для виведення з заданою кількістю цифр після коми
+#include <iomanip> //Для виведення з заданою кількістю цифр після коми та в колонку
+// Підключаємо windows.h(для виведення тексту українською мовою) ТІЛЬКИ під час компіляції для Windows
+#ifdef _WIN32
+#include <windows.h>
+#endif
 using namespace std;
 int main()
 {
-    //Це для виведення текту українською мовою
-    SetConsoleCP(65001);
-    SetConsoleOutputCP(65001);
+    double const annual_degradation_coefficient=2;
+    //Це для виведення тексту українською мовою, але тільки на Windows
+    #ifdef _WIN32
+        SetConsoleCP(65001);
+        SetConsoleOutputCP(65001);
+    #endif
     string Station_Model;
     //Вводимо всі змінні і робимо перевірки
     cout <<"Модель станції: ";
     getline(cin, Station_Model); //Якщо в назві будуть пропуски програма всеодно її запише
     if(Station_Model.length()>31){
-        cout <<"Введіть назву не довшу за 31 символ";
+        cout <<"Введіть назву не довшу за 31 символ" <<endl;
         return 1;
     }
     double C;
     cout <<"Паспортна ємність (Вт·год): ";
     cin >>C;
     if(C<=0){
-        cout <<"Введіть додатне число";
+        cout <<"Введіть додатне число" <<endl;
         return 1;
     }
     int years;
@@ -32,11 +38,11 @@ int main()
     if(cin >>years){
     }
     else{
-        cout <<"Введіть ціле число від 0 до 20";
+        cout <<"Введіть ціле число від 0 до 20" <<endl;
         return 1;
     }
     if(years<0 || years>20){
-        cout <<"Введіть ціле число від 0 до 20";
+        cout <<"Введіть ціле число від 0 до 20" <<endl;
         return 1;
     }
     double charge;
@@ -44,11 +50,11 @@ int main()
     if(cin >>charge){
     }
     else{
-        cout <<"Введіть ціле число від 0 до 100";
+        cout <<"Введіть ціле число від 0 до 100" <<endl;
         return 1;
     }
     if(charge<0 || charge>100){
-        cout <<"Введіть ціле число від 0 до 100";
+        cout <<"Введіть ціле число від 0 до 100" <<endl;
         return 1;
     }
     double eff;
@@ -56,11 +62,11 @@ int main()
     if(cin >>eff){
     }
     else{
-        cout <<"Введіть число від 0 до 100";
+        cout <<"Введіть число від 0 до 100" <<endl;
         return 1;
     }
     if(eff<0 || eff>100){
-        cout <<"Ввеведіть число від 0 до 100";
+        cout <<"Ввеведіть число від 0 до 100" <<endl;
         return 1;
     }
     double p;
@@ -68,42 +74,51 @@ int main()
     if(cin >>p){
     }
     else{
-        cout <<"Введіть число більше 0";
+        cout <<"Введіть число більше 0" <<endl;
         return 1;
     }
     if(p<=0){
-        cout <<"Введіть число більше 0";
+        cout <<"Введіть число більше 0" <<endl;
         return 1;
     }
     //Розрахунки
-    double C_eff=C*pow(0.98, years); //Фактична ємність
+    double C_eff=C*pow(1-(annual_degradation_coefficient/100), years); //Фактична ємність
     double E_stored=C_eff*(charge/100); //Запас енергії
-    double E_eseful=E_stored*(eff/100); //Корисна енергія
-    double E_loss=E_stored-E_eseful; //Втрати енергії на перетворенні
-    double T=E_eseful/p; //Час роботи
+    double E_useful=E_stored*(eff/100); //Корисна енергія
+    double E_loss=E_stored-E_useful; //Втрати енергії на перетворенні
+    double T=E_useful/p; //Час роботи
     double h=(int)T;
     double m=(int)((T-h)*60);
-    //Виводимо дані з заданою кількістю цифр після коми
-    cout <<"Модель: ";
-    cout <<Station_Model <<endl;
-    cout <<"Паспортна ємність: ";
-    cout <<fixed <<setprecision(1) <<C <<" Вт·год" <<endl;
-    cout <<"Вік станції: ";
-    cout <<fixed <<setprecision(0) <<years <<" р." <<endl;
-    cout <<"Фактична ємність: ";
-    cout <<fixed <<setprecision(1) <<C_eff <<" Вт·год" <<endl;
-    cout <<"Рівень заряду: ";
-    cout <<fixed <<setprecision(0) <<charge <<" %" <<endl;
-    cout <<"ККД інвертора: ";
-    cout <<fixed <<setprecision(2) <<eff <<" %" <<endl;
-    cout <<"Запас енергії: ";
-    cout <<fixed <<setprecision(1) <<E_stored <<" Вт·год" <<endl;
-    cout <<"Корисна енергія: ";
-    cout <<fixed <<setprecision(1) <<E_eseful <<" Вт·год" <<endl;
-    cout <<"Втрати на перетворенні: ";
-    cout <<fixed <<setprecision(1) <<E_loss <<" Вт·год" <<endl;
-    cout <<"Час роботи: ";
-    cout <<fixed <<setprecision(2) <<T <<" год = ";
+    //Виводимо дані з заданою кількістю цифр після коми та рівно в колонку
+    cout <<"Модель:                    "
+    <<right <<setw(10) <<Station_Model <<endl;
+    cout <<"Паспортна ємність:         "
+    <<right <<setw(10) <<fixed <<setprecision(1) <<C
+    <<left <<" Вт·год" <<endl;
+    cout <<"Вік станції:               "
+    <<right <<setw(10) <<fixed <<setprecision(0) <<years
+    <<left <<" р." <<endl;
+    cout <<"Фактична ємність:          "
+    <<right <<setw(10) <<fixed <<setprecision(1) <<C_eff
+    <<left <<" Вт·год" <<endl;
+    cout <<"Рівень заряду:             "
+    <<right <<setw(10) <<fixed <<setprecision(0) <<charge
+    <<left <<" %" <<endl;
+    cout <<"ККД інвертора:             "
+    <<right <<setw(10) <<fixed <<setprecision(2) <<eff
+    <<left <<" %" <<endl;
+    cout <<"Запас енергії:             "
+    <<right <<setw(10) <<fixed <<setprecision(1) <<E_stored
+    <<left <<" Вт·год" <<endl;
+    cout <<"Корисна енергія:           "
+    <<right <<setw(10) <<fixed <<setprecision(1) <<E_useful
+    <<left <<" Вт·год" <<endl;
+    cout <<"Втрати на перетворенні:    "
+    <<right <<setw(10) <<fixed <<setprecision(1) <<E_loss
+    <<left <<" Вт·год" <<endl;
+    cout <<"Час роботи:                "
+    <<right <<setw(10) <<fixed <<setprecision(2) <<T
+    <<left <<" год = ";
     if(m<10){
         cout <<fixed <<setprecision(0) <<h <<" год" <<" 0" <<m <<" хв" <<endl;
     }
