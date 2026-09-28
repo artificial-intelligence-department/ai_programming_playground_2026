@@ -5,19 +5,10 @@
 #include <string>
 #include <cmath>
 #include <iomanip> //Для виведення з заданою кількістю цифр після коми та в колонку
-// Підключаємо windows.h(для виведення тексту українською мовою) ТІЛЬКИ під час компіляції для Windows
-#ifdef _WIN32
-#include <windows.h>
-#endif
 using namespace std;
 int main()
 {
     double const annual_degradation_coefficient=2;
-    //Це для виведення тексту українською мовою, але тільки на Windows
-    #ifdef _WIN32
-        SetConsoleCP(65001);
-        SetConsoleOutputCP(65001);
-    #endif
     string Station_Model;
     //Вводимо всі змінні і робимо перевірки
     cout <<"Модель станції: ";
