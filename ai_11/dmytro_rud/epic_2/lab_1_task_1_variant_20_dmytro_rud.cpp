@@ -1,3 +1,9 @@
+/*
+Задача: 1
+ Рудь Дмитро
+ Група СШІ-11
+*/
+
 #include <iomanip>
 #include <iostream>
 #include <cmath>
