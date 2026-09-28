@@ -48,7 +48,8 @@ int main() {
         cout << "Потужність станції повинна бути додатнім числом" << endl; 
         return 0;
     }
-    double C_eff = C*pow(1.0 - (2.0/100.0), years);
+    double percent=2.0;
+    double C_eff = C*pow(1.0 - (percent/100.0), years);
     double E_stored = C_eff * (charge/100.0);
     double E_useful = E_stored * eff / 100.0;
     double E_loss = E_stored - E_useful;
