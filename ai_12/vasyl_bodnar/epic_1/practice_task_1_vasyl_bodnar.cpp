@@ -18,15 +18,15 @@ int main() {
     //Назва моделі портативної зарядної станції
     string model_name;
     //паспортна ємність станції 
-    double capacity = 0;
+    double capacity;
     //вік станції
-    int years = 0;
+    int years;
     //рівень заряду
-    int charge = 0;
+    int charge;
     //ккд інвертора
-    double efficiency = 0;
+    double efficiency;
     //потужність приладу 
-    double power = 0;
+    double power;
 
     cout << "Ведіть модель зарядної станції: ";
     cin >> model_name;
@@ -71,11 +71,11 @@ int main() {
     }
 
     // Фактична ємність з урахуванням віку, Вт·год
-    double C_eff = capacity * pow(1 - degradation_per_year / 100.0, years);
+    double C_eff = capacity * pow(1 - degradation_per_year / 100, years);
     // Запас енергії при поточному заряді, Вт·год
-    double E_stored = C_eff * charge / 100.0;
+    double E_stored = C_eff * charge / 100;
     // Корисна енергія, що дійде до приладу, Вт·год
-    double E_useful = E_stored * efficiency / 100.0;
+    double E_useful = E_stored * efficiency / 100;
     // Втрати на перетворенні напруги, Вт·год
     double E_loss = E_stored - E_useful;
     // Час роботи приладу, год
