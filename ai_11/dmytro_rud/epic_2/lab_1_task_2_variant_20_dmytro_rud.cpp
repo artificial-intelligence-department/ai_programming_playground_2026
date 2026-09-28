@@ -1,3 +1,8 @@
+/*
+Задача: 2
+ Рудь Дмитро
+ Група СШІ-11
+*/
 #include <iostream>
 
 using namespace std;
@@ -10,7 +15,7 @@ int main() {
 
     int res_1 = m-++n;
     n = n0; m = m0;
-    bool res_2 = --n<++m;
+    bool res_2 = ++m>--n;
     n = n0; m = m0;
     bool res_3 = --n<++m;
     n = n0; m = m0;
