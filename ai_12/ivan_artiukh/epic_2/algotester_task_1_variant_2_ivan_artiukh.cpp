@@ -7,7 +7,7 @@ using namespace std;
     long long minH=0, maxH=0;//shortest n longes leg to calc whether the table will fall
     int res = 0;
 
-    for(int i=0; i<4;){ // read h, find min n max
+    for(int i=0; i<4; i++){ // read h, find min n max
         cin>>h[i];
         if(i==0){
             minH=h[i];
@@ -15,12 +15,10 @@ using namespace std;
         if(h[i]<minH){
             minH=h[i];
         }
-        i++;
     }
 
-    for(int i=0; i<4;){ //read d
+    for(int i=0; i<4;i++){ //read d
         cin>>d[i];
-        i++;
     }
 
     for(int i=0; i<4;){//"cut" the legs

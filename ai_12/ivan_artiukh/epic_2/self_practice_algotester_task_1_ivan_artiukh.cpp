@@ -1,23 +1,17 @@
 #include <iostream>
 #include <numeric>
-
-
 using namespace std;
-int main(){
-    int n = 0, div = 0;
-    cin>>n;
-    int votes[n];
-    long places = 0;
-    for( int n_temp = 0; n_temp < n; n_temp++){
-        cin>>votes[n_temp];
-        places += votes[n_temp];
-        if(n_temp == 0){
-            div = votes[n_temp];
-        }
-        else{
-            div = gcd(votes[n_temp], div);      
-        }
-    }
-    cout<< places/div;
 
+int main(){
+   int a = 0, b = 0;
+   cin>>a>>b;
+
+   if( (b-a) % 12 != 0){
+       cout<<-1;
+      return 0;
+   }
+
+   float diff = (b - (float)a) / 12;
+   long long res = (a + b)*6.5;
+   cout<<res;
 }
