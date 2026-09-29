@@ -1,15 +1,25 @@
+/*  
+Аналізатор надійності пароля
+Ярошенко Володимир 
+11 група 
+*/
 #include <iostream>
- // #include <string>
 
 using namespace std;
 
 int main() {
 int lenght;
-char nums, U_sym, Sp_sym;
-int level = 0;
+char nums, U_sym, Sp_sym; // Створюєм кількість типів символів 
+int level = 0; // Рівень надійності паролю
+const int min_lenght = 0; // мінімальні обмеження вводу
+const int max_lenght = 64; // максимальні обмеження вводу
+const int psw_min_lenght = 8; // мінімальна довжина паролю 
+const int psw_lenght = 6; // довжина паролю для 1 рівня надійності 
+const int psw_lvl_lenght = 12; // довжина паролю для 5 рівню надійності 
+
 cout << "Введіть довжину: " << endl;
 cin >> lenght;
-if(lenght<0 && lenght > 64) {
+if(lenght < min_lenght && lenght > max_lenght) {
     cout << "Введіть коректне значення довжини" << endl;
     return -1;
 }
@@ -31,44 +41,33 @@ if(Sp_sym != 'y' && Sp_sym != 'n') {
     cout << "Введіть коректне значення спеціальних символів" << endl;
     return -1;
 }
+/* 
+Вводимо дані,
+Перевіряємо чи допустимі значення
+*/
 
- /*if(lenght <8 && nums == 'n' && U_sym == 'n' && Sp_sym == 'n') {
-    cout << "Мінімальні вимоги: НЕ ПРОЙДЕНО" << endl;
-}
-else if(lenght <8 && nums == 'n' || U_sym == 'n' || Sp_sym == 'n') {
-    cout << "Мінімальні вимоги: НЕ ПРОЙДЕНО" << endl;
-}
-else if(lenght <8 && U_sym == 'n' || nums == 'n'  || Sp_sym == 'n') {
-    cout << "Мінімальні вимоги: НЕ ПРОЙДЕНО" << endl;
-}
-else if(lenght <8 && Sp_sym == 'n' || nums == 'n' || U_sym == 'n' ) {
-    cout << "Мінімальні вимоги: НЕ ПРОЙДЕНО" << endl;
-}
-else if (lenght <8 || Sp_sym == 'n' || nums == 'n' || U_sym == 'n' ) {
-    cout << "Мінімальні вимоги: НЕ ПРОЙДЕНО" << endl;
-}
-else {
-    cout << "Мінімальні вимоги: ПРОЙДЕНО" << endl;
-}*/
-if(lenght>=8 && nums == 'y'   && U_sym == 'y') {
+if(lenght >= psw_min_lenght && nums == 'y'   && U_sym == 'y') {
     cout <<  "Мінімальні вимоги: ПРОЙДЕНО" << endl;
 }
- else if(lenght>=8 && nums == 'y'   && Sp_sym == 'y') {
+ else if(lenght >= psw_min_lenght && nums == 'y'   && Sp_sym == 'y') {
     cout <<  "Мінімальні вимоги: ПРОЙДЕНО" << endl;
 }
- else if(lenght>=8 && U_sym == 'y'   && Sp_sym == 'y') {
+ else if(lenght >= psw_min_lenght && U_sym == 'y'   && Sp_sym == 'y') {
     cout <<  "Мінімальні вимоги: ПРОЙДЕНО" << endl;
 }
 else {
     cout << "Мінімальні вимоги: НЕ ПРОЙДЕНО" << endl;
 }
+/* 
+Перевіряємо чи пройдено мінімальні умови згідно умови задачі
+Користуємось операторами if, esle if, та логічними операторами кон'юкції(&&) та диз'юнкції(||)
+*/
 
-
-if(lenght <6) {
+if(lenght < psw_lenght) {
     level = 1;
     cout << "Рівень надійності: 1 - Дуже слабкий" << endl;
 }
-else if(lenght < 8 ||( nums == 'n' && U_sym == 'n' && Sp_sym == 'n')) {
+else if(lenght < psw_min_lenght ||( nums == 'n' && U_sym == 'n' && Sp_sym == 'n')) {
     level = 2;
     cout << "Рівень надійності: 2 - Слабкий" << endl;
 }
@@ -84,7 +83,7 @@ else if(nums == 'n' && U_sym == 'n' &&  Sp_sym == 'y') {
  level = 3;
     cout << "Рівень надійності: 3 - Середній" << endl;
 }
-else if(lenght >12 && nums == 'y' && U_sym == 'y' && Sp_sym == 'y') {
+else if(lenght > psw_lvl_lenght && nums == 'y' && U_sym == 'y' && Sp_sym == 'y') {
     level = 5;
     cout << "Рівень надійності: 5 - Дуже надійний" << endl;
 }
@@ -92,6 +91,10 @@ else {
     level = 4; 
     cout << "Рівень надійності: 4 - Надійний" << endl;
 }
+/* 
+Перевіряємо рівень надійності паролю 
+Користуємось операторами if, esle if, та логічними операторами кон'юкції(&&) та диз'юнкції(||)
+*/
 switch(level)  {
 case 1 : {
     cout << "Пароль надто короткий. Мінімум 8 символів" << endl;
@@ -113,9 +116,16 @@ case 5 : {
     cout << "Відмінно. Змінювати нічого не потрібно" << endl;
     break;
 }
-}
+    default: 
+    cout << "Неправильний рівень надійності паролю" << endl;
+}    
+/* 
+Даєм рекомендації щодо надійності паролю
+Користуємось операторами switch() {case}
+*/
+
 if(nums == 'n' && U_sym == 'n' && Sp_sym == 'n') {
-    cout << "Пароль тільки з літер підбирається швидше" << endl;
+    cout << "Пароль тільки з літер підбирається швидше" << endl; // Перевіряєм чи потрібно попередження та виводим його 
 }
     return 0;
 }
