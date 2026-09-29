@@ -18,7 +18,8 @@ int main() {
     string result = "WIN";
     
     for (int i = 0; i < 5; i++) {
-        if (!(cin >> arr[i])) {
+        cin >> arr[i];
+        if (arr[i] <= 0) {
             result = "ERROR";
             break;
         }
