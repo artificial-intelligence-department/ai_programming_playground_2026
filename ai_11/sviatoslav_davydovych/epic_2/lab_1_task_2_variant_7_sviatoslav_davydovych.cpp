@@ -25,7 +25,7 @@ int Eop1(int n, int m){
 }
 
 bool Eop2(int n, int m){
-    return m < (n - 1);
+    return m < (n + 1);
 }
 
 bool Eop3(int n, int m){
@@ -50,11 +50,11 @@ int main() {
     } else return 1;
 
     if (op2(n,m) == Eop2(n,m)){
-        cout << "вираз m++<++n логічно еквівалентний виразу m < (n - 1)" << endl;
+        cout << "вираз m++<++n логічно еквівалентний виразу m < (n + 1)" << endl;
     } else return 1;
 
     if (op3(n,m) == Eop3(n,m)){
-        cout << "вираз m+--n логічно еквівалентний виразу n < (m - 1)" << endl;
+        cout << "вираз n--<--m логічно еквівалентний виразу n < (m - 1)" << endl;
     } else return 1;
 
     // послідовне застосування операцій
