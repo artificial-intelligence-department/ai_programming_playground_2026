@@ -3,7 +3,6 @@ using namespace std;
 
 int main() {
     long long n;
-    cout << "Введіть кількість рядів: ";
     cin >> n;
 
     long long number = 0;
@@ -14,7 +13,7 @@ int main() {
         number += a - 1;
     }
 
-    cout << "Кількість печива, які зможе з'їсти Марічка: " << number << endl;
+    cout << number << endl;
 
     return 0;
 }
