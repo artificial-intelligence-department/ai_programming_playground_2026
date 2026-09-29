@@ -6,7 +6,7 @@ int main() {
     int n;
     cin >> n;
 
-    int pechivo = 0;
+    long long pechivo = 0;
 
     for (int i = 0; i < n; i++) {
         int a;
