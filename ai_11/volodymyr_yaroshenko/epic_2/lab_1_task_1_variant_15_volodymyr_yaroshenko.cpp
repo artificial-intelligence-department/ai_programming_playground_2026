@@ -1,5 +1,11 @@
+/*  
+Лабораторна завдання 1 
+Ярошенко Володимир 
+11 група 
+*/
 #include <iostream>
 #include <cmath>
+
 using namespace std;
 
 int main() {
