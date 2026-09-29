@@ -9,10 +9,9 @@ using namespace std;
 int main() {
     
     //Оголошуємо змінні
-    short length = 0;
-    char numbers = 0, letters = 0, symbols = 0;
-    int k = 0;
-    int r = 0;
+    short length;
+    char numbers, letters, symbols;
+    int k, r;
 
     //Вводимо змінні та перевіряємо їх
     cout << "\nДовжина пароля: "; cin >> length;
