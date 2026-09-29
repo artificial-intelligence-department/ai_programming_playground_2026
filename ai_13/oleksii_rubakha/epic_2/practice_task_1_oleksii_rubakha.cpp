@@ -150,7 +150,7 @@ int main() {
             break;
     }
 
-    cout << "/n";
+    cout << "\n";
 
     // Попередження для паролів, що містять тільки малі літери
     if (!minRequirements && types == 0) {
