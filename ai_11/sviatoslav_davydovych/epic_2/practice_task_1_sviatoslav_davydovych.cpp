@@ -26,7 +26,7 @@ int main() {
         cout << "помилка вводу: значення не є цілим числом" << endl;
         return 1;
     }
-    if (length < 1 || length > 64){
+    if (length < MIN_length || MAX_length > 64){
         cout << "помилка вводу: значення виходить за допустимі межі(віл 1 до 64)" << endl;
         return 1;
     }
