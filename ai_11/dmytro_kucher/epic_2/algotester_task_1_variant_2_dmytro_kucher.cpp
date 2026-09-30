@@ -45,10 +45,10 @@ int main() {
     long long hmin = h[0];
     for (int i = 1; i<4; i++) {
         if (h[i]< hmin) hmin = h[i];
-    }
-    if (hmin <= 0) {
-        cout << "NO\n";
-        return 0;
+        if (hmin <= 0) {
+            cout << "NO\n";
+            return 0;
+        }
     }
 
     for (int i = 0; i < 4; i++) {
