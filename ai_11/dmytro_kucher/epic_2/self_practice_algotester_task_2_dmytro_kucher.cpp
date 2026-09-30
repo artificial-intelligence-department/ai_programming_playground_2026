@@ -8,7 +8,7 @@
 using namespace std;
 
 int main() {
-    int a, b;
+    long a, b;
     cin >> a >> b;
     if ((b-a)%12 == 0) cout << (a+b)/2*13 << endl;
     else cout << "-1\n";
