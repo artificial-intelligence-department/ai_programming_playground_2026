@@ -2,24 +2,30 @@
 Автор: Мадяр Андрій
 Група: ШІ-13
 */
+// Бібліотеки для можливості виконання тих чи інших дій
 #include <iostream>
 #include <cmath>
 #include <locale>
-#include<string> // Бібліотеки
+#include<string> 
 using namespace std;
 
 int main(){
    setlocale (LC_ALL, "Uk_ua.UTF-8");
-   const int name_limit = 31; // Максимальна довжина назви model
-   const double age_losses = 2.0; // % ємніть що втрачається за рік
-   const double percentage = 100.0; // для переведення з відсотків
-   const int min_in_hr = 60; // для переведення часу
+   // Максимальна довжина назви model щоб потім перевіряти за критеріями
+   const int name_limit = 31;
+   // % ємніть що втрачається за рік для подальших розрахунків
+   const double age_losses = 2.0;
+   // для переведення з відсотків
+   const double percentage = 100.0;
+   // для переведення часу
+   const int min_in_hr = 60;
+   // створюю змінні для подальших внесень їхзначень користувачем
    string model;
    double C = 0.0;
    int years = 0;
    int charge = 0;
    double eff = 0.0;
-   double P = 0.0; // створюю змінні щоб їх далі вводити і використовували
+   double P = 0.0;
    cout << "Модель станції(не більше 31 символу): ";
    cin >> model;
    if (model.length() > name_limit) {
@@ -56,13 +62,19 @@ int main(){
         cout << "Помилка: потужність повинна бути > 0" << endl;
         return 1;
     }
-    // пішло обрахування формул
+    // розрахунок фактичної ємності з врахуванням віку(Вт*год)
     double c_eff = C * pow(1.0 - (age_losses / percentage), years);
+    // розрахунок запасу енергії(Вт*год)
     double E_stored = c_eff * charge/percentage;
+    // розрахунок корисної енергії(Вт*год)
     double E_useful = E_stored * eff/percentage;
+    // розрахунок втрат енергії(Вт*год)
     double E_loss = E_stored - E_useful;
+    // розрахунок часу роботи(год)
     double T = E_useful / P;
+    // розрахунок цілих годин(год)
     int h = (int)T;
+    //розрахунок хвилин(хв)
     int m = (int)((T - h) * min_in_hr);
     // виведення результатів
     cout << "Модель станції: " << model << endl;
