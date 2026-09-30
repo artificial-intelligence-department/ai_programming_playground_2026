@@ -18,24 +18,28 @@ int main() {
     cout << "\nДовжина пароля: "; cin >> length;
     if (cin.fail() || length <= 0 || length > 64) {
         cout << "Помилка! Введіть число від 1 до 64\n";
-        return 1; }
+        return 1;
+    }
     
     cout << "Чи є цифри (y/n): "; cin >> numbers;
     if (numbers != 'y' && numbers != 'n') {
         cout << "Помилка! Введіть y або n\n";
-        return 1; }
+        return 1;
+    }
     else if (numbers == 'y') k++;
 
     cout << "Чи є великі літери (y/n): "; cin >> letters;
     if (letters != 'y' && letters != 'n') {
         cout << "Помилка! Введіть y або n\n";
-        return 1; }
+        return 1;
+    }
     else if (letters == 'y') k++;
 
     cout << "Чи є спеціальні символи (y/n): "; cin >> symbols;
     if (symbols != 'y' && symbols != 'n') {
         cout << "Помилка! Введіть y або n\n";
-        return 1; }
+        return 1;
+    }
     else if (symbols == 'y') k++;
 
     cout << endl;
@@ -60,7 +64,6 @@ int main() {
         case 4: cout << "Надійний\n"; break;
         case 5: cout << "Дуже надійний\n"; break;
         default: cout << "Невідомий рівень надійності\n"; break;
-
     }
 
     //Виводимо користувачу рекомендації щодо пароля
@@ -72,7 +75,6 @@ int main() {
         case 4: cout << "Хороший пароль. Для максимуму 12+ символів і всі три типи символів.\n"; break;
         case 5: cout << "Відмінно. Змінювати нічого не потрібно.\n"; break;
         default: cout << "Невідомі рекомендації.\n"; break;
-
     }
 
     //Якщо всі літери пароля маленькі, то виводимо користувачу попередження про це
