@@ -12,15 +12,11 @@ int main(){
     int m;
     cin >> m;
 
-    int result1 = n---m;
-    cout << "Результат 1-го виразу (n---m):  " << result1 << endl;
+    cout << "Результат 1-го виразу (n---m):  " <<  n---m << endl;
 
-    bool result2 = m--<n;
     cout << boolalpha;
-    cout << "Результат 2-го виразу (m--<n): " << result2 << endl;
-
-    bool result3 = n++>m;
-    cout << "Результат 3-го виразу (n++>m): " << result3 << endl;
+    cout << "Результат 2-го виразу (m--<n): " << (m--<n) << endl;
+    cout << "Результат 3-го виразу (n++>m): " << (n++>m) << endl;
 
 
     return 0;
