@@ -1,3 +1,6 @@
+/*Аналізатор надійності пароля
+Гайдучок Олександр
+ШІ-11*/
 #include <iostream>
 #include <string>
 using namespace std;
@@ -64,23 +67,23 @@ else {
 int level = 1;
 if(Length < 6){
     level = 1;
-    cout << "Рівень надійності: " << level << " - Дуже слабкий" << endl;
+    cout << "Рівень надійності: 1 - Дуже слабкий" << endl;
 }
 else if(Length < 8 || calc == 0){
     level = 2;
-cout << "Рівень надійності: " << level << " - Cлабкий" << endl;
+cout << "Рівень надійності: 2 - Cлабкий" << endl;
 }
 else if(calc == 1){
     level = 3;
-    cout << "Рівень надійності: " << level << " - Середній" << endl;
+    cout << "Рівень надійності: 3 - Середній" << endl;
 }
 else if(Length >= 12 && calc == 3){
     level = 5;
-    cout << "Рівень надійності: " << level << " - Дуже надійний" << endl;
+    cout << "Рівень надійності: 5 - Дуже надійний" << endl;
 }
 else{
     level = 4;
-    cout << "Рівень надійності: " << level << " - Надійний" << endl;
+    cout << "Рівень надійності: 4 - Надійний" << endl;
 }
 cout << "Рекомендація: ";
 
