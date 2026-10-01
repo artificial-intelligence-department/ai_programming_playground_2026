@@ -55,7 +55,8 @@ int main()
     float f5 = f5d1 + f5d2;
     float f6 = f4 / f5;
 
-    std::cout << std::fixed << std::setprecision(15) << "Double: " << r6 << std::endl << "Float:  " << f6 << std::endl;
+    std::cout << std::fixed << std::setprecision(15) << "Double: " 
+    << r6 << std::endl << "Float:  " << f6 << std::endl;
 
     return 0;
 

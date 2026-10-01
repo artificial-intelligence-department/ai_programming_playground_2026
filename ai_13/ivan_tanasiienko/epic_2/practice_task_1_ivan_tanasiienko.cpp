@@ -4,38 +4,34 @@ int main()
 {
     //Оголошення змінних
     int length, level;
-    int types = 0;
     char numbers, capLetters, specSymbols;
     bool minRequirements;
+    int types = 0;
 
     //Введення даних
     std::cout << "Довжина пароля: ";
     std::cin >> length;
-    std::cout << "Чи є цифри (y/n): ";
-    std::cin >> numbers;
-    std::cout << "Чи є великі літери (y/n): ";
-    std::cin >> capLetters;
-    std::cout << "Чи є спеціальні символи (y/n): ";
-    std::cin >> specSymbols;
-
-    char typesList[3] = {numbers, capLetters, specSymbols};
-
-    //Перевірка обмежень
     if(length < 1 || length > 64)
     {
         std::cout << "Введіть правильну довжину паролю(від 1 до 64)" << std::endl;
         return 1;
     }
+    std::cout << "Чи є цифри (y/n): ";
+    std::cin >> numbers;
     if(numbers != 'y' && numbers != 'n')
     {
         std::cout << "Введіть дійсне значення(y/n)" << std::endl;
         return 1;
     }
+    std::cout << "Чи є великі літери (y/n): ";
+    std::cin >> capLetters;
     if(capLetters != 'y' && capLetters != 'n')
     {
         std::cout << "Введіть дійсне значення(y/n)" << std::endl;
         return 1;
     }
+    std::cout << "Чи є спеціальні символи (y/n): ";
+    std::cin >> specSymbols;
     if(specSymbols != 'y' && specSymbols != 'n')
     {
         std::cout << "Введіть дійсне значення(y/n)" << std::endl;
@@ -43,12 +39,17 @@ int main()
     }
 
     //Кількість типів
-    for(int i = 0; i < 3; i ++)
+    if(numbers == 'y')
     {
-        if(typesList[i] == 'y')
-        {
-            types++;
-        }
+        types++;
+    }
+    if(capLetters == 'y')
+    {
+        types++;
+    }
+    if(specSymbols == 'y')
+    {
+        types++;
     }
 
     //Мінімальні вимоги
