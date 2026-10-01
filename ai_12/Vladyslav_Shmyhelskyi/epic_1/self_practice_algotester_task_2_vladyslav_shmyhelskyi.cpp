@@ -1,38 +1,58 @@
 #include <iostream>
 int main()
 {
-    long long h, m;
-    using namespace std;
-    cin >> h;
-    cin >> m;
-    if ((h <= 0 || h > 1000000000000) || (m <= 0 || m > 1000000000000))
+    long long presentcost;
+    std::cin >> presentcost;
+    if (presentcost < 1 || presentcost > 1000000000)
     {
-        cout << "NO";
         return 0;
     }
-    long long h1, m1;
-    long long h2, m2;
-    long long h3, m3;
-    cin >> h1;
-    cin >> m1;
-    cin >> h2;
-    cin >> m2;
-    cin >> h3;
-    cin >> m3;
 
-    if ((h1 > 0 && m1 > 0) || (h2 > 0 && m2 > 0) || (h3 > 0 && m3 > 0))
+    int banknotes = 0;
+    if (presentcost >= 500)
     {
-        cout << "NO";
-        return 0;
+        banknotes += presentcost / 500;
+        presentcost %= 500;
     }
-    h = h - h1 - h2 - h3;
-    m = m - m1 - m2 - m3;
-    if ((h <= 0) || (m <= 0))
+    if (presentcost >= 200)
     {
-        cout << "NO";
+        banknotes += presentcost / 200;
+        presentcost %= 200;
     }
-    else
+    if (presentcost >= 100)
     {
-        cout << "YES";
+        banknotes += presentcost / 100;
+        presentcost %= 100;
     }
+    if (presentcost >= 50)
+    {
+        banknotes += presentcost / 50;
+        presentcost %= 50;
+    }
+    if (presentcost >= 20)
+    {
+        banknotes += presentcost / 20;
+        presentcost %= 20;
+    }
+    if (presentcost >= 10)
+    {
+        banknotes += presentcost / 10;
+        presentcost %= 10;
+    }
+    if (presentcost >= 5)
+    {
+        banknotes += presentcost / 5;
+        presentcost %= 5;
+    }
+    if (presentcost >= 2)
+    {
+        banknotes += presentcost / 2;
+        presentcost %= 2;
+    }
+    if (presentcost >= 1)
+    {
+        banknotes += presentcost / 1;
+        presentcost %= 1;
+    }
+    std::cout << banknotes << std::endl;
 }
