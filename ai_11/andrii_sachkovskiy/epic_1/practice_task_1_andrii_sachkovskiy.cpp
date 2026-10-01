@@ -3,167 +3,126 @@
  * Автор: Сачковський Андрій
  * Група: AI-11
  */
-#include <iostream> //бібліотеки
-#include <locale>
-#include <cmath>
-#include <string>
-#include <iomanip>
-/*Сталі:  31 - максимальна довжина моделі станції
-20 -максимально допустимий вік станції (років)
-100 межа допустимого рівня заряду (%)
-2 - відсоток втрати ємності акумулятора за рік
-100 - переведення відсотка деградації у частку (2% → 0.02)
-60 - переведення дробової частини години у хвилини
-100 -переведення ККД інвертора з відсотків у частку
-100 -переведення рівня заряду з відсотків у частку */
-int main(){
+#include <iostream>  // cin, cout
+#include <iomanip>   // setw, setprecision, setfill
+#include <cmath>     // pow
+#include <string>    // string для назви моделі
 
-    using namespace std; //ведення назви моделі
-    std::string model; 
-    std::setlocale(LC_ALL, "");
-std::cout << "Введіть модель станції: " ; 
-     std::getline(std::cin, model);
-    if (model.length()   > 31){
-        std::cout << "Помилка: довжина моделі станції не повинна перевищувати 31 символ." << std::endl;
+using namespace std;
+
+// ----- Сталі -----
+const int MAX_MODEL_LEN = 31;      // максимальна довжина назви моделі (символів)
+const int MAX_YEARS = 20;          // максимально допустимий вік станції (років)
+const double PERCENT = 100.0;      // 100 % - верхня межа для заряду та ККД, а також база для переводу відсотків у частку
+const double DEGRADATION = 2.0;    // відсоток втрати ємності акумулятора за рік
+const int MIN_PER_HOUR = 60;       // кількість хвилин в одній годині
+
+int main() {
+    // ----- Ввід даних з перевіркою -----
+    string model;
+    cout << "Модель станції: ";
+    cin >> model;
+    if (model.length() > MAX_MODEL_LEN) {
+        cout << "Помилка: назва моделі не довша " << MAX_MODEL_LEN << " символів." << endl;
         return 1;
     }
-    
-    float capacity; // введення паспортної ємності оримання даних від користовача
-   std::cout <<"Паспортна ємність, Вт·год: " ;
 
-   std::cin >> capacity; 
-if (std::cin.fail()){ 
-    std::cout << "Помилка: некоректне значення." << std::endl;
-    return 1;
+    double capacity;  // паспортна ємність, Вт·год
+    cout << "Паспортна ємність (Вт·год): ";
+    cin >> capacity;
+    if (cin.fail()) {
+        cout << "Помилка: ємність має бути числом." << endl;
+        return 1;
+    }
+    if (capacity <= 0) {
+        cout << "Помилка: паспортна ємність мусить бути більше 0." << endl;
+        return 1;
+    }
+
+    int years;  // вік станції, років
+    cout << "Вік станції (років): ";
+    cin >> years;
+    if (cin.fail()) {
+        cout << "Помилка: вік станції має бути цілим числом." << endl;
+        return 1;
+    }
+    if (years < 0 || years > MAX_YEARS) {
+        cout << "Помилка: вік станції мусить бути від 0 до " << MAX_YEARS << "." << endl;
+        return 1;
+    }
+
+    int charge;  // поточний рівень заряду, %
+    cout << "Рівень заряду (%): ";
+    cin >> charge;
+    if (cin.fail()) {
+        cout << "Помилка: рівень заряду має бути цілим числом." << endl;
+        return 1;
+    }
+    if (charge < 0 || charge > PERCENT) {
+        cout << "Помилка: рівень заряду мусить бути від 0 до " << PERCENT << "." << endl;
+        return 1;
+    }
+
+    double eff;  // ККД інвертора, %
+    cout << "ККД інвертора (%): ";
+    cin >> eff;
+    if (cin.fail()) {
+        cout << "Помилка: ККД має бути числом." << endl;
+        return 1;
+    }
+    if (eff <= 0 || eff > PERCENT) {
+        cout << "Помилка: ККД мусить бути більше 0 і не більше " << PERCENT << "." << endl;
+        return 1;
+    }
+
+    double power;  // потужність приладу, Вт
+    cout << "Потужність приладу (Вт): ";
+    cin >> power;
+    if (cin.fail()) {
+        cout << "Помилка: потужність має бути числом." << endl;
+        return 1;
+    }
+    if (power <= 0) {
+        cout << "Помилка: потужність мусить бути більше 0." << endl;
+        return 1;
+    }
+
+    // ----- Обчислення -----
+    // Фактична ємність з урахуванням старіння акумулятора, Вт·год
+    double actualCapacity = capacity * pow(1 - DEGRADATION / PERCENT, years);
+
+    // Запас енергії при поточному рівні заряду, Вт·год
+    double stored = actualCapacity * charge / PERCENT;
+
+    // Корисна енергія, що дійде до приладу після інвертора, Вт·год
+    double useful = stored * eff / PERCENT;
+
+    // Втрати енергії на перетворенні напруги, Вт·год
+    double loss = stored - useful;
+
+    // Час роботи приладу, годин
+    double time = useful / power;
+
+    // Повні години (відкидаємо дробову частину)
+    int hours = (int)time;
+
+    // Хвилини, що залишились: дробову частину години переводимо у хвилини
+    int minutes = (int)((time - hours) * MIN_PER_HOUR);
+
+    // ----- Вивід результатів -----
+    // Підписи доповнені пробілами вручну, бо setw некоректно рахує кирилицю
+    cout << fixed;
+    cout << "Модель:                 " << model << endl;
+    cout << "Паспортна ємність:      " << setw(10) << setprecision(1) << capacity << " Вт·год" << endl;
+    cout << "Вік станції:            " << setw(10) << years << " р." << endl;
+    cout << "Фактична ємність:       " << setw(10) << setprecision(1) << actualCapacity << " Вт·год" << endl;
+    cout << "Рівень заряду:          " << setw(10) << charge << " %" << endl;
+    cout << "ККД інвертора:          " << setw(10) << setprecision(2) << eff << " %" << endl;
+    cout << "Запас енергії:          " << setw(10) << setprecision(1) << stored << " Вт·год" << endl;
+    cout << "Корисна енергія:        " << setw(10) << setprecision(1) << useful << " Вт·год" << endl;
+    cout << "Втрати на перетворенні: " << setw(10) << setprecision(1) << loss << " Вт·год" << endl;
+    cout << "Час роботи:             " << setw(10) << setprecision(2) << time << " год  = "
+         << hours << " год " << setfill('0') << setw(2) << minutes << " хв" << endl;
+
+    return 0;
 }
-   if (capacity <= 0){
-std::cout << "Паспортна ємність мусить бути більше 0" << std::endl;
- return 1; 
-}
-//ведення віку станції
-   int years;
-std:: cout <<"Вік станції, років: " ;
-std::cin >>years; 
- 
-if (std::cin.fail()){ 
-    std::cout << "Помилка: некоректне значення." << std::endl;
-    return 1;
-}
-if (years < 0 || years > 20){ 
-    std::cout << "Вік станції мусить бути від 0 до 20." << std::endl;
-    return 1; 
-}
-//ведення рівня заряду
- float  charge_level;
-std:: cout <<"Рівень заряду, %: " ;
-std::cin >> charge_level; // введення рівня заряду оримання даних від користовача
-if (std::cin.fail()){ 
-    std::cout << "Помилка: некоректне значення." << std::endl;
-    return 1;
-}
-
-if (charge_level < 0 || charge_level > 100) {
- std::cout << "рівень заряду мусить бути від 0 до 100 " << std::endl;
- return 1; 
-}
-//ведення ККД інвертора
-float efficiency;
-std:: cout <<"ККД інвертора, %: " ;
-std::cin >> efficiency; // введення ККД інвертора оримання даних від користовача
-if (std::cin.fail()){ 
-    std::cout << "Помилка: некоректне значення." << std::endl;
-    return 1;
-}
-if (efficiency <= 0 || efficiency >  100) {// межа допустимого ККД інвертора (%)
-std::cout <<"ККД інвестора мусить бути від 0% - 100% "<<std::endl;
- return 1; 
-}
-//ведення потужності приладу=
- int power; 
-std:: cout <<"Потужність, Вт: " ;
-std::cin >> power; // введення потужності оримання даних від користовача
-if (std::cin.fail()){ 
-    std::cout << "Помилка: некоректне значення." << std::endl;
-    return 1;
-}
-if (power <= 0)	{
-std::cout <<"Потужність повина бути більше 0 "<<std::endl;
- return 1;
-} 
-// Обчислення всіх отриманих даних за формулами:
-
-float actual_capacity; 
- //Формула фактична ємність з урахуванням віку, Вт·год
-actual_capacity = capacity * pow(1 - 2.0/100, years);
-
-
-float energy ; // Запас енергії при поточному заряді, Вт·год
-energy = actual_capacity * charge_level / 100; 
-
-float E_useful; // Корисна енергія, що дійде до приладу, Вт·год
-E_useful = energy * efficiency / 100;
-
-float E_loss; // Втрати на перетворенні напруги, Вт·год
-E_loss = energy - E_useful;
-
-float time; // Час роботи приладу, год
-time = E_useful / power;
-
-int hours; // години цілі 
-hours = (int)time;
-
-
-int minutes; // залишок хвилин
-minutes = (int)((time - hours) * 60);
-        // Виведення результатів обчислень на екран з форматуванням
-std::cout << std::left << std::setw(35)
-          << "Модель:"
-          << model << std::endl;
-
-std::cout << std::left << std::setw(45)
-          << "Паспортна ємність:"
-          << std::fixed << std::setprecision(1)
-          << capacity << " Вт·год" << std::endl;
-
-std::cout << std::left << std::setw(39)
-          << "Вік станції:"
-          << years << " р." << std::endl;
-
-std::cout << std::left << std::setw(44)
-          << "Фактична ємність:"
-          << std::fixed << std::setprecision(1)
-          << actual_capacity << " Вт·год" << std::endl;
-
-std::cout << std::left << std::setw(41)
-          << "Рівень заряду:"
-          << std::fixed << std::setprecision(2)
-          << charge_level << " %" << std::endl;
-
-std::cout << std::left << std::setw(41)
-          << "ККД інвертора:"
-          << std::fixed << std::setprecision(2)
-          << efficiency << " %" << std::endl;
-
-std::cout << std::left << std::setw(41)
-          << "Запас енергії:"
-          << std::fixed << std::setprecision(1)
-          << energy << " Вт·год" << std::endl;
-
-std::cout << std::left << std::setw(43)
-          << "Корисна енергія:" 
-          << std::fixed << std::setprecision(1)
-          << E_useful << " Вт·год" << std::endl;
-
-std::cout << std::left << std::setw(49)
-          << "Втрати на перетворенні:"
-          << std::fixed << std::setprecision(1)
-          << E_loss << " Вт·год" << std::endl;
-
-std::cout << std::left << std::setw(38)
-          << "Час роботи:"
-          << hours<< " год  " 
-          <<" "
-          << minutes << " хв "
-          << std::endl;
-          
-}// 
