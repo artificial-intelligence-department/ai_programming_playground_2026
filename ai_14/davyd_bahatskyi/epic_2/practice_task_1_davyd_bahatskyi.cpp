@@ -11,13 +11,12 @@ const char *RED = "\033[1;31m";
 const char *RESET = "\033[0m";
 
 int main() {
-  int len, diff = 0, level = 0;
+  int len, diff = 0, level = 4;
   char num, capital, special;
-  bool alert = true;
 
   cout << "whats the password length? ";
   if (!(cin >> len) || len < 1 || len > 64) {
-    cout << RED << "[E]" << RESET
+    cout << RED << "[E]" << RESET // this makes [E] in the error output red.
          << " Length must be more than 0 and less than 64.\n";
     return 1;
   }
@@ -40,9 +39,10 @@ int main() {
     return 1;
   }
 
+  // check if there are numbers in the password
+  // and if there are, disable the alert message
   if (num == 'y') {
-    diff++;
-    alert = false;
+    diff++; // adds 1 to the amount of different types of characters used
   }
   if (capital == 'y') {
     diff++;
@@ -55,9 +55,10 @@ int main() {
   if (len >= 8 && diff >= 2) {
     cout << "\nPassed.\n";
   } else {
-    cout << "\nDidn\'t pass.\n";
+    cout << "\nDidn't pass.\n";
   }
 
+  // code thats responsible for the password strength level
   if (len < 6) {
     level = 1;
   } else if (len < 8 || diff == 0) {
@@ -66,39 +67,38 @@ int main() {
     level = 3;
   } else if (len >= 12 && diff == 3) {
     level = 5;
-  } else {
-    level = 4;
   }
 
   switch (level) {
   case 1:
     cout << "Password level: 1 - very weak.\n"
             "Recomendation: Password is too short. minnimum is 8 characters.\n";
-    break;
+    break; // break here because otherwise it will output each case output
+           // instead of only specific one.
   case 2:
     cout << "Password level: 2 - weak.\n"
             "Recomendation: Make password length 8+ and add capital letters, "
-            "numbers and "
-            "special characters.\n";
+            "numbers and " // split into multiple lines for easier code
+                           // visibility
+            "special characters.\n"; // doesnt affect the actual output
     break;
   case 3:
     cout << "Password level: 3 - okay\n"
             "Recomendation: Add another character type and lengthen your "
-            "password up to 12 "
-            "characters\n";
-    break;
-  case 4:
-    cout << "Password level: 4 - good\n"
-            "Recomendation: You can make password 12+ characters long with all "
-            "character "
-            "types included\n";
+            "password up to 12 characters\n";
     break;
   case 5:
     cout << "Password level: 5 - strong\n"
             "Recomendation: You dont have to do anything else\n";
     break;
+  default: // if level variable doesnt equal to any other case.
+    cout << "Password level: 4 - good\n"
+            "Recomendation: You can make password 12+ characters long with all "
+            "character types included\n";
+    break;
   }
-  if (alert) {
+  // outputs an error if there are no other types of characters except letters
+  if (num == 'n' || special == 'n') {
     cout << "Alert: Password made only from letters is easier to guess.\n";
   }
 
