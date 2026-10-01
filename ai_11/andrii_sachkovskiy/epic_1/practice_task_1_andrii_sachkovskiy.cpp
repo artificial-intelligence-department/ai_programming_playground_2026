@@ -110,7 +110,7 @@ int main() {
     int minutes = (int)((time - hours) * MIN_PER_HOUR);
 
     // ----- Вивід результатів -----
-    // Підписи доповнені пробілами вручну, бо setw некоректно рахує кирилицю
+    
     cout << fixed;
     cout << "Модель:                 " << model << endl;
     cout << "Паспортна ємність:      " << setw(10) << setprecision(1) << capacity << " Вт·год" << endl;
