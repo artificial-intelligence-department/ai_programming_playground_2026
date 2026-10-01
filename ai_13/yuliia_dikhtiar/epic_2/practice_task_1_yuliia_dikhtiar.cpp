@@ -12,7 +12,7 @@ using namespace std;
 int main()
 {
     // Характеристики пароля, які введе користувач.
-    int length;
+    int length = 0;
     string hasDigits;
     string hasUppercase;
     string hasSpecial;
@@ -80,7 +80,7 @@ int main()
     }
 
     // Перевіряємо правила за порядком: перше виконане визначає рівень.
-    int level;
+    int level = 0;
 
     if (length < 6)
     {
