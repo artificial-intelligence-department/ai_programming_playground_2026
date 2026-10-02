@@ -26,7 +26,7 @@ int main() {
         cout << "помилка вводу: значення не є цілим числом" << endl;
         return 1;
     }
-    if (length < MIN_length || length >= MAX_length){
+    if (length < MIN_length || length > MAX_length){
         cout << "помилка вводу: значення виходить за допустимі межі(від 1 до 64)" << endl;
         return 1;
     }
@@ -99,7 +99,11 @@ int main() {
         break;
     case 5:
         cout << "Відмінно. Змінювати нічого не потрібно." << endl;
+        break;
+    default:
+        cout << "Невідоме значення" << endl;
     }
+    
 
     // попередження виводимо тільки тоді, коли пароль складається лише з літер
     if (type1=='n' && type3=='n'){
