@@ -1,4 +1,4 @@
-/*Epic 2 - Стипендія
+/*Epic 2 - Зуби
 Франчук Андрій
 Ші - 14*/
 
@@ -23,9 +23,11 @@ int main(){
         }else if (max_streak < streak){
             max_streak = streak;
             streak = 0;
-        }else{
-            streak = 0;
         }
+    }
+    
+    if (max_streak < streak){
+        max_streak = streak;
     }
 
     cout << max_streak;
