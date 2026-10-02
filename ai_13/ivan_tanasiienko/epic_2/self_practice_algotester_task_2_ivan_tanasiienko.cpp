@@ -3,15 +3,14 @@
 */
 #include<iostream>
 #include<string>
-#include<vector>
-
 
 int main()
 {
-    std::vector<char> types;
-    int singleLettersAllowed, letters;
-    char letter, singleLetter;
+    int singleLettersAllowed;
+    int letters;
+    char letter;
     std::string str;
+    std::string types;
 
     std::cin >> str;
 
@@ -23,18 +22,17 @@ int main()
     {
         singleLettersAllowed = 0;
     }
+
     for(int i = 0; i < str.size(); i++)
     {
-        letters = 0;
         letter = str[i];
-        if(std::find(types.begin(), types.end(), letter) == types.end())
-        {
-            types.push_back(letter);
-        }
-        else
+
+        if(types.find(letter) != std::string::npos)
         {
             continue;
         }
+        types += letter;
+        letters = 0;
         for(int j = 0; j < str.size(); j++)
         {
             if(str[j] == letter)
@@ -44,12 +42,9 @@ int main()
         }
         if(letters % 2 == 1)
         {
-            if(singleLettersAllowed == 1 || letter == singleLetter)
-            {
-                singleLetter = letter;
-                singleLettersAllowed--;
-            }
-            else
+            singleLettersAllowed--;
+
+            if(singleLettersAllowed < 0)
             {
                 std::cout << "NO" << std::endl;
                 return 0;
@@ -57,5 +52,6 @@ int main()
         }
     }
     std::cout << "YES" << std::endl;
+
     return 0;
 }
