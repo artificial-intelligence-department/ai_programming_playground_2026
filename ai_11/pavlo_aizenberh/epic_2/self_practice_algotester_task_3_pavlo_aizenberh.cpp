@@ -1,0 +1,16 @@
+// Задача №0163 - Спекотнi днi пiнгвiнiв
+#include <iostream>
+using namespace std;
+
+int main(){
+    int l, w, u, d;
+    cin >> l >> w >> u >> d;
+    
+    if (((u + d) >= l) && (l <= w)){
+        cout << ("Three times Sex on the Beach, please!");
+    }
+    else {
+        cout << ("Forget about the cocktails, man!");
+    }
+    return 0;
+}
