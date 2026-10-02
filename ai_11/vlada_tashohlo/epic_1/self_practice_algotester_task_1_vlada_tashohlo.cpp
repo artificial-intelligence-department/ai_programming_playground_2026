@@ -1,3 +1,4 @@
+
 /* 
 Епік 1. self practice: Algotester, задача "A плюс B"
 Авторка: Влада Ташогло
@@ -9,9 +10,11 @@
 using namespace std;
 
 int main() {
+    // Зчитуємо два числа
     int num1, num2;
     cin >> num1 >> num2;
 
+    // Додаємо числа та виводимо результат
     cout << num1 + num2 << endl;
 
     return 0;
