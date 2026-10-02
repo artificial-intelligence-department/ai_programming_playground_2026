@@ -41,8 +41,8 @@ int main()
     double r6 = r4 / r5;
 
 
-    float c = 100;
-    float d = 0.001;
+    float c = 100.0f;
+    float d = 0.001f;
     float f1 = c + d;
     float f2 = std::pow(f1, 4);
     float f3d1 = std::pow(c, 4);
