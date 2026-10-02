@@ -3,11 +3,11 @@ using namespace std;
 int main() {
     int n;
     cin >> n;
-    int sum = 0;
+    long sum = 0;
     for (int i = n; i>0; i--) {
-        int x;
+        long x;
         cin >>x;
-        int k=x-1;
+        long k=x-1;
         sum+=k;
     }
     cout << sum;
