@@ -5,12 +5,11 @@
 // Бібліотеки для можливості виконання тих чи інших дій
 #include <iostream>
 #include <cmath>
-#include <locale>
-#include<string> 
+#include<string>
+#include <iomanip>
 using namespace std;
 
 int main(){
-   setlocale (LC_ALL, "Uk_ua.UTF-8");
    // Максимальна довжина назви model щоб потім перевіряти за критеріями
    const int name_limit = 31;
    // % ємніть що втрачається за рік для подальших розрахунків
@@ -77,16 +76,17 @@ int main(){
     //розрахунок хвилин(хв)
     int m = (int)((T - h) * min_in_hr);
     // виведення результатів
-    cout << "Модель станції: " << model << endl;
-    cout << "Ємність: " << C << " Вт*год" << endl;
-    cout << "Вік: " << years << " років" << endl;
-    cout << "Фактична ємність: " << c_eff << " Вт*год" << endl;
-    cout << "Рівень заряду: " << charge << "%" << endl;
-    cout << "ККД: " << eff << "%" << endl;
-    cout << "Запас енергії: " << E_stored << " Вт*год" << endl;
-    cout << "Корисна енергія: " << E_useful << " Вт*год" << endl;
-    cout << "Втрати енергії: " << E_loss << " Вт*год" << endl;
-    cout << "Час роботи: " << h << " годин " << m << " хвилин" << endl;
+    cout << "" << endl;
+    cout << fixed << left << setw(41) << "Модель станції: "                                              << model << endl;
+    cout << fixed << left << setw(35) << "Ємність: "                << fixed << setprecision(1) << C << " Вт*год" << endl;
+    cout << fixed << left << setw(31) << "Вік: "                                             << years << " років" << endl;
+    cout << fixed << left << setw(43) << "Фактична ємність: "   << fixed << setprecision(1) << c_eff << " Вт*год" << endl;
+    cout << fixed << left << setw(40) << "Рівень заряду: "                                       << charge << "%" << endl;
+    cout << fixed << left << setw(31) << "ККД: "                        << fixed << setprecision(2) << eff << "%" << endl;
+    cout << fixed << left << setw(40) << "Запас енергії: "   << fixed << setprecision(1) << E_stored << " Вт*год" << endl;
+    cout << fixed << left << setw(42) << "Корисна енергія: " << fixed << setprecision(1) << E_useful << " Вт*год" << endl;
+    cout << fixed << left << setw(41) << "Втрати енергії: "    << fixed << setprecision(1) << E_loss << " Вт*год" << endl;
+    cout << fixed << left << setw(37) << "Час роботи: " << fixed << setprecision(2)<< T << " годин = " << h << " годин " << m << " хвилин" << endl;
     return 0;
 }
  
