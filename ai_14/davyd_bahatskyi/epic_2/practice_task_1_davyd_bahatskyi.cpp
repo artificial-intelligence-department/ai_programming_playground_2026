@@ -67,6 +67,8 @@ int main() {
     level = 3;
   } else if (len >= 12 && diff == 3) {
     level = 5;
+  } else {
+    level = 4;
   }
 
   switch (level) {
@@ -79,23 +81,26 @@ int main() {
     cout << "Password level: 2 - weak.\n"
             "Recomendation: Make password length 8+ and add capital letters, "
             "numbers and " // split into multiple lines for easier code
-                           // visibility
-            "special characters.\n"; // doesnt affect the actual output
+                           // visibility. doesnt affect the actual output
+            "special characters.\n";
     break;
   case 3:
     cout << "Password level: 3 - okay\n"
             "Recomendation: Add another character type and lengthen your "
-            "password up to 12 characters\n";
+            "password up to 12 characters.\n";
+    break;
+  case 4:
+    cout << "Password level: 4 - good\n"
+            "Recomendation: You can make password 12+ characters long with all "
+            "character types included.\n";
     break;
   case 5:
     cout << "Password level: 5 - strong\n"
-            "Recomendation: You dont have to do anything else\n";
+            "Recomendation: You dont have to do anything else.\n";
     break;
-  default: // if level variable doesnt equal to any other case.
-    cout << "Password level: 4 - good\n"
-            "Recomendation: You can make password 12+ characters long with all "
-            "character types included\n";
-    break;
+  default: // if level variable didnt get a valid value
+    cout << RED << "[E]" << RESET << " Something went wrong.\n";
+    return 1;
   }
   // outputs an error if there are no other types of characters except letters
   if (num == 'n' || special == 'n') {
