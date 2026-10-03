@@ -8,7 +8,7 @@
 using namespace std;
 int main()
 {
-    double const annual_degradation_coefficient=2;
+    double const annual_degradation_coefficient=2; //Коефіцієнт річної деградації станції
     string Station_Model;
     //Вводимо всі змінні і робимо перевірки
     cout <<"Модель станції: ";
@@ -73,13 +73,13 @@ int main()
         return 1;
     }
     //Розрахунки
-    double C_eff=C*pow(1-(annual_degradation_coefficient/100), years); //Фактична ємність
-    double E_stored=C_eff*(charge/100); //Запас енергії
-    double E_useful=E_stored*(eff/100); //Корисна енергія
-    double E_loss=E_stored-E_useful; //Втрати енергії на перетворенні
-    double T=E_useful/p; //Час роботи
-    double h=(int)T;
-    double m=(int)((T-h)*60);
+    double C_eff=C*pow(1-(annual_degradation_coefficient/100), years); //Фактична ємність(Вт·год)
+    double E_stored=C_eff*(charge/100); //Запас енергії(Вт·год)
+    double E_useful=E_stored*(eff/100); //Корисна енергія(Вт·год)
+    double E_loss=E_stored-E_useful; //Втрати енергії на перетворенні(Вт·год)
+    double T=E_useful/p; //Час роботи(год+хв)
+    double h=(int)T; //Ціла кількість годин
+    double m=(int)((T-h)*60); //Ціла кількість хвилин, які залишилися без годин
     //Виводимо дані з заданою кількістю цифр після коми та рівно в колонку
     cout <<"Модель:                    "
     <<right <<setw(10) <<Station_Model <<endl;
@@ -111,10 +111,10 @@ int main()
     <<right <<setw(10) <<fixed <<setprecision(2) <<T
     <<left <<" год = ";
     if(m<10){
-        cout <<fixed <<setprecision(0) <<h <<" год" <<" 0" <<m <<" хв" <<endl;
+        cout <<fixed <<setprecision(0) <<h <<" год" <<" 0" <<m <<" хв" <<endl; //Якщо кількість хвилин менша за 10, то перед нею пишемо 0
     }
     else{
-        cout <<fixed <<setprecision(0) <<h <<" год" <<" " <<m <<" хв" <<endl;
+        cout <<fixed <<setprecision(0) <<h <<" год" <<" " <<m <<" хв" <<endl; //Якщо кількість хвилин 10 і більше, то перед нею не пишемо 0
     }
     return 0;
 }
