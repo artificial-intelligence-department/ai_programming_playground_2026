@@ -13,14 +13,14 @@ int main(){
     short S = n * m;
 
     if(S % 3 == 0){
-        cout << "Dragon";
+        cout << "Dragon" << endl;
         return 0;
     }else if((S % 3 == 1) || (S % 3 == 2)){
         if (S % 2 == 0){
-            cout << "Dragon";
+            cout << "Dragon" << endl;
             return 0;
         } else if(S % 2 == 1){
-            cout << "Imp";
+            cout << "Imp" << endl;
         }
     }
     return 0;
