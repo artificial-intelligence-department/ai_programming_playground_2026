@@ -16,6 +16,7 @@ int main() {
     char upChars;
     char specialChars;
 
+    // Введення та перевірка даних
     cout << "Довжина пароля: ";
     cin >> length;
 
@@ -23,7 +24,7 @@ int main() {
         cout << "Помилка: довжина пароля повинна бути від 1 до 64 символів." << endl;
         return 0;
     }
-
+    // Введення та перевірка даних
     cout << "Чи є цифри (y/n): ";
     cin >> numbers;
 
@@ -31,7 +32,7 @@ int main() {
         cout << "Помилка: відповідь повинна бути y або n" << endl;
         return 0;
     }
-
+    // Введення та перевірка даних
     cout << "Чи є великі літери (y/n): ";
     cin >> upChars;
 
@@ -39,7 +40,7 @@ int main() {
         cout << "Помилка: відповідь повинна бути y або n" << endl;
         return 0;
     }
-
+    // Введення та перевірка даних
     cout << "Чи є спеціальні символи (y/n): ";
     cin >> specialChars;
     cout << endl;
@@ -48,7 +49,7 @@ int main() {
         cout << "Помилка: відповідь повинна бути y або n" << endl;
         return 0;
     }
-
+    // Перевірка кількості типів символів
     int score = 0;
     if (numbers == 'y') {
         score++;
@@ -61,7 +62,7 @@ int main() {
     if (specialChars == 'y') {
         score++;
     }
-
+    // Проходить/не проходить мінімальні вимоги
     if (length >= 8 && score >= 2) {
         cout << "Пароль проходить мінімальні вимоги" << endl;
     } else {
@@ -70,7 +71,7 @@ int main() {
 
     string lvlname;
     int lvl;
-
+    // Визначення рівня надійності
     if (length < 6) {
         lvlname = "Дуже слабкий";
         lvl = 1;
@@ -88,7 +89,7 @@ int main() {
         lvl = 4;
     }
     cout << "Рівень надійності: " << lvl << " - " << lvlname << endl;
-
+    // Надання рекомендації
     cout << "Рекомендація: ";
     switch (lvl) {
         case 1:
