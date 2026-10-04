@@ -1,3 +1,7 @@
+/*"А + В"
+Автор: Шведько Юлія
+Група: ШІ-11*/
+
 #include <iostream>
 using namespace std;
 int main()
