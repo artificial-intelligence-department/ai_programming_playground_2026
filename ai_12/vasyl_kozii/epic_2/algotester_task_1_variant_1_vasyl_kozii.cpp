@@ -1,3 +1,8 @@
+/*
+Algotester Task 1 Variant 1
+група ШІ-12
+Козій Василь Іванович
+*/
 #include <iostream>
 using namespace std;
 int main()

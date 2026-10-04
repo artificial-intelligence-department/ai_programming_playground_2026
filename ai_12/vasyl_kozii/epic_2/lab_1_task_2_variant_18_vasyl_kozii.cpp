@@ -1,3 +1,8 @@
+/*
+Lab 1 Task 2 Variant 18
+група ШІ-12
+Козій Василь Іванович
+*/
 #include <iostream>
 using namespace std;
 int main()

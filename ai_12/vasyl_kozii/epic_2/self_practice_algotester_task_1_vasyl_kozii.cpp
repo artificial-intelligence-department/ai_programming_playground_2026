@@ -1,3 +1,8 @@
+/*
+Self Practice Algotester Task 1
+група ШІ-12
+Козій Василь Іванович
+*/
 #include <iostream>
 #include <cmath>
 using namespace std; 
