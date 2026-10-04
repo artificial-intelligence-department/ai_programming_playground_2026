@@ -15,7 +15,6 @@ int main() {
     std::cout << "Please, enter n: ";
     std::cin >> n;
     
-
     int a1 = -(-m);
     int b1 = n+1;
     int r1 = a1 - b1;

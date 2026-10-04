@@ -19,7 +19,7 @@ int main() {
     cin >> d4;
 
     if(h1 < d1 || h2 < d2 || h3 < d3 || h4 < d4){
-        cout << "ERROR";
+        cout << "ERROR" << endl;
         return 0;
     }
 
@@ -34,7 +34,7 @@ int main() {
     long long minh = min({v1, h2, h3 ,h4});
 
     if(maxh >= 2 * minh){
-        cout << "NO";
+        cout << "NO" << endl;
         return 0;
     }
 
@@ -44,7 +44,7 @@ int main() {
     minh = min({v1, v2, h3 ,h4});
 
     if(maxh >= 2 * minh){
-        cout << "NO";
+        cout << "NO" << endl;
         return 0;
     }
 
@@ -54,7 +54,7 @@ int main() {
     minh = min({v1, v2, v3 ,h4});
 
     if(maxh >= 2 * minh){
-        cout << "NO";
+        cout << "NO" << endl;
         return 0;
     }
 
@@ -64,12 +64,12 @@ int main() {
     minh = min({v1, v2, v3 ,v4});
 
     if(maxh >= 2 * minh){
-        cout << "NO";
+        cout << "NO" << endl;
         return 0;
     }
 
     if( v1 == v2 && v2 == v3 && v3 == v4){
-        cout << "YES";
+        cout << "YES"<< endl;
     }
    
 
