@@ -86,16 +86,16 @@ int main()
     int m = (T-h)*60;// Обчислюємо скільки хвилин залишилося
 
     //Виводимо значення з необхідною точністю
-    cout << "Модель станції: " << model << endl;
-    cout << "Паспортна ємність: " << fixed << setprecision(1) << C << " Вт*год" << endl;
-    cout << "Вік станції: " << years << " р." << endl;
-    cout << "Фактична ємність: " << C_eff << " Вт*год" << endl;
-    cout << "Рівень заряду: " << charge << " %" << endl;
-    cout << "ККД інвентора: " << fixed << setprecision(2) << eff << " %" << endl;
-    cout << "Запас енергії: " << fixed << setprecision(1) << E_stored << " Вт*год" << endl;
-    cout << "Корисна енергія: " << E_useful << " Вт*год" << endl;
+    cout << "Модель станції:         " << model << endl;
+    cout << "Паспортна ємність:      " << fixed << setprecision(1) << C << " Вт*год" << endl;
+    cout << "Вік станції:            " << years << " р." << endl;
+    cout << "Фактична ємність:       " << C_eff << " Вт*год" << endl;
+    cout << "Рівень заряду:          " << charge << " %" << endl;
+    cout << "ККД інвентора:          " << fixed << setprecision(2) << eff << " %" << endl;
+    cout << "Запас енергії:          " << fixed << setprecision(1) << E_stored << " Вт*год" << endl;
+    cout << "Корисна енергія:        " << E_useful << " Вт*год" << endl;
     cout << "Втрати на перетворенні: " << E_loss << " Вт*год" << endl;
-    cout << "Час роботи: " << fixed << setprecision(2) << T << " год = " << h << " год " << setfill('0') << setw(2) << m << " хв" << endl;
+    cout << "Час роботи:             " << fixed << setprecision(2) << T << " год = " << h << " год " << setfill('0') << setw(2) << m << " хв" << endl;
 
     return 0;
 }
