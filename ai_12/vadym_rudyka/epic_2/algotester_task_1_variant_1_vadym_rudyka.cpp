@@ -3,13 +3,13 @@
 using namespace std;
 // 2 цілих числа 𝐻 та 𝑀 - хітпойнти та мана персонажа
 int main() {
-    int H, M;
+    long long H, M;
     cin >> H >> M;
 
     bool win = true;
 // 3 рядки по 2 цілих числа, ℎ𝑖 та 𝑚𝑖 - кількість хітпойнтів та мани, які ваш персонаж потратить за хід на 𝑖 заклинання
-    for (int i = 0; i < 3; i++) {
-        int h, m;
+    for (long long i = 0; i < 3; i++) {
+        long long h, m;
         cin >> h >> m;
 
         // Закляття витрачає і HP, і ману
