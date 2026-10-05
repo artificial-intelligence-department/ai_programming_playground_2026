@@ -54,23 +54,23 @@ int main() {
     cout<<"Рівень надійності: ";
     if (passwordlength<6){
         reliability=1;
-        cout<<reliability<<"- Дуже слабкий"<<endl;
+        cout<<reliability<<" - Дуже слабкий"<<endl;
     }
     else if (passwordlength<8 || typesCount==0){
         reliability=2;
-        cout<<reliability<<"- Cлабкий"<<endl;
+        cout<<reliability<<" - Cлабкий"<<endl;
     }
     else if (typesCount==1){
         reliability=3;
-        cout<<reliability<<"- Середній"<<endl;
+        cout<<reliability<<" - Середній"<<endl;
     }
     else if (passwordlength>=12 && typesCount==3){
         reliability=5;
-        cout<<reliability<<"- Дуже надійний"<<endl;
+        cout<<reliability<<" - Дуже надійний"<<endl;
     }
     else{
         reliability=4;
-        cout<<reliability<<"- Надійний"<<endl;
+        cout<<reliability<<" - Надійний"<<endl;
     }
 
     cout<<"Рекомендація: ";
