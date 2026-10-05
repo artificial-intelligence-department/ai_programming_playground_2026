@@ -15,6 +15,9 @@ int main() {
     char numbers;
     char upChars;
     char specialChars;
+    int score = 0;
+    string lvlname;
+    int lvl;
 
     // Введення та перевірка даних
     cout << "Довжина пароля: ";
@@ -50,7 +53,6 @@ int main() {
         return 0;
     }
     // Перевірка кількості типів символів
-    int score = 0;
     if (numbers == 'y') {
         score++;
     }
@@ -68,9 +70,7 @@ int main() {
     } else {
         cout << "Пароль не проходить мінімальні вимоги" << endl;
     }
-
-    string lvlname;
-    int lvl;
+    
     // Визначення рівня надійності
     if (length < 6) {
         lvlname = "Дуже слабкий";
