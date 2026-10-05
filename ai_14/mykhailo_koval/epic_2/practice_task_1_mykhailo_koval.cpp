@@ -35,27 +35,32 @@ int main() {
     if (digits != 'y' && digits != 'n'){
         cout << "Помилка, введіть значення y(yes) або n(no)" << '\n';
         return 1;
-    } else if (digits == 'y'){
-        symbol_types++;
-    }
+    } 
 
     cout << "Чи є великі літери: ";
     cin >> caps;
     if (caps != 'y' && caps != 'n'){
         cout << "Помилка, введіть значення y(yes) або n(no)" << '\n';
         return 1;
-    } else if (caps == 'y'){
-        symbol_types++;
-    }
+    } 
 
     cout << "Чи є спецііальні символи : ";
     cin >> specials;
     if (specials != 'y' && specials != 'n'){
         cout << "Помилка, введіть значення y(yes) або n(no)" << '\n';
         return 1;
-    } else if (specials == 'y'){
+    }
+
+    if (digits == 'y'){
         symbol_types++;
     }
+    if (caps == 'y'){
+        symbol_types++;
+    }
+    if (specials == 'y'){
+        symbol_types++;
+    }
+
 
     //Перевірка мінімальних вимог
     if (lenght >= 8 && symbol_types >= 2){
@@ -96,11 +101,8 @@ int main() {
         case 4: 
         recomendations = "Хороший пароль. Для максимуму 12+ символів і всі три типи символів.";
         break;
-        case 5:
-        recomendations = "Відмінно. Змінювати нічого не потрібно.";
-        break;
         default:
-        return 1;
+        recomendations = "Відмінно. Змінювати нічого не потрібно.";
     }
 
     //Вивід рівня надійності та рекомендацій
