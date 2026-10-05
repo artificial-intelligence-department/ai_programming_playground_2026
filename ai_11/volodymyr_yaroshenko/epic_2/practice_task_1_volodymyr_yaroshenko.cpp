@@ -19,7 +19,7 @@ const int psw_lvl_lenght = 12; // довжина паролю для 5 рівн�
 
 cout << "Введіть довжину: " << endl;
 cin >> lenght;
-if(lenght < min_lenght && lenght > max_lenght) {
+if(lenght <= min_lenght ||  lenght > max_lenght) {
     cout << "Введіть коректне значення довжини" << endl;
     return -1;
 }
