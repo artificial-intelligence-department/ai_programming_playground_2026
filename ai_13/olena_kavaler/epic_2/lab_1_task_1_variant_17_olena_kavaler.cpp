@@ -35,5 +35,6 @@ int main() {
 
     cout << "Результат обчислення (double): " << result_d << endl;
 
+    return 0;
 
 }
