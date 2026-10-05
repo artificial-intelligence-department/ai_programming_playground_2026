@@ -1,160 +1,55 @@
 #include <iostream>
 
-using namespace std;
+    using namespace std;
 
-int main()
-{
+    int main() 
+    {
+        int n;
+        if (!(cin >> n)) return 0;
 
-	long long H;
-	
-	cin >> H;
+        int k_games = 0, v_games = 0;
+        int curr_k = 0, curr_v = 0;
 
-	if (H < 1)
-	{
+        char c;
+        for (int i = 0; i < n; i++) 
+        {
+            cin >> c;
+            if (c == 'K') {
+                curr_k++;
+            }
+            else if (c == 'V') 
+            {
 
-		cout << "NO";
+                curr_v++;
 
-		return 0;
+            }
 
-	}
+            if (curr_k >= 11 && (curr_k - curr_v) >= 2) 
+            {
 
-	long long M;
+                k_games++;
+                curr_k = 0;
+                curr_v = 0;
 
-	cin >> M;
+            }
+            else if (curr_v >= 11 && (curr_v - curr_k) >= 2) 
+            {
 
-	if (M < 1)
-	{
+                v_games++;
+                curr_k = 0;
+                curr_v = 0;
 
-		cout << "NO";
+            }
+        }
 
-		return 0;
+        cout << k_games << ":" << v_games << "\n";
 
-	}
+        if (curr_k > 0 || curr_v > 0) 
+        {
 
-	long long hi[3];
+            cout << curr_k << ":" << curr_v << "\n";
 
-	long long mi[3];
+        }
 
-	cin >> hi[0];
-
-	if (hi[0]<0)
-	{
-
-		cout << "NO";
-
-		return 0;
-
-	}
-
-	cin >> mi[0];
-
-	if (mi[0] < 0)
-	{
-
-		cout << "NO";
-
-		return 0;
-
-	}
-
-	cin >> hi[1];
-
-	if (hi[1] < 0)
-	{
-
-		cout << "NO";
-
-		return 0;
-
-	}
-
-	cin >> mi[1];
-
-	if (mi[1] < 0)
-	{
-
-		cout << "NO";
-
-		return 0;
-
-	}
-
-	cin >> hi[2];
-
-	if (hi[2] < 0)
-	{
-
-		cout << "NO";
-
-		return 0;
-
-	}
-
-	cin >> mi[2];
-
-	if (mi[2] < 0)
-	{
-
-		cout << "NO";
-
-		return 0;
-
-	}
-
-	if (mi[0] > 0 && hi[0] > 0)
-	{
-
-		cout << "NO";
-
-		return 0;
-
-	}
-
-	if (mi[1] > 0 && hi[1] > 0)
-	{
-
-		cout << "NO";
-
-		return 0;
-
-	}
-
-	if (mi[2] > 0 && hi[2] > 0)
-	{
-
-		cout << "NO";
-
-		return 0;
-
-	}
-
-	for (int i = 0; i < 3; i++)
-	{
-
-		H = H - hi[i];
-
-		M = M - mi[i];
-
-	}
-
-	if (M <= 0)
-	{
-
-		cout << "NO";
-		return  0;
-
-	}
-
-	if (H <= 0)
-	{
-
-		cout << "NO";
-		return 0;
-
-	}
-
-	cout << "YES";
-
-	return 0;
-
-}
+        return 0;
+    }
