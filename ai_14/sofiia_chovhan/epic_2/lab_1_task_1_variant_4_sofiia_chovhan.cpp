@@ -39,7 +39,7 @@ int main() {
     // #7 Збираємо знаменник
     float zn;
     zn = g + h + i;
-    // #8 Results calculations 
+    // #8 Результати
     float res1;
     res1 = ch/zn;
     
@@ -66,7 +66,7 @@ int main() {
     // #7 Збираємо знаменник
     double zn1;
     zn1 = g1 + h1 + i1;
-    // #8 Results calculations 
+    // #8 Результати
     double res2;
     res2 = ch1/zn1;
     cout << "Result1: " << res1 << endl;
