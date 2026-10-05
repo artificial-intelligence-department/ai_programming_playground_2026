@@ -1,9 +1,15 @@
+/*  
+self-practice, задача в алготестер "А+В"
+*/
 #include <iostream>
 using namespace std;
 int main(){
+  //створюю змінні
     int a=0, b=0;
     int a0=0, b0=0;
+    // ввід змінних
     cin >> a0 >> b0;
+    //перевірка на правильність введення
     if (a0<0 || a0>100){
       cout << "Неправильне введення" << endl;
      return 0;
@@ -13,6 +19,7 @@ int main(){
      return 0;
     }
     else a=a0, b=b0;
+    //відповідь
     int S=a+b;
     cout << S << endl;
     return 0;
