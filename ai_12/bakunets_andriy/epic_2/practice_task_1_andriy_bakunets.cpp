@@ -4,7 +4,7 @@ using namespace std;
 
 int main() {
     int length;
-    char has_digits, has_uppercase, has_special;
+    char numbers, big, symbols;
 
     cout << "Довжина пароля: ";
     cin >> length;
@@ -15,23 +15,23 @@ int main() {
     }
 
     cout << "Чи є цифри (y/n): ";
-    cin >> has_digits;
+    cin >> numbers;
     cout << "Чи є великі літери (y/n): ";
-    cin >> has_uppercase;
+    cin >> big;
     cout << "Чи є спеціальні символи (y/n): ";
-    cin >> has_special;
+    cin >> symbols;
 
-    if (!(has_digits == 'y' || has_digits == 'n') ||
-        !(has_uppercase == 'y' || has_uppercase == 'n') ||
-        !(has_special == 'y' || has_special == 'n')) {
+    if (!(numbers == 'y' || numbers == 'n') ||
+        !(big == 'y' || big == 'n') ||
+        !(symbols == 'y' || symbols == 'n')) {
         cout << "Помилка: введіть дійсне значення (y/n)." << endl;
         return 0;
     }
 
     // Мінімальні вимоги
-    if (length >= 8 && ((has_digits == 'y' && has_uppercase == 'y') || 
-                        (has_digits == 'y' && has_special == 'y') || 
-                        (has_uppercase == 'y' && has_special == 'y'))) {
+    if (length >= 8 && ((numbers == 'y' && big == 'y') || 
+                        (numbers == 'y' && symbols == 'y') || 
+                        (big == 'y' && symbols == 'y'))) {
         cout << "\nМінімальні вимоги: ПРОЙДЕНО" << endl;
     } else {
         cout << "\nМінімальні вимоги: НЕ ПРОЙДЕНО" << endl;
@@ -41,13 +41,13 @@ int main() {
     int lvl;
     if (length < 6) {
         lvl = 1;
-    } else if (length < 8 || (has_digits == 'n' && has_uppercase == 'n' && has_special == 'n')) {
+    } else if (length < 8 || (numbers == 'n' && big == 'n' && symbols == 'n')) {
         lvl = 2;
-    } else if ((has_digits == 'y' && has_uppercase == 'n' && has_special == 'n') ||
-               (has_digits == 'n' && has_uppercase == 'y' && has_special == 'n') ||
-               (has_digits == 'n' && has_uppercase == 'n' && has_special == 'y')) {
+    } else if ((numbers == 'y' && big == 'n' && symbols == 'n') ||
+               (numbers == 'n' && big == 'y' && symbols == 'n') ||
+               (numbers == 'n' && big == 'n' && symbols == 'y')) {
         lvl = 3;
-    } else if (length >= 12 && has_digits == 'y' && has_uppercase == 'y' && has_special == 'y') {
+    } else if (length >= 12 && numbers == 'y' && big == 'y' && symbols == 'y') {
         lvl = 5;
     } else {
         lvl = 4;
@@ -100,7 +100,7 @@ int main() {
     }
 
     // Попередження
-    if (has_digits == 'n' && has_special == 'n') {
+    if (numbers == 'n' && symbols == 'n') {
         cout << "Попередження: Пароль тільки з літер підбирається швидше." << endl;
     }
 
