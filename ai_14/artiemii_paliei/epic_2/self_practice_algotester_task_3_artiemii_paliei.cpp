@@ -1,3 +1,5 @@
+// Рейтинг петрика
+
 #include <iostream>
 
 int main()
