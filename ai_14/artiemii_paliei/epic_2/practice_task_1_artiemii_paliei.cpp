@@ -29,7 +29,7 @@ int main()
     }
     else
     {
-        std::cout << "Введені значення повинні бути або 'y' або 'n'." << std::endl;
+        std::cout << "Помилка: Введені значення повинні бути або 'y' або 'n'." << std::endl;
         return 1;
     }
 
@@ -44,7 +44,7 @@ int main()
     }
     else
     {
-        std::cout << "Введені значення повинні бути або 'y' або 'n'." << std::endl;
+        std::cout << "Помилка: Введені значення повинні бути або 'y' або 'n'." << std::endl;
         return 1;
     }
 
@@ -59,7 +59,7 @@ int main()
     }
     else
     {
-        std::cout << "Введені значення повинні бути або 'y' або 'n'." << std::endl;
+        std::cout << "Помилка: Введені значення повинні бути або 'y' або 'n'." << std::endl;
         return 1;
     }
 
@@ -85,7 +85,7 @@ int main()
         warning = false;
 
     // Перевірка на мінімальні вимоги
-    if (password_lenght >= 8 && sum == 2)
+    if (password_lenght >= 8 && sum >= 2)
         requirements = true;
     else
         requirements = false;
@@ -115,7 +115,7 @@ int main()
         break;
     default:
         std::cout << "Рівень надійності: 4 – Сильний" << std::endl;
-        std::cout << "Рекомендація: Відмінно. Змінювати нічого не потрібно." << std::endl;
+        std::cout << "Рекомендація: Хороший пароль. Для максимуму 12+ символів і всі три типи символів." << std::endl;
         break;
     }
 
