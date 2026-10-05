@@ -1,3 +1,9 @@
+/* 
+self_practice_algotester_task_3_mykhailo_koval
+"Цікава гра"
+Name: Mykhailo Koval
+Group: AI-14
+*/
 #include <iostream>
 
 using namespace std;
