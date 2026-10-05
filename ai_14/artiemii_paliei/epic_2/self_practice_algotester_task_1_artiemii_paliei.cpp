@@ -1,3 +1,5 @@
+// Спекотні будні пінгвінів
+
 #include <iostream>
 
 int main()

@@ -1,3 +1,8 @@
+/*
+    Algotester Lab 1 Task 1
+    Прізвище: Палєй
+    Група: ШІ-14
+*/
 #include <iostream>
 
 int main()
