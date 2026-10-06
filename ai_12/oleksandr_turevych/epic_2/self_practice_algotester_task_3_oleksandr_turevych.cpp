@@ -2,11 +2,10 @@
 using namespace std;
 
 int main() {
-    double a;
-    cin >> a;
-
-
-    cout << 225000000 / a << endl;
+    double speed;
+    const double range = 225000000;
+    cin >> speed;
+    cout << range / speed << endl;
     return 0;
   
 }
