@@ -26,6 +26,6 @@ int main () {
         }
     }
     long long result = max - min;
-    cout << result;
+    cout << result << endl;
     return 0;    
 }
