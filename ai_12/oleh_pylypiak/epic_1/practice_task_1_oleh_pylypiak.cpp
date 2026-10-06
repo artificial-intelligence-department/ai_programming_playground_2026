@@ -5,9 +5,9 @@
 */
 
 #include <iostream> //отримувати або виводити дані на екран
-#include <math.h> //Для матем обчислень
 #include <iomanip> //Для виводу
 #include <cmath> //Для заокруглення чисел
+#include <string> //Для роботи з рядками
 using namespace std; //щоб не писати коден раз std::...
 
 int main() { //головна функція,яка запускає код
@@ -64,7 +64,7 @@ int main() { //головна функція,яка запускає код
     double E_useful = E_stored * eff / 100;//обчисл корисну енергію
     double E_loss = E_stored - E_useful;//обчисл втрати на перетворенні напруги
     double T = E_useful / P;//очисл час роботи(год)
-    int h = int(T);//округлюємо до цілих годин
+    int h = int(T);//округлюємо до цілих годинs
     int m = int((T - h) * 60);//обчисл хвилини,що залишились
     cout<<"Модель:" << model_name << endl;
     cout<<"Паспортна ємність:" << fixed << setprecision(1)<< C << " Вт*год" << endl;
