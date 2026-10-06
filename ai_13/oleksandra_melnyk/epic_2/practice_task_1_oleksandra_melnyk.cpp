@@ -5,12 +5,13 @@ using namespace std;
 
 int main() 
 {
+    //ініціалізація змінних 
     int passwordlength, typecount = 0, securitylevel = 0;
     char hasnumber, hasupper, hasspecial;
     
     cout << "Довжина пароля: ";
     cin >> passwordlength;
-    
+    //перевірка на коректність вводу
     if (passwordlength > 64 || passwordlength < 1) 
     {
         cout << "Помилка. Пароль повинен бути від 1 до 64 символів.";
@@ -52,7 +53,7 @@ int main()
     {
         typecount++;
     }
-    
+    //визначення рівня надійності
     if (passwordlength < 6) 
     {
         securitylevel = 1;
@@ -84,7 +85,7 @@ int main()
     }
     
     cout << "Рівень надійності: " << securitylevel << endl;
-    
+    //вивід результатів залежно від рівня 
     switch (securitylevel) 
     {
         case 1:
