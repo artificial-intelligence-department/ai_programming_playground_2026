@@ -9,11 +9,11 @@ int main () {
         char c; cin >> c;
         if (c == 'V') v++;
         else k++;
-        if (v >= 11 && v - k == 2) {
+        if (v >= 11 && v - k >= 2) {
             v_wins++;
             v = 0; k = 0;
         }
-        if (k >= 11 && k - v == 2) {
+        if (k >= 11 && k - v >= 2) {
             k_wins++;
             v = 0; k = 0;
         }
