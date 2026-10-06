@@ -25,7 +25,7 @@ int main() {
     //Введення даних та валідація
     cout << "Довжина пароля: ";
     cin >> lenght;
-    if (lenght < 1 && lenght > 64){
+    if (lenght < 1 || lenght > 64){
         cout << "Помилка, введіть правильне значення" << '\n';
         return 1;
     }
