@@ -10,8 +10,8 @@ int main(){
 
     // Оголошення змінних
     const double loss = 2; // відсоток втрати ємності
-    double C, eff, P, C_eff, charge, E_stored, E_useful, E_loss, T, h;
-    int years, m;
+    double C, eff, P, C_eff, charge, E_stored, E_useful, E_loss, T, h, m;
+    int years;
     string model;
 
 
@@ -58,7 +58,7 @@ int main(){
     // Обчислюємо час роботи, годин
     T = E_useful / P;
     h = trunc(T);
-    m = (T - h)*60;
+    m = (T - h) * 60;
 
     // Виводимо результати
     cout << fixed;
