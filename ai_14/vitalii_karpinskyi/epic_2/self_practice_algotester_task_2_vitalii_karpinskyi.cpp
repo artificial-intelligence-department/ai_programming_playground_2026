@@ -18,10 +18,8 @@ int main() {
     long count = 0;
     long pos = 0;
     // Пошук рядка "TOILET"
-    while (pos = s.find("TOILET", pos)) {
-        if (pos == -1) {
-            break;
-        }
+    while ((pos = s.find("TOILET", pos)) != string::npos) {
+        
         count++;
         pos += 6;
     }
