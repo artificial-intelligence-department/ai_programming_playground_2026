@@ -103,7 +103,7 @@ int main() {
     return 1;
   }
   // outputs an error if there are no other types of characters except letters
-  if (num == 'n' || special == 'n') {
+  if (num == 'n' && special == 'n') {
     cout << "Alert: Password made only from letters is easier to guess.\n";
   }
 
