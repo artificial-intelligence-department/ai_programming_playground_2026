@@ -1,3 +1,9 @@
+/*
+Назва: Lab 1v1
+Автор: Макух Арсеній
+Група: ШІ-13
+*/
+
 #include <iostream>
 #include <cmath>
 using namespace std;
