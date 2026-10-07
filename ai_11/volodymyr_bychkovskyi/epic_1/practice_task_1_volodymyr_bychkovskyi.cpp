@@ -19,7 +19,7 @@ int main() {
     setlocale(LC_ALL, "uk_UA");
 
     // Відсоток щорічної втрати ємності акумулятора (2%)
-    int LOSED_Capacity = 2; 
+    const int LOSED_Capacity = 2; 
 
     // Оголошення змінних для вхідних даних та результатів
     string model_name;
