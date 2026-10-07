@@ -37,19 +37,19 @@ int main()
         h3 < 0 || m3 < 0 || h3 > max_number || m3 > max_number ||
         m1 != 0 && h1 != 0 || m2 != 0 && h2 != 0 || m3 != 0 && h3 != 0 )
     {
-        cout << "NO";
+        cout << "NO" << endl;
         return 0;
     }
 
     else if ( (h1 + h2 + h3) < h && (m1 + m2 + m3) < m )
     {
-        cout << "YES";
+        cout << "YES" << endl;
         return 0;
     }
 
     else 
     {
-        cout << "NO";
+        cout << "NO" << endl;
         return 0;
     }
 
