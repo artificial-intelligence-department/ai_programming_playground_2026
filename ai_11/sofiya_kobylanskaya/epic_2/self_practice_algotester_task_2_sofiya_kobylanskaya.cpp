@@ -1,3 +1,8 @@
+/*
+Епік 2. self practice: Algotester, задача "Юний художник"
+Автор: Кобилянська Софія
+Група: ші-11
+*/
 
 #include <iostream>
 using namespace std;
