@@ -2,7 +2,7 @@
 using namespace std;
 int main(){
     long long lengthChair[4], cutlengthChair[4];
-    bool isTableFlipped = 0; // Змінено: змінна для відстеження перевертання столу
+    bool isTableFlipped = 0; //змінна для відстеження перевертання столу
     //записую виміри в масиви
     for (int i = 0; i < 4; i++){
         cin >> lengthChair[i];
