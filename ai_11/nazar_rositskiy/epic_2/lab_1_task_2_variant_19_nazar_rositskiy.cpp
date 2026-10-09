@@ -4,6 +4,7 @@ int main(){
     
     //оголошення n i m
     float n,m;
+    float a,b;
     
     //введення n i m відповідно
     std::cout << "Enter n: ";
@@ -11,9 +12,17 @@ int main(){
     std::cout << "Enter m: ";
     std::cin >> m;
     std::cout << m << " " << n << std::endl;
+    a=n;
+    b=m;
     //послідовне виконання та виведення першої другої та третьої дії відповідно
-    std::cout << "1) --m - ++n: " << (--m - ++n) << std::endl;
-    std::cout << "2) m*n < n++: " << (m*n < n++) << std::endl;
-    std::cout << "3) n-- > m++: " << (n-- > m++) << std::endl;
+    a=n;
+    b=m;
+    std::cout << "1) --m - ++n: " << (--b - ++a) << std::endl;
+    a=n;
+    b=m;
+    std::cout << "2) m*n < n++: " << (b*a < a++) << std::endl;
+    a=n;
+    b=m;
+    std::cout << "3) n-- > m++: " << (a-- > b++) << std::endl;
 
 }

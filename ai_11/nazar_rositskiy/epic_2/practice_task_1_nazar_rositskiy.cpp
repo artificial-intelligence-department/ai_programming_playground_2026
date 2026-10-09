@@ -5,7 +5,7 @@ int main(){
     int lenght;
     int types = 0;
     int level = 0;
-    char _isNumbers, _isBigNumber, _isSymbols;
+    char _isNumbers, _isBigLetter, _isSymbols;
 
     //Перевірка мінімальної та максимальної довжини пароля
     std::cout << "Довжина пароля ";
@@ -28,11 +28,11 @@ int main(){
 
     //Питаємо користувача Чи є великі літери
     std::cout << "Чи є великі літери ";
-    std::cin >> _isBigNumber;
+    std::cin >> _isBigLetter;
     //Опрацьовуємо ввід, якщо відповідь у то додаємо 1 до кількості типів символів, якщо ні х ні у то видаємо помилку
-    if (_isBigNumber == 'y'){
+    if (_isBigLetter == 'y'){
         types++;
-    } else if(_isBigNumber != 'y' && _isBigNumber != 'n'){
+    } else if(_isBigLetter != 'y' && _isBigLetter != 'n'){
         std::cout << "Введіть дійсне значення";
         return 1;
     }
