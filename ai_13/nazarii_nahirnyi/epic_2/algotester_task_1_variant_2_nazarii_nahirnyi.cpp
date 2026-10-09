@@ -1,5 +1,5 @@
 /*
-Algotster Lab 1v3, Нагірний Назарій, ШІ-13
+Algotster Lab 1v2, Нагірний Назарій, ШІ-13
 */
 #include <iostream>
 
