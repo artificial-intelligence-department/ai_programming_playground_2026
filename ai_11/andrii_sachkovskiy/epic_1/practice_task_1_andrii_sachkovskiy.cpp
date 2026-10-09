@@ -46,7 +46,7 @@ int main() {
         cout << "Помилка: вік станції має бути цілим числом." << endl;
         return 1;
     }
-    if (years < 0  years > MAX_YEARS) {
+    if (years < 0 || years > MAX_YEARS) {
         cout << "Помилка: вік станції мусить бути від 0 до " << MAX_YEARS << "." << endl;
         return 1;
     }
@@ -58,7 +58,7 @@ int main() {
         cout << "Помилка: рівень заряду має бути цілим числом." << endl;
         return 1;
     }
-    if (charge < 0  charge > PERCENT) {
+    if (charge < 0 || charge > PERCENT) {
         cout << "Помилка: рівень заряду мусить бути від 0 до " << PERCENT << "." << endl;
         return 1;
     }
