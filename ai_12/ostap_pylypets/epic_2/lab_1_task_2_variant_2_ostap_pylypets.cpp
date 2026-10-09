@@ -1,3 +1,8 @@
+/*
+Завдання з лабораторної роботи. №2, варіант 2
+Пилипець Остап
+Ші-12
+*/
 #include <iostream>
 using namespace std;
  int main() {

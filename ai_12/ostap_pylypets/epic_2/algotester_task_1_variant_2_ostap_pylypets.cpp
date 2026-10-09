@@ -1,3 +1,8 @@
+/*
+algotester task 1 variant 2 
+Пилипець Остап 
+Ші-12
+*/
 #include <iostream>
 using namespace std;
 int main(){

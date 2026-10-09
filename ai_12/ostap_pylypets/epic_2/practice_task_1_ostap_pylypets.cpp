@@ -1,3 +1,7 @@
+/*Практичне завдання 1
+Пилипець Остап
+Ші-12
+*/
 #include <iostream>
 using namespace std;
 int main()

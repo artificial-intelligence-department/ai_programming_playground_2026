@@ -1,3 +1,7 @@
+/*алготестер self практика
+Пилипець Остап
+Ші-12
+*/
 #include <iostream>
 #include <string>
 using namespace std;
