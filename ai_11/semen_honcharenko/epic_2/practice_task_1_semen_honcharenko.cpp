@@ -40,6 +40,12 @@ int main() {
     if (special == 'y') {
         types++;
     }
+    if (length >= 8 and types >= 2) {
+    std::cout << "Мінімальні вимоги: ПРОЙДЕНО" << std::endl;
+    }
+    else {
+    std::cout << "Мінімальні вимоги: НЕ ПРОЙДЕНО" << std::endl;
+    }
     if (length < 6) {
         choice = 1;
     }
@@ -55,14 +61,7 @@ int main() {
     else {
         choice = 4;
     }
-    
-    if (length >= 8 and types >= 2) {
-    std::cout << "Мінімальні вимоги: ПРОЙДЕНО" << std::endl;
-    }
-    else {
-    std::cout << "Мінімальні вимоги: НЕ ПРОЙДЕНО" << std::endl;
-    }
-    
+
     switch (choice) {
         case 1:
             std::cout << "Рівень надійності: 1 - Дуже слабкий" << std::endl;
