@@ -14,7 +14,7 @@ int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
 
-    long long H, M;
+    long long H=100, M=100;
     long long Hlose, Mlose;
 
     cin >> H >> M;
