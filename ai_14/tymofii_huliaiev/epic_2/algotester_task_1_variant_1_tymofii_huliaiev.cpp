@@ -1,35 +1,32 @@
 #include <iostream>
-#include <vector>
-#include <algorithm>
 
 using namespace std;
 
 int main() {
-    int n;
-    cin >> n;
+    long long H, M;
+    cin >> H >> M;
 
-    vector<long long> r(n);
-    for (int i = 0; i < n; ++i) {
-        cin >> r[i];
-    }
+    long long h1, m1, h2, m2, h3, m3;
+    cin >> h1 >> m1;
+    cin >> h2 >> m2;
+    cin >> h3 >> m3;
 
-    // Якщо в масиві 1 або 2 елементи, після видалення залишається <=1 елемент, втома = 0
-    if (n <= 2) {
-        cout << 0 << endl;
+    // Якщо хоч одне закляття забирає І хитпоінти, І ману одночасно — поразка
+    if ((h1 > 0 && m1 > 0) || (h2 > 0 && m2 > 0) || (h3 > 0 && m3 > 0)) {
+        cout << "NO" << endl;
         return 0;
     }
 
-    // Сортуємо масив за зростанням
-    sort(r.begin(), r.end());
+    // Віднімаємо витрати
+    H = H - h1 - h2 - h3;
+    M = M - m1 - m2 - m3;
 
-    // Варіант 1: викидаємо найменше число r[0], тоді різниця = r[n-1] - r[1]
-    long long diff1 = r[n - 1] - r[1];
-
-    // Варіант 2: викидаємо найбільше число r[n-1], тоді різниця = r[n-2] - r[0]
-    long long diff2 = r[n - 2] - r[0];
-
-    // Виводимо найменшу з двох різниць
-    cout << min(diff1, diff2) << endl;
+    // В кінці хитпоінти та мана мають бути СУВОРO більше 0 (> 0)
+    if (H > 0 && M > 0) {
+        cout << "YES" << endl;
+    } else {
+        cout << "NO" << endl;
+    }
 
     return 0;
 }
