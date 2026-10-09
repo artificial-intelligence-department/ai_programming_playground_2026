@@ -13,5 +13,6 @@ int main() {
     } else {
         cout << "No";
     }
+    cout << sizeof (long double) << endl;
     return 0;
 } 
