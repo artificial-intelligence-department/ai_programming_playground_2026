@@ -16,8 +16,8 @@ int main() {
     cin >> n;
     
     int one = - -m - ++n;
-    bool two = m * n < n++;
-    int three = n-- > m++;
+    bool two = (m * n) < n++;
+    bool three = n-- > m++;
 
     cout << "1)- -m - ++n = " << one << endl;
     cout << "2)m * n < n++ = " << two << endl;
