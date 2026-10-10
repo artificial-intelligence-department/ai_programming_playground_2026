@@ -1,5 +1,5 @@
 /* 
-Практика Алготестер, варіант 3
+Алготестер, варіант 3
 Зубак Тетяна
 ШІ-12
 */
@@ -9,36 +9,23 @@
 using namespace std;
 
 int main() {
-    int N;
-    cin >> N;
-    int square[N];
-    for(int i = 0; i < N; i++) {
-        cin >> square[i];
-    }
-    int squarel = 0, square2 = N - 1;
-    int dleft, dright;
-    string result;
-    while(true){
-    if(squarel == square2){
-        result = "Collision";
-        break;
-    }
-    else if(squarel > square2){
-        result = "Miss";
-        break;
-    }
-    else if(squarel + 1 == square2){
-        result = "Stopped";
-        break;
+    const int n = 5;
+    long long a[n];
+    for(int i = 0; i < n; i++){
+    cin >> a[i];
     }
 
-    dleft = square[squarel];
-    squarel += dleft;
-    dright = square[square2];
-    square2 -= dright;
+    for(int i = 0; i < n; i++){
+        if (a[i] <= 0){
+            cout << "ERROR" << endl;
+            return 0;
+        }
+        if(i > 0 && a[i - 1] < a[i]){
+            cout << "LOSS" << endl;
+            return 0;
+        } 
     }
 
-    cout << squarel + 1 << " " << square2 + 1 << endl << result << endl;                      
-
+    cout << "WIN" << endl;
     return 0;
 }
