@@ -19,7 +19,7 @@ int main() {
     string model_name;
     double capacity;
     int years;
-    int charge;
+    double charge;
     double efficiency;
     double power;
 
@@ -75,12 +75,16 @@ int main() {
     int minutes = (total_hours - hours) * 60;
 
 
-    cout << "Назва станції: " << model_name << endl;
-    cout << "Фактична ємність: " << real_capacity << " Вт*год" << endl;
-    cout << "Запас енергії: " << stored_energy << " Вт*год" << endl;
-    cout << "Корисна енергія: " << useful_energy << " Вт*год" << endl;
-    cout << "Втрати на перетворення: " << energy_loss << " Вт*год" << endl;
-    cout << "Час роботи: " << hours << " год " << minutes << " хв" << endl;
-
+    cout << "Модель станції " << model_name << endl;
+    cout << "Паспортна ємність " << round(capacity * 10.0) / 10.0 << " Вт·год" << endl;
+    cout << "Вік станції " << years << " р." << endl;
+    cout << "Фактична ємність " << round(real_capacity * 10.0) / 10.0 << " Вт·год" << endl;
+    cout << "Рівень заряду %  " << round(charge * 10.0) / 10.0 << " %" << endl;
+    cout << "ККД інвертора %  " << round(efficiency * 10.0) / 10.0 << " %" << endl;
+    cout << "Запас енергії " << round(stored_energy * 10.0) / 10.0 << " Вт·год" << endl;
+    cout << "Корисна енергія  " << round(useful_energy * 10.0) / 10.0 << " Вт·год" << endl;
+    cout << "Втрати на перетворенні " << round(energy_loss * 10.0) / 10.0 << " Вт·год" << endl;
+    cout << "Час роботи годин  " << round(total_hours * 10.0) / 10.0 << " год  = " << hours << " год " << (minutes < 10 ? "0" : "") << minutes << " хв" << endl;
+    
     return 0;
 }
