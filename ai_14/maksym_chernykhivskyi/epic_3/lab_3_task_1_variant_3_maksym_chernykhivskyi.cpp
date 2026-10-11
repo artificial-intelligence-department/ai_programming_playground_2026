@@ -64,9 +64,9 @@ int main() {
     for (int step = 0; step <= k; ++step) {
         double x = a + step * h;
         
-        double exact = sin(x);        // Точне значення,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,....
+        double exact = sin(x);        // Точне значення
         double s_n = sum_by_n(x, n);    // Значення суми для фіксованого n
-        double s_eps = sum_by_eps(x, eps); // Значение суми для заданої точності eps
+        double s_eps = sum_by_eps(x, eps); // Значення суми для заданої точності eps
 
         // Виводимо рядок таблиці з результатами
         cout << setw(9) << x 
