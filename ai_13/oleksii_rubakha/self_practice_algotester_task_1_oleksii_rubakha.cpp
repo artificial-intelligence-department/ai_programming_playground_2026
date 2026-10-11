@@ -1,10 +1,20 @@
 
+/*
+Веселі каруселі, Олексій Рубаха, ШІ-13
+*/
+
 #include <iostream>
+
 using namespace std;
 
+// Функція для знаходження індексу мінімальної ціни серед доступних каруселей
 int minimIndex(int prices[], int n) {
+    // Ініціалізуємо індекс мінімальної ціни як -1 (немає доступних каруселей)
     int minIdx = -1;
+
+    // Проходимо по всіх цінах і шукаємо мінімальну серед доступних
     for (int i = 0; i < n; i++) {
+        // Перевіряємо, чи карусель доступна (ціна не -1) і чи є вона дешевшою за поточну мінімальну
         if (prices[i] != -1 && (minIdx == -1 || prices[i] < prices[minIdx])) {
             minIdx = i;
         }
@@ -15,23 +25,27 @@ int minimIndex(int prices[], int n) {
 int main() {
     int money, n;
     cin >> money >> n;
-
     int prices[1000];
 
+    // Зчитуємо ціни каруселей
     for (int i = 0; i < n; i++) {
         cin >> prices[i];
     }
 
     int count = 0;
 
+    // Продовжуємо купувати каруселі, поки є гроші та доступні каруселі
     while (true) {
+        // Знаходимо індекс каруселі з мінімальною ціною
         int minIdx = minimIndex(prices, n);
+
+        // Якщо немає доступних каруселей або мінімальна ціна перевищує наявні гроші, виходимо з циклу
         if (minIdx == -1 || prices[minIdx] > money) {
             break;
         }
-        money -= prices[minIdx];
-        prices[minIdx] = -1; // Mark the item as bought
-        count++;
+        money -= prices[minIdx]; // Віднімаємо ціну купленої каруселі від наявних грошей
+        prices[minIdx] = -1; // Позначаємо карусель як недоступну
+        count++; // Збільшуємо лічильник куплених каруселей
     }
 
     cout << count;
