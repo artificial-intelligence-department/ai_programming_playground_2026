@@ -6,7 +6,7 @@ int main() {
     int n;
     cin >> n;
 
-    int a[131072];
+    int a[131072]; // 2 в степені 17
 
     for (int i = 0; i < n; i++) {
         cin >> a[i];
