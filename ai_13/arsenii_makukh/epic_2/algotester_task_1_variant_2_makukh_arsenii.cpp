@@ -19,7 +19,7 @@ int main() {
 
     for (int i = 0; i < 4; i++) {
         if (d[i] > h[i]) {
-            cout << "ERROR";
+            cout << "ERROR" << endl;
             return 0;
         }
 
@@ -34,9 +34,9 @@ int main() {
     }
 
     if (flipped) {
-        cout << "NO";
+        cout << "NO" << endl;
     } else {
-        cout << "YES";
+        cout << "YES" << endl;
     }
 
     return 0;
