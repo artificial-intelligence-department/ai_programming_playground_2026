@@ -9,7 +9,7 @@
 #include<cmath>
 using namespace std;
 
-void spendPerDay (double arr[], int N) {
+void spendPerDay (double arr[], int N) {        //Функція, що виводить  витрати за кожен день для 1 пункту
 
     cout << "\n======= Витрати по днях =======";
     cout << "\nДень     Витрати, грн \n";
@@ -19,7 +19,7 @@ void spendPerDay (double arr[], int N) {
     }
 }
 
-void findMinMax (double arr[], int N, double& min, double& max) {
+void findMinMax (double arr[], int N, double& min, double& max) {        //Функція, що шукає мінімальну і максимальну витрату
 
     min = arr[0];
     max = arr[0];
@@ -33,13 +33,13 @@ void findMinMax (double arr[], int N, double& min, double& max) {
     }
 }
 
-double findSum (double arr[], int N) {
+double findSum (double arr[], int N) {      //Функція, що шукає суму всіх витрат
 
     if (N == 0) return 0;
     return arr[N-1] + findSum(arr, N-1);
 }
 
-void statistics (double arr[], int N, double budget) {
+void statistics (double arr[], int N, double budget) {      //Функція, що виводить статистику для 2 пункту
 
     double min = 0, max = 0;
 
@@ -52,7 +52,7 @@ void statistics (double arr[], int N, double budget) {
     double sum1 = findSum(arr, N);
     cout << "Сумарні витрати: " << sum1 << endl;
 
-    double reshta = fabs(sum1 - budget);
+    double reshta = fabs(sum1 - budget);        //Шукаємо частину бюджету яку не потратили, або на скільки його перевитратили
     if (sum1 <= budget) cout << "Залишок бюджету: " << reshta << endl;
     else cout << "Перевитрата понад бюджет: " << reshta << endl;
 
@@ -84,7 +84,7 @@ void statistics (double arr[], int N, double budget) {
     }
 }
 
-void checkLimits (double arr[], int N, double limit = 1000) {
+void checkLimits (double arr[], int N, double limit = 1000) {        //Функція, що порівнює витрати із заданим лімітом
     int count = 0;
     cout << "\n==== Дні з перевищенням денного ліміту ====\n";
     cout << "Ліміт: " << limit << " грн\n";
@@ -100,7 +100,7 @@ void checkLimits (double arr[], int N, double limit = 1000) {
     cout << "Кількість днів з перевищенням: " << count << endl << endl;
 }
 
-void limits (double arr[], int N) {
+void limits (double arr[], int N) {         //Функція, що запитує ліміт в користувача та перевіряє ввід на коректність
 
     double limit;
     cout << "Введіть денний ліміт (0 = 1000 грн): "; cin >> limit;
@@ -117,7 +117,7 @@ void limits (double arr[], int N) {
     else checkLimits (arr, N, limit);
 }
 
-void showTop3 (double arr0[], int N) {
+void showTop3 (double arr0[], int N) {        //Функція, що сортує витрати за спаданням та виводить 3 найбільші витрати
     double arrCopy[N];
     for (int i = 0; i<N; i++) {
         arrCopy[i] = arr0[i];
