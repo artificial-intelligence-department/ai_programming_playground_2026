@@ -148,23 +148,26 @@ int main(){
     int option; // пункт меню
 
     std::cout << "Бюджет на місяць, грн: ";
-    if(!(std::cin >> budget) || budget <= 0){
-        std::cout << "Некоректні дані\n";
-        return 1;
+    while(!(std::cin >> budget) || budget <= 0){
+        std::cout << "Некоректні дані, повторіть ввід: ";
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     }
 
     std::cout << "Кількість днів обліку: ";
-    if(!(std::cin >> N) || N < 1 || N > 31){
-        std::cout << "Некоректні дані\n";
-        return 1;
+    while(!(std::cin >> N) || N < 1 || N > 31){
+        std::cout << "Некоректні дані, повторіть ввід: ";
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     }
 
     double spending[31];
     std::cout << "Витрати по днях, грн: ";
     for (int i = 0; i < N; i++){
-        if(!(std::cin >> spending[i]) || spending[i] < 0){
-            std::cout << "Некоректні дані\n";
-            return 1;
+        while(!(std::cin >> spending[i]) || spending[i] < 0){
+        std::cout << "Некоректні дані, повторіть ввід: ";
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         }
     }
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -180,8 +183,7 @@ int main(){
         std::cout << "0\t" << "Вийти\n\n";
 
         std::cout << "Виберіть дію: ";
-        std::cin >> option;
-        if(option != 1 && option != 2 && option !=  3 && option != 4 && option != 0){
+        if(!(std::cin >> option) || option != 1 && option != 2 && option !=  3 && option != 4 && option != 0){
             std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             goto menu_start;
@@ -198,5 +200,7 @@ int main(){
         }
 
     }while(option != 0);
+
+    return 0;
 
 }
