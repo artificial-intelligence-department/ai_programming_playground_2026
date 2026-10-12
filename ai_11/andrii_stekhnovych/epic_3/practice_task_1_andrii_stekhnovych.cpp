@@ -3,6 +3,7 @@
 #include <iomanip>
 #include <cmath>
 using namespace std;
+//Функції для виконання подальших завдань
 void PrintSpendings (float array[], int N) {
     cout << "День\tВитрати, грн"<<endl;
     for (int i = 1; i<(N+1); i++) {
@@ -78,23 +79,24 @@ void Top3Output(float array[], int N) {
     cout << "грн " << endl;
 }
 int main() {
+    // Введення даних та перевірка їх валідності
     float budget;
     cout << "Бюджет на місяць (грн): ";
     cin >> budget;
     if (cin.fail() or budget<0) {
         cout << "Бюджет повинний бути числом більшим або рівним за 0." << endl;
-        return 0;
+        return 1;
     } 
     int N;
     cout << "Кількість днів обліку: ";
     cin >> N;
     if (cin.fail() or N<=0) {
                 cout << "Кількість днів повинна бути числом більшим за 0." << endl;
-                return 0;
+                return 1;
     }
     if (N>31) {
         cout << "Облік ведеться не довше одного місяця." << endl;
-        return 0;
+        return 1;
     }
     float spending[31];
     cout << "Витрати по днях (грн): ";
@@ -103,11 +105,12 @@ int main() {
         cin >> v;
         if (cin.fail() or v<0) {
             cout << "Витрати - число більше/рівне 0.";
-            return 0;
+            return 1;
         }
         spending[i]=v;
     }
     int choice = 100;
+    // Мітка "меню" для вибору пункту меню
     menu: 
         do {
         cout << "==== MENU ====\n 1 - Показати витрати по днях\n 2 - Статистика витрат\n 3 - Дні з перевищенням денного ліміту\n 4 - Три найдорожчі дні\n 0 - Вийти\nЗробіть свій вибір:\n";
@@ -193,6 +196,7 @@ int main() {
             case 0:
             cout<<"Дякуємо за використання нашого аналізатора. До нових зустрічей! :)";
                 break;
+            // Перевірка на випадок введення некоректного пункту меню
             default:
                 cout << "\n[Помилка] Потрібно ввести число від 0 до 4! Спробуйте ще раз.\n\n";
                 cin.clear();
@@ -200,6 +204,7 @@ int main() {
                 goto menu;
                 break;
         }
+        return 0;
     } while (choice!=0);
 
 }
