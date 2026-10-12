@@ -1,3 +1,6 @@
+/*
+Algotster Lab 1v3, Артем Момоток, ШІ-13
+*/
 #include <iostream>
 using namespace std;
 
