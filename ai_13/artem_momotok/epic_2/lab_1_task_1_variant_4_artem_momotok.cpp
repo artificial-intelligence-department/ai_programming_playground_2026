@@ -1,3 +1,7 @@
+
+/*
+Lab 1 task 2, Артем Момоток, ШІ-13, Варіант 4
+*/
 #include <iostream>
 #include <iomanip>
 #include <cmath>
