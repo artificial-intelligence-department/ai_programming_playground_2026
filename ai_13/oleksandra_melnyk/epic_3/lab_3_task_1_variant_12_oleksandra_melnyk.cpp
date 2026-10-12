@@ -1,15 +1,13 @@
 /*
 Lab_3_task_1
-Мельник Олександра ШІ-13 варіант 12
-*/
+Мельник Олександра ШІ-13 варіант 12*/
 #include <iostream>
 #include <cmath>  
 #include <iomanip> 
 /*
 функція y=-1/2ln(1-2xcos(pi/3)+x^2)
 діапазон зміни аргументу 0.1<=x<=0.8
-сума S=(x*cos(pi/3))/1+(x^2*cos(2*pi/3))/2+...+(x^n*cos(n*pi/3))/n
-*/
+сума S=(x*cos(pi/3))/1+(x^2*cos(2*pi/3))/2+...+(x^n*cos(n*pi/3))/n*/
 using namespace std;
 
 int main() {
@@ -50,6 +48,5 @@ int main() {
         cout << "   SE=" << SE;
         cout << "   Y=" << Y << endl; 
     }
-    
     return 0;
 }
