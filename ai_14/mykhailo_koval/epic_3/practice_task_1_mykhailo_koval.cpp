@@ -51,6 +51,11 @@ void avg_spend(int N, double arr[], double total_spendings){
         } 
         days++;
     }
+    if (days == 0) {
+    std::cout << "Днів з покупками: 0" << std::endl;
+    std::cout << "Середні витрати за такий день: 0.00" << std::endl;
+    return;
+    }
     avg = total_spendings / days;
     std::cout << "Днів з покупками: " << days << std::endl;
     std::cout << "Середні витрати за такий день: " << std::fixed << std::setprecision(2) << avg << std::endl;
@@ -67,9 +72,9 @@ void budget_over(int N, double arr[], double budget){
         }
     }
     if(sum > budget){
-        std::cout << "Бюджет вичерпано на дні " << i << ", " << "накопичено " << std::fixed << std::setprecision(2) << sum << std::endl; 
+        std::cout << "Бюджет вичерпано на дні " << i << ", " << "накопичено " << std::fixed << std::setprecision(2) << sum << " грн" << std::endl; 
     } else {
-        std::cout << "Бюджет не вичерпано, залишок: " << std::fixed << std::setprecision(2) << budget - sum << std::endl;
+        std::cout << "Бюджет не вичерпано, залишок: " << std::fixed << std::setprecision(2) << budget - sum << " грн" << std::endl;
     }
 }
 //функція для загального виконання пункту 2
@@ -89,9 +94,6 @@ void day_limit(int N, double arr[], double limit = 1000){
     double input;
     std::cout << "Денний ліміт (грн, 0 = за замовчуванням): ";
     while(!(std::cin >> input) || input < 0){
-        if (std::cin.eof()){
-            return;
-        }
         std::cin.clear();
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         std::cout << "Некоректне значення. Введіть число >= 0: ";
