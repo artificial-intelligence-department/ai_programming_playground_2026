@@ -36,6 +36,6 @@ int main() {
         n++;
     } while (abs(current)>E);
     
-    printf("Сума ряду з точністю 4 знаки пісял коми: %.4f\n",sum);
+    printf("Сума ряду з точністю 4 знаки після коми: %.4f\n",sum);
     return 0;
 }

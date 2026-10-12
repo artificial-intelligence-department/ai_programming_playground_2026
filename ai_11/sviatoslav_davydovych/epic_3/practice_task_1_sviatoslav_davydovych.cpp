@@ -84,6 +84,7 @@ void show_max_spend(double spending[],int n){
 
 void do_min_spend(double spending[],int n, double& p){
     double min = spending[0];
+    // обхід масиву із збереженням мінімального значення
     for (int i = 0; i<n;i++){
         if (spending[i]<min) min = spending[i];
     }
@@ -91,6 +92,7 @@ void do_min_spend(double spending[],int n, double& p){
 }
 
 void do_max_spend(double spending[],int n, double& p){
+    // обхід масиву із збереженням максимального значення
     double max = spending[0];
     for (int i = 0; i<n;i++){
         if (spending[i]>max) max = spending[i];
@@ -104,6 +106,7 @@ double rec_sum_spending(const double spending[],int n, int index){
     return spending[index]+rec_sum_spending(spending,n,index+1);
 }
 
+// функція-обгортка для рекурсивної фукнції
 void do_sum_spending(double spending[],int n, double& p){
     double sum = 0;
     p = rec_sum_spending(spending, n, 0);
@@ -117,7 +120,8 @@ void do_overrun(double cost, double budget, double& p){
 void count_day(double spending[],int n, int& p){
     int c = 0;
     for (int i = 0; i<n;i++){
-        if (spending[i]>0) c++;
+        if (spending[i]==0) continue; // дні з нульовими витратами не рахуємо
+        c++;
     }
     p = c;
 }
@@ -149,12 +153,14 @@ int main() {
     0 - Вийти)";
     // встановлюємо точність виводу
     cout << fixed << setprecision(2);
-
+    
+    // ініціалізація змінних
     double budget;
     int N;
     double min_spend, max_spend, sum, overrun,average,critical_sum;
     int looses_days,critical_day;
 
+    // ввід та валідація
     cout << "Бюджет на місяць (грн): ";
     cin >> budget;
     if (cin.fail() || budget<0 || budget>=1e10){
@@ -181,6 +187,7 @@ int main() {
         spending[i] = spend;
     }
 
+    // кожна функція записує значення за параметром-посиланням
     do_min_spend(spending,N,min_spend);
     do_max_spend(spending,N,max_spend);
     do_sum_spending(spending,N,sum);
@@ -188,6 +195,7 @@ int main() {
     count_day(spending,N,looses_days);
     do_average_cost(sum,looses_days,average);
     
+    // якщо є перевитрати - рахуємо критичний день
     if (overrun>0){
         do_critical_data(budget,spending,N,critical_day,critical_sum);
     }
@@ -197,6 +205,7 @@ int main() {
         menu:
         cout << MenuText << "\n";
         cin >> action;
+        // якщо потік вводу повертає помилку, скидаємо стан cin та повертаємось на мітку
         if (cin.fail()){
             clean_cin();
             goto menu;
