@@ -128,14 +128,11 @@ int main() {
             else {
                 double remaining = budget, accumulated = 0;
                 int days = 0;
-                for (int i = 0; i < N; i++) {
-                
-                while (remaining > 0) {
+                 for (int i = 0; i < N; i++) {
                     remaining -= spending[i];
-                    
                     days++;
-                }
-                break;
+                    if (remaining <= 0) break;
+                
                 }
                 
                 cout << "Бюджет вичерпано на дні " << days << ", накопичено " << fixed << setprecision(2) << findsum(days, spending) << " грн.\n";
