@@ -1,3 +1,6 @@
+/*
+Practice Task Проскурня Дмитро ШІ-13
+*/
 #include <iostream>
 #include <iomanip>
 #include <cmath>

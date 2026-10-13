@@ -1,3 +1,7 @@
+/*
+Lab_2_task_1
+Проскурня Дмитро ШІ-13 варіант 20
+*/
 #include <iostream>
 #include <cmath>
 #include <iomanip>
