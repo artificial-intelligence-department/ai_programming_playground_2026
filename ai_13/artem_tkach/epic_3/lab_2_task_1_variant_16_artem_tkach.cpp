@@ -1,3 +1,9 @@
+/* 
+* Лабораторна робота 2
+* Артем Ткач ШІ-13 
+* Задача: обчислити суму ряду до точності eps = 0.0001, an = lg(n!) * exp(-n * sqrt(n))
+*/
+
 #include <iostream>
 #include <cmath>
 using namespace std;
