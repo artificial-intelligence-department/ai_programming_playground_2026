@@ -34,8 +34,7 @@ int main() {
             }
         }
 
-        if (count > bestCount ||
-            (count == bestCount && a[i] > answer)) {
+        if (count > bestCount || (count == bestCount && a[i] > answer)) {
             bestCount = count;
             answer = a[i];
         }
