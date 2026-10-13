@@ -158,7 +158,6 @@ menu_start:
         string dummy;
         cin >> dummy; 
     }
-
     do {
         cout << "--- Меню ---" << endl;
         cout << "1 Показати витрати по днях" << endl;
@@ -202,6 +201,5 @@ menu_start:
             goto menu_start;
         }
     } while (choice != 0);
-
     return 0;
 }

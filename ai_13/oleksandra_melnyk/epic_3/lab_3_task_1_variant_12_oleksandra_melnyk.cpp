@@ -15,7 +15,6 @@ int main() {
     int n_max = 35; 
     double step = 0.1;
     double pi = acos(-1.0);
-
     for (double x = 0.1; x <= 0.81; x += step) 
     {
         //обчислення Y
@@ -35,13 +34,12 @@ int main() {
         x_power = x;
         double a = (x_power / n) * cos(n * pi / 3.0);
         
-        while (abs(a) >= e) {
+        while (fabs(a) >= e) {
             SE += a;
             n++;
             x_power *= x;
             a = (x_power / n) * cos(n * pi / 3.0);
         }
-
         cout << fixed << setprecision(5);
         cout << "X=" << x;
         cout << "   SN=" << SN;
