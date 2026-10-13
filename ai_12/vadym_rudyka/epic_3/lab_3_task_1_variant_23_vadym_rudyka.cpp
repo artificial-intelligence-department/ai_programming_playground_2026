@@ -1,55 +1,44 @@
 #include <iostream>
 #include <cmath>
 #include <iomanip>
-
 using namespace std;
 
 int main() {
-    double a = 0.1;
-    double b = 1;
-    int k = 10;
-    int n = 15;
-    double eps = 0.0001;
-
+    // Ввідні дані, тут a - це нижня межа, b - верхня межа, eps - точність, k - кількість кроків, n - кількість членів ряду
+    const double a = 0.1, b = 1.0, eps = 0.0001;
+    const int k = 10, n = 15;
     double h = (b - a) / k;
 
-    cout << fixed << setprecision(6);
-
-    cout << "x\t\tS(n)\t\tS(eps)\t\tTochne" << endl;
-
+    cout << "Обчислення функції\n";
     for (int i = 0; i <= k; i++) {
         double x = a + i * h;
+        double t = 2 * x;
+        double t2 = t * t;
 
-        // Сума для n = 15
-        double sumN = 0;
-
-        for (int j = 1; j <= n; j++) {
-            double term = pow(-1, j) * pow(2 * x, 2 * j)
-                          / tgamma(2 * j + 1);
-            sumN += term;
+        // сума для заданого n
+        double term = -t2 / 2;   // перший член
+        double SN = term;
+        for (int j = 1; j < n; j++) {
+            term *= -t2 / ((2 * j + 1) * (2 * j + 2));
+            SN += term;
         }
 
-        // Сума з точністю eps
-        double sumEps = 0;
-        double term = -2 * x * x;
+        // сума для заданої точності eps
+        term = -t2 / 2;
+        double SE = term;
         int j = 1;
-
-        while (abs(term) >= eps) {
-            sumEps += term;
-
+        while (fabs(term) >= eps) {
+            term *= -t2 / ((2 * j + 1) * (2 * j + 2));
+            SE += term;
             j++;
-            term = pow(-1, j) * pow(2 * x, 2 * j)
-                   / tgamma(2 * j + 1);
         }
 
-        // Точне значення
-        double exact = 2 * (cos(x) * cos(x) - 1);
+        // точне значення
+        double Y = 2 * (cos(x) * cos(x) - 1);
 
-        cout << x << "\t"
-             << sumN << "\t"
-             << sumEps << "\t"
-             << exact << endl;
+        cout << fixed << setprecision(6)
+             << "X=" << x << "  SN=" << SN
+             << "  SE=" << SE << "  Y=" << Y << "\n";
     }
-
     return 0;
 }
