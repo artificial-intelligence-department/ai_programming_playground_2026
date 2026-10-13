@@ -1,48 +1,58 @@
-/* Задача "Кругла арена"
-Умова: https://algotester.com/uk/ArchiveProblem/DisplayWithEditor/81395
+/* Задача "Ліки для тома"
+Умова: https://algotester.com/uk/ArchiveProblem/DisplayWithEditor/81423
 Автор: Давидович Святослав
 Група: ШІ-11
 */
 
 #include <iostream>
+#include <cmath>
+#include <iomanip>
 
 using namespace std;
+
+void countingSort(int arr[], int n) {
+    int max = 1000;
+    int count[max + 1] = {0};
+
+    for (int i = 0; i < n; i++) {
+        if (arr[i] >= 0 && arr[i] <= max) {
+            count[arr[i]]++;
+        }
+    }
+
+    int index = 0;
+    for (int v = max; v>=0; v--) {
+        while (count[v] > 0) {
+            arr[index++] = v;
+            count[v]--;
+        }
+    }
+}
 
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
 
-    long long r, n;
-    int p = 0, result = 0;
-
-    cin >> r >> n;
-    int squares[r*r];
-    long long input[n], squares_id[n] = {0};
+    int n, x;
+    cin >> n >> x;
+    int arr[n];
 
     for (int i = 0; i<n; i++){
-        long long x, y;
-        cin >> x >> y;
-
-        long long sq = x*x+y*y;
-        squares[sq] = 0;
-        input[i] = sq;
+        cin >> arr[i];
     }
 
-    for (int i = 0; i<n; i++){
-        if (squares[input[i]]==0) {
-            squares_id[p] = input[i];
-            p++;
-        }
+    countingSort(arr, n);
 
-        squares[input[i]]++;
+    double log2_x = log2(x), time = 0;
+    int current = 0, sum = 0;
+    while (current!=n){
+        sum+=arr[current];
+        current++;
+        if (sum<=x) continue;
+        time+=log2(sum)-log2_x;
+        sum=x;
     }
-
-    for (int i = 0; i<p; i++){
-        long long c = squares[squares_id[i]];
-        result+=c*(c-1)/2;
-    }
-
-    cout << result;
     
+    cout << fixed << setprecision(10)<< time;
     return 0;
 }
