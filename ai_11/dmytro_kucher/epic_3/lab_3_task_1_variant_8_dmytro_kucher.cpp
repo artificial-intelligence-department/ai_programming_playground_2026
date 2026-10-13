@@ -19,34 +19,34 @@ int main () {
 
     double step = (b-a)/k;
 
-    cout << "Обчислення функції \n";
+    cout << "\nОбчислення функції \n";
     cout << fixed << setprecision(6);
 
     for (double x = a; x <= b+step/2; x+=step) {
 
-        double sumN = 0;
+        double SN = 0;
         for (int n = 1; n<=nMax; n++) {
 
             double An = pow(x, n) * sin(n * M_PI / 4);
-            sumN += An;
+            SN += An;
         }
 
-        double sumE = 0;
+        double SE = 0;
         for (int n = 1; ; n++) {
 
             double An = pow(x, n) * sin(n * M_PI / 4);
             
-            sumE += An;
+            SE += An;
 
             if (fabs(pow(x, n)) < e) break;
         }
 
-        double y = (x * sin(M_PI / 4)) / (1 - 2 * x * cos(M_PI / 4) + pow(x, 2));
+        double Y = (x * sin(M_PI / 4)) / (1 - 2 * x * cos(M_PI / 4) + pow(x, 2));
      
         cout << "X = " << setw(7) << x;
-        cout << "\nSN = " << setw(7) << sumN;
-        cout << "\nSE = " << setw(7) << sumE;
-        cout << "\nY = " << setw(7) << y << "\n\n"; 
+        cout << "   SN = " << setw(7) << SN;
+        cout << "   SE = " << setw(7) << SE;
+        cout << "   Y = " << setw(7) << Y << "\n"; 
     }
 
     return 0;
