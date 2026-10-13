@@ -33,11 +33,6 @@ double expensesSum(double Array[], int n)
     return Array[n - 1] + expensesSum(Array, n - 1);
 }
 
-// Обрахунок витрат/перевитрат
-double remainder(double Budget, double Expenses)
-{
-    return (Budget - Expenses);
-}
 
 // Обрахунок днів з витратами
 int daysWithExpenses(double Array[], int n)
@@ -88,7 +83,7 @@ void option2(double Array[], int n, double Budget)
 
     days = daysWithExpenses(Array, n);
     expns = expensesSum(Array, n);
-    remain = remainder(Budget, expns);
+    remain = Budget - expns;
     calculateMinMax(Array, n, min, max);
 
     printf("Мінімальні витрати за день:\t%.2f грн\n", min);
