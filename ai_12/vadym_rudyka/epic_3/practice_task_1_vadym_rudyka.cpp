@@ -163,7 +163,7 @@ int main() {
 menu:
 
     int choice;
-
+do {
     cout << endl;
     cout << "===== МЕНЮ =====" << endl;
     cout << "1 - Показати витрати" << endl;
@@ -218,6 +218,6 @@ menu:
             cout << "Неправильний пункт меню!" << endl;
             goto menu;
     }
-    goto menu;
+    } while (choice != 0);
     return 0;
 }
