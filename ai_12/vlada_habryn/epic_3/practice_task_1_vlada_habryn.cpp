@@ -103,31 +103,46 @@ void showSpending(double spending[], int days) {
         cout << i + 1 << "\t" << spending[i] << endl;
     }
 } 
+
 void checkLimit(double spending[], int days, double limit) {
     double input;
-    cout << "Daily limit (0 = default):";
+    cout << "Daily limit (0 = default): ";
     cin >> input;
+
     while (cin.fail() || input < 0) {
         if (cin.fail()) {
             cin.clear();
             cin.ignore(1000, '\n');
         }
-        cout << "Invalid limit. Try again:";
+        cout << "Invalid limit. Try again: ";
         cin >> input;
     }
+
     if (input != 0) {
-    limit = input;
+        limit = input;
     }
+
     cout << "Limit: " << limit << endl;
+
     int count = 0;
-    for (int i = 0; i < days; i++) {
+    int i = 0;
+
+    while (true) {
+        if (i >= days) {
+            break;
+        }
+
         if (spending[i] > limit) {
             cout << "Day " << i + 1 << ": " << spending[i] << endl;
             count++;
         }
+
+        i++;
     }
+
     cout << "Number of days over limit: " << count << endl;
 }
+
 void showTop3(double spending[], int days) {
     double sorted[MAX_DAYS];
     for (int i = 0; i < days; i++) {
