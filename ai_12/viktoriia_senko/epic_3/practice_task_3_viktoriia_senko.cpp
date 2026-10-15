@@ -71,7 +71,8 @@ void overBudget(double spending[], int N, double budget, double &sumabud, int &d
     }
 }
 //вихід за денний ліміт
-void Menu3(double spending[], int N, double limit) {
+void Menu3(double spending[], int N, double limit=1000) {
+    cout << "Ліміт: " << limit << " грн" << endl;
     int k=0;
     for(int i=0; i<N; i++){
         if(spending[i]>limit){
@@ -172,9 +173,11 @@ int main() {
             double limit;
             cout<<"Денний ліміт (грн 0 = за замовчуванням): ";
             cin>>limit;
-            if (limit == 0)  limit = 1000;
-            cout<<"Ліміт: "<<limit<<endl;
-            Menu3(spending, N, limit);
+            if (limit == 0) {
+                Menu3(spending, N);        
+            } else {
+                Menu3(spending, N, limit); 
+            }
             break;
         }
         case 4:
