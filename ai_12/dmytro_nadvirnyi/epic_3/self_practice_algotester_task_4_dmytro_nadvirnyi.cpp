@@ -1,5 +1,5 @@
-/*Факторіал
-1153*/
+/* Факторіал
+    1153    */
 #include <iostream>
 using namespace std;
 
