@@ -1,30 +1,32 @@
 #include <iostream>
 using namespace std;
 
-const int MOD = 1000000007;
-const int L = 2520;
-
-int dp[L], nw[L];
-
 int main() {
-    int n;
-    cin >> n;
+    int rows, columns;
+    cin >> rows >> columns;
 
-    dp[0] = 1;
+    int biggest[1000] = {0};
 
-    for (int i = 0; i < n; i++) {
-        int a;
-        cin >> a;
-        a %= L;
-        for (int r = 0; r < L; r++) {
-            // або не беремо a (лишається dp[r]),
-            // або беремо a (тоді раніше сума була r - a)
-            nw[r] = (dp[r] + dp[(r - a + L) % L]) % MOD;
+    for (int row = 0; row < rows; row++) {
+        for (int column = 0; column < columns; column++) {
+            int number;
+            cin >> number;
+
+            // якщо це число більше за те, що ми запам'ятали для цього стовпця, оновлюємо
+            if (number > biggest[column]) {
+                biggest[column] = number;
+            }
         }
-        for (int r = 0; r < L; r++) dp[r] = nw[r];
     }
 
-    // dp[0] враховує і порожню підмножину, тому віднімаємо 1
-    cout << (dp[0] - 1 + MOD) % MOD;
+    // тепер серед найбільших чисел стовпців шукаємо найменше
+    int answer = biggest[0];
+    for (int column = 1; column < columns; column++) {
+        if (biggest[column] < answer) {
+            answer = biggest[column];
+        }
+    }
+
+    cout << answer;
     return 0;
 }
