@@ -1,4 +1,5 @@
-/*зуби*/
+/*  Зуби
+    0182    */
 #include <iostream>
 using namespace std;
 

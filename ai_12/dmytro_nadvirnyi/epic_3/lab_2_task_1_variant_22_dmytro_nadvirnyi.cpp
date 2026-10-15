@@ -1,3 +1,8 @@
+/*
+    Лаб2 вараінт 22
+    Автор: Дмитро Надвірний
+    Група: 12
+*/
 #include <iostream>
 #include <cmath>
 #include <iomanip>

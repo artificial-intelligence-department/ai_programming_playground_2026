@@ -1,5 +1,5 @@
-/*Дракон і голод
-0102 */
+/*   Дракон і голод
+        0102     */
 #include <iostream>
 using namespace std;
 

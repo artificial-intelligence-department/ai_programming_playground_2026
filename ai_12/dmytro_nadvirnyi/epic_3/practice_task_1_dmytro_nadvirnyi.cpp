@@ -1,3 +1,9 @@
+/*
+    Аналізатор місячного бюджету
+    Автор: Дмитро Надвірний
+    Група: 12
+*/
+
 #include <iostream>
 #include <iomanip>
 #include <cmath>

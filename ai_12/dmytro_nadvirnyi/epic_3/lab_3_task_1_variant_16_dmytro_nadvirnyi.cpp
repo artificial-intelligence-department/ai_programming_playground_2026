@@ -1,3 +1,8 @@
+/*
+    Лаб3 вараінт 16
+    Автор: Дмитро Надвірний
+    Група: 12
+*/
 #include <iostream>
 #include <iomanip>
 #include <cmath>

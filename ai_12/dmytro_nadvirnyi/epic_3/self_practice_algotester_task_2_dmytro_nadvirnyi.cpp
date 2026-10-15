@@ -1,5 +1,5 @@
 /* Коля, Вася і Теніс
-0031 */
+        0031       */
 
 #include <iostream>
 #include <string>
