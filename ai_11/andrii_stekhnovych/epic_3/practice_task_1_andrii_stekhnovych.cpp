@@ -204,7 +204,8 @@ int main() {
                 goto menu;
                 break;
         }
-        return 0;
+        
     } while (choice!=0);
+    return 0;
 
 }
