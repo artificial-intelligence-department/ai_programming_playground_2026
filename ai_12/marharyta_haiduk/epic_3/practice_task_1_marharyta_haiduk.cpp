@@ -154,16 +154,16 @@ void showTopThree(double spending[],int days)
     }
     for (int i = 0; i < days - 1; i++)
     {
-    for (int j = 0; j < days - 1; j++)
-    {
-        if (copy[j] < copy[j + 1])
+        for (int j = 0; j < days - 1; j++)
         {
-            double temp = copy[j];
-            copy[j] = copy[j + 1];
-            copy[j + 1] = temp;
+            if (copy[j] < copy[j + 1])
+            {
+                double temp = copy[j];
+                copy[j] = copy[j + 1];
+                copy[j + 1] = temp;
+            }
         }
     }
-}
     int count = 3;
     if (days < 3)
     {
