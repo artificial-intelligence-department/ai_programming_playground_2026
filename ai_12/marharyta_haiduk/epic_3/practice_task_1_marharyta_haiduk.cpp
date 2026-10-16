@@ -106,8 +106,8 @@ void showStatistics(double spending[], int days, double budget)
     {
         cout << "Бюджету вистачило на всі дні. Залишок: " << budget - currentSum << " грн." << endl;
     }
-// Виведення днів, у які витрати перевищили ліміт
 }
+// Виведення днів, у які витрати перевищили ліміт
 void limitDays(double spending[],int days, double limit = 1000)
 {
     int count = 0;
@@ -150,20 +150,20 @@ void showTopThree(double spending[],int days)
     double copy[31];
     for (int i = 0; i < days; i++)
     {
-        copy[i] = spending [i];
+        copy[i] = spending[i];
     }
-    for (int i = 0; i < days; i++)
+    for (int i = 0; i < days - 1; i++)
     {
-        for (int j = i + 1; j < days; j++)
+    for (int j = 0; j < days - 1; j++)
+    {
+        if (copy[j] < copy[j + 1])
         {
-            if (copy[j] > copy[i])
-            {
-                double temp = copy[i];
-                copy[i] = copy[j];
-                copy[j] = temp;
-            }
+            double temp = copy[j];
+            copy[j] = copy[j + 1];
+            copy[j + 1] = temp;
         }
     }
+}
     int count = 3;
     if (days < 3)
     {
