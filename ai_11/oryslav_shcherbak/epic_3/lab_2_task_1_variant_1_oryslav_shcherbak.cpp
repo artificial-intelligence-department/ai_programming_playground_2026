@@ -7,10 +7,12 @@ using namespace std;
 */
 
 int main(){
-    int sum = 0;
+    int sum = 0; // сума чисел
+    // перебираємо числа від 0 до 199 з кроком 3
     for (int i = 0; i < 200; i +=3){
-        sum += i;
+        sum += i; // додаємо поточне число до суми
     }
+    // виводимо результат
     cout << sum << endl;
     return 0;
 }
