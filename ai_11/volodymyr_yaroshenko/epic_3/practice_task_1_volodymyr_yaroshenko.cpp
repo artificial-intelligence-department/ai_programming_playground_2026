@@ -129,20 +129,34 @@ double budget, N;
 int spending[31];
 int sorted[31];
 cout << "Введіть бюджет: " << endl;
-cin >> budget;
+if (!(cin >> budget)) {
+    cin.ignore(10000, '\n');
+    cout << "Введіть число!\n";
+    return -1;
+}
 if(budget< 0 ) {
     cout << "Введіть коректнe значення!" << endl;
     return -1;
 }
+
 cout << "Введіть кількість днів: " << endl;
-cin >> N;
+if (!(cin >> N)) {
+    cin.ignore(10000, '\n');
+    cout << "Введіть число!\n";
+    return -1;
+}
 if(N <=0  || N> 31) {
     cout << "Введіть коректнe значення!" << endl;
     return -1;
 }
+
 cout << "Введіть витрати по днях: " << endl;
 for(int i =0; i < N; i++) {
-    cin >> spending[i];
+    if (!(cin >> spending[i])) {
+    cin.ignore(10000, '\n');
+    cout << "Введіть число!\n";
+    return -1;
+}
     if(spending[i] < 0 ) {
     cout << "Введіть коректнe значення!" << endl;
     return -1;
@@ -161,8 +175,6 @@ if (!(cin >> choice)) {
         goto menu;
     }
 switch(choice) {
-default:
-    cout << "Неправильний пункт меню!" << endl;
 case 1: 
 case1(spending, N);
 break;
@@ -179,8 +191,12 @@ case 4:
 case4(spending, N, sorted);
 break;
 
+default:
+    cout << "Неправильний пункт меню!" << endl;
+    break;
 }
 }
+
 while(choice !=0);  
 return 0;
 }
