@@ -65,9 +65,11 @@ void show_limits(double spending[],int n, double limit = 1000){
 void show_max_spend(double spending[],int n){
     if (n==1){
         cout << "найбільша витрата: " << spending[0] << " грн\n";
+        return;
     }else if (n==2){
         int id = spending[0]>=spending[1] ? 0 : 1;
         cout << "топ-2 витрати: " << spending[id] << ", " << spending[(id+1)%2] << " грн\n";
+        return;
     } 
     
     double copy[n];
@@ -113,7 +115,7 @@ double rec_sum_spending(const double spending[],int n, int index){
     return spending[index]+rec_sum_spending(spending,n,index+1);
 }
 
-// функція-обгортка для рекурсивної фукнції
+// функція-обгортка для рекурсивної функції
 void do_sum_spending(double spending[],int n, double& p){
     p = rec_sum_spending(spending, n, 0);
 }
