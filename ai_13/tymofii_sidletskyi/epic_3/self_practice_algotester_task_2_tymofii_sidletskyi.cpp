@@ -1,6 +1,6 @@
 #include <iostream>
 using namespace std;
-
+// Задача 2021
 int main() {
     int B[3];
     int n;
