@@ -4,6 +4,7 @@
 #include <iostream>
 #include <iomanip>
 #include <cmath>
+#include <limits>
 using namespace std;
 //функція для обрахування максимальної та мінімальної витрати
 void vytraty(double a[], int b, double &Max, double &Min){
@@ -138,22 +139,64 @@ void choice4(double spendingcopy[], int N){
 int main(){
     double budget = 0;
     int N = 0;
+    while(true){
     cout << "Бюджет на місяць (грн): ";
     cin >> budget;
-    do{
+    if(cin.fail()){
+    cout << "Помилка. Введіть коректне число!\n";
+    cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    continue;
+    }
+
+    if(budget < 0){
+        cout << "Помилка. Введіть додатнє число!\n";
+        continue;
+    }
+    break;
+}
+    while(true){
     cout << "Кількість днів обліку: ";
     cin >> N;
-    if(N <= 0 || N > 31){
-    cout << "Місяць обмежений 31 днем, введіть ще раз кількість днів обліку\n";
+    if(cin.fail()){
+    cout << "Помилка. Введіть коректну кількість днів!\n";
+    cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    continue;
     }
-}
-    while (N <= 0 || N > 31);
+    if(N <= 0 || N > 31){
+    cout << "Помилка. Місяць обмежений від 1 до 31 днів, введіть ще раз кількість днів обліку!\n";
+    continue;
+    }
+    break;
+ }
+    
 
     double spending[N];
     double spendingcopy[N];
+    while(true){
+    bool mistake = false;
     cout << "Витрати по днях (грн): ";
     for(int i = 0; i < N; i++){
         cin >> spending[i];
+    
+    if(cin.fail()){
+    mistake = true;
+    cout << "Помилка. Введіть коректну суму витрати!\n";
+    cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    break;
+    }
+    if(spending[i] < 0){
+        mistake = true;
+        cout << "Помилка. Введіть додатню суму витрат\n";
+        break;
+    }
+    }
+    if(mistake){
+        continue;
+    }
+    break;
     }
     int choice = 0;
     // цикл ду вайл повертає нам кожен раз меню
