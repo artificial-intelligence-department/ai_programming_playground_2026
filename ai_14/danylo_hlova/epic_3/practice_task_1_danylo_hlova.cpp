@@ -3,7 +3,7 @@
 #include <cmath>
 
 using namespace std;
-
+// Виведення таблиці витрат по днях
 void table(double spend[], int n) {
     cout << "\nДень     Витрати, грн" << endl;
     for (int i = 0; i < n; i++) {
@@ -11,7 +11,7 @@ void table(double spend[], int n) {
              << setw(15) << fixed << setprecision(2) << spend[i] << endl;
     }
 }
-
+// Пошук найменшої та найбільшої витрати за місяць
 void findMinMax(double spend[], int n, double &minVal, double &maxVal) {
     minVal = spend[0];
     maxVal = spend[0];
@@ -24,20 +24,20 @@ void findMinMax(double spend[], int n, double &minVal, double &maxVal) {
         }
     }
 }
-
+// Обчислення загальної суми всіх витрат
 double sumRecursive(double spend[], int n) {
     if (n == 0) {
         return 0;
     }
     return spend[n - 1] + sumRecursive(spend, n - 1);
 }
-
+// порівняння з бюджетом, середні витрати,день вичерпання коштів
 void statistics(double spend[], int n, double budget) {
     double minVal, maxVal;
     findMinMax(spend, n, minVal, maxVal);
 
     double total = sumRecursive(spend, n);
-
+// Рахує суму та кількість днів, у які дійсно були покупки
     double sumWithPurchases = 0;
     int daysWithPurchases = 0;
 
@@ -53,7 +53,7 @@ void statistics(double spend[], int n, double budget) {
     if (daysWithPurchases > 0) {
         average = sumWithPurchases / daysWithPurchases;
     }
-
+// Вивід результатів
     cout << fixed << setprecision(2);
     cout << "\nМінімальні витрати за день:       " << minVal << " грн" << endl;
     cout << "Максимальні витрати за день:   " << maxVal << " грн" << endl;
@@ -67,7 +67,7 @@ void statistics(double spend[], int n, double budget) {
 
     cout << "Днів з покупками:                    " << daysWithPurchases << endl;
     cout << "Середні витрати за такий день: " << average << " грн" << endl;
-
+// Шукає день на якому бюджет закінчився
     double accumulated = 0;
     int day = 0;
     bool exhausted = false;
@@ -78,7 +78,7 @@ void statistics(double spend[], int n, double budget) {
 
         if (accumulated > budget) {
             exhausted = true;
-            break;                  // зупиняємося одразу, коли перевищили
+            break;                  // зупиняє коли перевищили
         }
     }
 
@@ -90,7 +90,7 @@ void statistics(double spend[], int n, double budget) {
              << (budget - accumulated) << " грн." << endl;
     }
 }
-
+// Пошук днів, коли витрати перевищили заданий ліміт (по стандарту 1000 грн)
 void daysOverLimit(double spend[], int n, double limit = 1000.0) {
     cout << "Ліміт: " << fixed << setprecision(2) << limit << " грн" << endl;
     int count = 0;
@@ -104,15 +104,15 @@ void daysOverLimit(double spend[], int n, double limit = 1000.0) {
     
     cout << "Разом днів з перевищенням: " << count << endl;
 }
-
+// Знаходження трьох днів з найбільшими витратами
 void top3Days(double spend[], int n) {
     double copy[31];
-    // копія
+// Копіює масив, щоб не змінити оригінальні дані
     for (int i = 0; i < n; i++) {
         copy[i] = spend[i];
     }
     
-    // сорутвання
+    // сорутвання(бульбашкою)
     for (int i = 0; i < n - 1; i++) {
         for (int j = 0; j < n - i - 1; j++) {
             if (copy[j] < copy[j + 1]) {
@@ -122,7 +122,7 @@ void top3Days(double spend[], int n) {
             }
         }
     }
-    
+    // Виводить до 3 найбільших сум
     cout << "\nТоп-3 витрат: ";
     int maxItems = (n < 3) ? n : 3;
     for (int i = 0; i < maxItems; i++) {
@@ -135,6 +135,7 @@ void top3Days(double spend[], int n) {
 }
 
 int main() {
+    // Введення та перевірка вхідних даних (бюджет, кількість днів та витрати)
     double budget;
     cout << "Бюджет на місяць (грн): ";
     cin >> budget;
@@ -164,7 +165,7 @@ int main() {
     }
 
     int choice;
-
+// Головне меню програми
 choices:
     do {
         cout << "\n---- МЕНЮ ----" << endl;
@@ -176,14 +177,14 @@ choices:
         cout << "Введіть свій пункт: ";
 
         cin >> choice;
-
+// Захист від введення літер або некоректних символів
         if (cin.fail()) {
             cout << "Помилка вводу! Спробуйте ще раз." << endl;
             cin.clear();
             cin.ignore(1000, '\n');
             goto choices;
         }
-
+// Обробка вибору користувача
         switch (choice) {
             case 1:
                 table(spend, n);
