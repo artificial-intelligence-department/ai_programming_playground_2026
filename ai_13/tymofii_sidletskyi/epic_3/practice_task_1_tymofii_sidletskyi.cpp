@@ -12,15 +12,15 @@ float sumSpending(float *A, int x); // рекурсивна функція дл�
 void budgetleftover(float *A, int days, float budget); // функція для підрахунку залишку бюджету або перевитрати
 void avgspending (float *A, int days); // функція для підрахунку середніх витрат на день та кількості днів з покупками
 void budgetoverspent (float *A, int days, float budget); // функція для підрахунку дня, коли бюджет вичерпано або залишку бюджету
-void daylimit(float *A, int days, float limit); // функція для підрахунку днів з перевищенням денного ліміту
+void daylimit(float *A, int days, float limit = 1000); // функція для підрахунку днів з перевищенням денного ліміту
 void mostexpensivedays(float *A, int days); // функція для підрахунку трьох найдорожчих днів
 
 int main() {
     float budget;
     float spending[30];
     int n, action;
-    float min, max, newlimit;
-
+    float min, max;
+    int newlimit;
     // введення даних та валідація
     cout << "Бюджет на місяць(грн): ";
     cin >> budget;
@@ -79,13 +79,21 @@ int main() {
                 budgetoverspent(spending, n, budget);
                 break;
             case 3:
+                case3start:
                 cout << endl;
                 cout << "Денний ліміт (грн, 0 = за замовчуванням): ";
                 cin >> newlimit;
-                if (newlimit == 0) {
-                    newlimit = 1000;
+                if (newlimit < 0 || cin.fail()) {
+                    cin.clear();
+                    cin.ignore(1000,'\n');
+                    cout << "Неправильно введений ліміт. Спробуйте ще раз.";
+                    goto case3start;
+                } else if (newlimit == 0) {
+                    daylimit(spending, n);
+                } else {
+                    daylimit(spending, n, newlimit);
                 }
-                daylimit(spending, n, newlimit);
+                
                 break;
             case 4:
                 mostexpensivedays(spending, n);
@@ -176,7 +184,7 @@ void budgetoverspent (float *A, int days, float budget) {
     cout << endl;
 }
 
-void daylimit(float *A, int days, float limit = 1000) {
+void daylimit(float *A, int days, float limit) {
     int daycount = 0;
     cout << "Ліміт: " << limit << " грн" << endl;
     for (int i = 0; i < days; i++) {
