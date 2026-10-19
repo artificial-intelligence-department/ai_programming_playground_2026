@@ -1,3 +1,8 @@
+/*
+Задача: Халява
+Карпінський Віталій
+СШІ-14
+*/
 #include <iostream>
 
 using namespace std;
