@@ -7,33 +7,24 @@
 
 using namespace std;
 
-long long factorial(int x);
-
 int main() {
-    const double epsilon = pow(10, -4);
+    const double epsilon = 0.0001;
 
     int n = 1;
-    double b = 0;
-    double a = 0;
+    double term = 0.5; 
+    double sum = term;
 
-    do {
-        b = a;
-        a += pow(factorial(n), 2) / pow(2.0, pow(n, 2));
+    cout << "step " << n << ": a = " << setprecision(10) << term << endl;
 
-        cout << "step " << n << ": a = " << setprecision(10) << a << endl;
-
+    while (term >= epsilon) {
         n++;
-    } while ((a - b) > epsilon);
+        term = term * (n * n) / pow(2.0, 2 * n - 1);
+        sum += term;
 
-    cout << "Sum = " << setprecision(10) << a << endl;
+        cout << "step " << n << ": a = " << setprecision(10) << term << endl;
+    }
+
+    cout << "\nSum = " << setprecision(10) << sum << endl;
 
     return 0;
-}
-
-long long factorial(int x) {
-    long long res = 1;
-    for (int i = 1; i <= x; i++) {
-        res = res * i;
-    }
-    return res;
 }
