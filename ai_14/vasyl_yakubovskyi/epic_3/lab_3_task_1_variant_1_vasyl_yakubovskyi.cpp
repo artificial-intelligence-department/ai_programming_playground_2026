@@ -11,8 +11,6 @@ Group: ШІ-14(II)
 
 using namespace std;
 
-
-
 int main (){
     
     setlocale(LC_ALL, "uk_UA");
