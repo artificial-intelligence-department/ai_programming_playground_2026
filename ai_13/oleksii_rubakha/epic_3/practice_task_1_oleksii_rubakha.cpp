@@ -89,22 +89,27 @@ int main(){
 
         // Виконуємо відповідну операцію залежно від вибору користувача
         switch (choice){
+            // Викликаємо функцію для виведення таблиці витрат по днях
             case 1:
                 expensesTable(expenses, days);
                 break;
 
+            // Викликаємо функцію для обчислення статистики витрат
             case 2:
                 expensesStats(expenses, days, budget, min, max);
                 break;
 
+            // Викликаємо функцію для виведення днів з перевищенням денного ліміту
             case 3:
                 overlimit(expenses, days);
                 break;
 
+            // Викликаємо функцію для виведення трьох найбільших витрат за місяць
             case 4:
                 topThree(expenses, days);
                 break;
 
+            // Виводимо повідомлення про вихід з програми
             case 0:
                 cout << "Вихід..." << endl;
                 break;
@@ -150,7 +155,7 @@ void expensesStats(int expenses[], int days, int budget, int& min, int& max){
 
     // Якщо залишок бюджету від'ємний, обчислюємо перевитрату
     if (remaining < 0)
-        overlimit = abs(remaining);
+        overlimit = fabs(remaining);
 
     double shoppingSum = 0;
 
