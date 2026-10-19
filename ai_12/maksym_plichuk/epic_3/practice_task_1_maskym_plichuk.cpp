@@ -3,6 +3,9 @@
 #include <cmath>
 using namespace std;
 
+/* Практична робота: Аналізатор місячного бюджету
+ Плічук Максим ШІ-12*/
+
 void showSpentByDays(double spending[], int size) {
 	cout << "\nДень\tВитрати, грн\n";
 	for (int i = 0; i < size; i++) {
