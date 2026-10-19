@@ -8,9 +8,11 @@
 #include <cmath>
 using namespace std;
 
+// Обчислює факторіал числа n
 double factorial(int n) {
     double factorial = 1.0;
-    for (int i = 1; i <= n; i++) {
+    // Множить всі цілі числа від 1 до n
+    for (int i = 1; i <= n; i++) { 
         factorial *= i;
     }
     return factorial;
