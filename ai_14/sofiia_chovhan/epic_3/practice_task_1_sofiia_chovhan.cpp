@@ -41,10 +41,11 @@ int main()
     // days
     cout << "Enter the number of days you are interested in: ";
     cin >> N;
-    while (N <= 0 || N > 31)
+    while (N <= 0 || N > 31 || !(cin >> N))
     {
-        cout << "The program control your budget only over mounth maximum!" << endl
-             << "Enter the number of days again: ";
+         cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cout << "Something went wrong! Enter the number of days again: ";
         cin >> N;
     }
     // each day
