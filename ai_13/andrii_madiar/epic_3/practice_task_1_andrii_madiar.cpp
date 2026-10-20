@@ -18,8 +18,8 @@ void checkLimit(double spending[], int N, double limit);
 // функція на визначення днів з максимальними витратами
 void top3(double spending[], int N);
 int main(){
-    int budget = 0;            // ввід бюджету
-    int N = 0;                 // ввід кількості днів розрахунку
+    int budget = 0;// ввід бюджету
+    int N = 0;// ввід кількості днів розрахунку
     double spending[31] = {0}; // ввід самих витрат
     int choice;
     cout << "Бюджет на місяць (грн): ";
@@ -40,6 +40,7 @@ int main(){
             cout << "Помилка! введіть невід'ємне число: ";
             cin.clear();
             cin.ignore(1000, '\n');
+            i = 0;//(чомусь після завершення циклу while перед переходом до наступного кроку for дія i++ не виконується)
         }
     }
 menu_start: // точка для повернення завдяки goto
@@ -51,7 +52,7 @@ menu_start: // точка для повернення завдяки goto
              << "Три найдорожчі дні(4)\n"
              << "Вихід(0)\n"; // вивід меню
 
-        if (!(cin >> choice)){ // перевірка на коректний ввід
+        while(!(cin >> choice)){ // перевірка на коректний ввід
             cout << "Помилка! виберіть існуючий варіант\n";
             cin.clear();
             cin.ignore(100, '\n');
@@ -78,8 +79,12 @@ menu_start: // точка для повернення завдяки goto
         case 3:{
             double customLimit; // додаткова змінна щоб використати функцію
             cout << "Денний ліміт (грн, 0 = за замовчуванням): ";
-            cin >> customLimit;
-            if (customLimit <= 0){
+            while(!(cin >> customLimit) || customLimit < 0){
+                cout << "Помилка! введіть додатнє число або 0: \n";
+                cin.clear();
+                cin.ignore(100, '\n');
+            }
+            if (customLimit == 0){
                 checkLimit(spending, N, 1000.0); //виклик зі значенням за замовчуванням
             }else{
                 checkLimit(spending, N, customLimit); //виклик з введеним лімітом
@@ -94,7 +99,7 @@ menu_start: // точка для повернення завдяки goto
             break;
         }
         default:{// дії якщо користувач ввів щось що не розраховано програмою
-            cout << "Помилка! зробіть вибір із запропонованих варіантів\n";
+            cout << "Помилка! виберіть існуючий варіант\n";
             goto menu_start;
         }
         }
@@ -117,7 +122,7 @@ void findMinMax(double spending[], int N, double &minVal, double &maxVal){
 }
 // функція для знаходження перевитрат
 void overSpendings(double spending[], int N, int budget, double sum){
-    if (sum > budget){                                           // перевірка на перевитрату
+    if (sum > budget){// перевірка на перевитрату
         double overBudget = fabs(budget - sum); // розрахунок перевитрати
         cout << "Перевитрата понад бюджет: " << setw(21) << overBudget << " грн\n";
     }
@@ -143,8 +148,8 @@ void overSpendings(double spending[], int N, int budget, double sum){
             break;
         }
         temp++;
-    }if (temp >= 0)
-        cout << "Бюджет вичерпано на дні " << runoutDay << ", накопичено " << setprecision(2) << totalOut << " грн\n";
+    }if (temp >= 0 && totalOut > budget)cout << "Бюджет вичерпано на дні " << runoutDay << ", накопичено " << setprecision(2) << totalOut << " грн\n";
+    else cout << "Бюджет не вичерпано.\n";
 }
 // функція на перевірку ексіда ліміту витрат
 void checkLimit(double spending[], int N, double limit = 1000.0){
@@ -163,8 +168,7 @@ void top3(double spending[], int N){
     double copy[31] = {0}; // максимум обліку = місяць тому виділяю пам'ять на 31 елемент
     for (int i = 0; i < N; i++){
         copy[i] = spending[i];
-    }for (int i = 0; i < N - 1; i++)
-    { // bubble sort за допомогою вкладеного циклу
+    }for (int i = 0; i < N - 1; i++){ // bubble sort за допомогою вкладеного циклу
         for (int j = 0; j < N - i - 1; j++){
             if (copy[j] < copy[j + 1]){// умова перестановки
                 double tempVal = copy[j]; // створюю тимчасове значення, щоб не втратити старе значення copy[j]
@@ -173,5 +177,7 @@ void top3(double spending[], int N){
             }
         }
     }
-    cout << "Топ 3 витрат: " << copy[0] << ", " << copy[1] << ", " << copy[2] << " грн" << endl;
+    if(N>=3)cout << "Топ 3 витрат: " << copy[0] << ", " << copy[1] << ", " << copy[2] << " грн\n";
+    else if(N == 2)cout << "Топ 2 витрат: " << copy[0] << ", " << copy[1] << "грн\n";
+    else cout << "Лише одна витрата: " << copy[0] << "грн\n";
 }
