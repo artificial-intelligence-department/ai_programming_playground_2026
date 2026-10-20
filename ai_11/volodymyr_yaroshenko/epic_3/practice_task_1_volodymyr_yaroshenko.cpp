@@ -90,16 +90,16 @@ while(day != N) {
 void case3( int N, int spending[], double limits) {
 cout << "Денний ліміт (грн, 0 = за замовчуванням): ";
 if (!(cin >> limits)) {
+    cin.clear();
     cin.ignore(10000, '\n');
     cout << "Введіть число!\n";
+    return;
 }
 if(limits <  0) {
     cout << "Введіть коректне значення!\n";
+    return;
 }
-else {
     limit(spending, N, limits);
-}
-
 }// Зчитує денний ліміт і викликає функцію його перевірки
 
 void case4(int spending[], int N, int sorted[]) {
