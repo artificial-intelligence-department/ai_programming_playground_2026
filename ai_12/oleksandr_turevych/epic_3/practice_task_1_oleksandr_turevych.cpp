@@ -47,6 +47,7 @@ void showDailySpending(const double spending[], int N) {
     }
 }
 
+
 // Пункт 2 меню: Статистика витрат
 void showStatistics(const double spending[], int N, double budget) {
 
@@ -57,7 +58,8 @@ void showStatistics(const double spending[], int N, double budget) {
     cout << "\n--- Статистика витрат ---" << endl;
 
     cout << "Мінімальні витрати: " << minVal << " грн" << endl;
-    cout << "Максимальні витрати: " << maxVal << " грн" << endl;
+    cout << "максима льні витрати: " << maxVal << " грн" << endl;
+
 
     double total = calculateTotal(spending, N);
     cout << "Загальні витрати: " << total << " грн" << endl;
@@ -143,6 +145,8 @@ int main()
     while (true) {
         cout << "Бюджет на місяць (грн): ";
         if (cin >> budget && budget >= 0) break;
+        cin.clear();
+		cin.ignore(10000, '\n');
         cout << "Помилка! Введіть коректну додатну суму бюджету." << endl;
     }
 
@@ -150,14 +154,19 @@ int main()
     while (true) {
         cout << "Кількість днів обліку (1..31): ";
         if (cin >> N && N >= 1 && N <= 31) break;
+        cin.clear();
+		cin.ignore(10000, '\n');
         cout << "Помилка! Кількість днів має бути цілим числом від 1 до 31." << endl;
     }
 
     // Введення витрат
     cout << "Витрати по днях (грн, " << N << " чисел): ";
     for (int i = 0; i < N; ++i) {
+
         while (!(cin >> spending[i]) || spending[i] < 0) {
             cout << "Помилка вводу для дня " << (i + 1) << "! Введіть число > 0: ";
+            cin.clear();
+		    cin.ignore(10000, '\n');
         }
     }
 
@@ -184,6 +193,8 @@ MENU_LABEL: // Мітка для goto
 
                 cout << "Ведіть денний ліміт (грн, 0 = за замовчуванням): " << endl;
                 if (!(cin >> dailyLimit) || dailyLimit < 0) {
+                    cin.clear();
+		            cin.ignore(10000, '\n');
                     cout << "Некоректний ліміт, повернення в меню..." << endl;
                     goto MENU_LABEL;
                 } 
@@ -197,8 +208,11 @@ MENU_LABEL: // Мітка для goto
                 break;
             default:
                 cout << "Помилка! Введіть коректний пункт меню." << endl;
+                cin.clear();
+		        cin.ignore(10000, '\n');
                 goto MENU_LABEL; 
         }
+        
     } while (choice != 5);
     
     return 0;
