@@ -9,6 +9,7 @@ Group: ШІ-14(II)
 
 using namespace std ;
 
+
 int main(){
 
 
@@ -73,3 +74,4 @@ int main(){
 
     return 0;
 }
+
