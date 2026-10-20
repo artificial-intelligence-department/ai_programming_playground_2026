@@ -1,0 +1,42 @@
+#include <iostream>
+
+using namespace std;
+
+int main() {
+    int n;
+    cin >> n;
+    char x;
+    int kolya = 0;
+    int vasya = 0;
+    int kolyaGames = 0;
+    int vasyaGames = 0;
+
+    for (int i = 0; i < n; i++) {
+        cin >> x;
+
+        if (x == 'K')
+            kolya++;
+        else
+            vasya++;
+
+        // Перевірка, чи закінчилась партія
+        if ((kolya >= 11 || vasya >= 11) &&
+            abs(kolya - vasya) >= 2) {
+
+            if (kolya > vasya)
+                kolyaGames++;
+            else
+                vasyaGames++;
+
+            kolya = 0;
+            vasya = 0;
+        }
+    }
+    cout << kolyaGames << ":" << vasyaGames << endl;
+
+    if (kolya > 0 || vasya > 0) {
+        cout << kolya << ":" << vasya << endl;
+    }
+
+    return 0;
+}
