@@ -14,10 +14,11 @@ Group: ШІ-14(II)
 using namespace std;
 
 void spendings_per_days(double spendings[], int N);
-void spendings_Statistic(double spendings[], int N, long double budget, double &total);
+void spendings_Statistic(double spendings[], int N, long double budget, double &total, double max, double min);
 void bubbleSort_Top3 (double spendings[], int N);
 double Sum_spendings (double spendings[], int N);
 void Day_limit(double spendings[], int N);
+void min_max(double &min, double &max, double spendings[], int N);
 
 int main(){
 
@@ -60,6 +61,9 @@ int main(){
     }
     int action = 0;
     double total = Sum_spendings(spendings, N);
+    double min = spendings[0];
+    double max = spendings[0];
+    min_max(min, max, spendings, N);
 
     // виводимо користувачу меню і просимо обрати дію
     do
@@ -90,7 +94,7 @@ int main(){
             spendings_per_days(spendings, N);
             break;
         case 2: 
-            spendings_Statistic(spendings, N, budget, total);
+            spendings_Statistic(spendings, N, budget, total, max, min);
             break;
         case 3: 
             Day_limit(spendings, N);
@@ -132,13 +136,7 @@ double Sum_spendings (double spendings[], int N){
     return spendings[N - 1] + Sum_spendings(spendings, N - 1);
 }
 
-        // Функція для виводу статистики витрат
-void spendings_Statistic(double spendings[], int N, long double budget, double &total){
-    cout << "==================СТАТИСТИКА ВИТРАТ=================" << endl;
-
- //Обчислюємо найменше та найбільше значення   
-    double min = spendings[0];
-    double max = spendings[0];
+void min_max(double &min, double &max, double spendings[], int N){
 
     for (int i = 0; i < N; i++){
         if(spendings[i] > max){
@@ -148,6 +146,15 @@ void spendings_Statistic(double spendings[], int N, long double budget, double &
             min = spendings[i];
         }
     }
+   
+}
+
+        // Функція для виводу статистики витрат
+void spendings_Statistic(double spendings[], int N, long double budget, double &total, double max, double min){
+    cout << "==================СТАТИСТИКА ВИТРАТ=================" << endl;
+
+ //Обчислюємо найменше та найбільше значення   
+
     cout << "Мінімальні витрати за день:  \t\t" <<  min << endl;
     cout << "Максимальні витрати за день:  \t\t" << max << endl;
 
