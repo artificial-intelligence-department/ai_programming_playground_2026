@@ -1,0 +1,312 @@
+
+/*
+    Class Practice Work, Олексій Рубаха, ШІ-13
+*/
+
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+
+using namespace std;
+
+// Прототипи функцій
+int countSum(int expenses[], int days);
+void expensesTable(int expenses[], int days);
+void expensesStats(int expenses[], int days, int budget, int& min, int& max);
+void overlimit(int expenses[], int days, int defLimit = 1000);
+void topThree(int expenses[], int days);
+
+int main(){
+    int budget, days;
+
+    // Запитуємо користувача про бюджет на місяць та кількість днів обліку
+    cout << "Бюджет на місяць (грн): ";
+    while (!(cin >> budget) || budget < 0){
+        if (cin.fail()){
+            cin.clear();
+            cin.ignore(1000, '\n');
+        }
+        cout << "Бюджет не може бути від'ємним або некоректним. Введіть невід'ємне число: ";
+    }
+
+    // Запитуємо користувача про кількість днів обліку та перевіряємо,
+    // чи введене значення знаходиться в допустимому діапазоні
+    cout << "Кількість днів обліку: ";
+    while (!(cin >> days) || days < 1 || days > 31){
+        if (cin.fail()){
+            cin.clear();
+            cin.ignore(1000, '\n');
+        }
+        cout << "Кількість днів повинна бути від 1 до 31. Введіть коректне число: ";
+    }
+
+    int expenses[31];
+
+    // Запитуємо користувача про витрати по днях та перевіряємо,
+    // чи введене значення є невід'ємним числом
+    cout << "Витрати по днях (грн): ";
+    for (int i = 0; i < days; i++){
+        while (!(cin >> expenses[i]) || expenses[i] < 0){
+            if (cin.fail()){
+                cin.clear();
+                cin.ignore(1000, '\n');
+            }
+            cout << "Витрати не можуть бути від'ємними або некоректними. Введіть невід'ємне число: ";
+        }
+    }
+
+    int choice;
+    int min = expenses[0];
+    int max = expenses[0];
+
+    // Головне меню програми, яке дозволяє користувачу обирати різні операції
+    do{
+        menu:
+        cout << endl << "Пункт    Операція" << endl;
+        cout << "1        Показати витрати по днях" << endl;
+        cout << "2        Статистика витрат" << endl;
+        cout << "3        Дні з перевищенням денного ліміту" << endl;
+        cout << "4        Три найдорожчі дні" << endl;
+        cout << "0        Вийти" << endl;
+        cout << "Пункт: ";
+
+        // Перевіряємо, чи введене значення є числом, і якщо ні,
+        // очищаємо потік вводу та виводимо повідомлення про помилку
+        if (!(cin >> choice)){
+            cin.clear();
+            cin.ignore(1000, '\n');
+            cout << "Помилка! Введіть номер пункту меню." << endl;
+            goto menu;
+        }
+
+        cout << endl;
+
+        // Перевіряємо, чи введене значення знаходиться в допустимому діапазоні
+        if (choice < 0 || choice > 4){
+            cout << "Неправильний пункт меню!" << endl;
+            goto menu;
+        }
+
+        // Виконуємо відповідну операцію залежно від вибору користувача
+        switch (choice){
+            // Викликаємо функцію для виведення таблиці витрат по днях
+            case 1:
+                expensesTable(expenses, days);
+                break;
+
+            // Викликаємо функцію для обчислення статистики витрат
+            case 2:
+                expensesStats(expenses, days, budget, min, max);
+                break;
+
+            // Викликаємо функцію для виведення днів з перевищенням денного ліміту
+            case 3:
+                overlimit(expenses, days);
+                break;
+
+            // Викликаємо функцію для виведення трьох найбільших витрат за місяць
+            case 4:
+                topThree(expenses, days);
+                break;
+
+            // Виводимо повідомлення про вихід з програми
+            case 0:
+                cout << "Вихід..." << endl;
+                break;
+        }
+    }while(choice != 0);
+
+    return 0;
+}
+
+// Функція для обчислення суми витрат за всі дні
+int countSum(int expenses[], int days){
+    // Базовий випадок: якщо днів немає, повертаємо 0
+    if (days == 0) {
+        return 0;
+    }
+
+    // Рекурсивно обчислюємо суму витрат
+    return countSum(expenses, days - 1) + expenses[days - 1];
+}
+
+// Функція для виведення таблиці витрат по днях
+void expensesTable(int expenses[], int days){
+    cout << "День     Витрати, грн" << endl;
+
+    // Проходимо по всіх днях і виводимо номер дня та відповідні витрати
+    for (int i = 0; i < days; i++){
+        cout << fixed << setprecision(2) << setw(3) << i + 1
+             << setw(10) << double(expenses[i]) << endl;
+    }
+}
+
+// Функція для обчислення статистики витрат
+void expensesStats(int expenses[], int days, int budget, int& min, int& max){
+    int overlimit = 0; // Змінна для зберігання перевитрати бюджету
+    double average = 0; // Змінна для зберігання середніх витрат за день
+    double sum = countSum(expenses, days); // Сума витрат за всі дні
+    int spendDays = 0; // Лічильник днів з покупками
+    int runOutDay = 0; // День, коли бюджет вичерпано
+    double remaining = budget - sum; // Залишок бюджету після витрат
+
+    min = expenses[0];
+    max = expenses[0];
+
+    // Якщо залишок бюджету від'ємний, обчислюємо перевитрату
+    if (remaining < 0)
+        overlimit = fabs(remaining);
+
+    double shoppingSum = 0;
+
+    // Проходимо по всіх днях і обчислюємо мінімальні та максимальні витрати,
+    // суму витрат та кількість днів з покупками
+    for (int i = 0; i < days; i++){
+        // Оновлюємо максимальні витрати
+        if (expenses[i] > max){
+            max = expenses[i];
+        }
+
+        // Оновлюємо мінімальні витрати
+        if (expenses[i] < min){
+            min = expenses[i];
+        }
+
+        // Пропускаємо дні без витрат
+        if (expenses[i] == 0){
+            continue;
+        }
+
+        shoppingSum += expenses[i]; // Додаємо витрати за день
+        spendDays++; // Збільшуємо лічильник днів з покупками
+    }
+
+    // Обчислюємо середні витрати за день, якщо були дні з покупками
+    if (spendDays > 0){
+        average = shoppingSum / spendDays;
+    }
+
+    int i = 0;
+    double spends = 0;
+
+    // Проходимо по всіх днях і визначаємо день вичерпання бюджету
+    while (i < days){
+        spends += expenses[i];
+
+        if (spends > budget){
+            runOutDay = i + 1;
+            break;
+        }
+        i++;
+    }
+
+    // Виводимо статистику витрат
+    cout << fixed << setprecision(2) << "Мінімальні витрати за день:       "
+         << double(min) << " грн" << endl;
+
+    cout << fixed << setprecision(2) << "Максимальні витрати за день:      "
+         << double(max) << " грн" << endl;
+
+    cout << fixed << setprecision(2) << "Сумарні витрати:                  "
+         << sum << " грн" << endl;
+
+    // Виводимо залишок бюджету або перевитрату
+    if (remaining < 0){
+        cout << fixed << setprecision(2) << "Перевитрата понад бюджет:         "
+             << overlimit << " грн" << endl;
+    }else{
+        cout << fixed << setprecision(2) << "Залишок бюджету:                  "
+             << remaining << " грн" << endl;
+    }
+
+    cout << "Днів з покупками:                  " << spendDays << endl;
+    cout << fixed << setprecision(2) << "Середні витрати за такий день:     "
+         << average << " грн" << endl;
+
+    // Виводимо день вичерпання бюджету або повідомлення про залишок
+    if (runOutDay > 0){
+        cout << fixed << setprecision(2)
+             << "Бюджет вичерпано на дні " << runOutDay
+             << ", накопичено " << spends << " грн." << endl;
+    }else{
+        cout << fixed << setprecision(2)
+             << "Бюджету вистачило на всі дні. Залишок: "
+             << remaining << " грн" << endl;
+    }
+}
+
+// Функція для виведення днів, коли витрати перевищили денний ліміт
+void overlimit(int expenses[], int days, int defLimit){
+    int limit;
+
+    // Запитуємо користувача про денний ліміт витрат
+    cout << "Введіть денний ліміт витрат (грн, 0 - за замовчуванням): ";
+    while (!(cin >> limit) || limit < 0){
+        if (cin.fail()){
+            cin.clear();
+            cin.ignore(1000, '\n');
+        }
+        cout << "Ліміт не може бути від'ємним або некоректним. Введіть невід'ємне число: ";
+    }
+
+    // Якщо користувач не ввів ліміт (0), використовуємо значення за замовчуванням
+    if (limit == 0)
+        limit = defLimit;
+
+    int overlimitDays = 0; // Лічильник днів з перевищенням ліміту
+    cout << fixed << setprecision(2) << "Ліміт: " << double(limit) << " грн" << endl;
+
+    // Проходимо по всіх днях і виводимо дні з перевищенням ліміту
+    for (int i = 0; i < days; i++){
+        if (expenses[i] > limit){
+            cout << fixed << setprecision(2) << "День " << i + 1 << ": "
+                 << double(expenses[i]) << " грн" << endl;
+
+            overlimitDays++;
+        }
+    }
+
+    cout << "Разом днів з перевищенням: " << overlimitDays << endl;
+}
+
+// Функція для виведення трьох найбільших витрат за місяць
+void topThree(int expenses[], int days){
+    int sorted[31], buffer; // Масив для сортування та буферна змінна
+
+    // Копіюємо витрати у масив sorted для сортування
+    for (int i = 0; i < days; i++){
+        sorted[i] = expenses[i];
+    }
+
+    // Сортуємо масив sorted за спаданням методом бульбашки
+    for (int i = 0; i < days - 1; i++){
+        for (int j = 0; j < days - 1 - i; j++){
+            if (sorted[j] < sorted[j + 1]){
+                buffer = sorted[j + 1];
+                sorted[j + 1] = sorted[j];
+                sorted[j] = buffer;
+            }
+        }
+    }
+
+    int topCount = days; // Кількість днів для виведення
+
+    // Обмежуємо кількість результатів трьома
+    if (topCount > 3){
+        topCount = 3;
+    }
+
+    // Виводимо трійку найбільших витрат
+    cout << fixed << setprecision(2) << "Топ-" << topCount << " витрат: ";
+
+    for (int i = 0; i < topCount; i++){
+        cout << double(sorted[i]);
+
+        // Додаємо кому після кожної витрати, крім останньої
+        if (i < topCount - 1){
+            cout << ", ";
+        }
+    }
+
+    cout << " грн" << endl;
+}
