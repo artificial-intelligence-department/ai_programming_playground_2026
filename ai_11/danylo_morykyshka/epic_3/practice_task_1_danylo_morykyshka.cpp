@@ -12,8 +12,6 @@ using namespace std;
 
 void ShowStatisticsOfOne(double daysFlow[], int length);
 void ShowMenu();
-void ShowStatisticsOfFlow();
-void ShowStatisticsOfFlow(double daysFlow[], int length,double& maxValue, double& minValue);
 double SumOfFlow(double arr[], int length, double& sum);
 void ShowStatisticsOfTwo(double arr[], int length, double budget);
 void ShowDayLimit(double arr[], int length, double limit);
@@ -56,13 +54,13 @@ int main()
         }
     }
 
-    ShowMenu();
 
     int userChoice;
     bool isWorking = true;
     do
     {
     tryagainChoice:
+    ShowMenu();
        cout << "\nВведіть опцію: ";
        if(!(cin >> userChoice)){
         cout << "Помилка!Некоректне значення вводу.Спробуйте ще раз.";
@@ -95,21 +93,22 @@ int main()
             ThreeMostExpensive(daysFlow, countOfDays);
             break;
              case 0:
-            cout << "Вихід з програми.";
+            cout << "Вихід з програми." << endl;
             isWorking = false;
             break;
             default:
             cout << "Такої опції немає.Виберіть від 0 до 4.\n";
-            break;
+            goto tryagainChoice;
         }
     } 
     while (isWorking);
+    return 0;
  }
 
 void ShowMenu()
 {
-    cout << endl;
-     cout << setw(25) << "Меню\n";
+    cout << '\n';
+    cout << right << setw(25) << "Меню" << '\n';
     cout << left;
    
     cout << setw(10) << 1 << "Вказати витрати по днях.\n";
@@ -160,6 +159,7 @@ void ShowMenu()
 
  void ShowStatisticsOfTwo(double arr[], int length, double budget)
  {
+   
     cout << "\nСтатистика витрат:" << endl;
     double max = 0;
     double min = 0;
@@ -167,10 +167,10 @@ void ShowMenu()
     sum = SumOfFlow(arr, length, sum);
     MinMaxFinding(arr, length, max, min);
     cout << right << fixed << setprecision(2);
-    cout << "Мінімальні витрати за день:" << setw(10) << min<< endl;
-    cout << "Максимальні витрати за день:" << setw(9) << max<< endl;
-    cout << "Сумарні витрати: "<< setw(21) << sum << endl;
-    cout << "Перевитрата понад бюджет: ";
+    cout << "Мінімальні витрати за день:" << setw(13) << min<< endl;
+    cout << "Максимальні витрати за день:" << setw(12) << max<< endl;
+    cout << "Сумарні витрати: "<< setw(24) << sum << endl;
+    
 
     double surp = 0;
     if (budget >= sum)
@@ -182,9 +182,11 @@ void ShowMenu()
     {
         surp = budget - sum;
         if(surp < 0){
-            cout << abs(surp) << endl;
+            surp = abs(surp);
         }
     }
+    cout << "Перевитрата понад бюджет: " << setw(15) << surp << endl;
+
    
     int count = 0;
     for(int i = 0; i < length;i++){
@@ -193,7 +195,7 @@ void ShowMenu()
         }
     }
 
-    cout << "Днів з покупками: " << count << endl;
+    cout << "Днів з покупками: " << setw(23) << count << endl;
     double sumOfNonNull = 0;
     for(int i = 0; i < length;i++){
         if(arr[i] > 0 ){
@@ -204,9 +206,15 @@ void ShowMenu()
         }
     }
     double res = 0;
-    res = sumOfNonNull / count;
+    if(count == 0){
+        res= 0;
+    }
+    else{
+        res = sumOfNonNull / count;
+    }
     
-    cout << "Середні витрати за такий день: "<< res << endl;
+    
+    cout << "Середні витрати за такий день: "<< setw(10) << res << endl;
 
     double sum2 = 0;
     count = 0;
@@ -219,7 +227,7 @@ void ShowMenu()
     }
     
     if(budget >= sum2){
-        cout << "Бюджету вистачило на всі дні.Залишок: " << budget - sum2 << "грн.";
+        cout << "Бюджету вистачило на всі дні.Залишок: " << budget - sum2 << "грн."<< endl;
     }
         
     else{
@@ -242,7 +250,7 @@ void ShowDayLimit(double arr[], int length, double limit)
             count++;
         }
     }
-    cout << "Разом днів з перевищенням: " << count;
+    cout << "Разом днів з перевищенням: " << count << endl;
 
 }
 
@@ -276,4 +284,5 @@ void ThreeMostExpensive(double arr[], int length)
     }
     cout << "грн" << endl;
 }
+
 
