@@ -6,7 +6,7 @@
 
 using namespace std;
 
-pair<int, int> a[100005];
+pair<int, int> a[100000];
 
 int main() {
     int n;

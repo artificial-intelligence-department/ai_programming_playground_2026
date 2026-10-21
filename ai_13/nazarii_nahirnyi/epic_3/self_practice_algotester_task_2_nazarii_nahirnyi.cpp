@@ -14,9 +14,9 @@ int main() {
         cin >> a[i];
     }
 
-    int dp[100];
+    int b[100];
     for (int i = 0; i < n; i++) {
-        dp[i] = 1;
+        b[i] = 1;
     }
 
     int ans = 1;
@@ -24,13 +24,13 @@ int main() {
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < i; j++) {
             if (a[j] < a[i]) {
-                if (dp[j] + 1 > dp[i]) {
-                    dp[i] = dp[j] + 1;
+                if (b[j] + 1 > b[i]) {
+                    b[i] = b[j] + 1;
                 }
             }
         }
-        if (dp[i] > ans) {
-            ans = dp[i];
+        if (b[i] > ans) {
+            ans = b[i];
         }
     }
 
