@@ -76,7 +76,7 @@ void case2(int N, int spending[], int budget)
     cout << "Максимальні витрати за день:  " << fixed << setprecision(2) << (double)MaxSpent << " грн" << endl;
     cout << "Сумарні витрати:              " << fixed << setprecision(2) << (double)totalsumma << " грн" << endl;
     int difference = budget - totalsumma; // Виклик ще одніє функції,де пораховані всі витрати через рекурсію
-    int rest = abs(difference);                   // рахуємо різницю по модулю
+    int rest = abs(difference);           // рахуємо різницю по модулю
     double average;
 
     if (difference < 0)
@@ -92,11 +92,10 @@ void case2(int N, int spending[], int budget)
             continue;
         }
         buydays++;
-        total += spending[i]; //всі потрачені гроші
+        total += spending[i]; // всі потрачені гроші
     }
     cout << "Днів з покупками:              " << buydays << endl;
 
-    
     if (buydays > 0)
     {
         average = total / buydays;
@@ -114,7 +113,7 @@ void case2(int N, int spending[], int budget)
     {
         total1 += spending[i];
 
-        if (total1 > budget) // зупиняємось на дні,коли було вичерпано бюджет 
+        if (total1 > budget) // зупиняємось на дні,коли було вичерпано бюджет
         {
             overspent = i + 1;
             break;
@@ -133,12 +132,12 @@ void case2(int N, int spending[], int budget)
 }
 
 void case3(int N, int spending[])
-{ //функція для 3 опції
+{ // функція для 3 опції
     int spentlimit;
 spentlimitmark:
     cout << "Денний ліміт(грн, 0 = за замовчуванням): " << endl;
     cin >> spentlimit;
-    if (cin.fail()) //валідаця при вводі букв та від'ємних чисел
+    if (cin.fail()) // валідаця при вводі букв та від'ємних чисел
     {
         cout << "Введіть число" << endl;
         cin.clear();
@@ -156,7 +155,7 @@ spentlimitmark:
 }
 
 void case4Sorting(int N, int spending[])
-{ //функція для 4 опції
+{ // функція для 4 опції
     int top1 = 0, top2 = 0, top3 = 0;
     int copyspending[N]; // копія масиву
     for (int i = 0; i < N; i++)
@@ -195,7 +194,7 @@ void menu(int &option)
     cout << left << setw(12) << "0" << "Вийти" << endl;
     cout << "Вибір: ";
     cin >> option;
-    if (cin.fail()) //валідація
+    if (cin.fail()) // валідація
     {
         cin.clear();
         cin.ignore(10000, '\n');
@@ -210,7 +209,7 @@ int main()
     int budget = 0;
     int N;
 budgetmark:
-    cout << "Бюджет на місяць, грн" << endl;
+    cout << "Бюджет на місяць, грн : ";
     cin >> budget;
     if (cin.fail() || budget < 0)
     {
@@ -220,7 +219,7 @@ budgetmark:
         goto budgetmark;
     }
 Nmark:
-    cout << "Кількість днів обліку" << endl;
+    cout << "Кількість днів обліку: ";
     cin >> N;
     if (N < 1 || N > 31 || cin.fail())
     {
@@ -230,7 +229,7 @@ Nmark:
         goto Nmark;
     }
     int spending[N];
-    cout << "Витрати по днях, грн" << endl;
+    cout << "Витрати по днях, грн:";
     for (int i = 0; i < N; i++)
     {
     spendingmark:
@@ -244,7 +243,7 @@ Nmark:
         }
     }
     do
-    {   
+    {
     menumark:
         menu(option);
         switch (option)
@@ -279,9 +278,9 @@ Nmark:
         }
         default: // якщо користувач ввів неправильну цифру/символ переводимо в меню
         {
-            cout << "Неправильний вибір" << endl; 
+            cout << "Неправильний вибір" << endl;
             goto menumark;
         }
         }
     } while (option != 0);
-}   
+}
