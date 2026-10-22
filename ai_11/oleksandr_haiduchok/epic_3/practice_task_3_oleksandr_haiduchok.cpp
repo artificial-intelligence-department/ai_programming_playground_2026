@@ -190,6 +190,8 @@ int main(){
     if(spending[i] < 0){
         mistake = true;
         cout << "Помилка. Введіть додатню суму витрат\n";
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
         break;
     }
     }
