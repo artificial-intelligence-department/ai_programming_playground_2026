@@ -10,9 +10,9 @@ int N = 0;
 double spending[31] = {0};
 
 // сумарні витрати обчислити рекурсивною функцією, без циклу
-double calculateTotalRecursive(int index) {
+double calculateTotalRecursive(const double spending[], int N, int index) {
     if (index >= N) return 0.0;
-    return spending[index] + calculateTotalRecursive(index + 1);
+    return spending[index] + calculateTotalRecursive(spending, N, index + 1);
 }
 
 // еовернути мінімум і максимум через параметри-посилання (&)
@@ -38,11 +38,11 @@ void table() {
 // статистика витрат
 void statistics() {
     double minVal = 0, maxVal = 0;
-    minmax(minVal, maxVal); // виклик функції з параметрами-посиланнями
+    minmax(minVal, maxVal); 
 
-    double sum = calculateTotalRecursive(0); // Виклик рекурсивної функції
+    double sum = calculateTotalRecursive(spending, N, 0); // виклик рекурсивної функції
 
-    // накопичувати витрати і 3. break: вийти одразу при перевищенні
+    // накопичувати витрати і вийти одразу при перевищенні
     double accumulated = 0;
     int dayExceeded = -1;
     int i = 0;
@@ -60,7 +60,7 @@ void statistics() {
     double sumNonNull = 0;
     for (int j = 0; j < N; j++) {
         if (spending[j] == 0) {
-            continue; // пропуск днів без покупок
+            continue;   
         }
         notnull++;
         sumNonNull += spending[j];
@@ -204,7 +204,7 @@ menu: //  goto мітка
                     cin.ignore(numeric_limits<streamsize>::max(), '\n');
                     cout << "Введіть число >= 0: ";
                 }
-                
+                 
                 // якщо введено 0 — викликаємо без аргументу ( спрацьовує limit = 1000 )
                 if (inputLimit == 0) {
                     exceeding();
