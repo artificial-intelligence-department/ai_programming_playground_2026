@@ -139,20 +139,46 @@ void expensive_days(double spendings[])
 
 int main()
 {
-    cout << "Ваш бюджет, грн: ";
-    cin >> budget;
+    bool fail;
     do {
-    cout << "Кількість днів обліку: ";
-    cin >> N;
-    if (N > 31 || N < 1){
-        cout << "НЕПРИПУСТИМЕ ЗНАЧЕННЯ ОБЛІКУ" << endl;
-    }
-    } while (N > 31 || N < 1);
+        cout << "Ваш бюджет, грн: ";
+        cin >> budget;
+        fail = cin.fail();
+        if (fail){
+            cout << "Бюджет не може складатися з букв." << endl;
+            cin.clear();
+            cin.ignore(1000, '\n');
+        } else if (budget < 0){
+            cout << "Бюджет не може бути меншим 0." << endl;
+        }
+    } while (budget <= 0 || fail);
+    do {
+        cout << "Кількість днів обліку: ";
+        cin >> N;
+        fail = cin.fail();
+        if (N > 31 || N < 1){
+            cout << "НЕПРИПУСТИМЕ ЗНАЧЕННЯ ОБЛІКУ" << endl;
+        } else if (fail){
+            cout << "Облік днів не може складатися з букв." << endl;
+            cin.clear();
+            cin.ignore(1000, '\n');
+        }
+    } while ((N > 31 || N < 1) || fail);
 
     cout << "Витрати по днях, грн: ";
     double spendings[N] = {0};
     for (int i = 0; i < N; i++){
+        do {
         cin >> spendings[i];
+        fail = cin.fail();
+        if (fail){
+            cout << "Витрати не можуть складатися з букв." << endl;
+            cin.clear();
+            cin.ignore(1000, '\n');
+        } else if (spendings[i] < 0){
+            cout << "Витрати не потрібно записувати як від'ємне." << endl;
+        }
+        } while (spendings[i] < 0 || fail);
     }
 MENU:
     cout << "МЕНЮ <" << endl;
