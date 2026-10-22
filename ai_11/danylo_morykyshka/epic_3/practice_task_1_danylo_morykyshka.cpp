@@ -10,6 +10,7 @@
 
 using namespace std;
 
+//Оголошую функції перед їнім використанням:
 void ShowStatisticsOfOne(double daysFlow[], int length);
 void ShowMenu();
 double SumOfFlow(double arr[], int length, double& sum);
@@ -19,11 +20,13 @@ void ThreeMostExpensive(double arr[], int length);
 
 int main()
 {
+    // Ініціалізовую константи для подальшої валідації:
     const double MIN_BUDGET = 2000;
     const double MAX_BUDGET = 12000;
     const int MIN_COUNT_OF_DAYS = 1;
     const int MAX_COUNT_OF_DAYS = 31;
 
+    // Роблю валідацію даних, використовую goto для повторного введення в разі помилки: 
     tryagainBudget:
         cout << "Бюджет на місяць (грн): ";
         double budget;
@@ -43,6 +46,7 @@ int main()
             goto tryagainDays;
         }
     cout << "Витрати по днях: ";
+    //Оголошую масив та ініціалізовую його в циклі for:
     double daysFlow[MAX_COUNT_OF_DAYS];
     for(int i = 0; i < countOfDays;i++)
     {
@@ -57,6 +61,7 @@ int main()
 
     int userChoice;
     bool isWorking = true;
+    // В циклі do while зчитую змінну userChoice, викликаю відповідні функії в залежності від вибору користувача, в раза введення значення 0 цикл завершується:
     do
     {
     tryagainChoice:
@@ -105,6 +110,7 @@ int main()
     return 0;
  }
 
+ // Функція для показу головного меню програми:
 void ShowMenu()
 {
     cout << '\n';
@@ -119,6 +125,7 @@ void ShowMenu()
     
 }
 
+// Функція для виведення через цикл for статистики витрат за днями:
  void ShowStatisticsOfOne(double daysFlow[], int length)
  {
     cout << left;
@@ -129,6 +136,7 @@ void ShowMenu()
     }
  }
 
+ // Функція для пошуку максимальної та мінімальної денних витрат:
  void MinMaxFinding(double daysFlow[], int length,double& maxValue, double& minValue)
  {
     maxValue = daysFlow[0];
@@ -144,6 +152,7 @@ void ShowMenu()
     }
  }
 
+ // Рекурсивна функція для обчислення загальної суми витрат за весь облік:
  double SumOfFlow(double arr[], int length, double& sum)
  {
     
@@ -156,10 +165,9 @@ void ShowMenu()
     }
  }
 
-
+// Функція для виведення статистики відповідно до пункту 2:
  void ShowStatisticsOfTwo(double arr[], int length, double budget)
  {
-   
     cout << "\nСтатистика витрат:" << endl;
     double max = 0;
     double min = 0;
@@ -212,10 +220,7 @@ void ShowMenu()
     else{
         res = sumOfNonNull / count;
     }
-    
-    
     cout << "Середні витрати за такий день: "<< setw(10) << res << endl;
-
     double sum2 = 0;
     count = 0;
     while(count < length){
@@ -236,6 +241,7 @@ void ShowMenu()
     
 }
 
+// Функція для знаходження днів, які перевищують денний ліміт:
 void ShowDayLimit(double arr[], int length, double limit)
 {
     if(limit == 0){
@@ -254,6 +260,7 @@ void ShowDayLimit(double arr[], int length, double limit)
 
 }
 
+// Функція для пошуку трьох найдорожчих днів за весь облік:
 void ThreeMostExpensive(double arr[], int length)
 {
     const int MAX_VALUE_OF_TEMP_ARRAY = 31;
@@ -272,7 +279,6 @@ void ThreeMostExpensive(double arr[], int length)
             }
         }
     }
-
     cout << "Топ-3 витрат: ";
     for(int i = 0;i < length;i++){
         if(i < 3 &&  i != 0){
