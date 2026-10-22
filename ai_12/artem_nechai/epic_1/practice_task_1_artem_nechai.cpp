@@ -94,6 +94,7 @@ int main() {    cout << "1.Enter model name(no spaces, for example: Battery_123)
     cout << fixed << setprecision(1);
     cout << endl << "Battery has following specifications:" << endl
         << "Battery model:      " << modelName << endl
+        << "Passport capacity:  " << capacity << " Wh" << endl
         << "Battery age:        " << age << " years" << endl
         << "Real capacity:      " << real_capacity << " Wh" << endl
         << "Battery charge:     " << charge * 100 << "%" << endl
