@@ -187,7 +187,13 @@ int main()
         cout<<"4        Три найдорожчі дні"<<endl;
         cout<<"0        Вийти"<<endl;
         cin>>choice;
-        
+        if(cin.fail()||choice<0) 
+            {
+                cin.clear();
+                cin.ignore(10000,'\n');
+                cout<<"Помилка введення! Спробуйте ще раз."<<endl;
+                continue;
+            }
         // Виведення результатів відповідно до вибору користувача
         switch(choice)
         {
