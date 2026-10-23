@@ -40,7 +40,6 @@ int main()
     }
     // days
     cout << "Enter the number of days you are interested in: ";
-    cin >> N;
     while (N <= 0 || N > 31 || !(cin >> N))
     {
          cin.clear();
