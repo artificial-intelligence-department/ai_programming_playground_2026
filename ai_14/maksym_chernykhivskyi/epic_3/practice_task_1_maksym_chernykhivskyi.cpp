@@ -19,7 +19,7 @@ void showStatistics(const int spending[], int N, double budget);
 void checkDailyLimit(const int spending[], int N, double limit = 1000);
 void showTopThree(const int spending[], int N);
 void validateInput(double &value, const string &prompt);
-void validateInput(int &value, const string &prompt);
+void validateInput(int &value, const string &prompt, bool isArray);
 
 int main(){
     cout << fixed << setprecision(2); // Вивід чисел з 2 знаками після коми
@@ -32,7 +32,7 @@ int main(){
     validateInput(budget, "Бюджет на місяць (грн): ");
 
     do {
-        validateInput(N, "Кількість днів обліку: ");
+        validateInput(N, "Кількість днів обліку: ", false);
         if (N < 1 || N > 31){
             cout << "Помилка. Кількість днів має бути від 1 до 31." << endl;
         }
@@ -44,8 +44,9 @@ int main(){
 
     // Зчитування витрат за кожен день з валідацією
     for (int i = 0; i < N; i++) {
-        validateInput(spending[i], "");
+        validateInput(spending[i], "", true);
     }
+    cin.ignore(100000, '\n');
 
     int choice;
     // Мітка для goto
@@ -263,26 +264,50 @@ void showTopThree(const int spending[], int N){
 void validateInput(double &value, const string &prompt){
     while (true){
         cout << prompt;
-        if (cin >> value && value >= 0){
-            break;
+        double temp;
+        if (cin >> temp){
+            if (temp >= 0){
+                value = temp;
+                return;
+            }
         } else {
-            cout << "Помилка. Введіть коректне додатне число або 0." << endl;
-            cin.clear();                // Скидання помилки потоку
-            while (cin.get() != '\n');  // Очищення буфера
+            if (cin.eof()) {
+                exit(1);
+            }
+            cin.clear();
         }
+        cout << "Помилка. Введіть додатнє число або 0" << endl;
+        cin.ignore(100000, '\n');
     }
 }
 
 // Валідація цілого числа (не менше 0)
-void validateInput(int &value, const string &prompt){
+void validateInput(int &value, const string &prompt, bool isArray){
     while (true){
         cout << prompt;
-        if (cin >> value && value >= 0){
-            break;
+        int temp;
+
+        if (cin >> temp) {
+            if (temp >= 0) {
+                value = temp;
+                return;
+            }
+            if (isArray) {
+                cout << "Помилка значення: " << temp << " Некоректне. Наступні значення в цьому рядку не зараховано." << endl;
+            } else {
+                cout << "Помилка. Введіть ціле число від 0 і більше." << endl;
+            }
         } else {
-            cout << "Помилка. Введіть ціле число від 0 і більше." << endl;
+            if (cin.eof()){
+                exit(1);
+            }
             cin.clear();
-            while (cin.get() != '\n');
-        }
+            if (isArray) {
+                cout << "Помилка. Введено не число. Наступні значення в цьому рядку не зараховано." << endl;
+            } else {
+                cout << "Помилка. Введіть ціле число від 0 і більше." << endl;
+            }
+        }   
+        cin.ignore(100000, '\n');  
     }
 }
