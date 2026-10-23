@@ -10,7 +10,7 @@ using namespace std;
 int main() {
     // оголошення змінних
     int pass_length,level,symbtype;
-    char is_num, is_upLetter, is_specialChar;
+    char is_num, is_up_letter, is_special_char;
     // ввід pass_length
     cout<<"Довжина пароля: "; cin>>pass_length;
     // перевірка на допустиме значення
@@ -26,16 +26,16 @@ int main() {
         return 1;
     }
     // ввід is_upLetter
-    cout<<"Чи є великі літери (y/n): "; cin>>is_upLetter;
+    cout<<"Чи є великі літери (y/n): "; cin>>is_up_letter;
     // перевірка на допустиме значення
-    if(is_upLetter!='y' && is_upLetter!='n'){
+    if(is_up_letter!='y' && is_up_letter!='n'){
         cout<<"Введіть y або n"<<endl;
         return 1;
     }
     // ввід is_specialChar
-    cout<<"Чи є спеціальні символи (y/n): "; cin>>is_specialChar;
+    cout<<"Чи є спеціальні символи (y/n): "; cin>>is_special_char;
     // перевірка на допустиме значення
-    if(is_specialChar!='y' && is_specialChar!='n'){
+    if(is_special_char!='y' && is_special_char!='n'){
         cout<<"Введіть y або n"<<endl;
         return 1;
     }
@@ -60,7 +60,7 @@ int main() {
     // вивід рівня надійності та рекомендації
     switch(level){
         case 1:
-            cout<<"Рівень надійності 1 -Дуже слабкий"<<endl;
+            cout<<"Рівень надійності 1 - Дуже слабкий"<<endl;
             cout<<"Рекомендація: Пароль надто короткий. Мінімум 8 символів."<<endl;
             break;
         case 2:
@@ -81,12 +81,14 @@ int main() {
             break;
         default:
             cout<<"Неправильний рівень"<<endl;
-            break;
-
-            // ПОПЕРЕДЖЕННЯ 
-            //!!!!
+            break;    
     }
-
+    if(is_num=='n' && is_up_letter=='n' && is_special_char=='n'){
+        cout<<"Попередження: пароль тільки з літер підбирається швидше"<<endl;
+    }
+    if(level==1){
+        cout<<"Попередження: надко короткий пароль підбирається швидше"<<endl;
+    }
     
     return 0;
 }
