@@ -8,33 +8,28 @@
 #include <cmath>
 
 using namespace std;
-// spendings summary
+
 void spendSumDay(float arr[], int n) {
     cout << right << setw(10) << "День" << setw(37) << "Витрати, грн" << endl;
-            cout << fixed << setprecision(2);
-            for (int i = 0; i < n; i++) {
-                cout << right << setw(6) << (i+1) << setw(27) << arr[i] << endl;
-            }
+    cout << fixed << setprecision(2);
+    for (int i = 0; i < n; i++) {
+        cout << right << setw(6) << (i+1) << setw(27) << arr[i] << endl;
+    }
 }
-// finding min in array
-float minSpent(float arr[], int size) {
-    float min = arr[0];
-            for (int i = 0; i < size; i++) {
-                if (arr[i] < min) {
-                    min = arr[i];
-                }
-            }
-            return min;
-}
-// finding max in array
-float maxSpent(float arr[], int size) {
-    float max = arr[0];
-            for (int i = 0; i < size; i++) {
-                if (arr[i] > max) {
-                    max = arr[i];
-                }
-            }
-            return max;
+void minMax(float arr[], float &minValue, float &maxValue, int size) {
+    if (size < 1) {
+        return;
+    }
+    minValue = arr[0];
+    maxValue = arr[0];
+    for (int i = 1; i < size; i++) {
+        if (arr[i] < minValue) {
+            minValue = arr[i];
+        }
+        if (arr[i] > maxValue) {
+            maxValue = arr[i];
+        }
+    }
 }
 float sumSpent(float arr[], int size) {
     if (size <= 0) {
@@ -68,7 +63,7 @@ void dayEnd(float arr[], int size, float money) {
     else {
         cout << "Бюджет вичерпано на дні " << day << ", накопичено " << spent << " грн.";
     }
-    }
+}
 float overSpent(float arr[], int size, float money) {
     float total = sumSpent(arr, size);
     if (total > money) {
@@ -91,7 +86,8 @@ float averSpent(float arr[], int size) {
     }
     return sum / total;
 }
-void overLimit(float arr[], int size, float limit) {
+
+void overLimit(float arr[], int size, float limit = 1000.0f) {
     int sum = 0;
     for (int i = 0; i < size; i++) {
         if (arr[i] > limit) {
@@ -106,6 +102,7 @@ void arrCopy(float arr[], float arr_copy[], int size) {
         arr_copy[i] = arr[i];
     }
 }
+
 void sortSpent(float arr[], int size) {
     for (int i = 0; i < size - 1; i++) {
         for (int j = 0; j < size - 1; j++) {
@@ -117,6 +114,7 @@ void sortSpent(float arr[], int size) {
         }
     }
 }
+
 void topSpent(float arr[], int size) {
     cout << "Топ-3 витрат: ";
     for (int i = 0; i < size; i++) {
@@ -127,10 +125,12 @@ void topSpent(float arr[], int size) {
     }
     cout << "грн.";
 }
+
 int main () {
-    float budget = 0.0f; //  budget for a month
+    float budget = 0.0f; // budget for a month
     int N = 0; // days count (31 max)
     float spending[31] = {}; // money spent each day
+
 budget_input:
     cout << "Бюджет на місяць (грн): ";
     cin >> budget;
@@ -142,6 +142,7 @@ budget_input:
     }
     cin.clear();
     cin.ignore(1000, '\n');
+
 days_count:
     cout << "Кількість днів обліку: ";
     cin >> N;
@@ -153,85 +154,95 @@ days_count:
     }
     cin.clear();
     cin.ignore(1000, '\n');
+
 spendings:
     cout << "Витрати по днях (грн): ";
     for (int i = 0; i < N; i++) {
         cin >> spending[i];
         if (spending[i] < 0 or cin.fail()) {
             cout << "Помилка. Витрата в день повинна бути числом більшим або рівним 0" << endl;
-        cin.clear();
-        cin.ignore(1000, '\n');
-        goto spendings;
+            cin.clear();
+            cin.ignore(1000, '\n');
+            goto spendings;
+        }
     }
-}
     cin.clear();
     cin.ignore(1000, '\n');
     
     int choice = 5;
     float daily_limit = 0;
     float arr_copy[31] = {};
-    menu:
+
+menu:
     do {
         cout << endl << endl
         << "1 - Показати витрати по днях" << endl 
-        << "2 - Статистика витрат" <<  endl 
+        << "2 - Статистика витрат" << endl 
         << "3 - Дні з перевищенням денного ліміту" << endl
         << "4 - Три найдорожчі дні" << endl 
         << "0 - Вийти" << endl << endl;
 
-    cout << "Пункт: ";
-    cin >> choice;
-    if (cin.fail()) {
-        cout << "Помилка. Треба ввести число від 0 до 4" << endl;
-        cin.clear();
-        cin.ignore(1000, '\n');
-        goto menu;
-    }
-    cin.clear();
-    cin.ignore(1000, '\n');
-    switch (choice) {
-        case 1:
-            spendSumDay(spending, N);
-            break;
-        case 2:
-            cout << fixed << setprecision(2);
-            cout << "Мінімальні витрати за день:   " << right << setw(10) << minSpent(spending, N) << " грн" << endl;
-            cout << "Максимальні витрати за день:  " << right << setw(10) << maxSpent(spending, N) << " грн" << endl;
-            cout << "Сумарні витрати:              " << right << setw(10) << sumSpent(spending, N) << " грн" << endl;
-            cout << "Перевитрата понад бюджет:     " << right << setw(10) << overSpent(spending, N, budget) << " грн" << endl;
-            cout << "Днів з покупками:             " << right << setw(10) << daysSpent(spending, N) << endl;
-            cout << "Середні витрати за такий день:" << right << setw(10) << averSpent(spending, N) << " грн" << endl;
-            dayEnd(spending, N, budget);
-            break;
-        case 3:
-        limit:
-            cout << "Денний ліміт (грн, 0 = за замовчуванням): ";
-            cin >> daily_limit;
-            if (daily_limit < 0 or cin.fail()) {
-                cout << "Помилка. Ліміт має бути числом не меншим за 0" << endl << endl;
-                cin.clear();
-                cin.ignore(1000, '\n');
-                goto limit;
-            }
-            if (daily_limit == 0) {
-                daily_limit = 1000;
-            }
-            cout << "Ліміт: " << daily_limit << endl;
-            overLimit(spending, N, daily_limit);
-            break;
-        case 4:
-            arrCopy(spending, arr_copy, N);
-            sortSpent(arr_copy, N);
-            topSpent(arr_copy, N);
-            break;
-        case 0:
-            cout << "Завершення програми..." << endl;
-            return 0;
-        default:
-            cout << "Помилка. Число повинно бути від 0 до 4" << endl;
+        cout << "Пункт: ";
+        cin >> choice;
+        if (cin.fail()) {
+            cout << "Помилка. Треба ввести число від 0 до 4" << endl;
             cin.clear();
             cin.ignore(1000, '\n');
-            break;
+            goto menu;
+        }
+        cin.clear();
+        cin.ignore(1000, '\n');
+
+        switch (choice) {
+            case 1:
+                spendSumDay(spending, N);
+                break;
+            case 2: {
+                float min_val = 0.0f, max_val = 0.0f;
+                minMax(spending, min_val, max_val, N);
+
+                cout << fixed << setprecision(2);
+                cout << "Мінімальні витрати за день:   " << right << setw(10) << min_val << " грн" << endl;
+                cout << "Максимальні витрати за день:  " << right << setw(10) << max_val << " грн" << endl;
+                cout << "Сумарні витрати:              " << right << setw(10) << sumSpent(spending, N) << " грн" << endl;
+                cout << "Перевитрата понад бюджет:     " << right << setw(10) << overSpent(spending, N, budget) << " грн" << endl;
+                cout << "Днів з покупками:             " << right << setw(10) << daysSpent(spending, N) << endl;
+                cout << "Середні витрати за такий день:" << right << setw(10) << averSpent(spending, N) << " грн" << endl;
+                dayEnd(spending, N, budget);
+                break;
+            }
+            case 3:
+            limit:
+                cout << "Денний ліміт (грн, 0 = за замовчуванням 1000 грн): ";
+                cin >> daily_limit;
+                if (daily_limit < 0 or cin.fail()) {
+                    cout << "Помилка. Ліміт має бути числом не меншим за 0" << endl << endl;
+                    cin.clear();
+                    cin.ignore(1000, '\n');
+                    goto limit;
+                }
+
+                if (daily_limit == 0) {
+                    cout << "Ліміт за замовчуванням: 1000 грн" << endl;
+                    overLimit(spending, N);
+                } else {
+                    cout << "Ліміт: " << daily_limit << " грн" << endl;
+                    overLimit(spending, N, daily_limit);
+                }
+                break;
+            case 4:
+                arrCopy(spending, arr_copy, N);
+                sortSpent(arr_copy, N);
+                topSpent(arr_copy, N);
+                break;
+            case 0:
+                cout << "Завершення програми..." << endl;
+                return 0;
+            default:
+                cout << "Помилка. Число повинно бути від 0 до 4" << endl;
+                cin.clear();
+                cin.ignore(1000, '\n');
+                break;
         }
     } while (choice != 0);
 }
