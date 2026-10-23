@@ -22,9 +22,8 @@ int main()
     cout << fixed << setprecision(2);
     double budget;
     cout << "Бюджет на місяць (грн): ";
-    cin >> budget;
     // Перевірка на коректність введеного бюджету
-    if (budget < 0)
+    if (!(cin >> budget) || budget < 0)
     {
         cout << endl << "Бюджет має бути бльшим за 0";
         return 1;
@@ -32,9 +31,8 @@ int main()
 
     int n;
     cout << endl << "Кількість днів обліку: ";
-    cin >> n;
     // Обмеження на максимальну кількість днів у місяці
-    if (n > 31)
+    if (!(cin >> n) || n > 31)
     {
         cout << endl << "Облік ведеться не довше одного місяця";
         return 1;
@@ -44,8 +42,7 @@ int main()
     cout << endl << "Витрати по днях (грн): ";
     for (int i = 0; i < n; ++i)
     {
-        cin >> spending[i];
-        if (spending[i] < 0)
+        if (!(cin >> spending[i]) || spending[i] < 0)
         {
             cout << endl << "Витрати не мають бути від'ємними";
             return 1;
