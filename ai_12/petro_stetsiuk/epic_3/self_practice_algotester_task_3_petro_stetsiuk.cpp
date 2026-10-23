@@ -17,13 +17,19 @@ int main()
     sort(a,a+n);
     for(int i=0;i<n;i++)
     {
-        if(a[i]*2>z){cout<<qunt;return 0;}
+        if(a[i]*2>z)
+        {
+            if(qunt>k)qunt=k;
+            cout<<qunt;
+            return 0;
+        }
          else 
          {
             qunt++;
             z=z-a[i]*2;
          }
     }
+    if(qunt>k)qunt=k;
     cout<<qunt;
 
 }
