@@ -90,6 +90,11 @@ int main()
                     cout << "Введіть числo" << endl;
                     goto Lim;
                 }
+                if (user_limit < 0)
+                {
+                    cout << "Введіть додатне числo" << endl;
+                    goto Lim;
+                }
                 if (user_limit == 0)
                 {
                     CheckLimit(spending, n);  // Використає 1000.0 за замовчуванням
