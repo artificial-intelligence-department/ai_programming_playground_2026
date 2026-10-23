@@ -11,6 +11,7 @@ int main() {
     cin >> p >> q;
     int n = 1;
     long long sum;
+    //шукаємо в циклі значення яке задовільняє умову кратності
     while (true) {
         sum = 1LL * n * (n + 1) / 2;
         if ((sum * p) % (p + q) == 0) {
@@ -18,9 +19,12 @@ int main() {
         }
         n++;
     }
+    //знайшовши потрібне значення записуємо його в цикл
     long long target = sum * p / (p + q);
     char colors[200001];
+    //записуємо в масив послідовність символів
     for (int i = n; i >= 1; i--) {
+        //сортуємо послідовність
         if (i <= target) {
             colors[i] = 'R';
             target -= i;

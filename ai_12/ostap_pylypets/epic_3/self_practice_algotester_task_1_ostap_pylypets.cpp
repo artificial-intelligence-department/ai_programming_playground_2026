@@ -13,7 +13,7 @@ int main() {
     int a[100001];
     int minPos = 1000000000;
     int maxPos = -1000000000;
-
+    //записуємо значення в масив та знаходимо крайні значення
     for (int i = 0; i < n; i++) {
         cin >> a[i];
 
@@ -25,7 +25,7 @@ int main() {
             maxPos = a[i];
         }
     }
-
+    //рахуємо кроки
     cout << maxPos - minPos << '\n';
 
     return 0;

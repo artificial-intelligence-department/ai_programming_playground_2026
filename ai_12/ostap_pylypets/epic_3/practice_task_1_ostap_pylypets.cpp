@@ -19,7 +19,7 @@ int main() {
     int n;
     bool shouldExit = false;
 
-
+    //вводимо значення та перевірямо на правильінсть вводу
     cout << "Бюджет на місяць (грн): ";
     while (!(cin >> budget) || budget < 0 || cin.peek() != '\n') {
         cout << "Помилка вводу.\n";
@@ -29,7 +29,7 @@ int main() {
     }
     
 
-    
+    //вводимо значення та перевірямо на правильінсть вводу
     cout << "Кількість днів обліку: ";
     while (!(cin >> n) || n < 1 || n > 31 || cin.peek() != '\n') {
         cout << "Помилка: кількість днів має бути цілим числом від 1 до 31.\n";
@@ -39,7 +39,7 @@ int main() {
     }
     
 
-
+    //вводимо значення та перевірямо на правильінсть вводу
     cout << "Витрати по днях (грн): ";
     for (int i = 0; i < n; i++) {
         while (!(cin >> spendings[i]) || spendings[i] < 0 || cin.peek() != '\n') {
@@ -50,7 +50,7 @@ int main() {
         }
     }
     
-
+    //блок з меню та вибором дії
     do {
     mainMenu:
         cout << "\n1. Показати витрати по днях\n";
@@ -69,7 +69,7 @@ int main() {
             goto mainMenu;
         }
         
-
+        //за допомогою switсh вибираємо потрібну дію
         switch (choice) {
             case 1:
                 vitratipodn(spendings, n);
@@ -100,7 +100,7 @@ int main() {
 
     return 0;
 }
-
+//вункціявиводить витрати за всі дні
 void vitratipodn(double spendings[], int n) {
     cout << "День\tВитрати, грн\n";
 
@@ -108,20 +108,20 @@ void vitratipodn(double spendings[], int n) {
         cout << i + 1 << "\t" << spendings[i] << endl;
     }
 }
-
+//функція виводить статистику
 void expensesstats(double spendings[], int n, double budget) {
     double minSpend, maxSpend;
-
+    //отримуємо minSpemd та maxSpend
     findMinMax(spendings, n, minSpend, maxSpend);
 
     cout << "Мінімальні витрати за день: " << minSpend << " грн" << endl;
     cout << "Максимальні витрати за день: " << maxSpend << " грн" << endl;
-
+    //присвоюємо рекурсивне значення змінній
     double total = recursiveSum(spendings, n);
     cout << "Сумарні витрати: " << total << " грн" << endl;
 
     double balance = budget - total;
-
+    //перевіряємо чи залишився бюджет
     if (balance >= 0) {
         cout << "Залишок бюджету: " << balance << " грн" << endl;
     } else {
@@ -130,7 +130,7 @@ void expensesstats(double spendings[], int n, double budget) {
 
     double purchasesTotal = 0;
     int daysWithPurchases = 0;
-
+    //рахуємо дні з покупками
     for (int i = 0; i < n; i++) {
         if (spendings[i] == 0) {
             continue;
@@ -141,7 +141,7 @@ void expensesstats(double spendings[], int n, double budget) {
     }
 
     cout << "Днів з покупками: " << daysWithPurchases << endl;
-
+    //виводимо середнє
     if (daysWithPurchases > 0) {
         double average = purchasesTotal / daysWithPurchases;
 
@@ -153,7 +153,7 @@ void expensesstats(double spendings[], int n, double budget) {
     double accumulated = 0;
     int day = 0;
     bool exceeded = false;
-
+    //рахуємо накопичення та чи перевищено бюджет
     while (day < n) {
         accumulated += spendings[day];
         day++;
@@ -172,14 +172,14 @@ void expensesstats(double spendings[], int n, double budget) {
         cout << "Залишок: " << budget - accumulated << " грн" << endl;
     }
 }
-
+//рекурсивна сума
 double recursiveSum(double spendings[], int n) {
     if (n == 0){
         return 0;
     }
     return spendings[n - 1] + recursiveSum(spendings, n - 1);
 }
-
+//знаходимо мінімальне та максимальне значення
 void findMinMax(double spendings[], int n, double &minSpend, double &maxSpend) {
     minSpend = spendings[0];
     maxSpend = spendings[0];
@@ -194,12 +194,12 @@ void findMinMax(double spendings[], int n, double &minSpend, double &maxSpend) {
         }
     }
 }
-
+//блок який перевіряє чи не було перевищено ліміт
 void dailylimit(double spendings[], int n, double daily_limit) {
     double enteredLimit;
 
     cout << "Денний ліміт (грн, 0 = за замовчуванням): ";
-
+    //перевіряємо на правильність вводу
     if (!(cin >> enteredLimit) || cin.peek() != '\n') {
         cin.clear();
         cin.ignore(10000, '\n');
@@ -218,7 +218,7 @@ void dailylimit(double spendings[], int n, double daily_limit) {
     cout << "Ліміт: " << daily_limit << " грн" << endl;
 
     int count = 0;
-
+    //в який день перевищено ліміь
     for (int i = 0; i < n; i++) {
         if (spendings[i] > daily_limit) {
             cout << "день " << i + 1 << ": " << spendings[i] << " грн" << endl;
@@ -228,14 +228,14 @@ void dailylimit(double spendings[], int n, double daily_limit) {
 
     cout << "Разом днів з перевищенням: " << count << endl;
 }
-
+//фунція рахує найдорожчі дні
 void themostexpensive(double spendings[], int n) {
     double spendingscp[31];
 
     for (int i = 0; i < n; i++) {
         spendingscp[i] = spendings[i];
     }
-
+    //сортуємо значення в копію маисву
     for (int i = 0; i < n - 1; i++) {
         for (int q = 0; q < n - 1 - i; q++) {
             if (spendingscp[q] < spendingscp[q + 1]) {
@@ -249,7 +249,7 @@ void themostexpensive(double spendings[], int n) {
     int count = n < 3 ? n : 3;
 
     cout << "Топ-" << count << " витрат: ";
-
+    //виводимо значеня
     for (int i = 0; i < count; i++) {
         cout << spendingscp[i];
         if (i < count - 1) {
