@@ -62,7 +62,7 @@ void dayswithspend(double spending[], int days, double sum)
          else continue;
     }
     average=sum/days;
-    cout<<"Днів з покупками:"<<setw(22)<<days<<endl;
+    cout<<"Днів з покупками:"<<setw(22)<<dayswithspend<<endl;
     cout<<"Середні витрати за такий день:"<<fixed<<setw(9)<<setprecision(2)<<average<<" грн"<<endl;
 }
 
