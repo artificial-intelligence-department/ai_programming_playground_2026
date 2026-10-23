@@ -6,7 +6,6 @@ int _menu(){
     invalidOption:
     //ініціалізація answear
     int answear;
-    
     //виведення меню
     std::cout << std::endl;
     std::cout << "1   Показати витрати по днях" << std::endl;
@@ -108,8 +107,14 @@ void _menu3(int N, float spending[], float default_limit = 1000){
     //І цивілізація змінних та введення ліміту користувача або 0 за замовчуванням
     float limit = 0;
     int over = 0;
+    limiterr:
     std::cout << "Денний ліміт (грн, 0 = за замовчуванням):";
     std::cin >> limit;
+    if(std::cin.fail()) {
+        std::cin.clear();
+        std::cin.ignore(10000, '\n');
+        goto limiterr;
+    } 
     if (limit == 0) {
         limit = default_limit; 
     }
@@ -128,10 +133,14 @@ void _menu3(int N, float spending[], float default_limit = 1000){
 }
 
 //Функція що виводить 4-й пун
-void _menu4(int N, float spending[]){
+void _menu4(int N, float spending0[]){
     std::cout<< "Топ-3 витрат: ";
+    float spending[N];
+    for(int i = 0; i < N; i++){
+        spending[i]=spending0[i];
+    }
     //цикл Що виводить 3 найбільші витрати
-    for(int i = 0; i<3; i++){
+    for(int i = 0; i<((N < 3) ? N : 3); i++){
         int max = spending[0];
         int max_i = 0;
         for(int j = 0; j<N; j++){
@@ -158,16 +167,31 @@ int main(){
     int answear;
     float budget;
     int N;
-
+    inputerr:
     //Отримання бюджету і кількості днів обліку та витрат по днях
     std::cout << "Бюджет на місяць (грн): ";
     std::cin >> budget;
+    if(std::cin.fail()) {
+        std::cin.clear();
+        std::cin.ignore(10000, '\n');
+        goto inputerr;
+    } 
     std::cout << "Кількість днів обліку: ";
     std::cin >> N;
+    if(std::cin.fail()) {
+        std::cin.clear();
+        std::cin.ignore(10000, '\n');
+        goto inputerr;
+    } 
     float spending[N];
     std::cout << "Витрати по днях (грн): ";
     for(int i = 0; i<N; i++){
         std::cin >> spending[i];
+        if(std::cin.fail()) {
+        std::cin.clear();
+        std::cin.ignore(10000, '\n');
+        goto inputerr;
+    } 
     }
 
     //цикл що викликає меню та виводить його пункти та дії при виборі пунктів меню
