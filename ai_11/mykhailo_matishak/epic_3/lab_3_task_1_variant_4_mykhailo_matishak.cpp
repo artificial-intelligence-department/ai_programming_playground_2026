@@ -1,3 +1,6 @@
+/*Епік 3. Лабораторна робота 3. Варіант 4
+Автор: Матішак Михайло
+Група: ШІ-11*/
 #include <iostream>
 #include <iomanip>
 #include <cmath>
