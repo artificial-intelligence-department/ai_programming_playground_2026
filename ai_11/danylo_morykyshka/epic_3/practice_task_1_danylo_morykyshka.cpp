@@ -45,19 +45,26 @@ int main()
             cin.ignore(10000, '\n');
             goto tryagainDays;
         }
+    tryagainArray:
     cout << "Витрати по днях: ";
     //Оголошую масив та ініціалізовую його в циклі for:
+   
     double daysFlow[MAX_COUNT_OF_DAYS];
     for(int i = 0; i < countOfDays;i++)
     {
-        if(!(cin >> daysFlow[i]) || daysFlow[i] < 0 || daysFlow[i] > budget){
-            cout << "Ви ввели неправильне значення для задання витрат, спробуйте ще раз!";
+
+       if(!(cin >> daysFlow[i]) || daysFlow[i] < 0 || daysFlow[i] > budget){
+            cout << "Ви ввели неправильне значення для задання витрат, на позиції  спробуйте ще раз!" << endl;
             cin.clear();
             cin.ignore(10000, '\n');
-            i--;
+            goto tryagainArray;
         }
-    }
 
+
+
+    }
+    cin.clear();
+    cin.ignore(10000, '\n');
 
     int userChoice;
     bool isWorking = true;
