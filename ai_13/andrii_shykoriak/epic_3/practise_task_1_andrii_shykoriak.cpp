@@ -15,6 +15,7 @@ int main() {
     // Оголошення змінних
     double budget, minSpending, maxSpending;
     int N, choice;
+    double limit;
     // Введення даних користувачем, та їхня валідація
     BUDGET:
     cout << "Бюджет на місяць (грн): ";
@@ -70,18 +71,30 @@ int main() {
         }
         // Визначення вводу користувача та виклик відповідних функцій
         switch (choice) {
-            case 1: { 
+            case 1: {
                 ShowExpenses(spending, N);
                 break;
             } 
-            
             case 2: {
                 MinMaxSpending(spending, N, minSpending, maxSpending, budget);
                 break;
-            } 
-            
+            }
             case 3: {
-                ShowExceededDays(spending, N);
+                LIMIT:                    
+                cout << "Денний ліміт (грн, 0 = за замовчуванням): ";
+                cin >> limit;
+                if (limit < 0 || cin.fail()){
+                    cout << "Ліміт не може бути від'ємним. Або не бути числом." << endl;
+                    cin.clear();
+                    cin.ignore(10000, '\n');
+                    goto LIMIT;
+                }
+                else if(limit ==0 ){
+                    ShowExceededDays(spending, N);
+                }
+                else {
+                    ShowExceededDays(spending, N, limit);;
+                } 
                 break;
             }
             case 4: {
@@ -169,34 +182,19 @@ void ShowExpenses(double spending[], int N) {
 }
 // Функція для обчислення суми елементів масиву рекурсивно
 double SumOfList(double array[], int N) {
-    if (N <= 0) { 
+    if (N <= 0){ 
         return 0;
     }
     return array[N - 1] +  SumOfList(array, N - 1);
 }
 // Функція для виведення днів, коли витрати перевищили ліміт
-void ShowExceededDays(double array[], int N,double limit_by_default){
-    double limit;
-    cout << "Денний ліміт (грн, 0 = за замовчуванням): ";
-    cin >> limit;
-    if (limit < 0 || cin.fail()) {
-        cout << "Ліміт не може бути від'ємним. Або не бути числом. Використовується ліміт за замовчуванням: 1000 грн." << endl;
-        limit = limit_by_default;
-        cin.clear();
-        cin.ignore(10000, '\n');
-    }
-    else if (limit == 0) {
-        limit = limit_by_default;
-    }
-    else {
-        limit = limit;
-    }    
+void ShowExceededDays(double array[], int N,double limit_by_default){   
     cout << fixed << setprecision(2);
-    cout << "Ліміт: " << limit << " грн." << endl;
+    cout << "Ліміт: " << limit_by_default << " грн." << endl;
     
     int sum_of_days_limit_exceeded = 0;
     for (int i = 0; i < N; i++) {
-        if (array[i] > limit) {
+        if (array[i] > limit_by_default) {
             cout << "  день " << (i + 1) << ": " << array[i] << " грн" << endl;
             sum_of_days_limit_exceeded++;
         }
