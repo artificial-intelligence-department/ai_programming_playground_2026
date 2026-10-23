@@ -20,7 +20,7 @@ int main()
     cout << fixed << setprecision(8);
     cout << "Calculation of the function" << endl;
 
-    // Outer loop: changing x
+    // loop: changing x
     for (int i = 0; i <= k; i++)
     {
         double x = a + i * h;
