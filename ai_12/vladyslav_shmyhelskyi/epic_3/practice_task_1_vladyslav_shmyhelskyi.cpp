@@ -230,15 +230,16 @@ Nmark:
     }
     int spending[N];
     cout << "Витрати по днях, грн:";
+spendingmark:
     for (int i = 0; i < N; i++)
     {
-    spendingmark:
         cin >> spending[i];
         if (spending[i] < 0 || cin.fail())
         {
             cout << "Введіть додатне число" << endl;
             cin.clear();
             cin.ignore(10000, '\n');
+
             goto spendingmark;
         }
     }
