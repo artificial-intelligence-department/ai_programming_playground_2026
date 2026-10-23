@@ -42,7 +42,7 @@ int main() {
     //вводимо значення та перевірямо на правильінсть вводу
     cout << "Витрати по днях (грн): ";
     for (int i = 0; i < n; i++) {
-        while (!(cin >> spendings[i]) || spendings[i] < 0 || cin.peek() != '\n') {
+        while (!(cin >> spendings[i]) || spendings[i] < 0) {
             cout << "Помилка: витрати мають бути невід'ємними числами.\n";
             cin.clear();
             cin.ignore(10000, '\n');
