@@ -1,3 +1,8 @@
+/*
+Lab 5 Task 1 Variant 10
+група ШІ-12
+Козій Василь Іванович
+*/
 #include <iostream>
 using namespace std;
 int negative_numbers(int** x, int row, int cols)
