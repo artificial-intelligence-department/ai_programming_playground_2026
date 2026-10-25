@@ -84,13 +84,21 @@ void choice2(double spending[], int N, double budget){
             }
 }
 void choice3(double spending[], int N, double Limit = 1000){
+    double userlimit = 0;
+    while(true){
     cout << "Денний ліміт (грн, 0 = за замовчуванням): \n";
-        double userlimit = 0;
-        cin >> userlimit;
-        // перевірка на введений 0-ий ліміт
-        if(userlimit != 0){
+    cin >> userlimit;
+    if(cin.fail() || userlimit < 0){
+    cout << "Помилка. Введіть коректне число!\n";
+    cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    continue;
+    }
+    if(userlimit != 0){
             Limit = userlimit;
         }
+        break;
+    }
         cout << "Ліміт: " << Limit << " грн\n";
         int c = 0;
         // підрахунок днів, що перевищують ліміт
@@ -151,6 +159,7 @@ int main(){
 
     if(budget < 0){
         cout << "Помилка. Введіть додатнє число!\n";
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
         continue;
     }
     break;
@@ -166,6 +175,7 @@ int main(){
     }
     if(N <= 0 || N > 31){
     cout << "Помилка. Місяць обмежений від 1 до 31 днів, введіть ще раз кількість днів обліку!\n";
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
     continue;
     }
     break;
@@ -190,7 +200,6 @@ int main(){
     if(spending[i] < 0){
         mistake = true;
         cout << "Помилка. Введіть додатню суму витрат\n";
-        cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
         break;
     }
@@ -216,7 +225,7 @@ int main(){
     if(cin.fail()){
     choice = -1;
     cin.clear();
-    cin.ignore();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
 }
 // копіюємо масив
     for(int d= 0;d < N; d++){
