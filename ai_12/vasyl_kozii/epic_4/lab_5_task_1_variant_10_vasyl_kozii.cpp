@@ -103,6 +103,14 @@ int main()
     cout_matrix(x, rows, cols);
     cout <<"Масив після зміни: " <<endl;
     cout_matrix(y, rows, cols);
+    for(int i=0; i<rows; i++)
+    {
+        delete[] x[i];
+    }
+    for(int i=0; i<rows; i++)
+    {
+        delete[] y[i];
+    }
     delete[] x;
     delete[] y;
 }
