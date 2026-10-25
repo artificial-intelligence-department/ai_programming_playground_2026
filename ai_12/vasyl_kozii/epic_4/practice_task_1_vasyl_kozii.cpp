@@ -267,5 +267,4 @@ int main()
         delete[] image[i];
     }
     delete[] image;
-    delete[] image_rotated;
 }
