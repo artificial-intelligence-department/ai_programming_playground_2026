@@ -6,7 +6,7 @@
 
 const double DEFAULT_LIMIT = 1000.0;
 
-// Виводить витрати для кожного дня.
+// Вивід витрати для кожного дня
 void expensesByDay(const double spending[], int N) {
     std::cout << "Витрати по днях: " << std::endl;
     for (int i = 0; i < N; i++) {
@@ -14,7 +14,7 @@ void expensesByDay(const double spending[], int N) {
     }
 }
 
-// Знаходить найменші та найбільші витрати й записує результати у параметри-посилання.
+// Знаходить найменші та найбільші витрати й записує результати у параметри-посилання
 void findMinMax(const double spending[], int N, double& minValue, double& maxValue) {
     minValue = spending[0];
     maxValue = spending[0];
@@ -24,13 +24,13 @@ void findMinMax(const double spending[], int N, double& minValue, double& maxVal
     }
 }
 
-// Повертає суму перших N елементів; умова завершення рекурсії — N == 0.
+// Повертає суму перших N елементів; умова завершення рекурсії — N == 0
 double sumRecursive(const double spending[], int N) {
     if (N == 0) return 0;
     return spending[N - 1] + sumRecursive(spending, N - 1);
 }
 
-// Обчислює підсумки, баланс бюджету, середні витрати та день перевищення бюджету.
+// Обчислює підсумки, баланс бюджету, середні витрати та день перевищення бюджету
 void spendingStatistics(const double spending[], int N, double budget) {
     double minValue, maxValue;
     findMinMax(spending, N, minValue, maxValue);
@@ -81,7 +81,7 @@ void spendingStatistics(const double spending[], int N, double budget) {
     }
 }
 
-// Виводить дні, у які витрати більші за вказаний ліміт.
+// Виводить дні, у які витрати більші за вказаний ліміт
 void daysOverLimit(const double spending[], int N, double limit = DEFAULT_LIMIT) {
     std::cout << "Ліміт: " << limit << " грн" << std::endl;
     int count = 0;
@@ -94,7 +94,7 @@ void daysOverLimit(const double spending[], int N, double limit = DEFAULT_LIMIT)
     std::cout << "Разом днів з перевищенням: " << count << std::endl;
 }
 
-// Сортує копію витрат за спаданням і виводить до трьох найбільших значень.
+// Сортує копію витрат за спаданням і виводить до трьох найбільших значень
 void topThreeDays(const double spending[], int N) {
     double copy[100];
     for (int i = 0; i < N; i++) {
@@ -125,14 +125,14 @@ void topThreeDays(const double spending[], int N) {
     std::cout << " грн" << std::endl;
 }
 
-// Перевіряє введений ліміт; 0 означає використання стандартного ліміту.
+// Перевіряє введений ліміт; 0 означає використання стандартного ліміту
 void daysOverLimitMenu(const double spending[], int N) {
     double limit;
     while (true) {
         std::cout << "Денний ліміт (грн, 0 = за замовчуванням): ";
         std::cin >> limit;
         if (std::cin.fail()) {
-            if (std::cin.eof()) return;      // ввід закінчився
+            if (std::cin.eof()) return;      // Ввід закінчився
             std::cin.clear();
             std::cin.ignore(1000, '\n');
         } else if (limit >= 0) {
@@ -148,10 +148,10 @@ void daysOverLimitMenu(const double spending[], int N) {
 }
 
 int main() {
-    // Налаштовуємо виведення чисел із двома знаками після коми.
+    // Налаштовуємо виведення чисел із двома знаками після коми
     std::cout << std::fixed << std::setprecision(2);
 
-    // Запитуємо додатний бюджет і повторюємо введення, доки значення некоректне.
+    // Запитуємо додатний бюджет і повторюємо введення, доки значення некоректне
     double budget;
     while (true) {
         std::cout << "Бюджет на місяць, грн: ";
@@ -179,24 +179,27 @@ int main() {
         std::cout << "Кількість днів має бути цілим числом від 1 до 31." << std::endl;
     }
 
-    // Зчитуємо невід'ємні витрати для кожного дня.
+       
+    // При будь-якій помилці весь рядок вводиться заново, починаючи з першого дня
     double spending[100];
-    std::cout << "Витрати по днях, грн: ";
-    for (int i = 0; i < N; i++) {
-        while (true) {
-            std::cin >> spending[i];
-            if (std::cin.fail() ) {
-                std::cin.clear();
-                std::cin.ignore(1000, '\n');
-            } else if (spending[i] >= 0) {
-                break;
-            }
+    int i = 0;
+    std::cout << "Витрати по днях, грн (" << N << " значень): ";
+    while (i < N) {
+        std::cin >> spending[i];
+        if (std::cin.eof()) return 0;               
+        if (std::cin.fail() || spending[i] < 0) {
+            std::cin.clear();
+            std::cin.ignore(1000, '\n');             
             std::cout << "Некоректний ввід для дня " << (i + 1)
-                      << ": потрібне число від 0. Введіть це значення ще раз: ";
+                      << ": потрібне число від 0. Введіть увесь рядок заново:" << std::endl;          
+            i = 0;                                  
+            continue;
         }
+        i++;
     }
+    std::cin.ignore(1000, '\n');                   
 
-    // Показуємо меню повторно, доки користувач не вибере вихід.
+    // Показуємо меню повторно, доки користувач не вибере вихід
     int action{};
 
     do {
@@ -209,7 +212,7 @@ int main() {
         std::cout << "0 - Вийти" << std::endl;
         std::cout << "Ваш вибір: ";
 
-        // Зчитуємо вибір; некоректне введення передаємо до гілки default.
+        // Зчитуємо вибір; некоректне введення передаємо до гілки default
         std::cin >> action;
         if (std::cin.fail()) {
             std::cin.clear();
@@ -218,7 +221,7 @@ int main() {
         }
 
         std::cout << std::endl;
-        // Виконуємо дію, що відповідає пункту меню.
+        // Виконуємо дію, що відповідає пункту меню
         switch (action) {
 
             case 1: expensesByDay(spending, N);
