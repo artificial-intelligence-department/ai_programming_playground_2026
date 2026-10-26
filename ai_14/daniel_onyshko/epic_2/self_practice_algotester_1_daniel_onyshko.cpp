@@ -4,25 +4,29 @@
    Група ШІ-14
  
  */
+/*
+    Задача: Цікава гра
+    Автор: Онишко Даніель
+    Група: ШІ-14
+*/
+
 #include <iostream>
 #include <string>
+
 using namespace std;
 
-
 int main() {
-    string n, m;
-    cin >> n >> m;
+    string n_dim, m_dim;
+    cin >> n_dim >> m_dim;
 
+    bool is_n_odd = (n_dim.back() - '0') & 1;
+    bool is_m_odd = (m_dim.back() - '0') & 1;
 
-    bool nOdd = (n.back() - '0') % 2 == 1;
-    bool mOdd = (m.back() - '0') % 2 == 1;
-
-
-    if (nOdd && mOdd)
+    if (is_n_odd && is_m_odd) {
         cout << "Imp";
-    else
+    } else {
         cout << "Dragon";
-
+    }
 
     return 0;
 }
