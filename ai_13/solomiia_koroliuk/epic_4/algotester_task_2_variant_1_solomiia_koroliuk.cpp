@@ -11,8 +11,8 @@ int main(){
     for (int i = 0; i < n; i++){
         cin >> a[i];
     }
-    if (n < 2) return 0;
-
+    if (n < 2) { cout << 0; return 0;}
+    
     for(int i = 0; i < n; i++){
         for (int j = 0; j < n - 1 - i; j++){
             if (a[j] > a[j + 1]){
@@ -34,5 +34,4 @@ int main(){
 
     return 0;
 }
-
 
