@@ -142,6 +142,7 @@ for (int i = 0; i < rows; i++) {
 
 int main() {
 int rows, cols;
+int pomulka = 0;
 cout << "Висота зображення (кількість пікселів): ";
 cin >> rows;
 if (rows < 0 || rows > 20){
@@ -149,6 +150,7 @@ if (rows < 0 || rows > 20){
     return 0;}
 cout << "Ширина зображення (кількість пікселів): ";
 cin >> cols;
+int start_rows = rows; 
 if (cols < 0 || cols > 20) {
      cout << "Помилка. Значення має бути в межах від 0 до 20.";
      return 0;}
@@ -161,7 +163,7 @@ for (int i = 0; i < rows; i++) {
 for (int i = 0; i < rows; i++) {
     for (int j = 0; j < cols; j++){
         cin >> image[i][j];
-        if (image[i][j] < 0 || image[i][j] > 9) return 0;
+        if (image[i][j] < 0 || image[i][j] > 9) {pomulka = 1; i = rows; break;}
     }
 }
 
@@ -183,9 +185,23 @@ char** image_char = new char*[rows];
 for (int i = 0; i < rows; i++) {
     image_char[i] = new char[cols];
 }
+if(pomulka == 1) {
+for (int i = 0; i < start_rows; i++) {
+    delete[] image[i];
+    delete[] image_char[i];}
+delete[] image;
+delete[] image_char;
+delete[] avarage_rows;
+
+for (int i = 0; i < rows; i++) {
+    delete[] img[i];}
+delete[] img;
+return 0;
+}
 cout << "\nПункт     Операція\n";
 cout << "1         Показати зображення\n" << "2         Статистика яскравості\n" << "3         Інвертувати яскравість\n" << "4         Віддзеркалити по горизонталі\n" << "5         Повернути на 90 градусів праворуч\n" << "0         Вийти\n";
 int menu = -1;
+
 cin >> menu;
 do {
 switch(menu) {
@@ -194,17 +210,22 @@ case 2 : brightnessStatistic(img, avarage_rows, rows, cols); break;
 case 3 : invertBrightness(image, rows, cols); break;
 case 4 : swapHorizontalResult(rows, cols, image); break;
 case 5 :rotateRightResult(img, rows, cols); break;
-default : return 0; break;
+case 0 : break;
+default : break;
 
 } cin >> menu; }
 while (menu != 0);
 
-for (int i = 0; i < rows; i++) {
+for (int i = 0; i < start_rows; i++) {
     delete[] image[i];
     delete[] image_char[i];}
 delete[] image;
 delete[] image_char;
 delete[] avarage_rows;
+
+for (int i = 0; i < rows; i++) {
+    delete[] img[i];}
+delete[] img;
 
     return 0;
 }
