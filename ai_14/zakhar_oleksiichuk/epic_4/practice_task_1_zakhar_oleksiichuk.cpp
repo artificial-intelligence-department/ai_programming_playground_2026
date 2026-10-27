@@ -136,21 +136,11 @@ int main() {
     cout << "Висота зображення: ";
     if (!(cin>>rows) || rows <= 0 || rows > 20) {
         cout << "Помилка вводу." << endl;
-        for (int i = 0; i < rows; i++) {
-            delete[] image[i];
-        }
-        delete[] image;
-        image = nullptr;
         return 0;
     }
     cout << "Ширина зображення: ";
     if (!(cin>>cols) || cols <= 0 || cols > 20) {
         cout << "Помилка вводу." << endl;
-        for (int i = 0; i < rows; i++) {
-            delete[] image[i];
-        }
-        delete[] image;
-        image = nullptr;
         return 0;
     }
 
