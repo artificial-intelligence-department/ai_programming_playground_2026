@@ -1,4 +1,10 @@
-# include <iostream>
+/*  
+Лабораторна 4 завдання 1
+Варіант 8
+Ярошенко Володимир 
+11 група 
+*/
+#include <iostream>
 #include  <ctime>
 using namespace std;
 

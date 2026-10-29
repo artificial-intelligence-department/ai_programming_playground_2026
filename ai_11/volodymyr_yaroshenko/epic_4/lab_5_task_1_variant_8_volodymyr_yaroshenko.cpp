@@ -1,3 +1,9 @@
+/*  
+Лабораторна 5 завдання 1
+Варіант 8
+Ярошенко Володимир 
+11 група 
+*/
 #include <iostream>
 using namespace std;
 const int MAX = 5;
