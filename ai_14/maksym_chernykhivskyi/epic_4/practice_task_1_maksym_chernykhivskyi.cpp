@@ -20,7 +20,7 @@ bool readInt(int &value){
         cin.ignore(1000000, '\n');
     } else {
         c = cin.peek(); // наступний символ після числа
-        if (c == EOF || c == ' ' || c == '\t' || c == '\n' || c == '\r') {
+        if (c == EOF || c == ' ' || c == '\t' || c == '\n') {
             value = x;
             result = true;
         } else {

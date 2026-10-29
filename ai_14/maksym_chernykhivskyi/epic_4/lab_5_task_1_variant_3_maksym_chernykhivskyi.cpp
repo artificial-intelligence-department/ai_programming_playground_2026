@@ -7,18 +7,20 @@
 using namespace std;
 
 void input(int matrix[20][20], int rows, int cols){
-
     cout << "Введіть вихідну матрицю (числа через пробіл), розмір " << rows << "x" << cols << ": " << endl;
 
     for(int i = 0; i < rows; i++) {
         for(int j = 0; j < cols; j++) {
-            cin >> matrix[i][j];
+            while (!(cin >> matrix[i][j])) {
+                cout << "Помилка. Введено нечислове значення. Всі значення після нього були відкинуті";
+                cin.clear();
+                cin.ignore(100000, '\n');
+            }
         }
     }
 }
 
 void rotate(int matrix[20][20], int rotated_matrix[20][20], int rows, int cols){
-
     for(int i = 0; i < rows; i++) {
         for(int j = 0; j < cols; j++) {
             rotated_matrix[j][rows - 1 - i] = matrix[i][j];
@@ -27,7 +29,6 @@ void rotate(int matrix[20][20], int rotated_matrix[20][20], int rows, int cols){
 }
 
 void add(int matrix[20][20], int rotated_matrix[20][20], int output_matrix[20][20], int rows, int cols){
-
     for(int i = 0; i < rows; i++) {
         for(int j = 0; j < cols; j++) {
             output_matrix[i][j] = matrix[i][j] + rotated_matrix[i][j];
@@ -36,7 +37,6 @@ void add(int matrix[20][20], int rotated_matrix[20][20], int output_matrix[20][2
 }
 
 void print(int output_matrix[20][20], int rows, int cols){
-
     cout << "\nВихідна матриця + матриця повернута на 90 градусів вправо:" << endl;
 
     for(int i = 0; i < rows; i++) {
