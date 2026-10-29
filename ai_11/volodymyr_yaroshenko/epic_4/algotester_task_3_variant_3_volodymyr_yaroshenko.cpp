@@ -1,3 +1,9 @@
+/*  
+Algotester 3
+Варіант 3 
+Ярошенко Володимир 
+11 група 
+*/
 #include <iostream>
 #include <string>
 using namespace std;

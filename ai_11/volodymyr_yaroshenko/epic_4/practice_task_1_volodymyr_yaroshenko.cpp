@@ -1,3 +1,8 @@
+/*  
+Практичне завдання
+Ярошенко Володимир 
+11 група 
+*/
 #include <iostream>
 #include <iomanip>
 using namespace std;

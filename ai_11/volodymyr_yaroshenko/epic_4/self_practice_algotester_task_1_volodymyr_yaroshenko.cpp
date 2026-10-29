@@ -1,3 +1,8 @@
+/*  
+Self Practice завдання 1
+Ярошенко Володимир 
+11 група 
+*/
 #include <iostream>
 #include <algorithm>
 using namespace std;
