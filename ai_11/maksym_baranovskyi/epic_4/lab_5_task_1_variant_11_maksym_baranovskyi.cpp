@@ -3,7 +3,6 @@
 using namespace std;
 
 int checkSort(int** array, int row, int m){
-
     bool ascending = true, descending = true;
 
     for(int j = 0; j < m - 1; j++){
@@ -25,10 +24,10 @@ int checkSort(int** array, int row, int m){
 }
 
 void sortRows(int** array, int n, int m){
-    for(int i = 0; i < n - 1; i++){
-        int checkedSort = (array, i, m);
-        if(checkedSort == -1){
-            continue;
+    for(int i = 0; i < n; i++){
+        int checkedSort = checkSort(array, i, m);
+        if(checkedSort == 1){
+            continue;   
         }
         for(int k = 0; k < m - 1; k++){
             for(int j = 0; j < m - 1 - k; j++){
@@ -42,45 +41,67 @@ void sortRows(int** array, int n, int m){
     }
 }
 
+void freeArray(int**& array, int rows){
+    for(int i = 0; i < rows; i++){
+        delete[] array[i];
+        array[i] = nullptr;
+    }
+    delete[] array;
+    array = nullptr;
+}
+
 int main(){
 
     cout << "Введіть кількість рядків та стовпців: " << endl;
     int n, m;
-    cin >> n >> m;
+    if(!(cin >> n >> m) || n < 1 || m < 1){
+        cout << "Введено некоректне значення!" << endl;
+        return 1;
+    }
 
-    int ** array = new int*[n];
+    int** array = new int*[n];
+    for(int i = 0; i < n; i++){
+        array[i] = nullptr;  
+    }
 
     cout << "Введіть елементи масиву: " << endl;
 
     for(int i = 0; i < n; i++){
         array[i] = new int[m];
         for(int j = 0; j < m; j++){
-            cin >> array[i][j];
+            if(!(cin >> array[i][j])){
+                cout << "Введено некоректне значення!" << endl;
+                freeArray(array, n);
+                return 1;
+            }
         }
     }
 
-    cout << "Введіть номер рядка для перевірки на сортування: " << endl;
+    cout << "Введіть номер рядка для перевірки на сортування (від 1 до " << n << "): " << endl;
     int row;
-    cin >> row;
+    if(!(cin >> row) || row < 1 || row > n){
+        cout << "Некоректний номер рядка!" << endl;
+        freeArray(array, n);
+        return 1;
+    }
 
-    int rowResult = checkSort(array, row + 1, m);
+    int rowResult = checkSort(array, row - 1, m);
 
     if(rowResult == 1) cout << "Впорядкований за зростанням" << endl;
-    else if(rowResult == -1) cout << "Впорядкований за спаданням" << endl; 
+    else if(rowResult == -1) cout << "Впорядкований за спаданням" << endl;
     else cout << "Невпорядкований" << endl;
 
     sortRows(array, n, m);
 
-    cout << "Результат після сортування: ";
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < m; j++) cout << array[i][j] << " ";
+    cout << "Результат після сортування: " << endl;
+    for(int i = 0; i < n; i++){
+        for(int j = 0; j < m; j++){
+            cout << array[i][j] << " ";
+        }
         cout << endl;
     }
 
-    for(int i = 0; i < n; i++){
-        delete[] array[i];
-    }
-    delete[] array;
+    freeArray(array, n);
 
     return 0;
 }
