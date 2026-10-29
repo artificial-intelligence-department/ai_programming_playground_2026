@@ -55,6 +55,7 @@ int main() {
         }
 
         M[first_even + 1] = M[first_even] + 2;
+        N++;
     }
 
     // 5) Друк кінцевого масиву
