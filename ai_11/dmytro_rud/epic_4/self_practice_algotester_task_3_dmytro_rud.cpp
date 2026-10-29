@@ -1,48 +1,53 @@
 #include <iostream>
 #include <vector>
-#include <cmath>
-#include <iomanip> // Необхідно для setprecision
+#include <algorithm>
 
 using namespace std;
 
-double distance(double x1, double y1, double x2, double y2) {
-    return hypot(x2 - x1, y2 - y1);
-}
-
-double sphere_volume(double radius) {
-    const double PI = acos(-1.0); 
-    return (4.0 / 3.0) * PI * pow(radius, 3);
-}
-
 int main() {
-    // Оптимізація введення-виведення для швидкості
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-
+    // Довжина ділянки
     int n;
-    if (!(cin >> n)) return 0;
-    
-    vector<vector<int>> matrix(n, vector<int>(2, 0));
+    cin >> n;
 
-    for (int i = 0; i < n; i++) {
-        cin >> matrix[i][0];
-        cin >> matrix[i][1];
+    // Дозволені довжини стрибків
+    int k;
+    cin >> k;
+    vector<int> jumps(k);
+    for (int i = 0; i < k; i++) {
+        cin >> jumps[i];
     }
-    
-    double max_dist = 0;
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < i; j++) {
-            double dist = distance(matrix[i][0], matrix[i][1], matrix[j][0], matrix[j][1]);
-            if (dist > max_dist) {
-                max_dist = dist;
+
+    // Кратери: crater[x] == true, якщо в точці x яма
+    int m;
+    cin >> m;
+    vector<bool> crater(n, false);
+    for (int i = 0; i < m; i++) {
+        int x;
+        cin >> x;
+        crater[x] = true;
+    }
+
+    // dp[i] = мінімальна кількість стрибків до точки i, -1 якщо недосяжна
+    vector<int> dp(n, -1);
+
+    // 1. Базовий випадок (старт)
+    dp[0] = 0;
+
+    // 2. Головний цикл: i від 1 до n-1
+    for (int i = 1; i < n; i++) {
+        if (crater[i]) continue;
+
+        for (int d : jumps) {
+            if (d <= i && dp[i - d] != -1) {
+                int cand = dp[i - d] + 1;
+                if (dp[i] == -1 || cand < dp[i]) {
+                    dp[i] = cand;
+                }
             }
         }
     }
-    
-    double radius = max_dist / 2.0;
-    
-    // Виведення з фіксованою точністю 6 знаків після коми
-    cout << fixed << setprecision(6) << sphere_volume(radius) << "\n";
-    
+    // 3. Виводимо відповідь
+    cout << dp[n - 1] << endl;
+
     return 0;
 }
