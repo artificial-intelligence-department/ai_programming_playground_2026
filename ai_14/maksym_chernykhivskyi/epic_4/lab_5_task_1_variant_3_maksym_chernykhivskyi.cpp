@@ -12,7 +12,7 @@ void input(int matrix[20][20], int rows, int cols){
     for(int i = 0; i < rows; i++) {
         for(int j = 0; j < cols; j++) {
             while (!(cin >> matrix[i][j])) {
-                cout << "Помилка. Введено нечислове значення. Всі значення після нього були відкинуті";
+                cout << "Помилка. Введено нечислове значення. Всі значення після нього були відкинуті" << endl;
                 cin.clear();
                 cin.ignore(100000, '\n');
             }
