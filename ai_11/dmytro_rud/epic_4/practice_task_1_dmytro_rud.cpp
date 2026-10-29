@@ -1,8 +1,12 @@
 #include <iostream>
 #include <limits>
 #include <iomanip>
+#include <utility>
 
 using namespace std;
+
+// Ставиться в true, коли введення закінчилося (EOF).
+bool inputEnded = false;
 
 bool endOfToken() {
     int c = cin.peek();
@@ -14,6 +18,10 @@ bool endOfToken() {
 bool readInt(int& value) {
     if (cin >> value && endOfToken()) {
         return true;
+    }
+
+    if (cin.eof()) {
+        inputEnded = true;
     }
 
     cin.clear();
@@ -44,8 +52,7 @@ void showImage(int** &image, int rows, int cols) {
         }
         cout << "\n";
     }
-    cout << "зображення " << rows << "х" << cols << "\n\n";
-    cout << "Малюнок" << "\n";
+    cout << "\nМалюнок" << "\n";
 
     for(int i = 0;i < rows;i++) {
         for (int j = 0;j < cols; j++) {
@@ -84,6 +91,7 @@ void showImage(int** &image, int rows, int cols) {
         }
         cout << "\n";
     }
+    cout << "\nРозміри зображення: " << rows << " x " << cols << "\n";
 }
 
 void findExtremes(
@@ -245,7 +253,7 @@ int main() {
         }
     }
 
-    int choice;
+    int choice = -1;
 
     do {
         cout << "\n--- Меню ---\n";
@@ -258,8 +266,14 @@ int main() {
         cout << "Ваш вибір: ";
 
         if (!readInt(choice)) {
+            if (inputEnded) {
+                cout << "\nВведення завершено. Вихід з програми.\n";
+                break;
+            }
+
             cout << "Помилка: введіть ціле число від 0 до 5.\n";
-            continue;
+            choice = -1;
+            continue;                // назад до меню
         }
 
         switch (choice) {
