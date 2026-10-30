@@ -186,7 +186,7 @@ int** rotateRight(int** img, int rows, int cols) {
     // переносимо числа зі старого в новий
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++) {
-            newImg[rows][cols] = img[i][j];
+           newImg[j][rows - 1 - i] = img[i][j];
         }
     }
 
