@@ -113,6 +113,7 @@ int main()
     for (int i = 0; i < rows; i++)
     {
         delete[] image[i];
+        image[i] = nullptr;
     }
     delete[] image;
     image=nullptr;
@@ -229,6 +230,7 @@ int** rotateRight(int** img, int rows, int cols){
     for (int i = 0; i < rows; i++)
     {
         delete[] img[i];
+        img[i] = nullptr;
     }
     delete[] img;
     img=nullptr;
