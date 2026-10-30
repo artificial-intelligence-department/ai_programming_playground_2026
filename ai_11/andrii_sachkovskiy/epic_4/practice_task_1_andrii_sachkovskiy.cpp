@@ -269,7 +269,7 @@ for (int i = 0; i < visota; i++) {
             return 0;
         }
         int next = cin.peek();
-        if (next != '\n' && next != ' ' && next != '\t' && next != '\r' && next != EOF) {
+        if (next != '\n' ) {
             cout << "Ви вели не ціле число" << endl;
             freeImg(img, visota);
             return 0;
