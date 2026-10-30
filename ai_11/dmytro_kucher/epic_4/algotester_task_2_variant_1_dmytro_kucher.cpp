@@ -5,6 +5,7 @@
 */
 
 #include<iostream>
+#include <climits>
 using namespace std;
 
 int main () {
@@ -12,46 +13,48 @@ int main () {
     int N;
     cin >> N;
 
-    int r[N];
+    int* r = new int[N];
     for (int i = 0; i<N; i++) {
         cin >> r[i];
     }
 
-    if (N < 2) {
+    if (N <= 2) {
         cout << 0;
-        return 1;
+        delete[] r;
+        return 0;
     }
 
-    int minR = 0;
-    bool first = true;
+    int max1 = INT_MIN;
+    int max2 = INT_MIN;
+
+    int min1 = INT_MAX;
+    int min2 = INT_MAX;
 
     for (int i = 0; i<N; i++) {
 
-        int min, max;
-        bool initialized = false;
-
-        for (int j = 0; j< N; j++) {
-            if (j == i) continue;
-
-            if (!initialized) {
-                min = r[j];
-                max = r[j];
-                initialized = true;
-            }
-
-            if (r[j]>max) max = r[j];
-            if (r[j]<min) min = r[j];
+        if (r[i] >= max1) {
+            max2 = max1;
+            max1 = r[i];
+        }
+        else if (r[i] > max2) {
+            max2 = r[i];
         }
 
-        int d = max - min;
-
-        if (first || d < minR) {
-            minR = d;
-            first = false;
+        if (r[i] <= min1) {
+            min2 = min1;
+            min1 = r[i];
+        }
+        else if (r[i] < min2) {
+            min2 = r[i];
         }
     }
 
-    cout << minR << "\n";
+    int m = max1 - min2;
+    if (max2 - min1 < m) m = max2 - min1;
+
+    cout << m << "\n";
+
+    delete[] r;
     
     return 0;
 }
