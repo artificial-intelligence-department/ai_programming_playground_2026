@@ -1,255 +1,231 @@
-/*
-Задача: Аналізатор місячного бюджету
-Автор: Дрогомирецька Ольга
-Група: ШІ-13
-*/
-#include <iostream>
-#include <iomanip>
+// Завдання: Аналізатор місячного бюджету
+// Авторка: Дрогомирецька Ольга
+// Група: ШІ-13
+
+#include <iostream> 
 #include <cmath>
+#include <iomanip>
+
 using namespace std;
 
-const int MAX = 31;
+const int MAX_DAYS = 31; //максимальна кількість днів обліку протягом одного місяця.
 
-double input(const char*);
-int readInt(const char*, int, int);
-double sum(const double[], int);
-void minMax(const double[], int, double&, double&);
-void showDays(const double[], int);
-void statistics(const double[], int, double);
-void limitDays(const double[], int, double = 1000);
-void topThree(const double[], int);
-
-int main() {
-    cout << fixed << setprecision(2);
-
-    double budget = input("Бюджет на місяць (грн): ");
-    int n = readInt("Кількість днів обліку: ", 1, MAX);
-
-    double a[MAX];
-    cout << "Витрати по днях (грн): ";
-
+void showSpending (double spending[], int n) // функція виводить номер дня та витрати за цей день
+{ 
+    cout << "День\tВитрати, грн" << endl;
     for (int i = 0; i < n; i++) {
-        while (!(cin >> a[i]) || !isfinite(a[i]) || a[i] < 0) {
-            cout << "Помилка! Введіть витрати за день "
-                 << i + 1 << " ще раз: ";
-            cin.clear();
-            cin.ignore(10000, '\n');
-        }
-    }
-
-    int choice;
-    do {
-    menu:
-        cout << "\n1 - Показати витрати по днях\n"
-             << "2 - Статистика витрат\n"
-             << "3 - Дні з перевищенням денного ліміту\n"
-             << "4 - Три найдорожчі дні\n"
-             << "0 - Вийти\n"
-             << "Ваш вибір: ";
-
-        if (!(cin >> choice) || choice < 0 || choice > 4) {
-            cout << "Неправильний пункт меню!\n";
-            cin.clear();
-            cin.ignore(10000, '\n');
-            goto menu;
-        }
-
-        switch (choice) {
-            case 1:
-                showDays(a, n);
-                break;
-
-            case 2:
-                statistics(a, n, budget);
-                break;
-
-            case 3: {
-                double limit = input(
-                    "Денний ліміт (грн, 0 = за замовчуванням): ");
-
-                if (limit == 0)
-                    limitDays(a, n);
-                else
-                    limitDays(a, n, limit);
-                break;
-            }
-
-            case 4:
-                topThree(a, n);
-                break;
-
-            case 0:
-                cout << "Програму завершено.\n";
-                break;
-        }
-    } while (choice != 0);
-    return 0;
-}
-// Введення невід'ємного числа
-double input(const char* msg) {
-    double x;
-
-    while (true) {
-        cout << msg;
-
-        if (cin >> x && isfinite(x) && x >= 0)
-            return x;
-
-        cout << "Помилка! Введіть невід'ємне число.\n";
-        cin.clear();
-        cin.ignore(10000, '\n');
+        cout << i + 1 << "\t" << spending[i] << endl;
     }
 }
 
-// Введення цілого числа в межах
-int readInt(const char* msg, int min, int max) {
-    int x;
+void minMax (double spending[], int n, double &mn, double &mx) //записує мінімум і макс у змінні виклику через посилання.
+{
+mn = spending[0];
+mx = spending[0];
+for (int i = 1; i < n; i++) {
+    if (spending[i] < mn) mn = spending[i];
+    if (spending[i] > mx) mx = spending[i];
+}
+}
 
-    while (true) {
-        cout << msg;
-
-        if (cin >> x && x >= min && x <= max)
-            return x;
-
-        cout << "Помилка! Введіть ціле число від "
-             << min << " до " << max << ".\n";
-        cin.clear();
-        cin.ignore(10000, '\n');
+double total(double spending[], int n) { //рекурсивно обчислює суму
+        if (n == 0) { return 0;}
+        return spending[n - 1] + total(spending, n - 1);
     }
-}
 
-// Рекурсивне обчислення суми
-double sum(const double a[], int n) {
-    if (n == 0)
-        return 0;
+void showStatistics(double spending[], int n, double budget) { //показує статистику витрат і перевіряє достатність бюджету
+    double mn;
+    double mx;
 
-    return a[n - 1] + sum(a, n - 1);
-}
+    minMax (spending, n, mn, mx);
 
-// Мінімум і максимум через параметри-посилання
-void minMax(const double a[], int n, double& mn, double& mx) {
-    mn = mx = a[0];
+    cout << "Мінімальні витрати за день: " << mn << fixed << setprecision(2) << " грн" << endl;
+    cout << "Мaксимальні витрати за день: " << mx << fixed << setprecision(2) << " грн" << endl;
 
-    for (int i = 1; i < n; i++) {
-        if (a[i] < mn) mn = a[i];
-        if (a[i] > mx) mx = a[i];
+    double sum = total (spending, n);
+    double balance = budget - sum;
+    cout << "Сумарні витрати: " << sum << fixed << setprecision(2) << " грн" << endl;
+    if (balance < 0){
+        cout << "Перевитрата понад бюджет: " << fabs(balance) << fixed << setprecision(2) << " грн" << endl;
+    } else {
+        cout << "Залишок бюджету: " << balance << fixed << setprecision(2) << " грн" << endl;
     }
+
+    int daysPurchases = 0; 
+    for (int i = 0; i < n; i++){ //пропускаю нульові витрати й рахую лише дні з покупкою
+    if (spending[i] == 0){
+        continue;
+    } 
+        daysPurchases++;
+    }
+    cout << "Днів з покупками: " << daysPurchases << endl;
+
+    if (daysPurchases > 0) { //запобігає діленню на нуль
+        double average = sum / daysPurchases;
+        cout << "Середні витрати за такий день: " << fixed << setprecision(2) << average << " грн" << endl;
+    } else {
+        cout << "Днів з покупками не було" << endl;
+    }
+
+    double accumulated = 0;
+    int i = 0;
+    while (i < n) { //накопичую витрати до першого перевищення бюджету.
+    accumulated += spending[i];
+    if (accumulated > budget) {
+        cout << "Бюджет вичерпано на дні " << i + 1 << ", накопичено " << fixed << setprecision(2) << accumulated << " грн." << endl;
+        break;
+    }
+    i++;
+}
+if (accumulated <= budget) {
+    cout << "Бюджет не вичерпано." << endl;
+    cout << "Залишок бюджету: " << fixed << setprecision(2) << budget - accumulated << " грн" << endl;
+}
 }
 
-// Показ витрат по днях
-void showDays(const double a[], int n) {
-    cout << "\nДень\tВитрати, грн\n";
-
-    for (int i = 0; i < n; i++)
-        cout << i + 1 << "\t" << a[i] << '\n';
-}
-
-// Статистика витрат
-void statistics(const double a[], int n, double budget) {
-    double mn, mx;
-    double total = sum(a, n);
-    double purchases = 0;
+void showOverlimit(double spending[], int n, double limit = 1000) { //показує дні з перевищенням ліміту, типовий ліміт = 1000 грн
     int count = 0;
 
-    minMax(a, n, mn, mx);
-
-    cout << "\nМінімальні витрати за день: "
-         << mn << " грн\n";
-    cout << "Максимальні витрати за день: "
-         << mx << " грн\n";
-    cout << "Сумарні витрати: " << total << " грн\n";
-
-    if (total > budget)
-        cout << "Перевитрата понад бюджет: "
-             << abs(budget - total) << " грн\n";
-    else
-        cout << "Залишок бюджету: "
-             << budget - total << " грн\n";
+    cout << "Ліміт: " << fixed << setprecision(2) << limit << " грн" << endl;
 
     for (int i = 0; i < n; i++) {
-        if (a[i] == 0)
-            continue;
-
-        purchases += a[i];
-        count++;
-    }
-
-    cout << "Днів з покупками: " << count << '\n';
-
-    // Перевіряю чи були взагалі дні з покупками
-    if (count > 0)
-        cout << "Середні витрати за такий день: "
-             << purchases / count << " грн\n";
-    else
-        cout << "Покупок не було.\n";
-    
-// Перевіряю коли бюджет вичерпано
-    double spent = 0;
-    int day = 0;
-    bool exhausted = false;
-
-    while (day < n) {
-        spent += a[day];
-        day++;
-
-        if (spent > budget) {
-            cout << "Бюджет вичерпано на дні "
-                 << day << ", накопичено "
-                 << spent << " грн.\n";
-            exhausted = true;
-            break;
-        }
-    }
-
-    if (!exhausted)
-        cout << "Бюджет не перевищено. Залишок: "
-             << budget - spent << " грн.\n";
-}
-
-// Дні з перевищенням денного ліміту
-void limitDays(const double a[], int n, double limit) {
-    int count = 0;
-
-    cout << "Ліміт: " << limit << " грн\n";
-
-    for (int i = 0; i < n; i++) {
-        if (a[i] > limit) {
-            cout << "  день " << i + 1 << ": "
-                 << a[i] << " грн\n";
+        if (spending[i] > limit) {
+            cout << " день " << i + 1 << ": " << spending[i] << " грн" << endl;  
             count++;
         }
     }
-
-    cout << "Разом днів з перевищенням: "
-         << count << '\n';
+    cout << "Разом днів з перевищенням: " << count << endl;
 }
 
-// Три найбільші витрати
-void topThree(const double a[], int n) {
-    double b[MAX];
-
-    for (int i = 0; i < n; i++)
-        b[i] = a[i];
-
-// Бульбашкове сортування
-    for (int i = 0; i < n - 1; i++) {
-        for (int j = 0; j < n - i - 1; j++) {
-            if (b[j] < b[j + 1]) {
-                double temp = b[j];
-                b[j] = b[j + 1];
-                b[j + 1] = temp;
+void showTopThree (double spending[], int n) {
+    double copy[MAX_DAYS];
+    //Спочатку повністю копіюю витрати
+    for (int i = 0; i < n; i++){
+        copy[i] = spending[i]; }
+        //Тепер сортую копію за спаданням
+        for (int i = 0; i < n - 1; i++){
+            for (int j = 0; j < n - 1 - i; j++) {
+                if (copy[j] < copy[j + 1]){
+                double temp = copy[j];
+                copy[j] = copy[j + 1];
+                copy[j + 1] = temp; }
+                }
             }
+            int count = 3;
+            if (n < 3) {
+                count = n;
+            }
+
+            cout << fixed << setprecision(2);
+            cout << "Топ-" << count << " витрат: ";
+
+            for (int i = 0; i < count; i++){
+                cout << copy[i];
+                if (i < count - 1) {
+                    cout << ", "; 
+                }
+            }
+            cout << " грн" << endl;
         }
+
+int main() {
+cout << fixed << setprecision(2);
+    double budget;
+//зчитуєм початкові дані та перевіряємо їх на умову
+    budget_input:
+    cout << "Бюджет на місяць (грн) : ";
+    cin >> budget;
+
+    if (cin.fail() || budget <= 0) {
+        cout << "Помилка: введіть число більше нуля." << endl;
+        cin.clear();
+        cin.ignore(1000, '\n');
+        goto budget_input;
     }
-// тернарний оператор
-    int count = (n < 3) ? n : 3;
 
-    cout << "Топ-" << count << " витрат: ";
+    int n;
+    double spending[MAX_DAYS] = {0};
 
-    for (int i = 0; i < count; i++) {
-        if (i > 0) cout << ", ";
-        cout << b[i];
+    days_input:
+    cout << "Кількість днів обліку: "; 
+    cin >> n;
+
+    if (cin.fail() || n < 1 || n > MAX_DAYS) {
+        cout << "Помилка: введіть ціле число від 1 до " << MAX_DAYS << endl;
+        cin.clear();
+        cin.ignore(1000, '\n');
+        goto days_input;
     }
 
-    cout << " грн\n";
+    spending_input:
+    cout << "Витрати по днях (грн): ";
+    for (int i = 0; i < n; i++){
+        cin >> spending[i];
+    
+    if (cin.fail() || spending[i] < 0) {
+        cout << "Помилка: введіть невідʼємні числа." << endl;
+        cin.clear();
+        cin.ignore(1000, '\n');
+        goto spending_input;
+    }
 }
+    //повторюю меню до вибору пункту 0
+    int choice;
+    do {
+    menu_input:
+        cout << endl << "МЕНЮ" << endl;
+        cout << "1 - Показати витрати по днях" << endl;
+        cout << "2 - Статистика витрат" << endl;
+        cout << "3 - Дні з перевищенням денного ліміту" << endl;
+        cout << "4 - Три найдорожчі дні" << endl;
+        cout << "0 - Вийти" << endl;
+        cout << "Ваш вибір: ";
+        cin >> choice;
+
+        if (cin.fail() || choice < 0 || choice > 4) {
+        cout << "Помилка: виберіть пункт меню від 0 до 4." << endl;
+        cin.clear();
+        cin.ignore(1000, '\n');
+        goto menu_input;
+        }
+        //викликаю функцію відповідно до вибраного пункту меню
+        switch (choice) {
+            case 1: 
+            showSpending(spending, n);
+            break;
+
+            case 2: 
+            showStatistics(spending, n, budget);
+            break;
+
+            case 3: {
+                double limit;
+
+                limit_input:
+                cout << "Денний ліміт (грн, 0 = за замовчуванням): ";
+                cin >> limit;
+
+                if (cin.fail() || limit < 0) {
+                cout << "Помилка: введіть невідʼємнe числo." << endl;
+                cin.clear();
+                cin.ignore(1000, '\n');
+                goto limit_input;
+                }
+
+                if (limit == 0) {
+                    showOverlimit(spending, n);
+                } else { showOverlimit(spending, n, limit);
+                }
+                break;
+            }
+            case 4: 
+                showTopThree(spending, n);
+                break;
+                
+            case 0: 
+            break;
+            }
+
+        } while (choice!= 0);
+        return 0;
+    }
