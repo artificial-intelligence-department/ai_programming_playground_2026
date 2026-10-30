@@ -1,30 +1,15 @@
 #include <iostream>
-#include <string>
 
 using namespace std;
 
+long long zero(int n){
+    if(n < 5) return 0;
+    return n/5 + zero(n/5);
+}
+
 int main(){
-    int n;
+    long long n;
     cin >> n;
-    int bal = 0;
-
-    for(int i = 0; i < n; i++){
-        string es;
-        int m;
-        cin >> es >> m;
-
-        if(es == "earn"){
-            bal += m;
-        }
-        if(es == "spend"){
-            bal -= m;
-        }
-        if(bal < 0){
-            cout << "debt";
-            return 0;
-    }
-    }
-    cout << "chinazes";
-
+    cout << zero(n);
     return 0;
-} 
+}

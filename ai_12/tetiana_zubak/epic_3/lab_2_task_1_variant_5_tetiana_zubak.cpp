@@ -18,7 +18,7 @@ double a(int n){
 
 double res(int n){
     double a0 = a(n);
-    if(fabs(a0) <= e) return 0;
+    if(fabs(a0) <= e) return a0;
     return a(n) + res(n+1);
 }
 

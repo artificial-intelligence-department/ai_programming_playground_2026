@@ -63,7 +63,7 @@ const double defLim = 1000;
 
     if(spend1 == true){
     spend1 = false;
-    cout << "Введіть коректне значення для дня ";
+    cout << "Некоректне значення для дня ";
     for(int i = 0; i < N; i++){
     if(spending[i] == -1){ 
     if(coma == true) cout << ", ";
@@ -73,16 +73,7 @@ const double defLim = 1000;
     }
     }
     
-    cout << ": ";
-    for(int i = 0; i < N; i++){
-        if(spending[i] == -1){ 
-        cin >> spending[i];
-        if(spending[i] < 0){ 
-        spending[i] = -1;
-        spend1 = true;
-        }
-        }
-    }
+    cout << ". (Enter)";
     a = 1;
     cost(spending, N);
     }
@@ -177,12 +168,13 @@ const double defLim = 1000;
  }
 
  void expenses(double spending[], int N){
-    int length = maxLen(spending, N) + 12;
+    int length = maxLen(spending, N) + 5;
+    if (length) length = 12;
     
-    cout << setw(8) << "День"  << setw(length + 10) << "Витрати, грн" << endl;
+    cout << setw(14) << "День"  <<"  "<< setw(length) << "Витрати, грн" << endl;
     cout << fixed << setprecision(2);
     for(int i = 0; i < N; i++){
-        cout << setw(4) << i + 1 << endl << setw(length) << spending[i] << endl;
+        cout << setw(10) << i + 1 <<"  " << setw(length) << spending[i] << endl;
     }
  }
 
@@ -216,12 +208,12 @@ const double defLim = 1000;
     double diff = 0;
     if(bug > sum){
         diff = bug - sum;
-        cout << left << setw(30) << "Залишок становить " << right << setw(10) << diff << " грн" << endl;
+        cout << left << "Залишок становить " << right << diff << " грн" << endl;
     }
     else if(bug == sum) cout << "Всі кошти витрачено." << endl;
     else{
         diff = abs(bug - sum);
-        cout << left << setw(30) << "Перевитрата становить " << right << setw(10) << diff << " грн" << endl;
+        cout << left << "Перевитрата становить " << right << diff << " грн" << endl;
     }
   }
   
@@ -253,10 +245,10 @@ const double defLim = 1000;
 
     balance(spending, N);
     if(sum <= bug){
-        cout << " Бюджету вистачило на всі дні.";
+        cout << "Бюджету вистачило на всі дні.";
         balance(spending, N);
     }
-    else cout << " Бюджет скінчився на " << i + 1 << " дні" << endl;
+    else cout << "Бюджет скінчився на " << i + 1 << " дні" << endl;
   }
 
  void statistic(double spending[], int N){
@@ -266,33 +258,34 @@ const double defLim = 1000;
     double Mid = mid(spending, N, k);
 
     cout << fixed << setprecision(2);
-    cout << left << setw(30) <<  "Мінімальні витрати за день: " << right << setw(10) << min << " грн" <<endl;
-    cout << left << setw(30) <<  "Максимальні витрати за день: " << right << setw(10) << max << " грн" <<endl;
-    cout << left << setw(30) <<  "Сумарні витрати: " << right << setw(10) << sumSpend(spending, N) << " грн" <<endl;
+    cout << left <<  "Мінімальні витрати за день: " << right << min << " грн" <<endl;
+    cout << left <<  "Максимальні витрати за день: " << right << max << " грн" <<endl;
+    cout << left <<  "Сумарні витрати: " << right << sumSpend(spending, N) << " грн" <<endl;
     balance(spending, N);
-    cout << left << setw(30) <<  "Днів з покупками: " << right << setw(10) << k <<endl;
-    cout << left << setw(30) <<  "Середні витрати за такий день: " << right << setw(10) << Mid << " грн" <<endl;
+    cout << left <<  "Днів з покупками: " << right << k <<endl;
+    cout << left <<  "Середні витрати за такий день: " << right << Mid << " грн" <<endl;
     dayLim(spending, N);
  }
 
  void Lim(double spending[], int N){
     double lim;
     int pen = 0;
-
+ lim:
     cout << "Денний ліміт(грн, 0 = за замовчуванням): ";
     cin >> lim;
     if(lim == 0) lim = defLim;
+    if(lim < 0) goto lim;
 
     cout << "Ліміт: " << lim << " грн" << endl;
 
     for(int i = 0; i < N; i++){
     if(spending[i] > lim){ 
-    cout << "день" << i + 1 << ": " << spending[i] << " грн" << endl;
+    cout << "день " << i + 1 << ": " << spending[i] << " грн" << endl;
     pen++;
+    }
     }
     if(lim == 0) cout << " - " << endl;
     cout << endl << "Разом днів з перевищенням:" << pen << endl;
- }
  }
 
  void top(double spending[], int N){
