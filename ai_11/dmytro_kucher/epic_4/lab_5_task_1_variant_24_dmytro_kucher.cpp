@@ -17,7 +17,7 @@ int main () {
     const int MAX_VALUE = 20;
     const int MIN_VALUE = 1;
     
-    cout << "Введіть кількість рядків (ціле число, від 1 до 20): ";
+    cout << "\nВведіть кількість рядків (ціле число, від 1 до 20): ";
     cin >> rows;
     if (cin.fail() || rows > MAX_VALUE || rows < MIN_VALUE) {
         cout << "Помилка! Введіть ціле число, від 1 до 20\n";
@@ -31,7 +31,7 @@ int main () {
         return 1;
     }
 
-    int **matrix = new int*[rows];                       //ЗВІЛЬНИТИ ПАМʼЯТЬ
+    int **matrix = new int*[rows];
     for (int i = 0; i<rows; i++) {
         matrix[i] = new int[cols];
     }
@@ -56,7 +56,7 @@ int main () {
 
     quantity = findHowMany(matrix, valueMax, rows, cols);
     
-    cout << "Кількість елементів, що більші від будь-якого елемента на головній діагоналі: " << quantity << "\n\n";
+    cout << "\nКількість елементів, що більші від будь-якого елемента на головній діагоналі: " << quantity << "\n\n";
 
     deleteMatrix(matrix, rows);
 
