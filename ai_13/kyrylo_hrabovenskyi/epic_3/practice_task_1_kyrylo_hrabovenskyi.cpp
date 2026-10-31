@@ -24,7 +24,7 @@ int main()
     int N;
     cout << "enter tracking period (days):\n";
     if (!(cin >> N) || N <= 0 || N > max_days) {
-        cout << "are you the Flash. Your girlfriend said that you are\n";
+        cout << "it is to little time\n";
         goto link2;
     }
 
