@@ -27,7 +27,7 @@ void show_spending(int* spending, int N);
 void findMinMaxRecursive(int* spending, int N, int& minVal, int& maxVal);
 long long getTotalSpending(int* spending, int N);
 void getRemainingBudget(int* spending, int N, int budget);
-int calculateSpendingStats(int* spending, int N, int& totalSpending, double& averageSpending);
+int calculateSpendingStats(int* spending, int N, long long& totalSpending, double& averageSpending);
 void show_statistics(int* spending, int N, int budget);
 void show_days_exceeding_limit(int* spending, int N, int limit = DEFAULT_BUDGET);
 void show_top_three_days(int* spending, int N);
@@ -156,15 +156,13 @@ void collectSpendingLine(const string& line, int* values, int& count, int dayCou
 
     if (added == -1) {
         count = 0;
-        cout << "Витрати мають бути цілими числами"
-             << ". Введіть витрати з самого початку:" << endl;
+        cout << "Витрати мають бути цілими числами. Введіть витрати з самого початку:" << endl;
         return;
     }
 
     if (added == -2) {
         count = 0;
-        cout << "Витрати не можуть бути від'ємними"
-             << ". Введіть витрати з самого початку:" << endl;
+        cout << "Витрати не можуть бути від'ємними. Введіть витрати з самого початку:" << endl;
         return;
     }
 
@@ -347,7 +345,7 @@ void show_statistics(int* spending, int N, int budget) {
 }
 
 // Виведення днів, у які витрати перевищили встановлений ліміт
-void show_days_exceeding_limit(int* spending, int N, int limit = DEFAULT_BUDGET) {
+void show_days_exceeding_limit(int* spending, int N, int limit) {
     int input = 0;
     
     cout << "Денний ліміт (грн, 0 = за замовчуванням): ";
