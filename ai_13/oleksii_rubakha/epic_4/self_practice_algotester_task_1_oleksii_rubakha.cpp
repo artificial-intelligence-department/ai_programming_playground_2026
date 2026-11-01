@@ -1,3 +1,10 @@
+
+/* 
+    Цікавий масив 
+    Олексій Рубаха
+    ШІ-13
+*/
+
 #include <iostream>
 
 using namespace std;
@@ -25,7 +32,7 @@ int main() {
         leftSum += a[i];
 
         if (leftSum == sum / 2) {
-            cout << "ТАК";
+            cout << "TAK";
             return 0;
         }
     }
