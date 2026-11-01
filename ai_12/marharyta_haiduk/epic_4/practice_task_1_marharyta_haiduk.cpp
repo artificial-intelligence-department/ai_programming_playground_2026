@@ -163,6 +163,13 @@ int** rotateRight(int **image, int rows, int cols)
     image = nullptr;
     return newImage;
 }
+void rotateImage(int** &image, int &rows, int &cols)
+{
+    image = rotateRight(image, rows, cols);
+    swapPixels(&rows, &cols);
+    cout << "Зображення повернуто. Нові розміри: " << rows << " x " << cols << endl;
+    printMatrix(image, rows, cols);
+}
 int main() {
     int rows;
     cout << "Введіть висоту пікселів: ";
@@ -229,14 +236,7 @@ int main() {
             case 2: showStatistics(image, rows, cols); break;
             case 3: invertImage(image, rows, cols); break;
             case 4: mirrorImage(image, rows, cols); break;
-            case 5: 
-            {
-                image = rotateRight(image, rows, cols);
-                swapPixels(&rows, &cols);
-                cout << "Зображення повернуто. Нові розміри: " << rows << " x " << cols << endl;
-                printMatrix(image, rows, cols);
-                break;
-            }
+            case 5: rotateImage(image, rows, cols); break;
         }
     } while(choice != 0);
     for (int i = 0; i < rows; i++)
