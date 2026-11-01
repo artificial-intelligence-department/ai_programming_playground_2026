@@ -82,8 +82,7 @@ void showImage(int** img, int rows, int cols) {
     cout << "\nМалюнок:\n";
     showImagePixels(img, rows, cols);
 
-    cout << "\nПоточні розміри: "
-         << rows << " x " << cols << '\n';
+    cout << "\nПоточні розміри: " << rows << " x " << cols << '\n';
 }
 
 // Пошук найтемнішого та найсвітлішого пікселів
