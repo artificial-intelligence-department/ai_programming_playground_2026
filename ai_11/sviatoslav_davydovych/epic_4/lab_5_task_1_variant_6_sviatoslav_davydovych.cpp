@@ -80,7 +80,11 @@ int main(){
         delete[] matrix[i];
     }
     delete[] matrix;
-
+    delete[] highRows;
+    delete[] highCols;
+    delete[] lowCols;
+    delete[] lowRows;
+    
     return 0;
 }
 
