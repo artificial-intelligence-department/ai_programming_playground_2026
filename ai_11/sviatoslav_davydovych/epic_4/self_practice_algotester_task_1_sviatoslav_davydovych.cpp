@@ -9,8 +9,16 @@
 
 using namespace std;
 
-void modifyBoard(int n, vector<vector<bool>> &board, int row, int col);
-
+void modifyBoard(int n, vector<vector<bool>> &board, int row, int col){
+    for (int i = 0; i<n; i++){
+        board[row][(col+i)%n] = true;
+        board[(row+i)%n][col] = true;
+        if (col+i<n){
+            if (row+i<n) board[row+i][col+i] = true;
+            if (row-i>=0) board[row-i][col+i] = true;
+        }
+    }
+}
 
 void printSpace(int space){
     for (int s = 0; s<space; s++){
@@ -28,7 +36,7 @@ void printBoard(int n, const vector<vector<bool>> &board, int space){
     }
 }
 
-int countComb(int n, const vector<vector<bool>> board, int current_col){
+int countComb(int n, const vector<vector<bool>> &board, int current_col){
     if (current_col==n) return 1;
     int result = 0;
     
@@ -40,17 +48,6 @@ int countComb(int n, const vector<vector<bool>> board, int current_col){
         }
     }
     return result;
-}
-
-void modifyBoard(int n, vector<vector<bool>> &board, int row, int col){
-    for (int i = 0; i<n; i++){
-        board[row][(col+i)%n] = true;
-        board[(row+i)%n][col] = true;
-        if (col+i<n){
-            if (row+i<n) board[row+i][col+i] = true;
-            if (row-i>=0) board[row-i][col+i] = true;
-        }
-    }
 }
 
 int main(){
