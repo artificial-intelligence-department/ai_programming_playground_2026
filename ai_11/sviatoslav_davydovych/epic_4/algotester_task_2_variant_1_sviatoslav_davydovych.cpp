@@ -13,6 +13,9 @@ int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
 
+    const int INT_MAX = 100000;
+    const int INT_MIN = 0;
+
     int n;
     cin >> n;
     if (n==1){
@@ -22,7 +25,7 @@ int main(){
         return 0;
     }
 
-    int min1 = 100000, min2 = 100000, max1 = 0, max2 = 0;
+    int min1 = INT_MAX, min2 = INT_MAX, max1 = INT_MIN, max2 = INT_MIN;
     for (int i = 0; i<n; i++){
         int current;
         cin >> current;
@@ -41,7 +44,7 @@ int main(){
             min2 = current;
         }
     }
-
+    
     cout << fmin(max1-min2,max2-min1);
 
     return 0;
