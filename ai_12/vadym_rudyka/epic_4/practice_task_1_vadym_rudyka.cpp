@@ -130,12 +130,12 @@ void showStatistics(int** img, int rows, int cols) {
         total += rowSum;
         cout << "Середня яскравість рядка " << i + 1 << ": "
              << fixed << setprecision(2)
-             << static_cast<double>(rowSum) / cols << '\n';
+             << 1.0 * rowSum / cols << '\n';
     }
 
     cout << "Середня яскравість усього зображення: "
          << fixed << setprecision(2)
-         << static_cast<double>(total) / (rows * cols) << '\n';
+         << 1.0 * total / (rows * cols) << '\n';
 }
 // Функція для інвертування яскравості пікселів
 void invertImage(int** img, int rows, int cols) {
