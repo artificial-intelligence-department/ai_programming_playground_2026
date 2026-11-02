@@ -1,8 +1,14 @@
+/*
+Редактор монохромного зображення
+Карпінський Віталій
+ШІ-14
+*/
 #include <iostream>
 #include <iomanip>
 
 using namespace std;
 
+// Пункт 1: Вивід зображення в числовому вигляді
 void choice_1(int **image, int rows, int cols) {
     cout << "Зображення " << rows << " x " << cols << ":\n";
     for (int i = 0; i < rows; i++) {
@@ -12,6 +18,7 @@ void choice_1(int **image, int rows, int cols) {
         cout << endl;
     }
 
+// Вивід зображення пікселями у вигляді символів
     char draw[] = " .:-=+*#%@";
     cout << "Малюнок: " << endl;
     for (int i = 0; i < rows; i++) {
@@ -23,6 +30,7 @@ void choice_1(int **image, int rows, int cols) {
     }
 }
 
+// Пошук екстремумів через параметри-посилання
 void findExtremes(int **image, int rows, int cols, int &minRow, int &minCol, int &maxRow, int &maxCol) {
     minRow = 0;
     minCol = 0;
@@ -32,9 +40,10 @@ void findExtremes(int **image, int rows, int cols, int &minRow, int &minCol, int
     int max = image[0][0];
 
     for (int i = 0; i < rows; i++) {
+        // Отримуємо вказівник на початок поточного рядка
         int *row = image[i];
         for (int j = 0; j < cols; j++) {
-
+            // Звернення до елемента через розіменування адреси *(row + j)
             if (min > *(row + j)) {
                 min = *(row + j);
                 minRow = i;
@@ -49,6 +58,7 @@ void findExtremes(int **image, int rows, int cols, int &minRow, int &minCol, int
     }
 }
 
+// Пункт 2: Обчислення середньої яскравості та вивід статистики
 void choice_2(int **image, int rows, int cols) {
     int minRow = 0;
     int minCol = 0;
@@ -56,6 +66,7 @@ void choice_2(int **image, int rows, int cols) {
     int maxCol = 0;
 
     findExtremes(image, rows, cols, minRow, minCol, maxRow, maxCol);
+    // Індексація через вказівник
     int minVal = *(image[minRow] + minCol);
     int maxVal = *(image[maxRow] + maxCol);
 
@@ -65,6 +76,7 @@ void choice_2(int **image, int rows, int cols) {
     double sum = 0;
     double rowSum = 0;
 
+    // Обчислення загальної середньої яскравості через вказівники *(row + j)
     for (int i = 0; i < rows; i++) {
         int *row = image[i];
         for (int j = 0; j < cols; j++) {
@@ -74,6 +86,7 @@ void choice_2(int **image, int rows, int cols) {
     double average = sum / (rows*cols);
     cout << "Середня яскравість: " << fixed << setprecision(2) << average << endl;
 
+    // Обчислення середньої яскравості для кожного рядка
     cout << "Середня по рядках: " << fixed << setprecision(1);
     for (int i = 0; i < rows; i++) {
         int *row = image[i];
@@ -87,15 +100,19 @@ void choice_2(int **image, int rows, int cols) {
     cout << endl;
 }
 
+// Функція для звільнення динамічної пам'яті двовимірного масиву
 void imageDelete(int **&image, int rows) {
     for (int i = 0; i < rows; i++) {
+        // Спочатку звільняємо кожен рядок (масиви int)
         delete[] image[i];
         image[i] = nullptr;
     }
+    // Потім звільняємо масив вказівників на рядки
     delete[] image;
     image = nullptr;
 }
 
+// Пункт 3: Інверсія яскравості
 void choice_3(int **image, int rows, int cols) {
     cout << "Яскравість інвертовано:" << endl;
     for (int i = 0; i < rows; i++){
@@ -107,12 +124,14 @@ void choice_3(int **image, int rows, int cols) {
     }
 }
 
+// Допоміжна функція для обміну значень двох пікселів через вказівники
 void swapPixels(int *a, int *b) {
     int change = *a;
     *a = *b;
     *b = change;
 }
 
+// Пункт 4: Віддзеркалення по горизонталі
 void choice_4(int **image, int rows, int cols) {
     cout << "Зображення віддзеркалено" << endl;
     cout << "Початкове:" << endl;
@@ -122,12 +141,14 @@ void choice_4(int **image, int rows, int cols) {
         }
         cout << endl;
     }
+    // Міняємо місцями пікселі від країв до середини рядка
     cout << "Результат:" << endl;
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols / 2; j++) {
             swapPixels(&image[i][j], &image[i][cols - j - 1]);
         }
     }
+
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++) {
             cout << image[i][j] << " ";
@@ -136,16 +157,20 @@ void choice_4(int **image, int rows, int cols) {
     }
 }
 
+// Пункт 5: Поворот на 90 градусів праворуч зі зміною розміру
 int **rotateRight(int **image, int rows, int cols) {
+    // Виділяємо новий динамічний масив з інвертованими розмірами
     int ** image2 = new int *[cols];
     for (int i = 0; i < cols; i++) {
         image2[i] = new int [rows];
     }
+    // Копіюємо елементи за правилом повороту
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++) {
             image2[j][rows - 1 - i] = image[i][j];
         }
     }
+    // Звільняємо старий масив, щоб уникнути витоку пам'яті
     imageDelete(image, rows);
     cout << "Зображення перевернуто. Нові розміри: " << cols << " x " << rows << endl;
     for (int i = 0; i < cols; i++) {
@@ -154,10 +179,12 @@ int **rotateRight(int **image, int rows, int cols) {
         }
         cout << endl;
     }
+    // Повертаємо новий масив
     return image2;
 }
 
 int main() {
+    // Ініціалізація та валідація даних
     int rows = 0;
     int cols = 0;
 
@@ -196,6 +223,7 @@ int main() {
     int temp;
     cin.ignore(10000, '\n');
 
+    // Цикл do-while для повторення меню до вибору "0"
     do {
         cout << "\n==========МЕНЮ==========" << endl;
         cout << "1    Показати зображення" << endl;
@@ -244,6 +272,7 @@ int main() {
         }
     } while (choice != 0);
 
+    // Очищення пам'яті
     imageDelete(image, rows);
 
     cout << "==========Завершення роботи==========\n" << endl;

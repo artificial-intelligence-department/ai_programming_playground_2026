@@ -1,3 +1,8 @@
+/*
+Задача: Симетрична матриця
+Карпінський Віталій
+ШІ-14
+*/
 #include <iostream>
 
 using namespace std;
