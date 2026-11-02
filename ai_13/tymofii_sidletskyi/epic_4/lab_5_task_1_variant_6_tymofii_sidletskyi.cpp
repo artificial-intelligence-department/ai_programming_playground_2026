@@ -12,13 +12,13 @@ void points (int rowsf, int colsf, int mf[][10]) {
             bool max_in_row = true;
             bool min_in_col = true;
 
-            for (int k = 0; k < rowsf; k++) {
+            for (int k = 0; k < colsf; k++) {
                 if (mf[i][k] > current) {
                     max_in_row = false;
                     break;
                 }
             }
-            for (int k = 0; k < colsf; k++) {
+            for (int k = 0; k < rowsf; k++) {
                 if (mf[k][j] < current) {
                     min_in_col = false;
                     break;
