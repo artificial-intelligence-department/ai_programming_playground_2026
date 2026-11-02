@@ -51,7 +51,9 @@ while(!(cin >> n) || n < 1){//ввід розміру
     swapLines(n, arr);
     for(int i = 0; i<n; i++){//видалення динамічного масиву
         delete[] arr[i];
+        arr[i] = nullptr;
     }
     delete[] arr;
+    arr = nullptr;
     return 0;
 }

@@ -21,7 +21,7 @@ void swapPixels(int *a, int *b);
 //ф-ція для пункту меню "4"
 void mirror(int **img,int rows,int cols);
 //ф-ція для пункту меню "5"
-int** rotateRight(int** img, int* rows, int* cols);
+int** rotateRight(int** img, int rows, int cols);
 int main(){
     int rows = 0, cols = 0,minRow = 0, minCol = 0, maxRow = 0, maxCol = 0, choice;
     cout << "Висота зображення: ";
@@ -70,11 +70,15 @@ int main(){
             break;}
         case 4:{mirror(img, rows, cols);
             break;}
-        case 5:{img = rotateRight(img, &rows, &cols);//редагуєм масив за допомогою присвоєнню поверненого результату
-            break;}//передаємо rows i cols за допомогою адреси щоб потім обміняти їх значення поза мейном
+        case 5:{img = rotateRight(img, rows, cols);//редагуєм масив за допомогою присвоєнню поверненого результату
+            int temp = rows;
+            rows = cols;//к-сь рядків стає к-тю стовпців і навпаки щоб при повторному вик. пункту "5"
+            cols = temp;
+            break;}
         case 0: break;
         default:{//якщо ввести число якого нема в меню
             cout << "Введіть існуючий варіант\n";
+            break;
         }
     }
     }while(choice != 0);//умова продовження роботи
@@ -181,32 +185,27 @@ void mirror(int **img,int rows,int cols){
     cout << "Результат:\n";
     coutImg(img, rows, cols);//вивід
 }
-int** rotateRight(int** img, int* rows, int* cols) {
-    int** rotated = new int*[*cols];
-    for (int i = 0; i < *cols; i++) {
-        rotated[i] = new int[*rows];
-    }//створення нового динамічного масиву з новими розмірами
-    for (int i = 0; i < *cols; i++){
-        for (int j = 0; j < *rows; j++){
+int** rotateRight(int** img, int rows, int cols){
+    int** rotated = new int*[cols];
+    for (int i = 0; i < cols; i++){
+        rotated[i] = new int[rows];//створення нового динамічного масиву з новими розмірами
+        for (int j = 0; j < rows; j++){
             rotated[i][j] = img[j][i];
         }
     }//поворот вправо можна реалізувати через дію arr[i][j]=arr[j][i] та віддзеркалення як у вункції mirror
-    for(int i = 0; i<*cols; i++){
+    for(int i = 0; i<cols; i++){
         int *ptrRow = rotated[i];
-        for(int j = 0; j<*rows/2; j++){
-            swapPixels(ptrRow + j,ptrRow + (*rows-j-1));
+        for(int j = 0; j<rows/2; j++){
+            swapPixels(ptrRow + j,ptrRow + (rows-j-1));
         }
     }
-    cout << "Зображення повернуто. Нові розміри: " << *cols << " x " << *rows <<endl;
-    coutImg(rotated, *cols, *rows);
-    for (int i = 0; i < *rows; i++) {
+    cout << "Зображення повернуто. Нові розміри: " << cols << " x " << rows <<endl;
+    coutImg(rotated, cols, rows);
+    for (int i = 0; i < rows; i++){
         delete[] img[i];
         img[i] = nullptr;
     }//видалення старого масиву і вказівники на nullptr
     delete[] img;
     img = nullptr;
-    int temp = *rows;
-    *rows = *cols;//к-сь рядків стає к-тю стовпців і навпаки щоб при повторному вик. пункту "5"
-    *cols = temp;
     return rotated;
 }
