@@ -1,3 +1,8 @@
+/*
+    Лабораторна робота №4 Завдання 1 Варіант 22
+    Прізвище: Палєй
+    Група: ШІ-14
+*/
 #include <iostream>
 
 const int MAX_SIZE = 100;
@@ -51,10 +56,17 @@ int main()
     int stack[MAX_SIZE] = {0};
     int N;
 
-    std::cout << "Enter stack lenght: ";
+    std::cout << "Enter stack size: ";
     std::cin >> N;
 
-    std::cout << "Enter your elements of stack: ";
+    if (N < 0 || N > MAX_SIZE)
+    {
+        std::cout << "You entered invalid stack size" << std::endl;
+        return 1;
+    }
+
+    if (N != 0)
+        std::cout << "Enter your elements of stack: ";
     for (int i = 0; i < N; i++)
         std::cin >> stack[i];
 

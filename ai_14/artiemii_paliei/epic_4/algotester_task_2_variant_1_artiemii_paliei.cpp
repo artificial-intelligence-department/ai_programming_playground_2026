@@ -1,3 +1,8 @@
+/*
+    Algotester Lab 2 Task 1
+    Прізвище: Палєй
+    Група: ШІ-14
+*/
 #include <iostream>
 
 void merge(int *array, int start, int mid, int end)
