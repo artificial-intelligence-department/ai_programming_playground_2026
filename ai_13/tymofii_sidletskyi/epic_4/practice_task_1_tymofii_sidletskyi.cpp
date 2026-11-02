@@ -254,7 +254,7 @@ int main () {
     } while (action != 0);
 
     // видалення двовимірного динамічного масиву
-    for (int i = 0; i < cols; i++) {
+    for (int i = 0; i < rows; i++) {
         delete[] image[i];
     }
     delete[] image;
