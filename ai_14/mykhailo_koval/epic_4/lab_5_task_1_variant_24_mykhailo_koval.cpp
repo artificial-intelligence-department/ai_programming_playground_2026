@@ -1,3 +1,10 @@
+/*
+Лабораторна робота 5 варіант 24
+Ім'я: Коваль Михайло
+Група: ШІ-14
+*/
+
+
 #include <iostream>
 
 int main(){
@@ -50,6 +57,7 @@ int main(){
 
     for(int i = 0; i < r; i++){
         delete[] matrix[i];
+        matrix[i] = nullptr;
     }
     delete[] matrix;
     delete[] mainD;
