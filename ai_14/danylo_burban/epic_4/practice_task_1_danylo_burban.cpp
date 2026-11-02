@@ -1,3 +1,6 @@
+/*Epic 4 - Практичне завдання 1
+Данило Бурбан
+ШІ - 14 */
 #include <iostream>
 #include <limits>
 
