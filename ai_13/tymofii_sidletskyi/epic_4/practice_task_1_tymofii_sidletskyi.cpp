@@ -5,6 +5,7 @@ using namespace::std;
    Сідлецький Тимофій ШІ-13
 */
 
+// функція для виводу матриці
 void print_image(int **image, int rows, int cols) {
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++) {
@@ -14,6 +15,7 @@ void print_image(int **image, int rows, int cols) {
     }
 }
 
+// пункт 1 показати зображення
 void show_image(int **image, int rows, int cols) {
     cout << "Зображення " << rows << " x " << cols << ": " << endl;
     print_image(image,rows,cols);
@@ -58,6 +60,7 @@ void show_image(int **image, int rows, int cols) {
     }
 }
 
+// знаходження найсвітлішого та найтемнішого пікселя, повернення параметром посиланням
 void findExtremes (int **image, int rows, int cols, int &maxRow, int &maxCol, int &minRow, int &minCol) {
     int bright_max = 9;
     int bright_min = 0;
@@ -84,6 +87,7 @@ void findExtremes (int **image, int rows, int cols, int &maxRow, int &maxCol, in
     cout << "Найсвітліший піксель: " << bright_min << " (рядок " << minRow << ", стовпець " << minCol << ")" << endl;
 }
 
+// середня яскравість
 void avg_brightness (int **image, int rows, int cols) {
     float sum = 0;
     for (int i = 0; i < rows; i++) {
@@ -95,6 +99,7 @@ void avg_brightness (int **image, int rows, int cols) {
     cout << fixed << setprecision(2) << "Середня яскравість: " << sum / (rows * cols) << endl;
 }
 
+// середня яскравість по рядках
 void avg_brightness_by_row (int **image, int rows, int cols) {
     cout << "Середня по рядках: " << fixed << setprecision(1); 
     for (int i = 0; i < rows; i++) {
@@ -108,6 +113,7 @@ void avg_brightness_by_row (int **image, int rows, int cols) {
     cout << endl;
 }
 
+// пункт 2 статистика яскравості
 void brightness_stats (int **image, int rows, int cols) {
     int maxRow,maxCol,minRow,minCol;
     findExtremes(image, rows, cols, maxRow, maxCol, minRow, minCol);
@@ -115,6 +121,7 @@ void brightness_stats (int **image, int rows, int cols) {
     avg_brightness_by_row(image,rows,cols);
 }
 
+// пункт 3 інвертувати яскравість
 void invert_brightness (int **image, int rows, int cols) {
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++) {
@@ -126,12 +133,14 @@ void invert_brightness (int **image, int rows, int cols) {
     cout << endl;
 }
 
+// функція обміну двох пікселів до пункту 4 за умовою практичного завдання 
 void swapPixels (int *a, int *b) {
     int temp = *a;
     *a = *b;
     *b = temp;
 }
 
+// пункт 4 відзеркалити зображення по горизонталі
 void horizontal_reflect(int **image, int rows, int cols) {
     cout << "Зображення відзеркалено." << endl;
     cout << "Початкове: " << endl;
@@ -148,6 +157,7 @@ void horizontal_reflect(int **image, int rows, int cols) {
     cout << endl;
 }
 
+// пункт 5 повернути на 90 градусів праворуч
 int** rotateRight(int **image, int &rows, int &cols) {
     int temp = rows;
     rows = cols;
@@ -189,6 +199,7 @@ int main () {
         return 1;
     }
 
+    // оголошення двовимірного динамічного масиву
     int **image = new int*[rows];
     for (int i = 0; i < rows; i++) {
         image[i] = new int[cols];
@@ -205,7 +216,7 @@ int main () {
         }
     }
     do {
-        menustart:
+        menustart: // мітка для повтору меню в разі некоректного значення
         cout << "1 - Показати зображення" << endl;
         cout << "2 - Статистика яскравості" << endl;
         cout << "3 - Інвертувати яскравість" << endl;
@@ -217,7 +228,7 @@ int main () {
             cout << "Некоректне значення. Спробуйте ще раз" << endl;
             cin.clear();
             cin.ignore(10000, '\n');
-            goto menustart;
+            goto menustart; // перехід до початку меню
         }
 
         switch(action) {
@@ -242,6 +253,7 @@ int main () {
 
     } while (action != 0);
 
+    // видалення двовимірного динамічного масиву
     for (int i = 0; i < cols; i++) {
         delete[] image[i];
     }
