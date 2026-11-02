@@ -55,6 +55,10 @@ int main(){
         for(int j = 0; j < cols; j++){
             if(!(cin >> image[i][j]) || image[i][j] < 0 || image[i][j] > 9){
                 cout << "НЕ КОРЕКТНИЙ ВВІД! Введіть нове значення від 1 до 9 " << endl;
+                
+                for(int i = 0;  i < rows; i++) delete [] image[i];
+                delete [] image;
+                image = nullptr;
                 return 1;
             }
         }
