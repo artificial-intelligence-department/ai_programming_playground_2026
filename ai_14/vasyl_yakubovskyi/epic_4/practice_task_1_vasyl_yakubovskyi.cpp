@@ -11,8 +11,8 @@ Group: ШІ-14(II)
 using namespace std;
 
 void showImage(int **m, int rows, int cols);
-void findExtremes(int **m, int rows, int cols, int &minRow, int &minCol, int &maxRow, int &maxCol);
-void statisticImage(int **m, int rows, int cols, int minRow, int minCol, int maxRow, int maxCol);
+void findExtremes(int **m, int rows, int cols, int &minRow, int &minCol, int &maxRow, int &maxCol, int &min, int &max);
+void statisticImage(int **m, int rows, int cols, int minRow, int minCol, int maxRow, int maxCol, int min, int max);
 void invertImage(int **m, int rows, int cols);
 void swapPixels(int *a, int *b);
 void imageReflection(int **m, int rows, int cols);
@@ -61,12 +61,14 @@ int main(){
         }
     }
 
-    int action = image[0][0];
+    int action = 0;
 
-    int minRow = image[0][0];
-    int minCol = image[0][0]; 
-    int maxRow = image[0][0];
-    int maxCol = image[0][0];
+    int min = image[0][0];
+    int max = image[0][0];
+    int minRow = 0;
+    int minCol = 0; 
+    int maxRow = 0;
+    int maxCol = 0;
 
     do{
         MENU_START:
@@ -94,7 +96,7 @@ int main(){
             showImage(image, rows, cols);
             break;
         case 2: 
-            statisticImage(image, rows, cols, minRow, minCol, maxRow, maxCol);
+            statisticImage(image, rows, cols, minRow, minCol, maxRow, maxCol, min, max);
             break;    
         case 3:
             invertImage(image, rows, cols);
@@ -181,45 +183,37 @@ void showImage(int **m, int rows, int cols){
 
 }
 // функція для пошуку найтемнішого та та найсвітлішого пікселя
-void findExtremes(int **m, int rows, int cols, int &minRow, int &minCol, int &maxRow, int &maxCol){
+void findExtremes(int **m, int rows, int cols, int &minRow, int &minCol, int &maxRow, int &maxCol, int &min, int &max){
 
-    bool isfoundMin = false;
+    min = m[0][0];
+    max = m[0][0];
     //шукаємо найсвітліший піксель
      for(int i = 0; i < rows; i++){
         for(int j = 0; j < cols; j++){
-            if(m[i][j] == 0){
+            if(m[i][j] < min){
+                min = m[i][j];
                 minRow = i;
                 minCol = j;
-                isfoundMin = true;
-                break;
             }
         }
-        if(isfoundMin) break;
      }
-     if(!isfoundMin) minRow = -1;
 
 
-      bool isfoundMax = false;
      //шукаємо найтемніший піксель
      for(int i = 0; i < rows; i++){
         for(int j = 0; j < cols; j++){
-            if(m[i][j] == 9){
+            if(m[i][j] > max){
+                max = m[i][j];
                 maxRow = i;
                 maxCol = j;
-                isfoundMax = true;
-                break;
             }
         }
-        if(isfoundMax) break;
      }
-
-     if(!isfoundMax) maxRow = -1;
-
 }
 
 
 // виводимо статистику
-void statisticImage(int **m, int rows, int cols, int minRow, int minCol, int maxRow, int maxCol){
+void statisticImage(int **m, int rows, int cols, int minRow, int minCol, int maxRow, int maxCol, int min, int max){
 
     //Рахуємо середню яскравість картинки
     double aveImage = 0;
@@ -230,20 +224,13 @@ void statisticImage(int **m, int rows, int cols, int minRow, int minCol, int max
      }
      aveImage /= double((rows*cols)); 
 
-     findExtremes(m, rows, cols, minRow, minCol, maxRow, maxCol);
+     findExtremes(m, rows, cols, minRow, minCol, maxRow, maxCol, min, max);
     
      
-    if(minRow != -1){
-        cout << "Найменший піксель: 0 (рядок " << (minRow + 1)<< ", стовпець  " << (minCol + 1)<< ")" << endl;
-    }else{
-        cout << "Найменший піксель: 0 - ВІДСУТНІЙ" << endl;
-    }
     
-    if(maxRow != -1){
-        cout << "Найбільший піксель: 9 (рядок " << (maxRow + 1) << ", стовпець  " << (maxCol + 1) << ")" << endl;
-    }else{
-        cout << "Найбільший піксель: 9 - ВІДСУТНІЙ" << endl;
-    }
+    cout << "Найменший піксель: " << min  << " (рядок " << (minRow + 1)<< ", стовпець  " << (minCol + 1)<< ")" << endl;
+
+    cout << "Найбільший піксель: " << max << " (рядок " << (maxRow + 1) << ", стовпець  " << (maxCol + 1) << ")" << endl;
     
     cout << fixed << setprecision(2) << "Середня яскравість: " << aveImage << endl;
     cout << "Середня по рядках: ";
