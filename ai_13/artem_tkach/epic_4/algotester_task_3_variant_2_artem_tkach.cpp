@@ -1,42 +1,49 @@
 /*
- * Algotester, Лабораторна робота №3, варіант 2 - "Lab 3v3"
+ * Algotester, Лабораторна робота №3, варіант 2 - "Lab 3v2"
  * Ткач Артем
  * ШІ-13
  *
- * Умова: дано стрічку s. Потрібно стиснути її: якщо якась буква іде більше
- * одного разу підряд, замінити її на букву + кількість входжень підряд.
+ * Умова: дано 2 масиви розміром N та M з унікальними значеннями. Вивести
+ * у першому рядку кількість елементів, які є в обох масивах одночасно,
+ * у другому - кількість унікальних елементів в обох масивах разом
+ * (тобто в масиві, який є об'єднанням двох даних).
  *
- * Приклад: AAAABBBCQQQQ -> A4B3CQ4, AA -> A2.
- *
- * Довжина стрічки до 10^5, тому читаємо її цілком через std::string.
+ * Обмеження: 0 <= N, M <= 100, значення елементів від 0 до 100, тому для
+ * кожного масиву достатньо масиву-позначок inA[101] та inB[101].
  */
 
 #include <iostream>
-#include <string>
+
+const int MAX_VALUE = 100;
+
+// Читає розмір і елементи масиву, позначаючи присутні значення в flags
+void readSet(bool flags[]) {
+    int count, x;
+    std::cin >> count;
+    for (int i = 0; i < count; i++) {
+        std::cin >> x;
+        flags[x] = true;
+    }
+}
 
 int main() {
-    std::string s;
-    std::cin >> s;
+    bool inA[MAX_VALUE + 1] = {};
+    bool inB[MAX_VALUE + 1] = {};
+    readSet(inA);
+    readSet(inB);
 
-    std::string result = "";
-    int i = 0;
-    int len = s.length();
-
-    while (i < len) {
-        // Рахуємо, скільки разів поспіль повторюється поточна буква.
-        int j = i;
-        while (j < len && s[j] == s[i]) {
-            j++;
+    int common = 0;
+    int total = 0;
+    for (int v = 0; v <= MAX_VALUE; v++) {
+        if (inA[v] && inB[v]) {
+            common++;
         }
-        int count = j - i;
-
-        result += s[i];
-        if (count > 1) {
-            result += std::to_string(count);
+        if (inA[v] || inB[v]) {
+            total++;
         }
-        i = j;
     }
 
-    std::cout << result << "\n";
+    std::cout << common << "\n";
+    std::cout << total << "\n";
     return 0;
 }
