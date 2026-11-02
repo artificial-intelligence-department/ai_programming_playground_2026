@@ -1,7 +1,15 @@
+/*
+Class practice task
+Ім'я: Коваль Михайло
+Група: ШІ-14
+*/
+
+
 #include <iostream>
 #include <iomanip>
 //1 пункт меню
 void showImage(int **image, int rows, int cols){
+    std::cout << '\n';
     std::cout << "Зображення " << rows << " x " << cols << ":\n";
     for(int i = 0; i < rows; i++){
         for(int j = 0; j < cols; j++){
@@ -37,6 +45,7 @@ void showImage(int **image, int rows, int cols){
         }
         std::cout << '\n';
     }
+    std::cout << '\n';
 }
 
 //2 пункт меню
@@ -94,14 +103,17 @@ void avgBrightness(int **image, int rows, int cols){
 void brightnessStats(int **image, int rows, int cols){
     int minRow, minCol, maxRow, maxCol;
     findExtremes(image, rows, cols, minRow, minCol, maxRow, maxCol);
+    std::cout << '\n';
     std::cout << "Найтемніший піксель: " << *(*(image + minRow) + minCol) << " " << "(рядок " << minRow + 1 << ", " << "стовпець " << minCol + 1<< ")\n"; 
     std::cout << "Найсвітліший піксель: " << *(*(image + maxRow) + maxCol) << " " << "(рядок " << maxRow + 1 << ", " << "стовпець " << maxCol + 1 << ")\n";
 
     avgBrightness(image, rows, cols);
+    std::cout << '\n';
 }
 
 //3 пункт меню
 void invertBrightness(int **image, int rows, int cols){
+    std::cout << '\n';
     std::cout << "Яскравість інвертовано.\n";
     for(int i = 0; i < rows; i++){
         for(int j = 0; j < cols; j++){
@@ -110,6 +122,7 @@ void invertBrightness(int **image, int rows, int cols){
         }
         std::cout << '\n';
     }
+    std::cout << '\n';
 }
 
 //4 пункт меню
@@ -120,6 +133,7 @@ void swapPixels(int *a, int *b){
 }
 
 void mirror(int **image, int rows, int cols){
+    std::cout << '\n';
     std::cout << "Зображення віддзеркалено.\n";
     std::cout << "Початкове: \n";
     for(int i = 0; i < rows; i++){
@@ -145,6 +159,7 @@ void mirror(int **image, int rows, int cols){
         }
         std::cout << "\n";
     }
+    std::cout << '\n';
 }
 
 //5 пункт меню
@@ -176,6 +191,7 @@ void rotated(int** &image, int &rows, int &cols){
     rows = cols;
     cols = temp;
 
+    std::cout << '\n';
     std::cout << "Зображення повернуто. Нові розміри: " << rows << " x " << cols << '\n';
     for(int i = 0; i < rows; i++){
         for(int j = 0; j < cols; j++){

@@ -1,3 +1,9 @@
+/*
+Task 2 algotester option 3
+Ім'я: Коваль Михайло
+Група: ШІ-14
+*/
+
 #include <iostream>
 
 void dronePositions(int *a, int *dron1, int *dron2, int N){

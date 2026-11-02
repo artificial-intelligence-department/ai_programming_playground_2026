@@ -1,3 +1,9 @@
+/*
+Task 3 algotester option 1
+Ім'я: Коваль Михайло
+Група: ШІ-14
+*/
+
 #include <iostream>
 #include <string>
 
