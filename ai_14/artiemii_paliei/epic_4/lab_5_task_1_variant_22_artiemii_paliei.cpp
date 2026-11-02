@@ -1,3 +1,8 @@
+/*
+    Лабораторна робота №5 Завдання 1 Варіант 22
+    Прізвище: Палєй
+    Група: ШІ-14
+*/
 #include <iostream>
 
 const int COLUMNS = 40;
@@ -39,7 +44,7 @@ int main()
         return 1;
     }
 
-    std::cout << "Enter elements of your 2D array: ";
+    std::cout << "Enter elements of your 2D array: " << std::endl;
     for (int i = 0; i < r; i++)
     {
         for (int j = 0; j < c; j++)
