@@ -1,72 +1,39 @@
-/*
- * Self practice (Algotester-стиль) - "Рядок з максимальною сумою"
- * Ткач Артем
- * ШІ-13
- *
- * Умова: задано матрицю з N рядків та M стовпців цілих чисел. Знайти рядок,
- * у якому сума елементів максимальна. Якщо таких рядків кілька, вивести
- * перший із них.
- *
- * Input: у першому рядку N і M (1 <= N, M <= 1000), далі N рядків по M цілих чисел.
- * Output: номер рядка (з 1) і сума його елементів через пробіл.
- *
- * Приклад:  3 3        ->  3 24
- *           1 2 3
- *           4 5 6
- *           7 8 9
- *
- * Тема епіку: двовимірні динамічні масиви (int **), вказівники, new / delete[].
- */
+// Algotester, задача №40603 "Matrix"
+// https://algotester.com/en/ArchiveProblem/DisplayWithEditor/40603
+// Ткач Артем, ШІ-13
+//
+// Умова: дано бінарну матрицю n x m. За один хід можна поміняти місцями значення
+// двох елементів (ходів може бути скільки завгодно). Потрібно визначити, чи можна
+// розставити елементи так, щоб у матриці не було підматриці розміром a x b, усі
+// елементи якої дорівнюють 1. Є t тестів.
 
 #include <iostream>
 
-// Зчитує матрицю n x m у динамічний двовимірний масив
-int **readMatrix(int n, int m) {
-    int **a = new int *[n];
-    for (int i = 0; i < n; i++) {
-        a[i] = new int[m];
-        for (int j = 0; j < m; j++) {
-            std::cin >> a[i][j];
-        }
-    }
-    return a;
-}
-
-// Сума елементів одного рядка (рядок передається вказівником)
-int rowSum(const int *row, int m) {
-    int sum = 0;
-    for (int j = 0; j < m; j++) {
-        sum += row[j];
-    }
-    return sum;
-}
-
-// Звільняє кожен рядок, потім масив вказівників
-void freeMatrix(int **a, int n) {
-    for (int i = 0; i < n; i++) {
-        delete[] a[i];
-    }
-    delete[] a;
-}
-
 int main() {
-    int n, m;
-    std::cin >> n >> m;
+    int t;
+    std::cin >> t;
 
-    int **a = readMatrix(n, m);
+    for (int test = 0; test < t; test++) {
+        int n, m, a, b;
+        std::cin >> n >> m >> a >> b;
 
-    int bestRow = 0;
-    int bestSum = rowSum(a[0], m);
-    for (int i = 1; i < n; i++) {
-        int sum = rowSum(a[i], m);
-        if (sum > bestSum) {
-            bestSum = sum;
-            bestRow = i;
+        int zeros = 0;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                char c;
+                std::cin >> c;
+                if (c == '0') {
+                    zeros++;
+                }
+            }
+        }
+
+        int needZeros = (n / a) * (m / b);
+        if (zeros >= needZeros) {
+            std::cout << "YES\n";
+        } else {
+            std::cout << "NO\n";
         }
     }
-
-    std::cout << bestRow + 1 << " " << bestSum << "\n";
-
-    freeMatrix(a, n);
     return 0;
 }

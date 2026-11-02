@@ -29,7 +29,6 @@ bool readInt(int &value) {
     return true;
 }
 
-// Звільняє кожен рядок, потім масив вказівників, і обнуляє вказівник
 void freeImage(int **&img, int rows) {
     for (int i = 0; i < rows; i++) {
         delete[] img[i];
@@ -50,7 +49,7 @@ bool readSize(const char *name, int &value) {
     return true;
 }
 
-// Виділяє динамічний двовимірний масив rows x cols
+// Виділяю динамічний двовимірний масив rows x cols
 int **createImage(int rows, int cols) {
     int **img = new int *[rows];
     for (int i = 0; i < rows; i++) {
@@ -59,7 +58,7 @@ int **createImage(int rows, int cols) {
     return img;
 }
 
-// Читає яскравість усіх пікселів і перевіряє діапазон 0..9
+// Читає яскравість усіх пікселів і перевіряє чи значення від 0 до 9
 bool readPixels(int **img, int rows, int cols) {
     cout << "Яскравість пікселів (0..9):" << endl;
     for (int i = 0; i < rows; i++) {
@@ -128,7 +127,7 @@ void showImage(int **img, int rows, int cols) {
     cout << "Поточні розміри: " << rows << " x " << cols << endl;
 }
 
-// Координати найтемнішого й найсвітлішого пікселів повертаються через посилання
+// Координати найтемнішoгo й найяскравіщoго пікселів
 void findExtremes(int **img, int rows, int cols, int &minRow, int &minCol, int &maxRow, int &maxCol) {
     minRow = 0;
     minCol = 0;
@@ -160,7 +159,7 @@ void printExtremes(int **img, int rows, int cols) {
     cout << "Найсвітліший піксель: " << *(*(img + maxRow) + maxCol) << " (рядок " << maxRow + 1 << ", стовпець " << maxCol + 1 << ")" << endl;
 }
 
-// Заповнює середні по рядках (обхід рядка через вказівник), повертає суму всіх пікселів
+// Заповнює середні по рядках і повертає суму пікселів
 int computeRowAverages(int **img, int rows, int cols, double averages[]) {
     int total = 0;
     for (int i = 0; i < rows; i++) {
@@ -216,8 +215,7 @@ void mirrorImage(int **img, int rows, int cols) {
     cout << "Зображення віддзеркалено." << endl;
 }
 
-// Створює новий масив cols x rows, переносить пікселі й лише потім звільняє старий
-int **rotateRight(int **img, int rows, int cols) {
+int **rotateRight(int **img, int rows, int cols) {  
     int **rotated = new int *[cols];
     for (int j = 0; j < cols; j++) {
         rotated[j] = new int[rows];
@@ -233,22 +231,29 @@ int **rotateRight(int **img, int rows, int cols) {
 
 // Виконує операцію, обрану в меню
 void processChoice(int **&image, int &rows, int &cols, int choice) {
-    if (choice == 1) {
-        showImage(image, rows, cols);
-    } else if (choice == 2) {
-        showStatistics(image, rows, cols);
-    } else if (choice == 3) {
-        invertImage(image, rows, cols);
-    } else if (choice == 4) {
-        mirrorImage(image, rows, cols);
-    } else if (choice == 5) {
-        image = rotateRight(image, rows, cols);
-        swap(rows, cols);
-        cout << "Зображення повернуто. Нові розміри: " << rows << " x " << cols << endl;
-    } else if (choice == 0) {
-        cout << "Вихід з програми." << endl;
-    } else {
-        cout << "Помилка: оберіть пункт меню від 0 до 5." << endl;
+    switch (choice) {
+        case 1:
+            showImage(image, rows, cols);
+            break;
+        case 2:
+            showStatistics(image, rows, cols);
+            break;
+        case 3:
+            invertImage(image, rows, cols);
+            break;
+        case 4:
+            mirrorImage(image, rows, cols);
+            break;
+        case 5:
+            image = rotateRight(image, rows, cols);
+            swap(rows, cols);
+            cout << "Зображення повернуто. Нові розміри: " << rows << " x " << cols << endl;
+            break;
+        case 0:
+            cout << "Вихід з програми." << endl;
+            break;
+        default:
+            cout << "Помилка: оберіть пункт меню від 0 до 5." << endl;
     }
 }
 
