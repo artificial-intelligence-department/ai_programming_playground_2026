@@ -10,19 +10,22 @@ Group: ШІ-14(II)
 
 using namespace std;
 
+const int MAX_N = 100;
+
+
 int main (){
 
     //Вводимо число N
     int N = 0; 
-    cout << "Введіть значення N: " ;
+    cout << "Введіть значення N (від 1 до 100): " ;
     cin >> N;
-    if(N < 0){
+    if(N < 1 || N > MAX_N){
         cout << "Некоректний ввід!";
         return 1;
     }
 
     //Просимо ввести N*N елементів
-    int a[N][N] = {0};
+    int a[MAX_N][MAX_N] = {0};
     cout << "Введіть " << (N*N) << " елементів: ";
 
     for (int i = 0; i < N; i++){
@@ -32,18 +35,13 @@ int main (){
     }
 
     //перевіряємо чи виконується умова що у першому стовпці матриці елементи йдуть у порядку зростання
-    int countS = 0;
+    bool isSuccess = true;
     for(int i = 1; i < N; i++){
-        if(a[i-1][0] < a[i][0]){
-            countS++;
+        if(a[i-1][0] > a[i][0]){
+            isSuccess = false;
         }
 
     }   
-
-    bool isSuccess = false;
-    if((countS + 1) == N){
-        isSuccess = true;
-    }
     
 
     //Виводимо матрицю
