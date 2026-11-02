@@ -26,16 +26,13 @@ int main(){
     int rows = 0;
     int cols = 0;
     //Просимо користувача ввести висоту(rows) ширину(cols) 
-    ROWS:
     cout << "Введіть висоту зображення: ";
     if(!(cin >> rows) || rows < 1 || rows > 20){
         cout << "НЕ КОРЕКТНИЙ ВВІД! Введіть нове значення від 1 до 20 " << endl;
         return 1;
     }
 
-
-    COLS:
-    cout << "Введіть висоту зображення: ";
+    cout << "Введіть ширину зображення: ";
     if(!(cin >> cols) || cols < 1 || cols > 20){
         cout << "НЕ КОРЕКТНИЙ ВВІД! Введіть нове значення від 1 до 20 " << endl;
         return 1;
@@ -54,7 +51,7 @@ int main(){
     for(int i = 0; i < rows; i++){
         for(int j = 0; j < cols; j++){
             if(!(cin >> image[i][j]) || image[i][j] < 0 || image[i][j] > 9){
-                cout << "НЕ КОРЕКТНИЙ ВВІД! Введіть нове значення від 1 до 9 " << endl;
+                cout << "НЕ КОРЕКТНИЙ ВВІД! Введіть нове значення від 0 до 9 " << endl;
                 
                 for(int i = 0;  i < rows; i++) delete [] image[i];
                 delete [] image;
