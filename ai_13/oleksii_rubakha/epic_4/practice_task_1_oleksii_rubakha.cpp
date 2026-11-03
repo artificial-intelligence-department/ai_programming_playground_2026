@@ -39,7 +39,6 @@ int** createImage(int rows, int cols) {
 void freeImage(int** img, int rows) {
     for (int i = 0; i < rows; i++) {
         delete[] img[i];
-        img[i] = nullptr;
     }
 
     delete[] img;
