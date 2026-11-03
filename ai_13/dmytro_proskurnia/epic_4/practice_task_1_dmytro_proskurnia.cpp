@@ -10,7 +10,7 @@ void brightnessStatistics(const int* const* image, int n, int m,
                           int& min_row, int& min_col, int& max_row, int& max_col);
 void invertBrightness(int** image, int n, int m);
 void reflectImage(int** image, int n, int m);
-void rotate(int**& image, int& n, int& m);
+int** rotate(int** image, int& n, int& m);
 void exit(int**& image, int n, int m);
 
 int main() {
@@ -83,7 +83,7 @@ int main() {
             break;
 
         case 5:
-            rotate(image, n, m);
+            image = rotate(image, n, m);
             break;
 
         case 0:
@@ -200,7 +200,7 @@ void reflectImage(int** image, int n, int m) {
     printMatrix(image, n, m);
 }
 
-void rotate(int**& image, int& n, int& m) {
+int** rotate(int** image, int& n, int& m) {
     int** new_image = new int* [m];
     for (int i = 0; i < m; i++) {
         new_image[i] = new int[n] {};
@@ -218,13 +218,12 @@ void rotate(int**& image, int& n, int& m) {
     delete[] image;
     image = nullptr;
 
-    image = new_image;
     std::swap(m, n);
 
-    new_image = nullptr;
-
     std::cout << "Зображення повернуто. Нові розміри:" << n << " x " << m << std::endl;
-    printMatrix(image, n, m);
+    printMatrix(new_image, n, m);
+
+    return new_image;
 }
 
 void exit(int**& image, int n, int m) {
