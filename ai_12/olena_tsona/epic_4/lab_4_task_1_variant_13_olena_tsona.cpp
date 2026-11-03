@@ -111,7 +111,6 @@ double average(const int a[], int n) {
     return (double)sum / n;
 }
 
-/
 bool addAtStart(int a[], int &n, int count, int value) {
     if (n + count > N) {
         return false;
