@@ -10,6 +10,8 @@
  *
  * Обмеження: 0 <= N, M <= 100, значення елементів від 0 до 100, тому для
  * кожного масиву достатньо масиву-позначок inA[101] та inB[101].
+ * 
+ * https://algotester.com/en/ContestProblem/DisplayWithEditor/167968
  */
 
 #include <iostream>
