@@ -97,7 +97,7 @@ void showStatistics(int **img, int rows, int cols) {
     }
 
     cout << fixed;
-      cout << setprecision(2);
+    cout << setprecision(2);
     cout << "Середня яскравість: " << double(total) / (rows * cols) << '\n';
     cout << "Середня по рядках:";
     for (int i = 0; i < rows; i++) {
@@ -184,18 +184,8 @@ int main() {
              << "Ваш вибір: ";
 
         if (!readNumber(choice)) {
-            if (cin.eof()) {
-                cout << "\nВвід завершено.\n";
-                break;
-            }
-
-            cout << "Помилка: введіть ціле число від 0 до 5.\n";
-            cin.clear();
-            char ch;
-            while (cin.get(ch) && ch != '\n') {
-            }
-            choice = -1;
-            continue;
+            cout << "Помилка: потрібно ввести ціле число.\n";
+            break;
         }
 
         switch (choice) {
@@ -227,7 +217,7 @@ int main() {
             case 0:
                 break;
             default:
-                cout << "Помилка: такого пункту немає. Виберіть від 0 до 5.\n";
+                cout << "Помилка: введіть ціле число від 0 до 5.\n";
         }
     } while (choice != 0);
 
