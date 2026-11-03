@@ -72,7 +72,7 @@ void printImage(int **matrix, int rows, int cols, string *symbols, bool Brightne
     cout << "Зображення:\n";
     for (int i = 0; i<rows; i++){
         for (int j = 0; j<cols; j++){
-            // викоорстовуємо symbols як словник
+            // використовуємо symbols як словник
             cout << symbols[matrix[i][j]]; 
         }
         cout << "\n";
