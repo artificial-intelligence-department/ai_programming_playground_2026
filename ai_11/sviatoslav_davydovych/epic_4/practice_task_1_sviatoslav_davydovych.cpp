@@ -58,13 +58,15 @@ void swapPixels(int *a, int *b){
     *b = temp;
 }
 
-void printImage(int **matrix, int rows, int cols, string *symbols){
+void printImage(int **matrix, int rows, int cols, string *symbols, bool Brightness=true){
+    if (Brightness){
     cout << "Таблиця яскравості:\n";
-    for (int i = 0; i<rows; i++){
-        for (int j = 0; j<cols; j++){
-            cout << setw(2) << matrix[i][j] << " ";
+        for (int i = 0; i<rows; i++){
+            for (int j = 0; j<cols; j++){
+                cout << setw(2) << matrix[i][j] << " ";
+            }
+            cout << "\n";
         }
-        cout << "\n";
     }
 
     cout << "Зображення:\n";
@@ -164,7 +166,13 @@ int main(){
     cout << "Пікселі зображення:\n";
     for (int i = 0; i<rows; i++){
         for (int j = 0; j<cols; j++){
-            cin >> image[i][j];
+            int pixel;
+            cin >> pixel;
+            if (cin.fail() || pixel < MinBright || pixel > MaxBright){
+                cout << "Невалідне значення яскравості\n";
+                return 0;
+            }
+            image[i][j] = pixel;
         }
     }
     cin.clear();
@@ -185,7 +193,7 @@ int main(){
         cout << menu << "\n";
         int action = getValidInteger(true, "Оберіть дію: "); 
 
-        // кожен пункт меню реалізований функцією
+        // кожен пункт меню реалізований функцією, додатково виводимо зображення після кожної зміни
         switch (action) {
             case 0:
                 loop = false;
@@ -198,18 +206,22 @@ int main(){
                 break;
             case 3:
                 invertImage(image, rows, cols);
+                printImage(image, rows, cols, symbols, false);
                 break;
             case 4:
                 mirrorOY(image, rows, cols);
+                printImage(image, rows, cols, symbols, false);
                 break;
             case 5: 
                 image = rotateRight(image, rows, cols);
-                swapPixels(&rows, &cols); // коректно обміняє значення змінних
+                swapPixels(&rows, &cols); // коректно обмінює значення змінних
+                printImage(image, rows, cols, symbols, false);
                 break; 
             default: 
                 cout << "Хибна операція!\n";
                 break;
         }
+        cout << "\n";
     } while (loop);
 
     for (int i = 0; i<rows; i++){
