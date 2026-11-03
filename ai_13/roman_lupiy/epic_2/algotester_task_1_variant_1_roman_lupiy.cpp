@@ -11,34 +11,30 @@ int main() {
     long long H, M;
     cin >> H >> M;
 
-    long long h[3], m[3];
-    for (int i = 0; i < 3; ++i) {
-        cin >> h[i] >> m[i];
+    long long h1, m1;
+    long long h2, m2;
+    long long h3, m3;
+
+    cin >> h1 >> m1;
+    cin >> h2 >> m2;
+    cin >> h3 >> m3;
+
+    // Перевіряємо, чи якесь закляття витрачає обидва ресурси.
+    if ((h1 > 0 && m1 > 0) ||
+        (h2 > 0 && m2 > 0) ||
+        (h3 > 0 && m3 > 0)) {
+        cout << "NO\n";
+        return 0;
     }
 
-    for (int mask = 0; mask < 8; ++mask) {
-        long long usedH = 0;
-        long long usedM = 0;
-        bool possible = true;
+    long long usedH = h1 + h2 + h3;
+    long long usedM = m1 + m2 + m3;
 
-        for (int i = 0; i < 3; ++i) {
-            if (mask & (1 << i)) {
-                // Це заклинання витрачає лише HP.
-                if (m[i] != 0) possible = false;
-                usedH += h[i];
-            } else {
-                // Це заклинання витрачає лише ману.
-                if (h[i] != 0) possible = false;
-                usedM += m[i];
-            }
-        }
-
-        if (possible && usedH < H && usedM < M) {
-            cout << "YES\n";
-            return 0;
-        }
+    if (usedH < H && usedM < M) {
+        cout << "YES\n";
+    } else {
+        cout << "NO\n";
     }
 
-    cout << "NO\n";
     return 0;
 }
