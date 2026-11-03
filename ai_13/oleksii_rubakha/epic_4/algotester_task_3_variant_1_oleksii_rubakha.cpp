@@ -23,8 +23,7 @@ int main(){
                     count++;
                     inGroup = true;
                 }
-            }
-            else{
+            }else{
                 inGroup = false;
             }
         }
