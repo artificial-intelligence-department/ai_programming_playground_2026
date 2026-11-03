@@ -3,7 +3,7 @@
 
 using namespace std;
 
-const char palet[] = " .:-=+*#%@";
+const char palet[] = " .:-=+*#%@"; // масив для збереження пікселів ясравості
 
 void showTabl (int **image, int rows, int cols);
 void showImage (int **image, int rows, int cols);
@@ -18,14 +18,15 @@ void rotateAction(int **&image, int &rows, int &cols);
 
 int main() {
 
-    int minRow = 0;
-    int minCol = 0;
-    int maxRow = 0;
-    int maxCol = 0;
-    int rows = 0;
-    int cols = 0;
+    int minRow = 0;     //координата рядка найтемнішого пікселя
+    int minCol = 0;     //координата стовпця найтемнішого пікселя
+    int maxRow = 0;     //координата рядка найсвітлішого пікселя
+    int maxCol = 0;     //координата стовпця найсвітлішого пікселя
+    int rows = 0;       // кількість рядків. висота
+    int cols = 0;       // стовпців. ширина
     
 
+    //ввід даних з валідацією
     cout << "Висота зображення: ";
     cin >> rows;
     if (cin.fail() || rows < 1 || rows > 20) {
@@ -44,6 +45,7 @@ int main() {
         return 1;
     }
 
+    //створюєм динамічний двовимірний масив для збереження зображення
     int **image = new int *[rows];
     
     for (int i = 0; i < rows; i++) {
@@ -51,6 +53,7 @@ int main() {
     }
 
     int light = 0;
+    //ввід даних з валідацією
     cout << "Яскравість зображення: " << endl;
     for (int i = 0; i < rows; i++) {
         for ( int j = 0; j < cols; j++) {
@@ -60,6 +63,7 @@ int main() {
                     cin.ignore(10000, '\n');    
                     cout << "Помилка! Потрібно ввести числа від 0 до 9 ";
 
+                    // Очищення вже виділеної пам'яті у разі аварійного завершення
                     for (int k = 0; k < rows; k++) {
                         delete[] image[k];        
                         image[k] = nullptr;
@@ -76,7 +80,7 @@ int main() {
 
     int choice = -1;
     do {
-
+        // виводимо меню дій
         cout <<"Оберіть дію:" <<endl;
         cout <<"1-Показати зображення" <<endl;
         cout <<"2-Статистика яскравості" <<endl;
@@ -104,6 +108,7 @@ int main() {
 
         }
         else {
+            // Обробка вибору користувача
             switch(choice) {
                 case 1:
                     showImage (image, rows, cols);
@@ -129,6 +134,8 @@ int main() {
         }
 
     } while ( choice != 0);
+
+    // видалення масиву до завершення програми
     for (int i = 0; i < rows; i++) {
         delete[] image[i];        
         image[i] = nullptr;
@@ -139,6 +146,7 @@ int main() {
     return 0;
 }
 
+// виведення зображення яскравості таблицею чисел
 void showTabl (int **image, int rows, int cols) {
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++) {
@@ -148,6 +156,7 @@ void showTabl (int **image, int rows, int cols) {
     }
 }
 
+// виведення зображення яскравості пікселями з palet
 void showImage (int **image, int rows, int cols) {
     showTabl ( image, rows, cols);
     for (int i = 0; i < rows; i++) {
@@ -161,6 +170,7 @@ void showImage (int **image, int rows, int cols) {
 
 }
 
+// пошук найтемнішого і найсвітлішого пікселів
 void findExtremes(int **image, int rows, int cols, int &minRow, int &minCol, int &maxRow, int &maxCol) {
     int max = -1;
     int min = 10;
@@ -186,6 +196,7 @@ void findExtremes(int **image, int rows, int cols, int &minRow, int &minCol, int
     
 }
 
+// статистика
 void showStatistic (int **image, int rows, int cols, int &minRow, int &minCol, int &maxRow, int &maxCol) {
     findExtremes (image, rows, cols, minRow, minCol, maxRow, maxCol);
     int sumAll = 0;
@@ -225,6 +236,7 @@ void showStatistic (int **image, int rows, int cols, int &minRow, int &minCol, i
     
 }
 
+// інвертоване зображення
 void invertImage(int **image, int rows, int cols) {
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++) {
@@ -235,12 +247,14 @@ void invertImage(int **image, int rows, int cols) {
     showTabl(image, rows, cols);
 }
 
+// обмін пікселів
 void swapPixels(int *a, int *b) {
     int tmp = *a;
     *a = *b;
     *b = tmp;
 }
 
+// відзеркалення
 void mirrorImage(int **image, int rows, int cols) {
     cout << "Зображення віддзеркалено." << endl;
     cout << "Початкове:" << endl;
@@ -254,6 +268,7 @@ void mirrorImage(int **image, int rows, int cols) {
     showTabl(image, rows, cols);
 }
 
+// поворот на 90 градусів
 int **rotateRight(int** image, int rows, int cols) {
     int **newImage = new int*[cols];
     for (int i = 0; i < cols; i++) {
@@ -273,6 +288,7 @@ int **rotateRight(int** image, int rows, int cols) {
     return newImage;
 }
 
+// повна функція повороту що одразу міняє рядки з стовпцями
 void rotateAction(int **&image, int &rows, int &cols) {
     image = rotateRight(image, rows, cols);
     int tmp = rows;                               
