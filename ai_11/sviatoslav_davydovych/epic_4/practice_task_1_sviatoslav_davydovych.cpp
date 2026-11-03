@@ -226,6 +226,9 @@ int main(){
 
     for (int i = 0; i<rows; i++){
         delete[] image[i];
+        image[i] = nullptr;
     }
     delete[] image;
+
+    image = nullptr;
 }
