@@ -1,7 +1,7 @@
 #include <iostream>
 #include <iomanip>
 using namespace std;
-// Функція для безпечного зчитування цілого числа з повідомленням
+// функція для безпечного зчитування цілого числа з повідомленням
 int readInt(const char* message) {
     int value;
     while (true) {
@@ -15,7 +15,7 @@ int readInt(const char* message) {
         cin.ignore(1000, '\n');
     }
 }
-// Функції для роботи з динамічним двовимірним масивом
+// функція для виділлення пам'яті для зображення
 int** createImage(int rows, int cols) {
     int** img = new int*[rows];
 // Виділення пам'яті для кожного рядка
@@ -25,9 +25,8 @@ int** createImage(int rows, int cols) {
 
     return img;
 }
-// Функція для звільнення пам'яті динамічного двовимірного масиву
+//функція для звільнення пам'яті динамічного двовимірного масиву
 void freeImage(int**& img, int rows) {
-    // Перевірка на nullptr перед звільненням пам'яті
     if (img != nullptr) {
         for (int i = 0; i < rows; i++) {
             delete[] img[i];
@@ -38,16 +37,16 @@ void freeImage(int**& img, int rows) {
         img = nullptr;
     }
 }
-// Функція для введення яскравості пікселів з перевіркою на діапазон
+//функція для введення яскравості пікселів
 bool inputImage(int** img, int rows, int cols) {
     cout << "Введіть яскравість пікселів (0..9):\n";
-// Цикл для введення значень пікселів з перевіркою на допустимий діапазон 
+//цикл для введення значень пікселів
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++) {
             while (true) {
                 cout << "Піксель [" << i + 1 << "][" << j + 1 << "]: ";
                 if (cin >> img[i][j]) {
-                    // Перевірка на допустимий діапазон значень
+                    // перевірка на допустимий діапазон значень
                     if (img[i][j] >= 0 && img[i][j] <= 9) {
                         break;
                     }
@@ -63,10 +62,10 @@ bool inputImage(int** img, int rows, int cols) {
     }
     return true;
 }
-// Функція для відображення зображення у вигляді таблиці та графічного малюнка
+//функція для відображення зображення у вигляді таблиці та малюнка
 void showImage(int** img, int rows, int cols) {
     const char palette[] = " .:-=+*#%@";
-// Виведення таблиці чисел та графічного малюнка
+//виведення таблиці чисел
     cout << "\nТаблиця чисел:\n";
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++) {
@@ -74,7 +73,7 @@ void showImage(int** img, int rows, int cols) {
         }
         cout << '\n';
     }
-// Виведення графічного малюнка з використанням символів палітри
+//виведення графічного малюнка з використанням символів палітри
     cout << "\nМалюнок:\n";
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++) {
@@ -92,7 +91,7 @@ void findExtremes(int** img, int rows, int cols,
     minCol = 0;
     maxRow = 0;
     maxCol = 0;
-// Цикл для пошуку мінімального та максимального значень пікселів
+//цикл для пошуку мінімального та максимального значень пікселів
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++) {
             if (img[i][j] < img[minRow][minCol]) {
@@ -107,7 +106,7 @@ void findExtremes(int** img, int rows, int cols,
         }
     }
 }
-// Функція для обчислення статистики яскравості та виведення результатів
+// функція для обчислення статистики яскравості та виведення результатів
 void showStatistics(int** img, int rows, int cols) {
     int minRow, minCol, maxRow, maxCol;
     findExtremes(img, rows, cols, minRow, minCol, maxRow, maxCol);
@@ -118,7 +117,7 @@ void showStatistics(int** img, int rows, int cols) {
          << " (рядок " << maxRow + 1 << ", стовпець " << maxCol + 1 << ")\n";
 
     int total = 0;
-    // Цикл для обчислення середньої яскравості кожного рядка та всього зображення
+    //цикл для обчислення середньої яскравості кожного рядка та всього зображення
     for (int i = 0; i < rows; i++) {
         int* row = img[i];
         int rowSum = 0;
@@ -137,7 +136,7 @@ void showStatistics(int** img, int rows, int cols) {
          << fixed << setprecision(2)
          << 1.0 * total / (rows * cols) << '\n';
 }
-// Функція для інвертування яскравості пікселів
+//функція для інвертування яскравості пікселів (9 - минула яскравіть)
 void invertImage(int** img, int rows, int cols) {
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++) {
@@ -146,15 +145,15 @@ void invertImage(int** img, int rows, int cols) {
     }
     cout << "Яскравість інвертовано.\n";
 }
-// Функція для обміну значень двох пікселів
+// функція для обміну значень двох пікселів
 void swapPixels(int* a, int* b) {
     int temp = *a;
     *a = *b;
     *b = temp;
 }
-// Функція для віддзеркалення зображення по горизонталі
+//функція для віддзеркалення зображення по горизонталі
 void mirrorImage(int** img, int rows, int cols) {
-    // Цикл для обміну пікселів у кожному рядку з протилежними
+    //цикл для обміну пікселів у кожному рядку з протилежними
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols / 2; j++) {
             swapPixels(&img[i][j], &img[i][cols - 1 - j]);
@@ -162,10 +161,10 @@ void mirrorImage(int** img, int rows, int cols) {
     }
     cout << "Зображення віддзеркалено по горизонталі.\n";
 }
-// Функція для повороту зображення на 90 градусів праворуч
+//функція для повороту зображення на 90 градусів праворуч
 int** rotateRight(int** img, int rows, int cols) {
     int** rotated = createImage(cols, rows);
-// Поворот на 90 градусів праворуч: новий рядок стає старим стовпцем у зворотному порядку
+// Поворот на 90 градусів праворуч, новий рядок стає старим стовпцем у зворотному порядку
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++) {
             rotated[j][rows - 1 - i] = img[i][j];
@@ -177,7 +176,7 @@ int** rotateRight(int** img, int rows, int cols) {
 }
 
 int main() { 
-    // Зчитування розмірів зображення з перевіркою на допустимий діапазон
+    //зчитування розмірів зображення з перевіркою на допустимий діапазон
     int rows = readInt("Висота зображення (1..20): ");
     if (rows < 1 || rows > 20) {
         cout << "Помилка: висота має бути від 1 до 20.\n";
@@ -189,7 +188,7 @@ int main() {
         cout << "Помилка: ширина має бути від 1 до 20.\n";
         return 1;
     }
-// Створення динамічного двовимірного масиву для зображення та введення даних
+//створення динамічного двовимірного масиву для зображення та введення даних
     int** img = createImage(rows, cols);
     if (!inputImage(img, rows, cols)) {
         freeImage(img, rows);
@@ -197,7 +196,6 @@ int main() {
     }
 
     int choice;
-    // Меню для взаємодії з користувачем
     do { 
         cout << "\n--- МЕНЮ ---\n";
         cout << "1. Показати зображення\n";

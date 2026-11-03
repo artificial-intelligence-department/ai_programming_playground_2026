@@ -5,14 +5,14 @@ using namespace std;
 
 const int N = 100;   // максимальний розмір
 
-// Заповнення матриці випадковими числами
+//заповнення матриці випадковими числами
 void fillMatrix(int a[][N], int n) {
     for (int i = 0; i < n; i++)
         for (int j = 0; j < n; j++)
-            a[i][j] = rand() % 9 + 1;    // числа 1..9, щоб добуток не став нульовим
+            a[i][j] = rand() % 9 + 1;    // числа 1-9, і +1 щоб добуток не став нульовим
 }
 
-// Друк матриці
+// друк матриці
 void printMatrix(int a[][N], int n) {
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++)
@@ -21,8 +21,7 @@ void printMatrix(int a[][N], int n) {
     }
 }
 
-// Чи перший елемент стовпця j більший за елементи цього стовпця,
-// що лежать на головній і бічній діагоналях
+// чи перший елемент стовпця j більший за елементи цього стовпця, що лежать на головній і бічній діагоналях
 bool isColumnSuitable(int a[][N], int n, int j) {
     for (int i = 1; i < n; i++) {                 // рядок 0 пропускаємо
         bool onMain = (i == j);
@@ -33,7 +32,7 @@ bool isColumnSuitable(int a[][N], int n, int j) {
     return true;
 }
 
-// Добуток елементів стовпця j
+// добуток елементів стовпця j
 long long columnProduct(int a[][N], int n, int j) {
     long long p = 1;
     for (int i = 0; i < n; i++)
@@ -41,8 +40,7 @@ long long columnProduct(int a[][N], int n, int j) {
     return p;
 }
 
-// Обробка матриці: виводить добутки підходящих стовпців,
-// повертає загальний добуток (або 0, якщо підходящих немає)
+// виводить добутки підходящих стовпців, повертає загальний добуток (або 0, якщо підходящих немає)
 long long processMatrix(int a[][N], int n, int &count) {
     long long total = 1;
     count = 0;
