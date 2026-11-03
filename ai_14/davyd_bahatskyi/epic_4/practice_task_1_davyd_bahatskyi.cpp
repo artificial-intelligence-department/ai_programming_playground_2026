@@ -163,12 +163,12 @@ int **rotateRight(int **img, int rows, int cols) {
 int main() {
   int rows = 0, cols = 0;
 
-  rows = read_val("Enter image height", 1, 20);
   cols = read_val("Enter image width", 1, 20);
+  rows = read_val("Enter image height", 1, 20);
 
   int **img = newImage(rows, cols);
 
-  std::println("Enter pixels brightness (0..9) for {}x{}:", rows, cols);
+  std::println("Enter pixels brightness (0..9) for {}x{}:", cols, rows);
   for (int i = 0; i < rows; ++i) {
     for (int j = 0; j < cols; ++j) {
       img[i][j] = read_val("Enter pixel brightness", 0, 9, false);
