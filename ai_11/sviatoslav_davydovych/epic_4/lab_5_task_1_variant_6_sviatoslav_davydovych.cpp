@@ -18,7 +18,7 @@ int main(){
     uniform_int_distribution<int> distrib(0, RANGE);
 
     // динамічне виділення
-    const int N = 10; // для N = 10 випадкова поява сідлових точок малоймовірна, варто дивитися для N = 2,3,4
+    const int N = 4; // для N = 10 випадкова поява сідлових точок малоймовірна, варто дивитися для N = 2,3,4
     int** matrix = new int*[N];
     for (int i = 0; i<N; i++){
         matrix[i] = new int[N];

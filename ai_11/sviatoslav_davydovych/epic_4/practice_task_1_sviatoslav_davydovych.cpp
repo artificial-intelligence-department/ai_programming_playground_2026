@@ -81,7 +81,7 @@ void printImage(int **matrix, int rows, int cols, string *symbols, bool Brightne
     cout << "Розмір: " << rows << "x" << cols << "\n";
 }
 
-void statystic(int **matrix, int rows, int cols){
+void statistic(int **matrix, int rows, int cols){
     int minRow, minCol, maxRow, maxCol;
     findExtremes(matrix, rows, cols, minRow, minCol, maxRow, maxCol);
 
@@ -202,7 +202,7 @@ int main(){
                 printImage(image, rows, cols, symbols);
                 break;
             case 2:
-                statystic(image, rows, cols);
+                statistic(image, rows, cols);
                 break;
             case 3:
                 invertImage(image, rows, cols);
