@@ -35,8 +35,8 @@ int main(){
     mt19937 gen(rd());
     uniform_int_distribution<int> distrib(-RANGE, RANGE);
 
-    const int N = 100;
-    int* arr = new int[N];
+    const int N = 100; // початкова кількість елементів
+    int arr[500]; // виділяємо пам'ять у статичному масиві "із запасом"
 
     for (int i = 0; i<N; i++){
         arr[i] = distrib(gen);
@@ -52,37 +52,30 @@ int main(){
     do{
         cout << "I = ";
         I = getValidInteger();
-    } while (I<0 || I>=N);
+    } while (I<1 || I>=N);
     
-    int* arr1 = new int[N-1];
-    for (int i = 0, j = 0; i<N; i++, j++){
-        if (i==I){ // пропускаємо запис "знищеного" елемента
-            j--;
-            continue;
-        }
-        arr1[j]=arr[i];
+    for (int i = I; i<N-1; i++){
+        arr[i]=arr[i+1]; // зсув вліво
     }
 
-    int newEl = arr1[I-1]+2;
+    int newEl = arr[I-1]+2;
 
-    int* arr2 = new int[N];
-    for (int i = 0, j = 0; i<N; i++, j++){
-        if (j!=i || (RANGE+arr1[j])%2==1) { // (RANGE+arr1[j])%2 гарантує, що отримане число буде додатним по модулю 
-            arr2[j]=arr1[i];
-        } else {
-            arr2[j]=arr1[i];
-            j++;
-            arr2[j]=newEl;
+    int inserted_id = -1;
+    for (int i = 0; i<N-1; i++){
+        if ((RANGE+arr[i])%2==0){ // (RANGE+arr1[i])%2 гарантує, що отримане число буде додатним по модулю
+            inserted_id = i+1;
+            break;
         }
     }
+
+    for (int i = N-1; i>inserted_id; i--){
+        arr[i] = arr[i-1]; // зсув вправо
+    }
+    arr[inserted_id] = newEl;
 
     cout << "Модифікований масив:\n";
     for (int i = 0; i<N; i++){
-        cout << arr2[i] << " ";
+        cout << arr[i] << " ";
     }
-    // звільнення пам'яті
-    delete[] arr;
-    delete[] arr1;
-    delete[] arr2;
     cout << "\n";
 }
