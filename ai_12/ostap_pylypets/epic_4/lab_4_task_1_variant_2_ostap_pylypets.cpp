@@ -4,6 +4,7 @@
 #include <cstdlib>
 #include <ctime>
 using namespace std;
+//виводимо масив
 void printm(int n, int m[]) {
     cout << "Масив елементів: ";
     for (int i = 0; i < n; i++) {
@@ -11,6 +12,7 @@ void printm(int n, int m[]) {
     }
     cout << endl;
 }
+//видаляємо нулі
 void deletefirst(int m[], int& n) {
     for (int i = 0; i < n; i++) {
         if (m[i] == 0) {
@@ -22,9 +24,11 @@ void deletefirst(int m[], int& n) {
         }
     }
 }
+//функція яка додає елемент після парного числа
 void addTwo(int m[], int& n) {
     for (int i = 0; i < n; i++) {
         if (m[i] % 2 == 0) {
+            //створюємо нову комірку для елемента
             for (int j = n; j > i + 1; j--) {
                 m[j] = m[j - 1];
             }
@@ -35,6 +39,7 @@ void addTwo(int m[], int& n) {
         }
     }
 }
+//функція яка виводить результат
 void printres(int m[], int n) {
     cout << "Результат: ";
     for (int i = 0; i < n; i++) {
@@ -52,6 +57,7 @@ int main() {
         cout << "Некоректна кількість елементів.";
         return 1;
     }
+    //генеруємо рандомні числа
     srand(time(0));
     for (int i = 0; i < n; i++) {
         m[i] = rand() % 31;

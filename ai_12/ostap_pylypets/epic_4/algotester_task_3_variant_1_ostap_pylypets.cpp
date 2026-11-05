@@ -7,8 +7,10 @@ int main(){
     string str;
     cin >> n;
     cin.ignore();
+    //зчитуємо лініями str
     for(int i = 0; i< n; i++){
         getline(cin, str);
+        //перебираємо кожне значення на #
         for(int j = 0; j < str.length(); j++){
             if(str[j] == '#' && (j == 0 || str[j-1] != '#')){
             res++;
