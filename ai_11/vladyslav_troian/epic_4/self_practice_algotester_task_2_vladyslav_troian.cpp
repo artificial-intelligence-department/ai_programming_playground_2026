@@ -1,49 +1,34 @@
 #include <iostream>
 using namespace std;
 
-void reorder(int *b, int len)
+void sortVstavka(int *b, int n)
 {
-    int *ptr = b;
-    int count = 0;
-    for (int i = 0; i < len; i++){
-        if (*(ptr + i) % 2 == 0){
-            count++;
+    int x;
+    int j;
+    for (int i = 1; i < n; i++){
+        x = b[i];
+        j = i - 1;
+        while (x < b[j] && j >= 0){
+            b[j+1] = b[j];
+            j--;
         }
+        b[j+1] = x;
     }
-
-    bool good = false;
-    if (count == len/2 || count+1 == len/2 || count-1 == len/2){
-        good = true;
-    } else if (!good){
-        cout << -1 << endl;
-    }
-
-    if (good){
-        for (int i = 0; i < len; i++){
-            for (int j = 1; j < len; j++){
-                if ((*(ptr + i) + *(ptr + j)) % 2 != 0){
-                    swap(*(ptr + j-1), *(ptr + j));
-                }
-            }
-        }
-    }
-
-    for (int i = 0; i < len; i++){
-        cout << *(ptr + i) << " ";
+    for (int i = 0; i < n; i++){
+        cout << b[i] << " ";
     }
     cout << endl;
 }
 
 int main()
 {
-    int a[1000000] = {0};
-    int n;
-    cin >> n;
-    int *b = new int[n];
-    for (int i = 0; i < n; i++){
-        cin >> b[i];
+    int n = 0;
+    int a[10001] = {0};
+    int num;
+    while (cin >> num){
+        a[n] = num;
+        n++;
     }
-    reorder(b, n);
-    delete[] b;
+    sortVstavka(a, n);
     return 0;
 }
