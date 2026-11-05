@@ -4,7 +4,7 @@
 #include <cstdlib>
 #include <ctime>
 using namespace std;
-
+//створюємо масив
 void create(int n, int k, int m[100][100]){
     for(int i = 0; i < n; i++){
         for(int j = 0; j < k; j++){
@@ -12,6 +12,7 @@ void create(int n, int k, int m[100][100]){
         }
     }
 }
+//функція яка міняє місцями елементи
 void swapRows(int m[100][100], int first, int second, int k){
     for(int j = 0; j < k; j++){
         int temp = m[first][j];
@@ -19,6 +20,7 @@ void swapRows(int m[100][100], int first, int second, int k){
         m[second][j] = temp;
     }
 }
+//сортуємо масив за третім стовпцем
 void sorting(int m[100][100], int n, int k){
     for(int i = 0; i < n-1; i++){
         for(int q = 0; q < n-i-1; q++){
@@ -28,6 +30,7 @@ void sorting(int m[100][100], int n, int k){
         }
     }
 }
+//виводимо масив
 void print(int m[100][100], int n, int k){
     for(int i = 0; i < n; i++){
         for(int j = 0; j < k; j++){
