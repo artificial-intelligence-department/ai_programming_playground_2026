@@ -16,7 +16,7 @@ void findAverageBrightnessRow(int** image, int rows, int cols);
 void invertBrightness(int** image, int rows, int cols);
 void toMirror(int** image, int rows, int cols);
 void swapPixels(int* a, int* b);
-int** rotateRight(int** image, int &rows, int &cols);
+int** rotateRight(int** image, int rows, int cols);
 void deleteImage(int** &image, int rows);
 
 int main () {
@@ -47,7 +47,7 @@ int main () {
         for (int j = 0; j < cols; j++) {
             cout << "Введіть елемент " << i+1 << " рядка " << j+1 << " стопця (від 0 до 9): ";
             cin >> image[i][j];
-            if (cin.fail() || image[i][j] < 0 || image[i][j] > 9 || cin.peek() != '\n') {
+            if (cin.fail() || image[i][j] < 0 || image[i][j] > 9) {
                 cout << "Помилка! Введіть ціле число, напр. 7, від 0 до 9\n";
                 deleteImage(image, rows);
                 return 1;
@@ -70,7 +70,7 @@ int main () {
         cout << "Виберіть операцію: ";
         cin >> choice;
 
-        if (cin.fail() || cin.peek() != '\n') {
+        if (cin.fail()) {
             cout << "Помилка! Введіть ціле число від 0 до 5\n";
             cin.clear();
             cin.ignore(10000, '\n');
@@ -80,7 +80,12 @@ int main () {
         else if (choice == 2) brightnessStatistics(image, rows, cols);
         else if (choice == 3) invertBrightness(image, rows, cols);
         else if (choice == 4) toMirror(image, rows, cols);
-        else if (choice == 5) image = rotateRight(image, rows, cols);
+        else if (choice == 5) {
+            image = rotateRight(image, rows, cols);
+            int t = rows;
+            rows = cols;
+            cols = t;
+        }
         else if (choice == 0) menuIsAlive = false;
         else cout << "\nПомилка! Введіть ціле число, від 0 до 5\n";
 
@@ -104,7 +109,7 @@ void showImage(int** image, int rows, int cols, char palitra[]) {
     cout << "\n====== Символьне зображення ====== \n";
     for (int i = 0; i<rows; i++) {
         for (int j = 0; j<cols; j++) {
-            cout << palitra[image[i][j]] << " ";
+            cout << palitra[image[i][j]];
         }
         cout << "\n";
     }
@@ -159,8 +164,10 @@ float findAverageBrightness(int** image, int rows, int cols) {
     float averageBrightness = 0;
 
     for (int i = 0; i<rows; i++) {
+        int* row = image[i];
+
         for (int j = 0; j<cols; j++) {
-            sumAllVall += image[i][j];
+            sumAllVall += *(row + j);
         }
     }
 
@@ -209,14 +216,11 @@ void swapPixels(int* a, int* b) {
     *b = temp;
 }
 
-int** rotateRight(int** image, int &rows, int &cols) {
+int** rotateRight(int** image, int rows, int cols) {
 
-    int newRows = cols;
-    int newCols = rows;
-
-    int** imageRotated = new int*[newRows];
-    for (int i = 0; i<newRows; i++) {
-        imageRotated[i] = new int[newCols];
+    int** imageRotated = new int*[cols];
+    for (int i = 0; i<cols; i++) {
+        imageRotated[i] = new int[rows];
     }
 
     for (int i = 0; i<rows; i++) {
@@ -226,9 +230,6 @@ int** rotateRight(int** image, int &rows, int &cols) {
     }
 
     deleteImage(image, rows);
-
-    rows = newRows;
-    cols = newCols;
 
     return imageRotated;
 
