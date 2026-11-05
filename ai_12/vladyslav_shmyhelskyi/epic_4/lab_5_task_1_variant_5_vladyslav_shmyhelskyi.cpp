@@ -94,9 +94,9 @@ int main()
     }
     cout << "Знищити до(B): ";
     cin >> B;
-    if (B < A)
+    if (B < A || B > rows)
     {
-        cout << "Помилка.B повинна бути >=  " << A << endl;
+        cout << "Помилка." << A << endl;
         deletearr(arr, rows);
         deletearr(copyarr, rows);
         return 0;
