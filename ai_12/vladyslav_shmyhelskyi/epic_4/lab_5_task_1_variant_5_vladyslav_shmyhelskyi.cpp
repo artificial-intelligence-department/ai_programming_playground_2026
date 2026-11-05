@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-void deletearr(int **&arr, int rows) //Звільнення пам'яті 
+void deletearr(int **&arr, int rows) // Звільнення пам'яті
 {
 
     if (arr == nullptr)
@@ -15,21 +15,21 @@ void deletearr(int **&arr, int rows) //Звільнення пам'яті
     arr = nullptr;
 }
 void deleterow(int cols, int rows, int A, int B, int **arr, int **copyarr)
-{   
+{
     A--;
     int difference = (B - A) + 1;
     int new_i = A;
-    for (int i = B; i < rows; i++)  // Зсуваємо рядки 
+    for (int i = B; i < rows; i++) // Зсуваємо рядки
     {
         for (int j = 0; j < cols; j++)
         {
             arr[new_i][j] = copyarr[i][j];
         }
-        new_i++; //Використовуємо власну змінну, щоб не вийти за межі масиву
+        new_i++; // Використовуємо власну змінну, щоб не вийти за межі масиву
     }
 
-    for (int i = rows - 1; i > ((rows)-difference); i--) 
-    {// міняємо останні B-A рядки на нулі бо ми їх зсунули
+    for (int i = rows - 1; i > ((rows)-difference); i--)
+    { // міняємо останні B-A рядки на нулі бо ми їх зсунули
         for (int j = 0; j < cols; j++)
         {
             arr[i][j] = 0;
@@ -55,10 +55,10 @@ int main()
         cout << "Помилка.Кількість повинна бути від 1 до 100." << endl;
         return 0;
     }
-    int **arr = new int *[rows]; 
+    int **arr = new int *[rows];
     for (int i = 0; i < rows; i++)
     {
-        arr[i] = new int[cols];// Для кожного рядка виділяємо пам'ять під cols елементів
+        arr[i] = new int[cols]; // Для кожного рядка виділяємо пам'ять під cols елементів
     }
     int A, B;
     for (int i = 0; i < rows; i++)
@@ -69,7 +69,7 @@ int main()
             cin >> arr[i][j];
         }
     }
-    int **copyarr = new int *[rows]; //створємо копію масиву
+    int **copyarr = new int *[rows]; // створємо копію масиву
     for (int i = 0; i < rows; i++)
     {
         copyarr[i] = new int[cols];
@@ -87,6 +87,9 @@ int main()
     if (A < 1 || A > rows)
     {
         cout << "Помилка.A повинна бути від 1 до " << rows << endl;
+        deletearr(arr, rows);
+        deletearr(copyarr, rows); // звільнення пам'яті
+
         return 0;
     }
     cout << "Знищити до(B): ";
@@ -94,6 +97,8 @@ int main()
     if (B < A)
     {
         cout << "Помилка.B повинна бути >=  " << A << endl;
+        deletearr(arr, rows);
+        deletearr(copyarr, rows);
         return 0;
     }
     cout << "Початковий масив: " << endl;
@@ -105,7 +110,7 @@ int main()
         }
         cout << endl;
     }
-    deleterow(cols, rows, A, B, arr, copyarr); //виклик функції для зміни матриці
+    deleterow(cols, rows, A, B, arr, copyarr); // виклик функції для зміни матриці
     cout << "Результат: " << endl;
     for (int i = 0; i < rows; i++)
     {
@@ -116,6 +121,6 @@ int main()
         cout << endl;
     }
     deletearr(arr, rows);
-    deletearr(copyarr, rows); //звільнення пам'яті
+    deletearr(copyarr, rows); // звільнення пам'яті
     return 0;
 }
