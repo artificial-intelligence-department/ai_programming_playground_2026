@@ -10,6 +10,7 @@ int main()
         cin >> a[i];
     }
     int m;
+    cin >> m;
     int b[m];
     for (int i = 0; i < m; i++)
     {
@@ -27,6 +28,6 @@ int main()
         }
     }
     cout << countOfPovt << endl;
-    cout << n +m - countOfPovt << endl;
+    cout << n + m - countOfPovt << endl;
     
 }
