@@ -98,6 +98,7 @@ void invertion(int** image, int rows, int cols){
             image[i][q] = 9 - image[i][q];
         }
     }
+    showImage(image,rows,cols);
 }
 void swapPixels(int* a, int* b){
     int temp = *a;
@@ -112,6 +113,7 @@ void mirror(int** image, int rows, int cols){
             swapPixels(&image[i][q], &image[i][cols-1-q]);
         }
     }
+    showImage(image,rows,cols);
 }
 void memoryrelease(int**& image, int rows){
     //вивільняємо пам'ять
@@ -139,6 +141,7 @@ int** rotateRight(int** image, int rows, int cols){
             newImage[j][rows - 1 - i] = image[i][j];
         }
     }
+    showImage(image,rows,cols);
     memoryrelease(image, rows);
     return newImage;
 }
