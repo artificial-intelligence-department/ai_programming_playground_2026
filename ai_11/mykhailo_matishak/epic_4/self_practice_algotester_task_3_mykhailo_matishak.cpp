@@ -4,7 +4,6 @@ using namespace std;
 long long t[100000];
 int n, m;
 
-// додає d до елемента з номером i
 void add(int i, long long d) {
     for (; i <= n; i += i & (-i)) {
         t[i] += d;
