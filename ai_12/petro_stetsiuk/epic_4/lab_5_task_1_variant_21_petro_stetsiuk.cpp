@@ -10,7 +10,7 @@ using namespace std;
 
 int MaxRepeatingElement(int a[100][100], int r, int c)
 {
-    int maxRep = -1;
+    int maxRep = -101;
     bool found = false;
 
    
@@ -47,17 +47,17 @@ int MaxRepeatingElement(int a[100][100], int r, int c)
     if (found)
         return maxRep;
     else
-        return -1; 
+        return -101; 
 }
 
 int main()
 {
     int mas[100][100], r, c;
 
-    cout << "Введіть кількість рядків та стовпців: ";
+    cout << "Введіть кількість рядків та стовпців(1-100): ";
     cin >> r >> c;
 
-    cout << "Введіть елементи матриці:" << endl;
+    cout << "Введіть елементи матриці(-100..100):" << endl;
     for (int i = 0; i < r; i++)
     {
         for (int j = 0; j < c; j++)
@@ -68,7 +68,7 @@ int main()
 
     int result = MaxRepeatingElement(mas, r, c);
 
-    if (result != -1)
+    if (result != -101)
         cout << "Максимальний з повторюваних елементів: " << result << endl;
     else
         cout << "Повторюваних елементів у матриці немає!" << endl;
