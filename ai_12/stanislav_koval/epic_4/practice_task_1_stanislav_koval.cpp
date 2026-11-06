@@ -159,8 +159,9 @@ void mirroring(int** img, int rows, int cols) {
         for (int j = 0; j < cols; j++) {
             cout << img[i][j] << " ";
         }
-    cout << endl << endl;
+    cout << endl;
     }
+    cout << endl;
 
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols / 2; j++) {
@@ -173,6 +174,7 @@ void mirroring(int** img, int rows, int cols) {
         for (int j = 0; j < cols; j++) {
             cout << img[i][j] << " ";
         }
+        cout << endl;
     }
     cout << endl;
 }
