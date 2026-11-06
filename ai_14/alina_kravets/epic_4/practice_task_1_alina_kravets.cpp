@@ -43,7 +43,7 @@ void findExtremes (int** image, int rows, int cols, int &minRow, int &minCol, in
     int max = image[0][0];
     int min = image[0][0];
     bool maxFound = false;
-    bool minFound = true;
+    bool minFound = false;
 
     for (int i = 0; i < rows; i++)
     {
