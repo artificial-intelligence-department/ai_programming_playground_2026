@@ -16,7 +16,7 @@ int main() {
 
   std::cin >> M;
   int *b = new int[M];
-  for (int i = 0; i < N; ++i) {
+  for (int i = 0; i < M; ++i) {
     std::cin >> b[i];
   }
 
