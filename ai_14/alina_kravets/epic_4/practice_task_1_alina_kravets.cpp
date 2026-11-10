@@ -95,8 +95,8 @@ void brightnessStats (int** image, int rows, int cols)//функція, яка �
     double sum = 0;
 
     findExtremes(image, rows, cols, minRow, minCol, maxRow, maxCol);
-    cout << "Найтемніший піксель: " << image[minRow][minCol] << " (рядок " << minRow << ", стовпець " << minCol << ")" << endl;
-    cout << "Найсвітліший піксель: " << image[maxRow][maxCol] << " (рядок " << maxRow << ", стовпець " << maxCol << ")" << endl;
+    cout << "Найтемніший піксель: " << image[minRow][minCol] << " (рядок " << minRow + 1 << ", стовпець " << minCol + 1 << ")" << endl;
+    cout << "Найсвітліший піксель: " << image[maxRow][maxCol] << " (рядок " << maxRow + 1 << ", стовпець " << maxCol + 1 << ")" << endl;
 
     for (int i = 0; i < rows; i++)
     {
