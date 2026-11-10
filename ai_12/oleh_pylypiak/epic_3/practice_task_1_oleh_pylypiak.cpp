@@ -1,15 +1,18 @@
+/*  Practise task 
+    Автор:Пилип'як Олег Васильович
+    Група: ШІ-12, 3-тя група*/
 #include <iostream>
 #include <iomanip>
 #include <cmath>
 using namespace std;
 
-// 2.Статистика витрат(Рекурсивна функція для обчислення сумарних витрат)
+// 2.Статистика витрат
 double calcTotal(const double spending[], int N) {
     if (N <= 0) return 0.0;
     return spending[N - 1] + calcTotal(spending, N - 1);
 }
 
-// 2.Статистика витрат(функція знаходження мінімуму та максимуму)
+// 2.Статистика витрат
 void findMinMax(const double spending[], int N, double &minVal, double &maxVal) {
     if (N <= 0) return;
     minVal = spending[0];
@@ -20,12 +23,12 @@ void findMinMax(const double spending[], int N, double &minVal, double &maxVal) 
     }
 }
 
-// 2.Статистика витрат(функція для виведення середніх витрат (без врахування днів по 0 грн))
+// 2.Статистика витрат
 void showAvgSpnd(const double spending[], int N) {
     double total = 0.0;
     int count = 0;
     for (int i = 0; i < N; ++i) {
-        if (spending[i] <= 0) continue; // Пропускаємо дні без покупок
+        if (spending[i] <= 0) continue;
         total += spending[i];
         count++;
     }
@@ -62,7 +65,7 @@ void showStat(const double spending[], int N, double budget) {
         cout << "Перевитрата понад бюджет: " << abs(remaining) << " грн" << endl;
     }
     showAvgSpnd(spending, N);
-    // 2.Статистика витрат (день, коли бюджет вичерпано)
+    // 2.Статистика витрат
     int count = 0;
     double potrach = 0;
     bool exhausted = false;
@@ -101,7 +104,6 @@ void showTop3Spnd(const double spending[], int N) {
     for (int i = 0; i < N; ++i) {
         top3[i] = spending[i];
     }
-    // Бабл сорт
     for (int i = 0; i < N - 1; ++i) {
         for (int j = 0; j < N - i - 1; ++j) {
             if (top3[j] < top3[j + 1]) {
@@ -153,7 +155,7 @@ int main() {
         }
     }
     do {
-menu: // Мітка для goto
+menu:
         cout << endl << "--- Меню ---" << endl;
         cout << "1. Показати витрати по днях" << endl;
         cout << "2. Статистика витрат" << endl;
