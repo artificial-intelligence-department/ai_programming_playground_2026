@@ -45,7 +45,7 @@ void change(int** a, int n, int row, int col) {
 void printArray(int** a, int n, int m) {
     for (int i = 0; i < n; ++i) {
         for (int j = 0; j < m; ++j) {
-            cout << a[i][j] << '\n';
+            cout << a[i][j] << ' ';
         }
         cout << '\n';
     }

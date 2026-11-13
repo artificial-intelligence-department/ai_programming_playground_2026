@@ -63,6 +63,8 @@ int main(){
     do{
 
         menu();
+
+        cout << "Введіть номер операції: ";
         action = inputInt();
 
         switch (action){
@@ -182,13 +184,13 @@ void menu(){
 
     cout << "===== Меню =====" << endl;
 
-    cout << left << setw(8) << "Пункт   " << setw(35) << "Операція\n";
-    cout << left << setw(8) << '1' << setw(35) << "Показати зображення\n";
-    cout << left << setw(8) << '2' << setw(35) << "Статистика яскравості\n";
-    cout << left << setw(8) << '3' << setw(35) << "Інвертувати яскравість\n";
-    cout << left << setw(8) << '4' << setw(35) << "Віддзеркалити по горизонталі\n";
-    cout << left << setw(8) << '5' << setw(35) << "Повернути на 90 градусів праворуч\n";
-    cout << left << setw(8) << '0' << setw(35) << "Вийти\n";
+    cout << "Пункт   Операція\n";
+    cout << left << setw(8) << '1' << "Показати зображення\n";
+    cout << left << setw(8) << '2' << "Статистика яскравості\n";
+    cout << left << setw(8) << '3' << "Інвертувати яскравість\n";
+    cout << left << setw(8) << '4' << "Віддзеркалити по горизонталі\n";
+    cout << left << setw(8) << '5' << "Повернути на 90 градусів праворуч\n";
+    cout << left << setw(8) << '0' << "Вийти\n";
 }
 
 // Виводить зображення у числовому вигляді та у вигляді ASCII-графіки.
@@ -196,11 +198,11 @@ void showImage(int** img, int rows, int cols){
 
     const char ch[] = {' ', '.', ':', '-', '=', '+', '*', '#', '%', '@'};
 
-    cout << "Зображення " << rows << " x " << cols << ':\n';
+    cout << "Зображення " << rows << " x " << cols << ':' << endl;
 
     for (int i = 0; i < rows; ++i){
         for (int j = 0; j < cols; ++j){
-            cout << img[i][j] << '\n';
+            cout << img[i][j] << ' ';
         }
         cout << '\n';
     }
@@ -209,10 +211,11 @@ void showImage(int** img, int rows, int cols){
 
     for (int i = 0; i < rows; ++i){
         for (int j = 0; j < cols; ++j){
-            cout << ch[img[i][j]] << '\n';
+            cout << ch[img[i][j]];
         }
         cout << '\n';
     }
+    cout << "Поточні розміри зображення: " << rows << " x " << cols << endl;
 }
 
 // Пошук координат найтемнішого та найсвітлішого пікселів.
@@ -257,34 +260,40 @@ void brightnessStatistics(int** img, int rows, int cols){
          << " (рядок " << maxRow + 1
          << ", стовпець " << maxCol + 1 << ")\n";
 
+
     cout << "Середня яскравість рядків: ";
+
+    int totalSum = 0;
 
     for (int i = 0; i < rows; ++i) {
         int* row = img[i];
         int rowSum = 0;
 
         for (int j = 0; j < cols; ++j) {
-            rowSum += *(row + j);
+            int pixel = *(row + j);
+            rowSum += pixel;
+            totalSum += pixel;
         }
 
         double rowAverage = static_cast<double>(rowSum) / cols;
-        cout << fixed << setprecision(1) << rowAverage;
-
-        if (i < rows - 1) {
-            cout << ", ";
-        }
+        cout << fixed << setprecision(1) << rowAverage << ' ';
     }
 
-    cout << endl;
+    cout << '\n';
+
+    double imageAverage = static_cast<double>(totalSum) / (rows * cols);
+    cout << "Середня яскравість зображення: " << fixed << setprecision(2) << imageAverage << endl;
 }
 
 // Зміна яскравості пікселів за формулою 9 - значення.
 void invertBrightness(int** img, int rows, int cols){
 
+    cout << "Зображення після інверсії яскравості:\n";
+    
     for (int i = 0; i < rows; ++i){
         for (int j = 0; j < cols; ++j){
             img[i][j] = 9 - img[i][j];
-            cout << img[i][j] << '\t';
+            cout << img[i][j] << ' ';
         }
         cout << '\n';
     }
@@ -306,6 +315,15 @@ void mirrorHorizontally(int** img, int rows, int cols){
             swapPixels(&img[i][j], &img[i][cols - 1 - j]);
         }
     }
+
+    cout << "Зображення віддзеркалено.\n";
+
+    for (int i = 0; i < rows; ++i){
+        for (int j = 0; j < cols; ++j){
+            cout << img[i][j] << ' ';
+        }
+        cout << '\n';
+    }
 }
 
 // Повертає зображення на 90 градусів праворуч.
@@ -325,6 +343,15 @@ int** rotateRight(int** img, int rows, int cols){
         for (int j = 0; j < cols; ++j){
             newImg[j][rows - 1 - i] = img[i][j];
         }
+    }
+
+    cout << "Зображення повернуто на 90 градусів праворуч.\nНові розміри зображення: " << cols << " x " << rows << endl;
+
+    for (int i = 0; i < cols; ++i){
+        for (int j = 0; j < rows; ++j){
+            cout << newImg[i][j] << ' ';
+        }
+        cout << '\n';
     }
 
     // Очищення старого масиву пікселів після створення нового.
