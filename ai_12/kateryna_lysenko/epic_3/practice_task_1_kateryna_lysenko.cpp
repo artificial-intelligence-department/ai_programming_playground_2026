@@ -208,11 +208,7 @@ int main() {
             case 0:
                 cout << "Завершення роботи." << endl;
                 break;
-            default:
-                cout << "Невірний пункт!" << endl;
-                cin.clear();
-                cin.ignore(6769, '\n');
-                goto main_menu;
+        
         }
 
     } while (choice != 0);
