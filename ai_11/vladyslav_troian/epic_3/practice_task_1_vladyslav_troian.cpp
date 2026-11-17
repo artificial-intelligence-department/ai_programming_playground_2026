@@ -169,24 +169,25 @@ int main()
     double spendings[N] = {0};
     int minus = 0;
     do {
-    for (int i = 0; i < N; i++){
-        cin >> spendings[i];
-        fail = cin.fail();
-        if (fail){
-            cout << "Витрати не можуть складатися з букв." << endl;
-            cin.clear();
-            cin.ignore(1000, '\n');
-            minus = i;
-            cout << "Витрати по днях, грн: " << endl;
-            break;
-        } else if (spendings[i] < 0){
-            minus = i;
-            cout << "Витрати не потрібно записувати як від'ємне." << endl;
-            cout << "Витрати по днях, грн: " << endl;
-            break;
+        minus = -1;
+        for (int i = 0; i < N; i++){
+            cin >> spendings[i];
+            if (cin.fail()){
+                cout << "Витрати не можуть складатися з букв." << endl;
+                cin.clear();
+                cin.ignore(1000, '\n');
+                minus = i;
+                cout << "Витрати по днях, грн: " << endl;
+                break;
+            } else if (spendings[i] < 0){
+                cin.ignore(1000, '\n');
+                cout << "Витрати не потрібно записувати як від'ємне." << endl;
+                minus = i;
+                cout << "Витрати по днях, грн: " << endl;
+                break;
+            }
         }
-    }
-    } while (spendings[minus] < 0 || fail);
+    } while (minus != -1);
 MENU:
     cout << "МЕНЮ <" << endl;
     cout << "1 > Показати витрати по днях" << endl;
