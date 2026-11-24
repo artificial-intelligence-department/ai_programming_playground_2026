@@ -226,29 +226,23 @@ int main() {
 		} 
 		cout << endl;
 
-		switch (chosen_action) {
-			case 1:
-				menu_show_image(image, rows, cols, brightness_symbols);
-				break;
+		if (chosen_action == 1) {
+			menu_show_image(image, rows, cols, brightness_symbols);
 
-			case 2:
-				menu_brightness_statistics(image, rows, cols);
-				break;
+		} else if (chosen_action == 2) {
+			menu_brightness_statistics(image, rows, cols);
 
-			case 3:
-				menu_invert_brightness(image, rows, cols);
-				break;
+		} else if (chosen_action == 3) {
+			menu_invert_brightness(image, rows, cols);
 
-			case 4:
-				menu_mirror_horizontal(image, rows, cols);
-				break;
+		} else if (chosen_action == 4) {
+			menu_mirror_horizontal(image, rows, cols);
 
-			case 5:
-				menu_rotate_90_degree_clockwise(image, rows, cols);
-				break;
+		} else if (chosen_action == 5) {
+			menu_rotate_90_degree_clockwise(image, rows, cols);
 
-			default:
-				is_working = false;
+		} else {
+			is_working = false;
 		}
 		
 		cout << endl;
