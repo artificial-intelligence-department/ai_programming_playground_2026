@@ -29,8 +29,8 @@ double totalspnd(int N, double spending[]){
     if(N<=0) return 0;
     return spending[N-1] + totalspnd(N-1,spending);
 }
-double remaining(double budget, int N, double spending [], double total){
-    return abs (budget - total);
+double remaining(double budget, double total){
+    return fabs (budget - total);
 }
 void avgspnd(int N, double spending [],double total, double average){
     int count=0;
@@ -43,14 +43,15 @@ void avgspnd(int N, double spending [],double total, double average){
     cout << "Середні витрати за такий день: "<< average << "грн" << endl;
 }
 
-void Statsperevytraty(int N,double budget, double spending[],double &total,double &sum,double average,double min, double max){
+void Statsperevytraty(int N,double budget, double spending[],double total,double average,double min, double max){
     findMinMax(N, spending, min, max);
+    double sum=0;
     int i=0,d=1;
     while(i<N){
     sum+=spending[i];
     if(sum>budget){
-        cout << "Сумарні витрати: " << sum << " грн" << endl;
-        cout <<"Перевитрати понад бюджет: " << total-budget << " грн" << endl;
+        cout << "Сумарні витрати: " << total << " грн" << endl;
+        cout <<"Перевитрати понад бюджет: " << remaining(budget, total)<< " грн" << endl;
         avgspnd(N, spending, total, average);
         cout << "Бюджет вичерпано на дні " << d << ", накопичено " << sum << " грн." << endl;
         break;
@@ -61,14 +62,18 @@ void Statsperevytraty(int N,double budget, double spending[],double &total,doubl
     if(sum<=budget){
         cout << "Сумарні витрати: " << sum << " грн" << endl;
         avgspnd(N, spending, total, average);
-        cout << "Залишок: "<< budget-sum << " грн" << endl;
+        cout << "Залишок: "<< remaining(budget, total) << " грн" << endl;
     }
 }
 // 3. Дні з перевищенням денного ліміту
 void Dlimits(int N, double spending[], double limit=1000){
     int count=0;
     cout << "Денний ліміт (грн, 0 = за замовчуванням): "<< endl;
-    cin >> limit;
+    while (!(cin >> limit) || limit < 0) {
+        cin.clear();
+        cin.ignore(1000, '\n');
+        cout << "Помилка! Введіть невід'ємне число для ліміту: " << endl;
+    }
     if (limit==0) limit=1000;
     for(int i=0; i<N; i++){
         if (spending[i]>limit){
@@ -110,38 +115,32 @@ int main (){
     double spending[31];
     double min, max;
     cout << "Бюджет на місяць(грн): " << endl;
-    cin >> budget;
     while (!(cin>> budget) || budget <0) {
             cin.clear();
             cin.ignore(1000, '\n');
             cout << "Помилка! Введіть додатне число для бюджету." << endl;
-            cin >> budget;
         }
     cout << "Кількість днів обліку: " << endl;
-    cin >> N;
     while (!(cin >> N) || N <=0 || N > 31) {
             cin.clear();
             cin.ignore(1000, '\n');
             cout << "Помилка! Введіть натуральне число менше 32." << endl;
-            cin >> N;
         }
     cout << "Витрати по днях (грн): " << endl;
     for (int i=0; i<N; i++){
-        cin >> spending [i];
         while (!(cin>> spending[i]) || spending[i] <0) {
             cin.clear();
             cin.ignore(1000, '\n');
             cout << "Помилка! Введіть додатне число для витрат." << endl;
-            cin >> spending[i];
         }
     }
     double total=totalspnd(N,spending);
-    double average;
+    double average=0;
     double sum=0;
     int choise;
 //меню
-    do{
 menu:
+    do{
     cout<< "Меню"<< endl;
     cout<< "Пункт\tОперація"<<endl;
     cout<< "1\t"<<"Показати витрати по днях" <<endl;
@@ -161,7 +160,7 @@ menu:
                 tabl(N,spending);
                 break;
             case 2:
-                Statsperevytraty(N, budget, spending, total, sum, average, min, max);
+                Statsperevytraty(N, budget, spending, total, average, min, max);
                 break;
             case 3:
                 Dlimits(N, spending);
