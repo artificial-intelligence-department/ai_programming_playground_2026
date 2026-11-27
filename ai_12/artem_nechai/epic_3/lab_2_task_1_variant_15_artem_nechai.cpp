@@ -1,5 +1,10 @@
-// Lab 2 Task 1-15
+/*
+Лабораторна робота N2, Варіант 15
+Нечай Артем
+ШІ-12
+*/
 #include <iostream>
+#include <cmath>
 
 using namespace std;
 

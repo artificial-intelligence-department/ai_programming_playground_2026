@@ -1,4 +1,8 @@
-// Lab 3 Task 14
+/*
+Лабораторна робота N3, Варіант 14
+Нечай Артем
+ШІ-12
+*/
 
 #include <iostream>
 #include <cmath>
