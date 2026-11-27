@@ -66,19 +66,19 @@ void menu_spending_statistic(float* spending, int N, float budget) {
 	get_min_max(spending, N, &min_spending, &max_spending);
 
 	cout << left << setw(32) << "Мінімальні витрати за день: "
-		<< right << setw(16) << min_spending << " грн" << endl
+		<< right << setw(12) << min_spending << " грн" << endl
 		<< left << setw(32) << "Максимальні витрати за день: "
-		<< right << setw(16) << max_spending << " грн" << endl;
+		<< right << setw(11) << max_spending << " грн" << endl;
 
 	float sum_spending = calc_sum_spending(spending, N - 1);
 
 	cout << left << setw(32) << "Сумарні витрати: "
-		<< right << setw(16) << sum_spending << " грн" << endl;
+		<< right << setw(22) << sum_spending << " грн" << endl;
 
 	if (sum_spending > budget) {
 		float over_spending = abs(budget - sum_spending);
 		cout << left << setw(32) << "Перевитрата понад бюджет: "
-			<< right << setw(16) << over_spending << " грн" << endl;
+			<< right << setw(14) << over_spending << " грн" << endl;
 	}
 
 	int days_with_buys = 0;
@@ -98,9 +98,9 @@ void menu_spending_statistic(float* spending, int N, float budget) {
 	}
 
 	cout << left << setw(32) << "Днів з покупками: "
-		<< right << setw(16) << days_with_buys << endl
+		<< right << setw(22) << days_with_buys << endl
 		<< left << setw(32) << "Середні витрати за такий день: "
-		<< right << setw(16) << average_spending << " грн" << endl;
+		<< right << setw(9) << average_spending << " грн" << endl;
 
 	int i = 0;
 	sum_spending = 0;

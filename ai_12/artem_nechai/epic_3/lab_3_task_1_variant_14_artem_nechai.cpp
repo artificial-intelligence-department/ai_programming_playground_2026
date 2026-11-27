@@ -13,7 +13,6 @@ using namespace std;
 int main() {
 
 	const double pi = 3.141592653589793;
-	const double pi_over_4 = pi / 4.0;
 
 	// Задаємо константні значення з умови задачі
 	const double epsilon = 0.0001;
