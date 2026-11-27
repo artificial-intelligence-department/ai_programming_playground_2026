@@ -213,22 +213,32 @@ int main() {
 		}
 	}
 
-	cout << "Витрати по днях (грн): ";
 	float spending[max_days];
-	for (int i = 0; i < N; i++) {
-		while (true) {
+	
+	while (true) {
+		cout << "Витрати по днях (грн): ";
+
+		bool everything_is_fine = true;
+		for (int i = 0; i < N; i++) {
 			cin >> spending[i];
 			
 			if (check_is_input_valid() == false) {
+				everything_is_fine = false;
+				break;
 			} 
 			else if (spending[i] < 0) {
-				cout << "Значення витрат за день не може бути меншим за 0: ";
-			} 
-			else {
+				cout << "Значення витрат за день не може бути меншим за 0\n";
+				everything_is_fine = false;
 				break;
 			}
 		}
-	}
+		if (everything_is_fine) {
+			break;
+		} else {
+			cin.clear();
+			cin.ignore(256, '\n');
+		}
+	}	
 
 	bool is_working = true;
 	int action;
