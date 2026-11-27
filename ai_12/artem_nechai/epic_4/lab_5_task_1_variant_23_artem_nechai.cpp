@@ -1,3 +1,8 @@
+/*
+Лабораторна робота N5, Варіант 23
+Нечай Артем
+ШІ-12
+*/
 #include <iostream>
 
 using namespace std;

@@ -1,4 +1,8 @@
-// Lab 4 Task 1 Variant 23
+/*
+Лабораторна робота N4, Варіант 23
+Нечай Артем
+ШІ-12
+*/
 #include <iostream>
 
 using namespace std;
