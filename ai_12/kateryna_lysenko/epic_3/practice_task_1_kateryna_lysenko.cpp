@@ -138,16 +138,27 @@ int main() {
         cin.ignore(10000, '\n');
     }
 
-    cin.ignore(10000, '\n');
+        cin.ignore(10000, '\n');
 
     cout << "Витрати по днях (грн): ";
-    for (int i = 0; i < N; i++) {
-        while (!(cin >> spending[i]) || !isfinite(spending[i]) || spending[i] < 0) {
-            cout << "Помилка! Введіть невід'ємну суму!: ";
-            cin.clear();
-            cin.ignore(10000, '\n');
+
+    bool correct;
+
+    do {
+        correct = true;
+
+        for (int i = 0; i < N; i++) {
+            if (!(cin >> spending[i]) || !isfinite(spending[i]) || spending[i] < 0) {
+                cout << "Помилка! Введіть весь список витрат заново: ";
+                cin.clear();
+                cin.ignore(10000, '\n');
+                correct = false;
+                break;
+            }
         }
-    }
+
+    } while (!correct);
+
     cin.ignore(10000, '\n');
 
     int choice = -1;
@@ -214,4 +225,4 @@ int main() {
     } while (choice != 0);
 
     return 0;
-}
+} 
