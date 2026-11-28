@@ -1058,19 +1058,16 @@ int main() {
         freeService(s);
         return 0;
     }
-
+    int choice=-1;
     char buf[256];
-    while (true) {
+    do {
         printMenu();
         if (!readLine("Ваш вибір: ", buf, sizeof(buf))) break;
-
-        int choice;
         if (!parseInt(buf, choice)) {
             cout << "Помилка: введіть номер пункту меню." << endl;
             continue;
         }
         if (choice == 0) break;
-
         switch (choice) {
             case 1: addOrderMenu(s);  break;
             case 2: printJournal(s);  break;
@@ -1083,7 +1080,7 @@ int main() {
             default:
                 cout << "Помилка: пункту " << choice << " немає в меню." << endl;
         }
-    }
+    } while(choice!=0);
 
     freeService(s);
 }
