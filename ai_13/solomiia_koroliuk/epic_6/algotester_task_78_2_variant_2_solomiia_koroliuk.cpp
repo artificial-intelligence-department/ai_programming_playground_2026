@@ -1,0 +1,95 @@
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+template <typename T>
+class DynArray {
+    T *data;
+    int sz;
+    int cap;
+
+    // збільшуємо ємність вдвічі, поки не вміститься need елементів
+    void grow(int need) {
+        int newCap = cap;
+        while (need >= newCap) newCap *= 2;
+        if (newCap == cap) return;
+        T *p = new T[newCap];
+        for (int i = 0; i < sz; i++) p[i] = data[i];
+        delete[] data;
+        data = p;
+        cap = newCap;
+    }
+
+public:
+    DynArray() : data(new T[1]), sz(0), cap(1) {}
+    ~DynArray() { delete[] data; }
+    DynArray(const DynArray &) = delete;
+    DynArray &operator=(const DynArray &) = delete;
+
+    int size() const { return sz; }
+    int capacity() const { return cap; }
+
+    T &operator[](int i) { return data[i]; }
+    const T &operator[](int i) const { return data[i]; }
+
+    // вставка n елементів з arr на позицію index
+    void insert(int index, int n, const T *arr) {
+        grow(sz + n);
+        for (int i = sz - 1; i >= index; i--) data[i + n] = data[i];
+        for (int i = 0; i < n; i++) data[index + i] = arr[i];
+        sz += n;
+    }
+
+    // видалення n елементів, починаючи з index
+    void erase(int index, int n) {
+        for (int i = index + n; i < sz; i++) data[i - n] = data[i];
+        sz -= n;
+    }
+
+    friend ostream &operator<<(ostream &os, const DynArray &a) {
+        for (int i = 0; i < a.sz; i++) {
+            if (i > 0) os << ' ';
+            os << a.data[i];
+        }
+        return os;
+    }
+};
+
+int main() {
+    DynArray<int> a;
+    int q;
+    cin >> q;
+
+    while (q--) {
+        char cmd[16];
+        cin >> cmd;
+
+        if (strcmp(cmd, "insert") == 0) {
+            int index, n;
+            cin >> index >> n;
+            int *tmp = new int[n];
+            for (int i = 0; i < n; i++) cin >> tmp[i];
+            a.insert(index, n, tmp);
+            delete[] tmp;
+        } else if (strcmp(cmd, "erase") == 0) {
+            int index, n;
+            cin >> index >> n;
+            a.erase(index, n);
+        } else if (strcmp(cmd, "size") == 0) {
+            cout << a.size() << "\n\n";
+        } else if (strcmp(cmd, "capacity") == 0) {
+            cout << a.capacity() << "\n";
+        } else if (strcmp(cmd, "get") == 0) {
+            int index;
+            cin >> index;
+            cout << a[index] << "\n\n";
+        } else if (strcmp(cmd, "set") == 0) {
+            int index, v;
+            cin >> index >> v;
+            a[index] = v;
+        } else if (strcmp(cmd, "print") == 0) {
+            cout << a << "\n\n";
+        }
+    }
+    return 0;
+}
